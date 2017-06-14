@@ -61,7 +61,7 @@ Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是
 
 ### Perfect TensorFlow 应用程序
 
-使用之前请在您的项目Package.swift文件中增加依存关系：
+使用之前请在您的项目Package.swift文件中增加依存关系并选择**最新版本**：
 
 ``` swift
 .Package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", majorVersion: 1)
@@ -70,13 +70,14 @@ Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是
 然后声明函数库：
 
 ``` swift
-/// TensorFlowAPI 就是定义在 libtensorflow.so的部分函数集
+// TensorFlowAPI 就是定义在 libtensorflow.so的部分函数集
 import TensorFlowAPI
 
-/// 这是我们主要介绍的TensorFlow对象封装库
+// 这是我们主要介绍的TensorFlow对象封装库
 import PerfectTensorFlow
 
-/// 为了保持与其他语言函数库版本（比如Python或者Java）的命名规范一致性，为TensorFlow对象取一个缩写名称是个好主意：
+// 为了保持与其他语言函数库版本（比如Python或者Java）的命名规范一致性，
+// 为TensorFlow对象取一个缩写名称是个好主意：
 public typealias TF = TensorFlow
 ```
 
@@ -85,13 +86,13 @@ public typealias TF = TensorFlow
 ⚠️注意⚠️ 在使用  Perfect TensorFlow 的 **任何具体函数之前**，必须首先调用`TF.Open()`方法：
 
 ``` swift
-/// 这个操作会打开 /usr/local/lib/libtensorflow.so 动态链接库
+// 这个操作会打开 /usr/local/lib/libtensorflow.so 动态链接库
 try TF.Open()
 ```
 
 另外，您还可以激活其他不同规格（CPU/GPU）版本的函数库，所需要的操作就是输入目标函数库路径：
 ``` swift
-/// 以下操作将打开非默认路径下的函数库：
+// 以下操作将打开非默认路径下的函数库：
 try TF.Open("/path/to/DLL/of/libtensorflow.so")
 ```
 

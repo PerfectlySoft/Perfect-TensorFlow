@@ -60,7 +60,7 @@ For more installation options, such as GPU/CPU and multiple versions on the same
 
 ### Perfect TensorFlow Application
 
-To use this library, add dependencies to your project's Package.swift:
+To use this library, add dependencies to your project's Package.swift with the **LATEST TAG**:
 
 ``` swift
 .Package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", majorVersion: 1)
@@ -69,13 +69,14 @@ To use this library, add dependencies to your project's Package.swift:
 Then declare the library:
 
 ``` swift
-/// TensorFlowAPI contains most API functions defined in libtensorflow.so
+// TensorFlowAPI contains most API functions defined in libtensorflow.so
 import TensorFlowAPI
 
-/// This is the Swift version of TensorFlow classes and objects
+// This is the Swift version of TensorFlow classes and objects
 import PerfectTensorFlow
 
-/// To keep the naming consistency with TensorFlow in other languages such as Python or Java, making an alias of `TensorFlow` Class is a good idea:
+// To keep the naming consistency with TensorFlow in other languages such as 
+// Python or Java, making an alias of `TensorFlow` Class is a good idea:
 public typealias TF = TensorFlow
 ```
 
@@ -84,14 +85,15 @@ public typealias TF = TensorFlow
 ⚠️NOTE⚠️ Prior to use **ANY ACTUAL FUNCTIONS** of Perfect TensorFlow framework, `TF.Open()` must be called first:
 
 ``` swift
-/// this action will load all api functions defined in /usr/local/lib/libtensorflow.so
+// this action will load all api functions defined 
+// in /usr/local/lib/libtensorflow.so
 try TF.Open()
 ```
 
 Please also note that you can active the library with a specific path, alternatively, especially in case of different versions or CPU/GPU library adjustment required:
 
 ``` swift
-/// this action will load the library with the path
+// this action will load the library with the path
 try TF.Open("/path/to/DLL/of/libtensorflow.so")
 ```
 
