@@ -335,7 +335,7 @@ extension Tensorflow_FixedLenFeatureProto: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_FixedLenFeatureProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._defaultValue != other_storage._defaultValue {return false}
@@ -376,7 +376,7 @@ extension Tensorflow_FeatureConfiguration: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_FeatureConfiguration) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._config != other_storage._config {return false}
         return true
       }

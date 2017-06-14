@@ -347,7 +347,7 @@ extension Xla_OperationRequest: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Xla_OperationRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._outputHandle != other_storage._outputHandle {return false}
         if _storage._outputShape != other_storage._outputShape {return false}
         if _storage._embeddedComputationVersions != other_storage._embeddedComputationVersions {return false}
@@ -393,7 +393,7 @@ extension Xla_SessionComputation: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Xla_SessionComputation) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._name != other_storage._name {return false}
         if _storage._computationHandle != other_storage._computationHandle {return false}
         if _storage._requests != other_storage._requests {return false}
@@ -444,7 +444,7 @@ extension Xla_SessionModule: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Xla_SessionModule) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._entry != other_storage._entry {return false}
         if _storage._embeddedComputations != other_storage._embeddedComputations {return false}
         if _storage._arguments != other_storage._arguments {return false}

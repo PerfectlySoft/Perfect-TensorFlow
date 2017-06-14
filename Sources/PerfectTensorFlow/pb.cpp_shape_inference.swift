@@ -165,7 +165,7 @@ extension Tensorflow_CppShapeInferenceResult: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CppShapeInferenceResult) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._shape != other_storage._shape {return false}
         if _storage._handleShape != other_storage._handleShape {return false}
         if _storage._handleDtype != other_storage._handleDtype {return false}

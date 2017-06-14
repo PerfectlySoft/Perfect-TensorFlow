@@ -291,7 +291,7 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Feed) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._id != other_storage._id {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._name != other_storage._name {return false}
@@ -333,7 +333,7 @@ extension Tensorflow_Tfcompile_Fetch: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Fetch) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._id != other_storage._id {return false}
         if _storage._name != other_storage._name {return false}
         return true

@@ -506,7 +506,7 @@ extension Tensorflow_HParamDef.HParamType: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_HParamDef.HParamType) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._kind != other_storage._kind {return false}
         return true
       }

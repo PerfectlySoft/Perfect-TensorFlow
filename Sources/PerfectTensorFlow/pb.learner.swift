@@ -788,7 +788,7 @@ extension Tensorflow_BoostedTrees_Learner_LearningRateConfig: SwiftProtobuf._Mes
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Learner_LearningRateConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._tuner != other_storage._tuner {return false}
         return true
       }
@@ -905,7 +905,7 @@ extension Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf._MessageI
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Learner_LearnerConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._numClasses != other_storage._numClasses {return false}
         if _storage._featureFraction != other_storage._featureFraction {return false}
         if _storage._regularization != other_storage._regularization {return false}

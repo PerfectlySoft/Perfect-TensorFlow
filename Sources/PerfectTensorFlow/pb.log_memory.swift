@@ -440,7 +440,7 @@ extension Tensorflow_MemoryLogTensorAllocation: SwiftProtobuf._MessageImplementa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MemoryLogTensorAllocation) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._kernelName != other_storage._kernelName {return false}
         if _storage._tensor != other_storage._tensor {return false}
@@ -502,7 +502,7 @@ extension Tensorflow_MemoryLogTensorOutput: SwiftProtobuf._MessageImplementation
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MemoryLogTensorOutput) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._kernelName != other_storage._kernelName {return false}
         if _storage._index != other_storage._index {return false}

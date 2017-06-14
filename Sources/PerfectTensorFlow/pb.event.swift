@@ -500,7 +500,7 @@ extension Tensorflow_Event: SwiftProtobuf._MessageImplementationBase, SwiftProto
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Event) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._wallTime != other_storage._wallTime {return false}
         if _storage._step != other_storage._step {return false}
         if _storage._what != other_storage._what {return false}

@@ -277,7 +277,7 @@ extension Tensorflow_BundleHeaderProto: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BundleHeaderProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._numShards != other_storage._numShards {return false}
         if _storage._endianness != other_storage._endianness {return false}
         if _storage._version != other_storage._version {return false}
@@ -341,7 +341,7 @@ extension Tensorflow_BundleEntryProto: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BundleEntryProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._shardID != other_storage._shardID {return false}

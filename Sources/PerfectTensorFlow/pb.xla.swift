@@ -2622,7 +2622,7 @@ extension Xla_ExecutionOptions: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Xla_ExecutionOptions) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._disableFastMath != other_storage._disableFastMath {return false}
         if _storage._shapeWithOutputLayout != other_storage._shapeWithOutputLayout {return false}
         if _storage._seed != other_storage._seed {return false}
@@ -2661,7 +2661,7 @@ extension Xla_SnapshotComputationRequest: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Xla_SnapshotComputationRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         return true
       }
@@ -2698,7 +2698,7 @@ extension Xla_SnapshotComputationResponse: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Xla_SnapshotComputationResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._module != other_storage._module {return false}
         return true
       }
@@ -2735,7 +2735,7 @@ extension Xla_LoadComputationSnapshotRequest: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Xla_LoadComputationSnapshotRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._module != other_storage._module {return false}
         return true
       }
@@ -2772,7 +2772,7 @@ extension Xla_LoadComputationSnapshotResponse: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Xla_LoadComputationSnapshotResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         return true
       }
@@ -2836,7 +2836,7 @@ extension Xla_TransferToClientRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferToClientRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         if _storage._shapeWithLayout != other_storage._shapeWithLayout {return false}
         return true
@@ -2874,7 +2874,7 @@ extension Xla_TransferToClientResponse: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferToClientResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._literal != other_storage._literal {return false}
         return true
       }
@@ -2914,7 +2914,7 @@ extension Xla_TransferToServerRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferToServerRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._literal != other_storage._literal {return false}
         if _storage._deviceHandle != other_storage._deviceHandle {return false}
         return true
@@ -2952,7 +2952,7 @@ extension Xla_TransferToServerResponse: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferToServerResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         return true
       }
@@ -2995,7 +2995,7 @@ extension Xla_TransferToInfeedRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferToInfeedRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._literal != other_storage._literal {return false}
         if _storage._replicaID != other_storage._replicaID {return false}
         if _storage._deviceHandle != other_storage._deviceHandle {return false}
@@ -3049,7 +3049,7 @@ extension Xla_TransferFromOutfeedRequest: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferFromOutfeedRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._shapeWithLayout != other_storage._shapeWithLayout {return false}
         if _storage._replicaID != other_storage._replicaID {return false}
         if _storage._deviceHandle != other_storage._deviceHandle {return false}
@@ -3088,7 +3088,7 @@ extension Xla_TransferFromOutfeedResponse: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Xla_TransferFromOutfeedResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._literal != other_storage._literal {return false}
         return true
       }
@@ -3125,7 +3125,7 @@ extension Xla_ResetDeviceRequest: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Xla_ResetDeviceRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._deviceHandle != other_storage._deviceHandle {return false}
         return true
       }
@@ -3171,7 +3171,7 @@ extension Xla_ComputationStatsRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_ComputationStatsRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         return true
       }
@@ -3208,7 +3208,7 @@ extension Xla_ComputationStatsResponse: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Xla_ComputationStatsResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._stats != other_storage._stats {return false}
         return true
       }
@@ -3257,7 +3257,7 @@ extension Xla_ComputationResponse: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Xla_ComputationResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         return true
       }
@@ -3303,7 +3303,7 @@ extension Xla_CreateChannelHandleResponse: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Xla_CreateChannelHandleResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._channel != other_storage._channel {return false}
         return true
       }
@@ -3340,7 +3340,7 @@ extension Xla_UnregisterRequest: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Xla_UnregisterRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         return true
       }
@@ -3389,7 +3389,7 @@ extension Xla_SetReturnValueRequest: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Xla_SetReturnValueRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._operand != other_storage._operand {return false}
         return true
@@ -3445,7 +3445,7 @@ extension Xla_ExecuteRequest: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
   public func _protobuf_generated_isEqualTo(other: Xla_ExecuteRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._arguments != other_storage._arguments {return false}
         if _storage._deviceHandle != other_storage._deviceHandle {return false}
@@ -3500,7 +3500,7 @@ extension Xla_ExecuteResponse: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
   public func _protobuf_generated_isEqualTo(other: Xla_ExecuteResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._output != other_storage._output {return false}
         if _storage._profile != other_storage._profile {return false}
         return true
@@ -3556,7 +3556,7 @@ extension Xla_ExecuteAsyncRequest: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Xla_ExecuteAsyncRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._arguments != other_storage._arguments {return false}
         if _storage._executionOptions != other_storage._executionOptions {return false}
@@ -3595,7 +3595,7 @@ extension Xla_ExecuteAsyncResponse: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Xla_ExecuteAsyncResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._execution != other_storage._execution {return false}
         return true
       }
@@ -3632,7 +3632,7 @@ extension Xla_WaitForExecutionRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_WaitForExecutionRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._execution != other_storage._execution {return false}
         return true
       }
@@ -3672,7 +3672,7 @@ extension Xla_WaitForExecutionResponse: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Xla_WaitForExecutionResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._output != other_storage._output {return false}
         if _storage._profile != other_storage._profile {return false}
         return true
@@ -3713,7 +3713,7 @@ extension Xla_IsConstantRequest: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Xla_IsConstantRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._operand != other_storage._operand {return false}
         return true
@@ -3769,7 +3769,7 @@ extension Xla_ComputeConstantRequest: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Xla_ComputeConstantRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._operand != other_storage._operand {return false}
         if _storage._outputLayout != other_storage._outputLayout {return false}
@@ -3808,7 +3808,7 @@ extension Xla_ComputeConstantResponse: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_ComputeConstantResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._output != other_storage._output {return false}
         return true
       }
@@ -3845,7 +3845,7 @@ extension Xla_DeconstructTupleRequest: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Xla_DeconstructTupleRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._tupleHandle != other_storage._tupleHandle {return false}
         return true
       }
@@ -3909,7 +3909,7 @@ extension Xla_LoadDataRequest: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
   public func _protobuf_generated_isEqualTo(other: Xla_LoadDataRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._columnioTabletPath != other_storage._columnioTabletPath {return false}
         if _storage._columnioField != other_storage._columnioField {return false}
         if _storage._elementShape != other_storage._elementShape {return false}
@@ -3963,7 +3963,7 @@ extension Xla_LoadDataResponse: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Xla_LoadDataResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         if _storage._dataShape != other_storage._dataShape {return false}
         if _storage._availableRows != other_storage._availableRows {return false}
@@ -4007,7 +4007,7 @@ extension Xla_SpecializeRequest: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Xla_SpecializeRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         if _storage._arguments != other_storage._arguments {return false}
         return true
@@ -4054,7 +4054,7 @@ extension Xla_GetShapeRequest: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
   public func _protobuf_generated_isEqualTo(other: Xla_GetShapeRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         return true
       }
@@ -4091,7 +4091,7 @@ extension Xla_GetShapeResponse: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Xla_GetShapeResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._shape != other_storage._shape {return false}
         return true
       }
@@ -4128,7 +4128,7 @@ extension Xla_GetComputationShapeRequest: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Xla_GetComputationShapeRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._computation != other_storage._computation {return false}
         return true
       }
@@ -4165,7 +4165,7 @@ extension Xla_GetComputationShapeResponse: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Xla_GetComputationShapeResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._programShape != other_storage._programShape {return false}
         return true
       }
@@ -4202,7 +4202,7 @@ extension Xla_UnpackRequest: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Xla_UnpackRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._data != other_storage._data {return false}
         return true
       }

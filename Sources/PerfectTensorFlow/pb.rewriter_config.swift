@@ -245,7 +245,7 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RewriterConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._optimizeTensorLayout != other_storage._optimizeTensorLayout {return false}
         if _storage._disableModelPruning != other_storage._disableModelPruning {return false}
         if _storage._constantFolding != other_storage._constantFolding {return false}

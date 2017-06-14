@@ -197,7 +197,7 @@ extension Tensorflow_KernelDef.AttrConstraint: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_KernelDef.AttrConstraint) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._name != other_storage._name {return false}
         if _storage._allowedValues != other_storage._allowedValues {return false}
         return true

@@ -280,7 +280,7 @@ extension Tensorflow_EmbeddingInfo: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_EmbeddingInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._tensorName != other_storage._tensorName {return false}
         if _storage._metadataPath != other_storage._metadataPath {return false}
         if _storage._bookmarksPath != other_storage._bookmarksPath {return false}

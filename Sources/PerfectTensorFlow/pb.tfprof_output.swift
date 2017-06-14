@@ -585,7 +585,7 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_TFGraphNodeProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._name != other_storage._name {return false}
         if _storage._tensorValue != other_storage._tensorValue {return false}
         if _storage._execMicros != other_storage._execMicros {return false}

@@ -1294,7 +1294,7 @@ extension Tensorflow_CreateWorkerSessionRequest: SwiftProtobuf._MessageImplement
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CreateWorkerSessionRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._sessionHandle != other_storage._sessionHandle {return false}
         if _storage._serverDef != other_storage._serverDef {return false}
         return true
@@ -1353,7 +1353,7 @@ extension Tensorflow_RegisterGraphRequest: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RegisterGraphRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._sessionHandle != other_storage._sessionHandle {return false}
         if _storage._graphDef != other_storage._graphDef {return false}
         if _storage._hasControlFlow_p != other_storage._hasControlFlow_p {return false}
@@ -1485,7 +1485,7 @@ extension Tensorflow_RunGraphRequest: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunGraphRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._sessionHandle != other_storage._sessionHandle {return false}
         if _storage._graphHandle != other_storage._graphHandle {return false}
         if _storage._stepID != other_storage._stepID {return false}
@@ -1535,7 +1535,7 @@ extension Tensorflow_RunGraphResponse: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunGraphResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._recv != other_storage._recv {return false}
         if _storage._stepStats != other_storage._stepStats {return false}
         if _storage._costGraph != other_storage._costGraph {return false}
@@ -1610,7 +1610,7 @@ extension Tensorflow_RecvTensorRequest: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RecvTensorRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._rendezvousKey != other_storage._rendezvousKey {return false}
         if _storage._dmaOk != other_storage._dmaOk {return false}
@@ -1661,7 +1661,7 @@ extension Tensorflow_RecvTensorResponse: SwiftProtobuf._MessageImplementationBas
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RecvTensorResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._tensor != other_storage._tensor {return false}
         if _storage._isDead != other_storage._isDead {return false}
         if _storage._sendStartMicros != other_storage._sendStartMicros {return false}
@@ -1720,7 +1720,7 @@ extension Tensorflow_LabeledStepStats: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_LabeledStepStats) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._stepStats != other_storage._stepStats {return false}
         return true
@@ -1792,7 +1792,7 @@ extension Tensorflow_TracingRequest: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TracingRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._options != other_storage._options {return false}
         return true
       }

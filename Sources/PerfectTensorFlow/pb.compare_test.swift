@@ -617,7 +617,7 @@ extension CompareTest_Large: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: CompareTest_Large) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._string_ != other_storage._string_ {return false}
         if _storage._int64_ != other_storage._int64_ {return false}
         if _storage._float_ != other_storage._float_ {return false}

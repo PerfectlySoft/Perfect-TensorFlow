@@ -117,7 +117,7 @@ extension Tensorflow_NamedTensorProto: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NamedTensorProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._name != other_storage._name {return false}
         if _storage._tensor != other_storage._tensor {return false}
         return true

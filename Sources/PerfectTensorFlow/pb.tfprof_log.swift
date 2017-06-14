@@ -332,7 +332,7 @@ extension Tensorflow_Tfprof_OpLogEntry: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_OpLogEntry) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._name != other_storage._name {return false}
         if _storage._floatOps != other_storage._floatOps {return false}
         if _storage._types != other_storage._types {return false}

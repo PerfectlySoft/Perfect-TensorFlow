@@ -747,7 +747,7 @@ public class TFLib {
   ///
   /// The data in the buffer will be the serialized OpList proto for ops registered
   /// in this address space.
-  public static var GetAllOpList: @convention(c) (Void) -> UnsafeMutablePointer<TF_Buffer>? = { return nil }
+  public static var GetAllOpList: @convention(c) () -> UnsafeMutablePointer<TF_Buffer>? = { return nil }
 
   /// Bootstrap of tensorflow library open, **MUST BE CALL BEFORE ANY OPERATIONS**
   /// - parameters

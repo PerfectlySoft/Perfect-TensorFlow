@@ -161,7 +161,7 @@ extension Tensorflow_Example: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Example) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._features != other_storage._features {return false}
         return true
       }
@@ -201,7 +201,7 @@ extension Tensorflow_SequenceExample: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SequenceExample) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
         if _storage._context != other_storage._context {return false}
         if _storage._featureLists != other_storage._featureLists {return false}
         return true
