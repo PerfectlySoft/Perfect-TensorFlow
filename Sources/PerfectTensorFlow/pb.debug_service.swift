@@ -40,34 +40,34 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_EventReply: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".EventReply"
 
-  var debugOpStateChanges: [Tensorflow_EventReply.DebugOpStateChange] = []
+  public var debugOpStateChanges: [Tensorflow_EventReply.DebugOpStateChange] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct DebugOpStateChange: SwiftProtobuf.Message {
+  public struct DebugOpStateChange: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_EventReply.protoMessageName + ".DebugOpStateChange"
 
-    var change: Tensorflow_EventReply.DebugOpStateChange.Change = .disable
+    public var change: Tensorflow_EventReply.DebugOpStateChange.Change = .disable
 
-    var nodeName: String = String()
+    public var nodeName: String = String()
 
-    var outputSlot: Int32 = 0
+    public var outputSlot: Int32 = 0
 
-    var debugOp: String = String()
+    public var debugOp: String = String()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-    enum Change: SwiftProtobuf.Enum {
-      typealias RawValue = Int
+    public enum Change: SwiftProtobuf.Enum {
+      public typealias RawValue = Int
       case disable // = 0
       case enable // = 1
       case UNRECOGNIZED(Int)
 
-      init() {
+      public init() {
         self = .disable
       }
 
-      init?(rawValue: Int) {
+      public init?(rawValue: Int) {
         switch rawValue {
         case 0: self = .disable
         case 1: self = .enable
@@ -75,7 +75,7 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
         }
       }
 
-      var rawValue: Int {
+      public var rawValue: Int {
         switch self {
         case .disable: return 0
         case .enable: return 1

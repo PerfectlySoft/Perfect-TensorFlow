@@ -77,7 +77,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_BytesList: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".BytesList"
 
-  var value: [Data] = []
+  public var value: [Data] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -111,7 +111,7 @@ public struct Tensorflow_BytesList: SwiftProtobuf.Message {
 public struct Tensorflow_FloatList: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".FloatList"
 
-  var value: [Float] = []
+  public var value: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -145,7 +145,7 @@ public struct Tensorflow_FloatList: SwiftProtobuf.Message {
 public struct Tensorflow_Int64List: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Int64List"
 
-  var value: [Int64] = []
+  public var value: [Int64] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -181,12 +181,12 @@ public struct Tensorflow_Feature: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Feature"
 
   /// Each feature can be exactly one kind.
-  var kind: OneOf_Kind? {
+  public var kind: OneOf_Kind? {
     get {return _storage._kind}
     set {_uniqueStorage()._kind = newValue}
   }
 
-  var bytesList: Tensorflow_BytesList {
+  public var bytesList: Tensorflow_BytesList {
     get {
       if case .bytesList(let v)? = _storage._kind {return v}
       return Tensorflow_BytesList()
@@ -194,7 +194,7 @@ public struct Tensorflow_Feature: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .bytesList(newValue)}
   }
 
-  var floatList: Tensorflow_FloatList {
+  public var floatList: Tensorflow_FloatList {
     get {
       if case .floatList(let v)? = _storage._kind {return v}
       return Tensorflow_FloatList()
@@ -202,7 +202,7 @@ public struct Tensorflow_Feature: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .floatList(newValue)}
   }
 
-  var int64List: Tensorflow_Int64List {
+  public var int64List: Tensorflow_Int64List {
     get {
       if case .int64List(let v)? = _storage._kind {return v}
       return Tensorflow_Int64List()
@@ -213,12 +213,12 @@ public struct Tensorflow_Feature: SwiftProtobuf.Message {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Each feature can be exactly one kind.
-  enum OneOf_Kind: Equatable {
+  public enum OneOf_Kind: Equatable {
     case bytesList(Tensorflow_BytesList)
     case floatList(Tensorflow_FloatList)
     case int64List(Tensorflow_Int64List)
 
-    static func ==(lhs: Tensorflow_Feature.OneOf_Kind, rhs: Tensorflow_Feature.OneOf_Kind) -> Bool {
+    public static func ==(lhs: Tensorflow_Feature.OneOf_Kind, rhs: Tensorflow_Feature.OneOf_Kind) -> Bool {
       switch (lhs, rhs) {
       case (.bytesList(let l), .bytesList(let r)): return l == r
       case (.floatList(let l), .floatList(let r)): return l == r
@@ -295,7 +295,7 @@ public struct Tensorflow_Features: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Features"
 
   /// Map from feature name to feature.
-  var feature: Dictionary<String,Tensorflow_Feature> = [:]
+  public var feature: Dictionary<String,Tensorflow_Feature> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -336,7 +336,7 @@ public struct Tensorflow_Features: SwiftProtobuf.Message {
 public struct Tensorflow_FeatureList: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".FeatureList"
 
-  var feature: [Tensorflow_Feature] = []
+  public var feature: [Tensorflow_Feature] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -371,7 +371,7 @@ public struct Tensorflow_FeatureLists: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".FeatureLists"
 
   /// Map from feature name to feature list.
-  var featureList: Dictionary<String,Tensorflow_FeatureList> = [:]
+  public var featureList: Dictionary<String,Tensorflow_FeatureList> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -454,7 +454,7 @@ extension Tensorflow_Feature: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _kind = source._kind
@@ -470,7 +470,7 @@ extension Tensorflow_Feature: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Feature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._kind != other_storage._kind {return false}
         return true
       }

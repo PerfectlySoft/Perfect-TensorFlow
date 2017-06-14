@@ -24,7 +24,7 @@ public struct Tensorflow_NamedTensorProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".NamedTensorProto"
 
   /// Name of the tensor.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
@@ -35,14 +35,14 @@ public struct Tensorflow_NamedTensorProto: SwiftProtobuf.Message {
   /// The client specifies whether the returned tensor values should be
   /// filled tensor fields (float_val, int_val, etc.) or encoded in a
   /// compact form in tensor.tensor_content.
-  var tensor: Tensorflow_TensorProto {
+  public var tensor: Tensorflow_TensorProto {
     get {return _storage._tensor ?? Tensorflow_TensorProto()}
     set {_uniqueStorage()._tensor = newValue}
   }
   /// Returns true if `tensor` has been explicitly set.
-  var hasTensor: Bool {return _storage._tensor != nil}
+  public var hasTensor: Bool {return _storage._tensor != nil}
   /// Clears the value of `tensor`. Subsequent reads from it will return its default value.
-  mutating func clearTensor() {_storage._tensor = nil}
+  public mutating func clearTensor() {_storage._tensor = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -100,7 +100,7 @@ extension Tensorflow_NamedTensorProto: SwiftProtobuf._MessageImplementationBase,
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -117,7 +117,7 @@ extension Tensorflow_NamedTensorProto: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NamedTensorProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._tensor != other_storage._tensor {return false}
         return true

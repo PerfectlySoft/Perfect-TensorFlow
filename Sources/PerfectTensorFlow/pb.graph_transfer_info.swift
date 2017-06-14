@@ -25,35 +25,35 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GraphTransferInfo"
 
-  var nodeInfo: [Tensorflow_GraphTransferInfo.NodeInfo] = []
+  public var nodeInfo: [Tensorflow_GraphTransferInfo.NodeInfo] = []
 
-  var constNodeInfo: [Tensorflow_GraphTransferInfo.ConstNodeInfo] = []
+  public var constNodeInfo: [Tensorflow_GraphTransferInfo.ConstNodeInfo] = []
 
-  var nodeInputInfo: [Tensorflow_GraphTransferInfo.NodeInputInfo] = []
+  public var nodeInputInfo: [Tensorflow_GraphTransferInfo.NodeInputInfo] = []
 
-  var nodeOutputInfo: [Tensorflow_GraphTransferInfo.NodeOutputInfo] = []
+  public var nodeOutputInfo: [Tensorflow_GraphTransferInfo.NodeOutputInfo] = []
 
   /// Input Node parameters of transferred graph
-  var graphInputNodeInfo: [Tensorflow_GraphTransferInfo.GraphInputNodeInfo] = []
+  public var graphInputNodeInfo: [Tensorflow_GraphTransferInfo.GraphInputNodeInfo] = []
 
-  var graphOutputNodeInfo: [Tensorflow_GraphTransferInfo.GraphOutputNodeInfo] = []
+  public var graphOutputNodeInfo: [Tensorflow_GraphTransferInfo.GraphOutputNodeInfo] = []
 
   /// Destination of graph transfer
-  var destination: Tensorflow_GraphTransferInfo.Destination = .nop
+  public var destination: Tensorflow_GraphTransferInfo.Destination = .nop
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum Destination: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum Destination: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case nop // = 0
     case hexagon // = 1
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .nop
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .nop
       case 1: self = .hexagon
@@ -61,7 +61,7 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .nop: return 0
       case .hexagon: return 1
@@ -71,12 +71,12 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
 
   }
 
-  struct NodeInput: SwiftProtobuf.Message {
+  public struct NodeInput: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".NodeInput"
 
-    var nodeID: Int32 = 0
+    public var nodeID: Int32 = 0
 
-    var outputPort: Int32 = 0
+    public var outputPort: Int32 = 0
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -111,22 +111,22 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct NodeInfo: SwiftProtobuf.Message {
+  public struct NodeInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".NodeInfo"
 
-    var name: String = String()
+    public var name: String = String()
 
-    var nodeID: Int32 = 0
+    public var nodeID: Int32 = 0
 
-    var typeName: String = String()
+    public var typeName: String = String()
 
-    var socOpID: Int32 = 0
+    public var socOpID: Int32 = 0
 
-    var paddingID: Int32 = 0
+    public var paddingID: Int32 = 0
 
-    var inputCount: Int32 = 0
+    public var inputCount: Int32 = 0
 
-    var outputCount: Int32 = 0
+    public var outputCount: Int32 = 0
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -181,18 +181,18 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct ConstNodeInfo: SwiftProtobuf.Message {
+  public struct ConstNodeInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".ConstNodeInfo"
 
-    var name: String = String()
+    public var name: String = String()
 
-    var nodeID: Int32 = 0
+    public var nodeID: Int32 = 0
 
-    var shape: [Int64] = []
+    public var shape: [Int64] = []
 
-    var data: Data = SwiftProtobuf.Internal.emptyData
+    public var data: Data = SwiftProtobuf.Internal.emptyData
 
-    var dtype: Tensorflow_DataType = .dtInvalid
+    public var dtype: Tensorflow_DataType = .dtInvalid
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -239,12 +239,12 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct NodeInputInfo: SwiftProtobuf.Message {
+  public struct NodeInputInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".NodeInputInfo"
 
-    var nodeID: Int32 = 0
+    public var nodeID: Int32 = 0
 
-    var nodeInput: [Tensorflow_GraphTransferInfo.NodeInput] = []
+    public var nodeInput: [Tensorflow_GraphTransferInfo.NodeInput] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -279,12 +279,12 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct NodeOutputInfo: SwiftProtobuf.Message {
+  public struct NodeOutputInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".NodeOutputInfo"
 
-    var nodeID: Int32 = 0
+    public var nodeID: Int32 = 0
 
-    var maxByteSize: [Int32] = []
+    public var maxByteSize: [Int32] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -319,14 +319,14 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct GraphInputNodeInfo: SwiftProtobuf.Message {
+  public struct GraphInputNodeInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".GraphInputNodeInfo"
 
-    var name: String = String()
+    public var name: String = String()
 
-    var shape: [Int64] = []
+    public var shape: [Int64] = []
 
-    var dtype: Tensorflow_DataType = .dtInvalid
+    public var dtype: Tensorflow_DataType = .dtInvalid
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -365,14 +365,14 @@ public struct Tensorflow_GraphTransferInfo: SwiftProtobuf.Message {
     }
   }
 
-  struct GraphOutputNodeInfo: SwiftProtobuf.Message {
+  public struct GraphOutputNodeInfo: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_GraphTransferInfo.protoMessageName + ".GraphOutputNodeInfo"
 
-    var name: String = String()
+    public var name: String = String()
 
-    var shape: [Int64] = []
+    public var shape: [Int64] = []
 
-    var dtype: Tensorflow_DataType = .dtInvalid
+    public var dtype: Tensorflow_DataType = .dtInvalid
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 

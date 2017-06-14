@@ -42,14 +42,14 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".HParamDef"
 
-  var hparam: Dictionary<String,Tensorflow_HParamDef.HParamType> = [:]
+  public var hparam: Dictionary<String,Tensorflow_HParamDef.HParamType> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct BytesList: SwiftProtobuf.Message {
+  public struct BytesList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_HParamDef.protoMessageName + ".BytesList"
 
-    var value: [Data] = []
+    public var value: [Data] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -80,10 +80,10 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
     }
   }
 
-  struct FloatList: SwiftProtobuf.Message {
+  public struct FloatList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_HParamDef.protoMessageName + ".FloatList"
 
-    var value: [Float] = []
+    public var value: [Float] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -114,10 +114,10 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
     }
   }
 
-  struct Int64List: SwiftProtobuf.Message {
+  public struct Int64List: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_HParamDef.protoMessageName + ".Int64List"
 
-    var value: [Int64] = []
+    public var value: [Int64] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -148,10 +148,10 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
     }
   }
 
-  struct BoolList: SwiftProtobuf.Message {
+  public struct BoolList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_HParamDef.protoMessageName + ".BoolList"
 
-    var value: [Bool] = []
+    public var value: [Bool] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -182,15 +182,15 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
     }
   }
 
-  struct HParamType: SwiftProtobuf.Message {
+  public struct HParamType: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_HParamDef.protoMessageName + ".HParamType"
 
-    var kind: OneOf_Kind? {
+    public var kind: OneOf_Kind? {
       get {return _storage._kind}
       set {_uniqueStorage()._kind = newValue}
     }
 
-    var int64Value: Int64 {
+    public var int64Value: Int64 {
       get {
         if case .int64Value(let v)? = _storage._kind {return v}
         return 0
@@ -198,7 +198,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .int64Value(newValue)}
     }
 
-    var floatValue: Float {
+    public var floatValue: Float {
       get {
         if case .floatValue(let v)? = _storage._kind {return v}
         return 0
@@ -206,7 +206,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .floatValue(newValue)}
     }
 
-    var bytesValue: Data {
+    public var bytesValue: Data {
       get {
         if case .bytesValue(let v)? = _storage._kind {return v}
         return SwiftProtobuf.Internal.emptyData
@@ -214,7 +214,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .bytesValue(newValue)}
     }
 
-    var boolValue: Bool {
+    public var boolValue: Bool {
       get {
         if case .boolValue(let v)? = _storage._kind {return v}
         return false
@@ -222,7 +222,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .boolValue(newValue)}
     }
 
-    var int64List: Tensorflow_HParamDef.Int64List {
+    public var int64List: Tensorflow_HParamDef.Int64List {
       get {
         if case .int64List(let v)? = _storage._kind {return v}
         return Tensorflow_HParamDef.Int64List()
@@ -230,7 +230,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .int64List(newValue)}
     }
 
-    var floatList: Tensorflow_HParamDef.FloatList {
+    public var floatList: Tensorflow_HParamDef.FloatList {
       get {
         if case .floatList(let v)? = _storage._kind {return v}
         return Tensorflow_HParamDef.FloatList()
@@ -238,7 +238,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .floatList(newValue)}
     }
 
-    var bytesList: Tensorflow_HParamDef.BytesList {
+    public var bytesList: Tensorflow_HParamDef.BytesList {
       get {
         if case .bytesList(let v)? = _storage._kind {return v}
         return Tensorflow_HParamDef.BytesList()
@@ -246,7 +246,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       set {_uniqueStorage()._kind = .bytesList(newValue)}
     }
 
-    var boolList: Tensorflow_HParamDef.BoolList {
+    public var boolList: Tensorflow_HParamDef.BoolList {
       get {
         if case .boolList(let v)? = _storage._kind {return v}
         return Tensorflow_HParamDef.BoolList()
@@ -256,7 +256,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-    enum OneOf_Kind: Equatable {
+    public enum OneOf_Kind: Equatable {
       case int64Value(Int64)
       case floatValue(Float)
       case bytesValue(Data)
@@ -266,7 +266,7 @@ public struct Tensorflow_HParamDef: SwiftProtobuf.Message {
       case bytesList(Tensorflow_HParamDef.BytesList)
       case boolList(Tensorflow_HParamDef.BoolList)
 
-      static func ==(lhs: Tensorflow_HParamDef.HParamType.OneOf_Kind, rhs: Tensorflow_HParamDef.HParamType.OneOf_Kind) -> Bool {
+      public static func ==(lhs: Tensorflow_HParamDef.HParamType.OneOf_Kind, rhs: Tensorflow_HParamDef.HParamType.OneOf_Kind) -> Bool {
         switch (lhs, rhs) {
         case (.int64Value(let l), .int64Value(let r)): return l == r
         case (.floatValue(let l), .floatValue(let r)): return l == r
@@ -490,7 +490,7 @@ extension Tensorflow_HParamDef.HParamType: SwiftProtobuf._MessageImplementationB
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _kind = source._kind
@@ -506,7 +506,7 @@ extension Tensorflow_HParamDef.HParamType: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_HParamDef.HParamType) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._kind != other_storage._kind {return false}
         return true
       }

@@ -26,53 +26,53 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_ExampleWithExtras: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ExampleWithExtras"
 
-  var features: Tensorflow_Features {
+  public var features: Tensorflow_Features {
     get {return _storage._features ?? Tensorflow_Features()}
     set {_uniqueStorage()._features = newValue}
   }
   /// Returns true if `features` has been explicitly set.
-  var hasFeatures: Bool {return _storage._features != nil}
+  public var hasFeatures: Bool {return _storage._features != nil}
   /// Clears the value of `features`. Subsequent reads from it will return its default value.
-  mutating func clearFeatures() {_storage._features = nil}
+  public mutating func clearFeatures() {_storage._features = nil}
 
-  var extra1: String {
+  public var extra1: String {
     get {return _storage._extra1}
     set {_uniqueStorage()._extra1 = newValue}
   }
 
-  var extra2: Int64 {
+  public var extra2: Int64 {
     get {return _storage._extra2}
     set {_uniqueStorage()._extra2 = newValue}
   }
 
-  var extra3: UInt32 {
+  public var extra3: UInt32 {
     get {return _storage._extra3}
     set {_uniqueStorage()._extra3 = newValue}
   }
 
-  var extra4: UInt64 {
+  public var extra4: UInt64 {
     get {return _storage._extra4}
     set {_uniqueStorage()._extra4 = newValue}
   }
 
-  var extra5: Double {
+  public var extra5: Double {
     get {return _storage._extra5}
     set {_uniqueStorage()._extra5 = newValue}
   }
 
-  var extra6: [Float] {
+  public var extra6: [Float] {
     get {return _storage._extra6}
     set {_uniqueStorage()._extra6 = newValue}
   }
 
-  var extra7: Tensorflow_Features {
+  public var extra7: Tensorflow_Features {
     get {return _storage._extra7 ?? Tensorflow_Features()}
     set {_uniqueStorage()._extra7 = newValue}
   }
   /// Returns true if `extra7` has been explicitly set.
-  var hasExtra7: Bool {return _storage._extra7 != nil}
+  public var hasExtra7: Bool {return _storage._extra7 != nil}
   /// Clears the value of `extra7`. Subsequent reads from it will return its default value.
-  mutating func clearExtra7() {_storage._extra7 = nil}
+  public mutating func clearExtra7() {_storage._extra7 = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -166,7 +166,7 @@ extension Tensorflow_ExampleWithExtras: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _features = source._features
@@ -189,7 +189,7 @@ extension Tensorflow_ExampleWithExtras: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ExampleWithExtras) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._features != other_storage._features {return false}
         if _storage._extra1 != other_storage._extra1 {return false}
         if _storage._extra2 != other_storage._extra2 {return false}

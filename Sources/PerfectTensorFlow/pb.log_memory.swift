@@ -23,10 +23,10 @@ public struct Tensorflow_MemoryLogStep: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryLogStep"
 
   /// Process-unique step id.
-  var stepID: Int64 = 0
+  public var stepID: Int64 = 0
 
   /// Handle describing the feeds and fetches of the step.
-  var handle: String = String()
+  public var handle: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -65,27 +65,27 @@ public struct Tensorflow_MemoryLogTensorAllocation: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryLogTensorAllocation"
 
   /// Process-unique step id.
-  var stepID: Int64 {
+  public var stepID: Int64 {
     get {return _storage._stepID}
     set {_uniqueStorage()._stepID = newValue}
   }
 
   /// Name of the kernel making the allocation as set in GraphDef,
   /// e.g., "affine2/weights/Assign".
-  var kernelName: String {
+  public var kernelName: String {
     get {return _storage._kernelName}
     set {_uniqueStorage()._kernelName = newValue}
   }
 
   /// Allocated tensor details.
-  var tensor: Tensorflow_TensorDescription {
+  public var tensor: Tensorflow_TensorDescription {
     get {return _storage._tensor ?? Tensorflow_TensorDescription()}
     set {_uniqueStorage()._tensor = newValue}
   }
   /// Returns true if `tensor` has been explicitly set.
-  var hasTensor: Bool {return _storage._tensor != nil}
+  public var hasTensor: Bool {return _storage._tensor != nil}
   /// Clears the value of `tensor`. Subsequent reads from it will return its default value.
-  mutating func clearTensor() {_storage._tensor = nil}
+  public mutating func clearTensor() {_storage._tensor = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -136,10 +136,10 @@ public struct Tensorflow_MemoryLogTensorDeallocation: SwiftProtobuf.Message {
 
   /// Id of the tensor buffer being deallocated, used to match to a
   /// corresponding allocation.
-  var allocationID: Int64 = 0
+  public var allocationID: Int64 = 0
 
   /// Name of the allocator used.
-  var allocatorName: String = String()
+  public var allocatorName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -178,33 +178,33 @@ public struct Tensorflow_MemoryLogTensorOutput: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryLogTensorOutput"
 
   /// Process-unique step id.
-  var stepID: Int64 {
+  public var stepID: Int64 {
     get {return _storage._stepID}
     set {_uniqueStorage()._stepID = newValue}
   }
 
   /// Name of the kernel producing an output as set in GraphDef, e.g.,
   /// "affine2/weights/Assign".
-  var kernelName: String {
+  public var kernelName: String {
     get {return _storage._kernelName}
     set {_uniqueStorage()._kernelName = newValue}
   }
 
   /// Index of the output being set.
-  var index: Int32 {
+  public var index: Int32 {
     get {return _storage._index}
     set {_uniqueStorage()._index = newValue}
   }
 
   /// Output tensor details.
-  var tensor: Tensorflow_TensorDescription {
+  public var tensor: Tensorflow_TensorDescription {
     get {return _storage._tensor ?? Tensorflow_TensorDescription()}
     set {_uniqueStorage()._tensor = newValue}
   }
   /// Returns true if `tensor` has been explicitly set.
-  var hasTensor: Bool {return _storage._tensor != nil}
+  public var hasTensor: Bool {return _storage._tensor != nil}
   /// Clears the value of `tensor`. Subsequent reads from it will return its default value.
-  mutating func clearTensor() {_storage._tensor = nil}
+  public mutating func clearTensor() {_storage._tensor = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -258,23 +258,23 @@ public struct Tensorflow_MemoryLogRawAllocation: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryLogRawAllocation"
 
   /// Process-unique step id.
-  var stepID: Int64 = 0
+  public var stepID: Int64 = 0
 
   /// Name of the operation making the allocation.
-  var operation: String = String()
+  public var operation: String = String()
 
   /// Number of bytes in the allocation.
-  var numBytes: Int64 = 0
+  public var numBytes: Int64 = 0
 
   /// Address of the allocation.
-  var ptr: UInt64 = 0
+  public var ptr: UInt64 = 0
 
   /// Id of the tensor buffer being allocated, used to match to a
   /// corresponding deallocation.
-  var allocationID: Int64 = 0
+  public var allocationID: Int64 = 0
 
   /// Name of the allocator used.
-  var allocatorName: String = String()
+  public var allocatorName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -329,21 +329,21 @@ public struct Tensorflow_MemoryLogRawDeallocation: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryLogRawDeallocation"
 
   /// Process-unique step id.
-  var stepID: Int64 = 0
+  public var stepID: Int64 = 0
 
   /// Name of the operation making the deallocation.
-  var operation: String = String()
+  public var operation: String = String()
 
   /// Id of the tensor buffer being deallocated, used to match to a
   /// corresponding allocation.
-  var allocationID: Int64 = 0
+  public var allocationID: Int64 = 0
 
   /// Name of the allocator used.
-  var allocatorName: String = String()
+  public var allocatorName: String = String()
 
   /// True if the deallocation is queued and will be performed later,
   /// e.g. for GPU lazy freeing of buffers.
-  var deferred: Bool = false
+  public var deferred: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -422,7 +422,7 @@ extension Tensorflow_MemoryLogTensorAllocation: SwiftProtobuf._MessageImplementa
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _stepID = source._stepID
@@ -440,7 +440,7 @@ extension Tensorflow_MemoryLogTensorAllocation: SwiftProtobuf._MessageImplementa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MemoryLogTensorAllocation) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._kernelName != other_storage._kernelName {return false}
         if _storage._tensor != other_storage._tensor {return false}
@@ -483,7 +483,7 @@ extension Tensorflow_MemoryLogTensorOutput: SwiftProtobuf._MessageImplementation
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _stepID = source._stepID
@@ -502,7 +502,7 @@ extension Tensorflow_MemoryLogTensorOutput: SwiftProtobuf._MessageImplementation
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MemoryLogTensorOutput) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._stepID != other_storage._stepID {return false}
         if _storage._kernelName != other_storage._kernelName {return false}
         if _storage._index != other_storage._index {return false}

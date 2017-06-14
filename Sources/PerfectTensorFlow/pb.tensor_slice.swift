@@ -30,25 +30,25 @@ public struct Tensorflow_TensorSliceProto: SwiftProtobuf.Message {
   /// Must have one entry for each of the dimension of the tensor that this
   /// slice belongs to.  The order of sizes is the same as the order of
   /// dimensions in the TensorShape.
-  var extent: [Tensorflow_TensorSliceProto.Extent] = []
+  public var extent: [Tensorflow_TensorSliceProto.Extent] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Extent of the slice in one dimension.
-  struct Extent: SwiftProtobuf.Message {
+  public struct Extent: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_TensorSliceProto.protoMessageName + ".Extent"
 
     /// Start index of the slice, starting at 0.
-    var start: Int64 = 0
+    public var start: Int64 = 0
 
     /// Length of the slice: if the length is missing or -1 we will
     /// interpret this as "everything in this dimension".  We use
     /// "oneof" to preserve information about whether the length is
     /// present without changing the serialization format from the
     /// prior proto2 version of this proto.
-    var hasLength_p: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength? = nil
+    public var hasLength_p: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength? = nil
 
-    var length: Int64 {
+    public var length: Int64 {
       get {
         if case .length(let v)? = hasLength_p {return v}
         return 0
@@ -63,10 +63,10 @@ public struct Tensorflow_TensorSliceProto: SwiftProtobuf.Message {
     /// "oneof" to preserve information about whether the length is
     /// present without changing the serialization format from the
     /// prior proto2 version of this proto.
-    enum OneOf_HasLength: Equatable {
+    public enum OneOf_HasLength: Equatable {
       case length(Int64)
 
-      static func ==(lhs: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength, rhs: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength) -> Bool {
+      public static func ==(lhs: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength, rhs: Tensorflow_TensorSliceProto.Extent.OneOf_HasLength) -> Bool {
         switch (lhs, rhs) {
         case (.length(let l), .length(let r)): return l == r
         }

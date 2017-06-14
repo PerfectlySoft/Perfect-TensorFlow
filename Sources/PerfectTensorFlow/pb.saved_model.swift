@@ -27,10 +27,10 @@ public struct Tensorflow_SavedModel: SwiftProtobuf.Message {
   /// The schema version of the SavedModel instance. Used for versioning when
   /// making future changes to the specification/implementation. Initial value
   /// at release will be 1.
-  var savedModelSchemaVersion: Int64 = 0
+  public var savedModelSchemaVersion: Int64 = 0
 
   /// One or more MetaGraphs.
-  var metaGraphs: [Tensorflow_MetaGraphDef] = []
+  public var metaGraphs: [Tensorflow_MetaGraphDef] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

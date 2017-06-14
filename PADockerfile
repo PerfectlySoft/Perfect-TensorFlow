@@ -1,2 +1,1 @@
-RUN cd /tmp && rm -rf tf && mkdir tf && cd tf && wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.1.0.tar.gz && tar xzvf ./libtensorflow-cpu-linux-x86_64-1.1.0.tar.gz && sudo cp ./lib/libtensorflow.so /usr/local/lib && cd .. && rm -rf tf && cd
-
+RUN curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.1.0.tar.gz -o /tmp/tflib.tgz && rmdir -rf /tmp/tf && mkdir /tmp/tf && tar xzf /tmp/tflib.tgz -C /tmp/tf && sudo cp /tmp/tf/lib/libtensorflow.so /usr/local/lib && rm -rf /tmp/tf && rm /tmp/tflib.tgz

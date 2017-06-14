@@ -23,30 +23,30 @@ public struct Tensorflow_TensorDescription: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TensorDescription"
 
   /// Data type of tensor elements
-  var dtype: Tensorflow_DataType {
+  public var dtype: Tensorflow_DataType {
     get {return _storage._dtype}
     set {_uniqueStorage()._dtype = newValue}
   }
 
   /// Shape of the tensor.
-  var shape: Tensorflow_TensorShapeProto {
+  public var shape: Tensorflow_TensorShapeProto {
     get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._shape = newValue}
   }
   /// Returns true if `shape` has been explicitly set.
-  var hasShape: Bool {return _storage._shape != nil}
+  public var hasShape: Bool {return _storage._shape != nil}
   /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-  mutating func clearShape() {_storage._shape = nil}
+  public mutating func clearShape() {_storage._shape = nil}
 
   /// Information about the size and allocator used for the data
-  var allocationDescription: Tensorflow_AllocationDescription {
+  public var allocationDescription: Tensorflow_AllocationDescription {
     get {return _storage._allocationDescription ?? Tensorflow_AllocationDescription()}
     set {_uniqueStorage()._allocationDescription = newValue}
   }
   /// Returns true if `allocationDescription` has been explicitly set.
-  var hasAllocationDescription: Bool {return _storage._allocationDescription != nil}
+  public var hasAllocationDescription: Bool {return _storage._allocationDescription != nil}
   /// Clears the value of `allocationDescription`. Subsequent reads from it will return its default value.
-  mutating func clearAllocationDescription() {_storage._allocationDescription = nil}
+  public mutating func clearAllocationDescription() {_storage._allocationDescription = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -110,7 +110,7 @@ extension Tensorflow_TensorDescription: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _dtype = source._dtype
@@ -128,7 +128,7 @@ extension Tensorflow_TensorDescription: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorDescription) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._allocationDescription != other_storage._allocationDescription {return false}

@@ -59,7 +59,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 /// nodes and a 'leaf node' has no internal structure.  The metanode containment
 /// relationship is acyclic, meaning that if a metanode 'A' contains the metanode
 /// 'B', then 'B' cannot contain 'A'.
-struct GraphExplorer_Node: SwiftProtobuf.Message {
+public struct GraphExplorer_Node: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Node"
 
   /// The identifier of a node is a sequence of strings separated by '/'. The
@@ -75,15 +75,15 @@ struct GraphExplorer_Node: SwiftProtobuf.Message {
   ///
   /// The identifiers for these nodes are: "node1", "node1/node2",
   /// "node1/node2/node3", and "node1/node4".
-  var name: String = String()
+  public var name: String = String()
 
   /// A node attribute is information used by Graph Explorer to style a node.
-  var nodeAttr: Dictionary<String,String> = [:]
+  public var nodeAttr: Dictionary<String,String> = [:]
 
   /// A metanode attribute is one that is inherited by all nodes inside the
   /// current metanode. If an attribute applies only to the current node and
   /// should not be inherited, it should be specified as a node attribute.
-  var metanodeAttr: Dictionary<String,String> = [:]
+  public var metanodeAttr: Dictionary<String,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -126,16 +126,16 @@ struct GraphExplorer_Node: SwiftProtobuf.Message {
 /// identifiers. An edge has attributes and data that are similar to node
 /// attributes and node data. Edges do not form a hierarchy so there are no
 /// metanode attributes.
-struct GraphExplorer_Edge: SwiftProtobuf.Message {
+public struct GraphExplorer_Edge: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Edge"
 
   /// The source and target fields must have the format of a Node name.
-  var source: String = String()
+  public var source: String = String()
 
-  var target: String = String()
+  public var target: String = String()
 
   /// Edge attributes.
-  var edgeAttr: Dictionary<String,String> = [:]
+  public var edgeAttr: Dictionary<String,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -174,24 +174,24 @@ struct GraphExplorer_Edge: SwiftProtobuf.Message {
   }
 }
 
-struct GraphExplorer_Graph: SwiftProtobuf.Message {
+public struct GraphExplorer_Graph: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Graph"
 
   /// List of nodes in the graph.
-  var node: [GraphExplorer_Node] = []
+  public var node: [GraphExplorer_Node] = []
 
   /// List of edges in the graph.
-  var edge: [GraphExplorer_Edge] = []
+  public var edge: [GraphExplorer_Edge] = []
 
   /// Default values of node, metanode and edge attributes.
-  var nodeAttr: Dictionary<String,String> = [:]
+  public var nodeAttr: Dictionary<String,String> = [:]
 
-  var metanodeAttr: Dictionary<String,String> = [:]
+  public var metanodeAttr: Dictionary<String,String> = [:]
 
-  var edgeAttr: Dictionary<String,String> = [:]
+  public var edgeAttr: Dictionary<String,String> = [:]
 
   /// Graph attributes.
-  var graphAttr: Dictionary<String,String> = [:]
+  public var graphAttr: Dictionary<String,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

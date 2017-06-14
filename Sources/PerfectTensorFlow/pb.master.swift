@@ -38,27 +38,27 @@ public struct Tensorflow_CreateSessionRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CreateSessionRequest"
 
   /// The initial graph definition.
-  var graphDef: Tensorflow_GraphDef {
+  public var graphDef: Tensorflow_GraphDef {
     get {return _storage._graphDef ?? Tensorflow_GraphDef()}
     set {_uniqueStorage()._graphDef = newValue}
   }
   /// Returns true if `graphDef` has been explicitly set.
-  var hasGraphDef: Bool {return _storage._graphDef != nil}
+  public var hasGraphDef: Bool {return _storage._graphDef != nil}
   /// Clears the value of `graphDef`. Subsequent reads from it will return its default value.
-  mutating func clearGraphDef() {_storage._graphDef = nil}
+  public mutating func clearGraphDef() {_storage._graphDef = nil}
 
   /// Configuration options.
-  var config: Tensorflow_ConfigProto {
+  public var config: Tensorflow_ConfigProto {
     get {return _storage._config ?? Tensorflow_ConfigProto()}
     set {_uniqueStorage()._config = newValue}
   }
   /// Returns true if `config` has been explicitly set.
-  var hasConfig: Bool {return _storage._config != nil}
+  public var hasConfig: Bool {return _storage._config != nil}
   /// Clears the value of `config`. Subsequent reads from it will return its default value.
-  mutating func clearConfig() {_storage._config = nil}
+  public mutating func clearConfig() {_storage._config = nil}
 
   /// The target string used from the client's perspective.
-  var target: String {
+  public var target: String {
     get {return _storage._target}
     set {_uniqueStorage()._target = newValue}
   }
@@ -114,11 +114,11 @@ public struct Tensorflow_CreateSessionResponse: SwiftProtobuf.Message {
   ///
   /// The client must arrange to call CloseSession with this returned
   /// session handle to close the session.
-  var sessionHandle: String = String()
+  public var sessionHandle: String = String()
 
   /// The initial version number for the graph, to be used in the next call
   /// to ExtendSession.
-  var graphVersion: Int64 = 0
+  public var graphVersion: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -158,7 +158,7 @@ public struct Tensorflow_ExtendSessionRequest: SwiftProtobuf.Message {
 
   /// REQUIRED: session_handle must be returned by a CreateSession call
   /// to the same master service.
-  var sessionHandle: String {
+  public var sessionHandle: String {
     get {return _storage._sessionHandle}
     set {_uniqueStorage()._sessionHandle = newValue}
   }
@@ -166,19 +166,19 @@ public struct Tensorflow_ExtendSessionRequest: SwiftProtobuf.Message {
   /// REQUIRED: The nodes to be added to the session's graph. If any node has
   /// the same name as an existing node, the operation will fail with
   /// ILLEGAL_ARGUMENT.
-  var graphDef: Tensorflow_GraphDef {
+  public var graphDef: Tensorflow_GraphDef {
     get {return _storage._graphDef ?? Tensorflow_GraphDef()}
     set {_uniqueStorage()._graphDef = newValue}
   }
   /// Returns true if `graphDef` has been explicitly set.
-  var hasGraphDef: Bool {return _storage._graphDef != nil}
+  public var hasGraphDef: Bool {return _storage._graphDef != nil}
   /// Clears the value of `graphDef`. Subsequent reads from it will return its default value.
-  mutating func clearGraphDef() {_storage._graphDef = nil}
+  public mutating func clearGraphDef() {_storage._graphDef = nil}
 
   /// REQUIRED: The version number of the graph to be extended. This will be
   /// tested against the current server-side version number, and the operation
   /// will fail with FAILED_PRECONDITION if they do not match.
-  var currentGraphVersion: Int64 {
+  public var currentGraphVersion: Int64 {
     get {return _storage._currentGraphVersion}
     set {_uniqueStorage()._currentGraphVersion = newValue}
   }
@@ -233,7 +233,7 @@ public struct Tensorflow_ExtendSessionResponse: SwiftProtobuf.Message {
 
   /// The new version number for the extended graph, to be used in the next call
   /// to ExtendSession.
-  var newGraphVersion: Int64 = 0
+  public var newGraphVersion: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -269,13 +269,13 @@ public struct Tensorflow_RunStepRequest: SwiftProtobuf.Message {
 
   /// REQUIRED: session_handle must be returned by a CreateSession call
   /// to the same master service.
-  var sessionHandle: String {
+  public var sessionHandle: String {
     get {return _storage._sessionHandle}
     set {_uniqueStorage()._sessionHandle = newValue}
   }
 
   /// Tensors to be fed in the step. Each feed is a named tensor.
-  var feed: [Tensorflow_NamedTensorProto] {
+  public var feed: [Tensorflow_NamedTensorProto] {
     get {return _storage._feed}
     set {_uniqueStorage()._feed = newValue}
   }
@@ -283,31 +283,31 @@ public struct Tensorflow_RunStepRequest: SwiftProtobuf.Message {
   /// Fetches. A list of tensor names. The caller expects a tensor to
   /// be returned for each fetch[i] (see RunStepResponse.tensor). The
   /// order of specified fetches does not change the execution order.
-  var fetch: [String] {
+  public var fetch: [String] {
     get {return _storage._fetch}
     set {_uniqueStorage()._fetch = newValue}
   }
 
   /// Target Nodes. A list of node names. The named nodes will be run
   /// to but their outputs will not be fetched.
-  var target: [String] {
+  public var target: [String] {
     get {return _storage._target}
     set {_uniqueStorage()._target = newValue}
   }
 
   /// Options for the run call.
-  var options: Tensorflow_RunOptions {
+  public var options: Tensorflow_RunOptions {
     get {return _storage._options ?? Tensorflow_RunOptions()}
     set {_uniqueStorage()._options = newValue}
   }
   /// Returns true if `options` has been explicitly set.
-  var hasOptions: Bool {return _storage._options != nil}
+  public var hasOptions: Bool {return _storage._options != nil}
   /// Clears the value of `options`. Subsequent reads from it will return its default value.
-  mutating func clearOptions() {_storage._options = nil}
+  public mutating func clearOptions() {_storage._options = nil}
 
   /// Partial run handle (optional). If specified, this will be a partial run
   /// execution, run up to the specified fetches.
-  var partialRunHandle: String {
+  public var partialRunHandle: String {
     get {return _storage._partialRunHandle}
     set {_uniqueStorage()._partialRunHandle = newValue}
   }
@@ -373,20 +373,20 @@ public struct Tensorflow_RunStepResponse: SwiftProtobuf.Message {
 
   /// NOTE: The order of the returned tensors may or may not match
   /// the fetch order specified in RunStepRequest.
-  var tensor: [Tensorflow_NamedTensorProto] {
+  public var tensor: [Tensorflow_NamedTensorProto] {
     get {return _storage._tensor}
     set {_uniqueStorage()._tensor = newValue}
   }
 
   /// Returned metadata if requested in the options.
-  var metadata: Tensorflow_RunMetadata {
+  public var metadata: Tensorflow_RunMetadata {
     get {return _storage._metadata ?? Tensorflow_RunMetadata()}
     set {_uniqueStorage()._metadata = newValue}
   }
   /// Returns true if `metadata` has been explicitly set.
-  var hasMetadata: Bool {return _storage._metadata != nil}
+  public var hasMetadata: Bool {return _storage._metadata != nil}
   /// Clears the value of `metadata`. Subsequent reads from it will return its default value.
-  mutating func clearMetadata() {_storage._metadata = nil}
+  public mutating func clearMetadata() {_storage._metadata = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -433,20 +433,20 @@ public struct Tensorflow_PartialRunSetupRequest: SwiftProtobuf.Message {
 
   /// REQUIRED: session_handle must be returned by a CreateSession call
   /// to the same master service.
-  var sessionHandle: String = String()
+  public var sessionHandle: String = String()
 
   /// Tensors to be fed in future steps.
-  var feed: [String] = []
+  public var feed: [String] = []
 
   /// Fetches. A list of tensor names. The caller expects a tensor to be returned
   /// for each fetch[i] (see RunStepResponse.tensor), for corresponding partial
   /// RunStepRequests. The order of specified fetches does not change the
   /// execution order.
-  var fetch: [String] = []
+  public var fetch: [String] = []
 
   /// Target Nodes. A list of node names. The named nodes will be run in future
   /// steps, but their outputs will not be fetched.
-  var target: [String] = []
+  public var target: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -495,7 +495,7 @@ public struct Tensorflow_PartialRunSetupResponse: SwiftProtobuf.Message {
   /// The unique handle corresponding to the ongoing partial run call setup by
   /// the invocation to PartialRunSetup. This handle may be passed to
   /// RunStepRequest to send and receive tensors for this partial run.
-  var partialRunHandle: String = String()
+  public var partialRunHandle: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -531,7 +531,7 @@ public struct Tensorflow_CloseSessionRequest: SwiftProtobuf.Message {
 
   /// REQUIRED: session_handle must be returned by a CreateSession call
   /// to the same master service.
-  var sessionHandle: String = String()
+  public var sessionHandle: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -611,12 +611,12 @@ public struct Tensorflow_ResetRequest: SwiftProtobuf.Message {
   ///
   /// If 'container' is empty, releases resources in the default
   /// container in all devices.
-  var container: [String] = []
+  public var container: [String] = []
 
   /// When any filters are present, only devices that match the filters
   /// will be reset. Each filter can be partially specified,
   /// e.g. "/job:ps" "/job:worker/replica:3", etc.
-  var deviceFilters: [String] = []
+  public var deviceFilters: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -704,9 +704,9 @@ public struct Tensorflow_ListDevicesRequest: SwiftProtobuf.Message {
 public struct Tensorflow_ListDevicesResponse: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ListDevicesResponse"
 
-  var localDevice: [Tensorflow_DeviceAttributes] = []
+  public var localDevice: [Tensorflow_DeviceAttributes] = []
 
-  var remoteDevice: [Tensorflow_DeviceAttributes] = []
+  public var remoteDevice: [Tensorflow_DeviceAttributes] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -759,7 +759,7 @@ extension Tensorflow_CreateSessionRequest: SwiftProtobuf._MessageImplementationB
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _graphDef = source._graphDef
@@ -777,7 +777,7 @@ extension Tensorflow_CreateSessionRequest: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CreateSessionRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._graphDef != other_storage._graphDef {return false}
         if _storage._config != other_storage._config {return false}
         if _storage._target != other_storage._target {return false}
@@ -818,7 +818,7 @@ extension Tensorflow_ExtendSessionRequest: SwiftProtobuf._MessageImplementationB
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _sessionHandle = source._sessionHandle
@@ -836,7 +836,7 @@ extension Tensorflow_ExtendSessionRequest: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ExtendSessionRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._sessionHandle != other_storage._sessionHandle {return false}
         if _storage._graphDef != other_storage._graphDef {return false}
         if _storage._currentGraphVersion != other_storage._currentGraphVersion {return false}
@@ -881,7 +881,7 @@ extension Tensorflow_RunStepRequest: SwiftProtobuf._MessageImplementationBase, S
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _sessionHandle = source._sessionHandle
@@ -902,7 +902,7 @@ extension Tensorflow_RunStepRequest: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunStepRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._sessionHandle != other_storage._sessionHandle {return false}
         if _storage._feed != other_storage._feed {return false}
         if _storage._fetch != other_storage._fetch {return false}
@@ -930,7 +930,7 @@ extension Tensorflow_RunStepResponse: SwiftProtobuf._MessageImplementationBase, 
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _tensor = source._tensor
@@ -947,7 +947,7 @@ extension Tensorflow_RunStepResponse: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunStepResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._tensor != other_storage._tensor {return false}
         if _storage._metadata != other_storage._metadata {return false}
         return true

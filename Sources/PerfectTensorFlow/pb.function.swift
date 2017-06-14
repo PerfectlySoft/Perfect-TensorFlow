@@ -23,9 +23,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_FunctionDefLibrary: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".FunctionDefLibrary"
 
-  var function: [Tensorflow_FunctionDef] = []
+  public var function: [Tensorflow_FunctionDef] = []
 
-  var gradient: [Tensorflow_GradientDef] = []
+  public var gradient: [Tensorflow_GradientDef] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -71,17 +71,17 @@ public struct Tensorflow_FunctionDef: SwiftProtobuf.Message {
 
   /// The definition of the function's name, arguments, return values,
   /// attrs etc.
-  var signature: Tensorflow_OpDef {
+  public var signature: Tensorflow_OpDef {
     get {return _storage._signature ?? Tensorflow_OpDef()}
     set {_uniqueStorage()._signature = newValue}
   }
   /// Returns true if `signature` has been explicitly set.
-  var hasSignature: Bool {return _storage._signature != nil}
+  public var hasSignature: Bool {return _storage._signature != nil}
   /// Clears the value of `signature`. Subsequent reads from it will return its default value.
-  mutating func clearSignature() {_storage._signature = nil}
+  public mutating func clearSignature() {_storage._signature = nil}
 
   /// Attributes specific to this function definition.
-  var attr: Dictionary<String,Tensorflow_AttrValue> {
+  public var attr: Dictionary<String,Tensorflow_AttrValue> {
     get {return _storage._attr}
     set {_uniqueStorage()._attr = newValue}
   }
@@ -89,14 +89,14 @@ public struct Tensorflow_FunctionDef: SwiftProtobuf.Message {
   /// By convention, "op" in node_def is resolved by consulting with a
   /// user-defined library first. If not resolved, "func" is assumed to
   /// be a builtin op.
-  var nodeDef: [Tensorflow_NodeDef] {
+  public var nodeDef: [Tensorflow_NodeDef] {
     get {return _storage._nodeDef}
     set {_uniqueStorage()._nodeDef = newValue}
   }
 
   /// A mapping from the output arg names from `signature` to the
   /// outputs from `node_def` that should be returned by the function.
-  var ret: Dictionary<String,String> {
+  public var ret: Dictionary<String,String> {
     get {return _storage._ret}
     set {_uniqueStorage()._ret = newValue}
   }
@@ -171,10 +171,10 @@ public struct Tensorflow_GradientDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GradientDef"
 
   /// The function name.
-  var functionName: String = String()
+  public var functionName: String = String()
 
   /// The gradient function's name.
-  var gradientFunc: String = String()
+  public var gradientFunc: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -243,7 +243,7 @@ extension Tensorflow_FunctionDef: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _signature = source._signature
@@ -262,7 +262,7 @@ extension Tensorflow_FunctionDef: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_FunctionDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._signature != other_storage._signature {return false}
         if _storage._attr != other_storage._attr {return false}
         if _storage._nodeDef != other_storage._nodeDef {return false}

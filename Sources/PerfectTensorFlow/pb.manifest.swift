@@ -27,17 +27,17 @@ public struct Tensorflow_Serving_Signatures: SwiftProtobuf.Message {
   /// WARNING(break-tutorial-inline-code): The following code snippet is
   /// in-lined in tutorials, please update tutorial documents accordingly
   /// whenever code changes.
-  var defaultSignature: Tensorflow_Serving_Signature {
+  public var defaultSignature: Tensorflow_Serving_Signature {
     get {return _storage._defaultSignature ?? Tensorflow_Serving_Signature()}
     set {_uniqueStorage()._defaultSignature = newValue}
   }
   /// Returns true if `defaultSignature` has been explicitly set.
-  var hasDefaultSignature: Bool {return _storage._defaultSignature != nil}
+  public var hasDefaultSignature: Bool {return _storage._defaultSignature != nil}
   /// Clears the value of `defaultSignature`. Subsequent reads from it will return its default value.
-  mutating func clearDefaultSignature() {_storage._defaultSignature = nil}
+  public mutating func clearDefaultSignature() {_storage._defaultSignature = nil}
 
   /// Named signatures of the graph.
-  var namedSignatures: Dictionary<String,Tensorflow_Serving_Signature> {
+  public var namedSignatures: Dictionary<String,Tensorflow_Serving_Signature> {
     get {return _storage._namedSignatures}
     set {_uniqueStorage()._namedSignatures = newValue}
   }
@@ -89,7 +89,7 @@ public struct Tensorflow_Serving_TensorBinding: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TensorBinding"
 
   /// The name of the tensor to bind to.
-  var tensorName: String = String()
+  public var tensorName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -126,19 +126,19 @@ public struct Tensorflow_Serving_AssetFile: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AssetFile"
 
   /// The tensor to bind the asset filename to.
-  var tensorBinding: Tensorflow_Serving_TensorBinding {
+  public var tensorBinding: Tensorflow_Serving_TensorBinding {
     get {return _storage._tensorBinding ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._tensorBinding = newValue}
   }
   /// Returns true if `tensorBinding` has been explicitly set.
-  var hasTensorBinding: Bool {return _storage._tensorBinding != nil}
+  public var hasTensorBinding: Bool {return _storage._tensorBinding != nil}
   /// Clears the value of `tensorBinding`. Subsequent reads from it will return its default value.
-  mutating func clearTensorBinding() {_storage._tensorBinding = nil}
+  public mutating func clearTensorBinding() {_storage._tensorBinding = nil}
 
   /// The filename within the assets directory. Note: does not include the base
   /// path or asset directory prefix. Base paths can and will change when models
   /// are deployed for serving.
-  var filename: String {
+  public var filename: String {
     get {return _storage._filename}
     set {_uniqueStorage()._filename = newValue}
   }
@@ -187,12 +187,12 @@ public struct Tensorflow_Serving_AssetFile: SwiftProtobuf.Message {
 public struct Tensorflow_Serving_Signature: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Signature"
 
-  var type: OneOf_Type? {
+  public var type: OneOf_Type? {
     get {return _storage._type}
     set {_uniqueStorage()._type = newValue}
   }
 
-  var regressionSignature: Tensorflow_Serving_RegressionSignature {
+  public var regressionSignature: Tensorflow_Serving_RegressionSignature {
     get {
       if case .regressionSignature(let v)? = _storage._type {return v}
       return Tensorflow_Serving_RegressionSignature()
@@ -200,7 +200,7 @@ public struct Tensorflow_Serving_Signature: SwiftProtobuf.Message {
     set {_uniqueStorage()._type = .regressionSignature(newValue)}
   }
 
-  var classificationSignature: Tensorflow_Serving_ClassificationSignature {
+  public var classificationSignature: Tensorflow_Serving_ClassificationSignature {
     get {
       if case .classificationSignature(let v)? = _storage._type {return v}
       return Tensorflow_Serving_ClassificationSignature()
@@ -208,7 +208,7 @@ public struct Tensorflow_Serving_Signature: SwiftProtobuf.Message {
     set {_uniqueStorage()._type = .classificationSignature(newValue)}
   }
 
-  var genericSignature: Tensorflow_Serving_GenericSignature {
+  public var genericSignature: Tensorflow_Serving_GenericSignature {
     get {
       if case .genericSignature(let v)? = _storage._type {return v}
       return Tensorflow_Serving_GenericSignature()
@@ -218,12 +218,12 @@ public struct Tensorflow_Serving_Signature: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Type: Equatable {
+  public enum OneOf_Type: Equatable {
     case regressionSignature(Tensorflow_Serving_RegressionSignature)
     case classificationSignature(Tensorflow_Serving_ClassificationSignature)
     case genericSignature(Tensorflow_Serving_GenericSignature)
 
-    static func ==(lhs: Tensorflow_Serving_Signature.OneOf_Type, rhs: Tensorflow_Serving_Signature.OneOf_Type) -> Bool {
+    public static func ==(lhs: Tensorflow_Serving_Signature.OneOf_Type, rhs: Tensorflow_Serving_Signature.OneOf_Type) -> Bool {
       switch (lhs, rhs) {
       case (.regressionSignature(let l), .regressionSignature(let r)): return l == r
       case (.classificationSignature(let l), .classificationSignature(let r)): return l == r
@@ -301,23 +301,23 @@ public struct Tensorflow_Serving_Signature: SwiftProtobuf.Message {
 public struct Tensorflow_Serving_RegressionSignature: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RegressionSignature"
 
-  var input: Tensorflow_Serving_TensorBinding {
+  public var input: Tensorflow_Serving_TensorBinding {
     get {return _storage._input ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._input = newValue}
   }
   /// Returns true if `input` has been explicitly set.
-  var hasInput: Bool {return _storage._input != nil}
+  public var hasInput: Bool {return _storage._input != nil}
   /// Clears the value of `input`. Subsequent reads from it will return its default value.
-  mutating func clearInput() {_storage._input = nil}
+  public mutating func clearInput() {_storage._input = nil}
 
-  var output: Tensorflow_Serving_TensorBinding {
+  public var output: Tensorflow_Serving_TensorBinding {
     get {return _storage._output ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._output = newValue}
   }
   /// Returns true if `output` has been explicitly set.
-  var hasOutput: Bool {return _storage._output != nil}
+  public var hasOutput: Bool {return _storage._output != nil}
   /// Clears the value of `output`. Subsequent reads from it will return its default value.
-  mutating func clearOutput() {_storage._output = nil}
+  public mutating func clearOutput() {_storage._output = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -367,32 +367,32 @@ public struct Tensorflow_Serving_RegressionSignature: SwiftProtobuf.Message {
 public struct Tensorflow_Serving_ClassificationSignature: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ClassificationSignature"
 
-  var input: Tensorflow_Serving_TensorBinding {
+  public var input: Tensorflow_Serving_TensorBinding {
     get {return _storage._input ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._input = newValue}
   }
   /// Returns true if `input` has been explicitly set.
-  var hasInput: Bool {return _storage._input != nil}
+  public var hasInput: Bool {return _storage._input != nil}
   /// Clears the value of `input`. Subsequent reads from it will return its default value.
-  mutating func clearInput() {_storage._input = nil}
+  public mutating func clearInput() {_storage._input = nil}
 
-  var classes: Tensorflow_Serving_TensorBinding {
+  public var classes: Tensorflow_Serving_TensorBinding {
     get {return _storage._classes ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._classes = newValue}
   }
   /// Returns true if `classes` has been explicitly set.
-  var hasClasses: Bool {return _storage._classes != nil}
+  public var hasClasses: Bool {return _storage._classes != nil}
   /// Clears the value of `classes`. Subsequent reads from it will return its default value.
-  mutating func clearClasses() {_storage._classes = nil}
+  public mutating func clearClasses() {_storage._classes = nil}
 
-  var scores: Tensorflow_Serving_TensorBinding {
+  public var scores: Tensorflow_Serving_TensorBinding {
     get {return _storage._scores ?? Tensorflow_Serving_TensorBinding()}
     set {_uniqueStorage()._scores = newValue}
   }
   /// Returns true if `scores` has been explicitly set.
-  var hasScores: Bool {return _storage._scores != nil}
+  public var hasScores: Bool {return _storage._scores != nil}
   /// Clears the value of `scores`. Subsequent reads from it will return its default value.
-  mutating func clearScores() {_storage._scores = nil}
+  public mutating func clearScores() {_storage._scores = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -446,7 +446,7 @@ public struct Tensorflow_Serving_ClassificationSignature: SwiftProtobuf.Message 
 public struct Tensorflow_Serving_GenericSignature: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GenericSignature"
 
-  var map: Dictionary<String,Tensorflow_Serving_TensorBinding> = [:]
+  public var map: Dictionary<String,Tensorflow_Serving_TensorBinding> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -493,7 +493,7 @@ extension Tensorflow_Serving_Signatures: SwiftProtobuf._MessageImplementationBas
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _defaultSignature = source._defaultSignature
@@ -510,7 +510,7 @@ extension Tensorflow_Serving_Signatures: SwiftProtobuf._MessageImplementationBas
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_Signatures) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._defaultSignature != other_storage._defaultSignature {return false}
         if _storage._namedSignatures != other_storage._namedSignatures {return false}
         return true
@@ -546,7 +546,7 @@ extension Tensorflow_Serving_AssetFile: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _tensorBinding = source._tensorBinding
@@ -563,7 +563,7 @@ extension Tensorflow_Serving_AssetFile: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_AssetFile) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._tensorBinding != other_storage._tensorBinding {return false}
         if _storage._filename != other_storage._filename {return false}
         return true
@@ -587,7 +587,7 @@ extension Tensorflow_Serving_Signature: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _type = source._type
@@ -603,7 +603,7 @@ extension Tensorflow_Serving_Signature: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_Signature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._type != other_storage._type {return false}
         return true
       }
@@ -626,7 +626,7 @@ extension Tensorflow_Serving_RegressionSignature: SwiftProtobuf._MessageImplemen
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _input = source._input
@@ -643,7 +643,7 @@ extension Tensorflow_Serving_RegressionSignature: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_RegressionSignature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._input != other_storage._input {return false}
         if _storage._output != other_storage._output {return false}
         return true
@@ -669,7 +669,7 @@ extension Tensorflow_Serving_ClassificationSignature: SwiftProtobuf._MessageImpl
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _input = source._input
@@ -687,7 +687,7 @@ extension Tensorflow_Serving_ClassificationSignature: SwiftProtobuf._MessageImpl
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_ClassificationSignature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._input != other_storage._input {return false}
         if _storage._classes != other_storage._classes {return false}
         if _storage._scores != other_storage._scores {return false}

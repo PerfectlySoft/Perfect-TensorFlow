@@ -26,9 +26,9 @@ public struct Tensorflow_BigQueryTablePartition: SwiftProtobuf.Message {
   /// [start_index, end_index] specify the boundaries of a partition.
   /// If end_index is -1, every row starting from start_index is part of the
   /// partition.
-  var startIndex: Int64 = 0
+  public var startIndex: Int64 = 0
 
-  var endIndex: Int64 = 0
+  public var endIndex: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

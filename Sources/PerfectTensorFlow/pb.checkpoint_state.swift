@@ -26,13 +26,13 @@ public struct Tensorflow_CheckpointState: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CheckpointState"
 
   /// Path to the most-recent model checkpoint.
-  var modelCheckpointPath: String = String()
+  public var modelCheckpointPath: String = String()
 
   /// Paths to all not-yet-deleted model checkpoints, sorted from oldest to
   /// newest.
   /// Note that the value of model_checkpoint_path should be the last item in
   /// this list.
-  var allModelCheckpointPaths: [String] = []
+  public var allModelCheckpointPaths: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

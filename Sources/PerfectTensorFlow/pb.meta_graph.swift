@@ -36,51 +36,51 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MetaGraphDef"
 
-  var metaInfoDef: Tensorflow_MetaGraphDef.MetaInfoDef {
+  public var metaInfoDef: Tensorflow_MetaGraphDef.MetaInfoDef {
     get {return _storage._metaInfoDef ?? Tensorflow_MetaGraphDef.MetaInfoDef()}
     set {_uniqueStorage()._metaInfoDef = newValue}
   }
   /// Returns true if `metaInfoDef` has been explicitly set.
-  var hasMetaInfoDef: Bool {return _storage._metaInfoDef != nil}
+  public var hasMetaInfoDef: Bool {return _storage._metaInfoDef != nil}
   /// Clears the value of `metaInfoDef`. Subsequent reads from it will return its default value.
-  mutating func clearMetaInfoDef() {_storage._metaInfoDef = nil}
+  public mutating func clearMetaInfoDef() {_storage._metaInfoDef = nil}
 
   /// GraphDef.
-  var graphDef: Tensorflow_GraphDef {
+  public var graphDef: Tensorflow_GraphDef {
     get {return _storage._graphDef ?? Tensorflow_GraphDef()}
     set {_uniqueStorage()._graphDef = newValue}
   }
   /// Returns true if `graphDef` has been explicitly set.
-  var hasGraphDef: Bool {return _storage._graphDef != nil}
+  public var hasGraphDef: Bool {return _storage._graphDef != nil}
   /// Clears the value of `graphDef`. Subsequent reads from it will return its default value.
-  mutating func clearGraphDef() {_storage._graphDef = nil}
+  public mutating func clearGraphDef() {_storage._graphDef = nil}
 
   /// SaverDef.
-  var saverDef: Tensorflow_SaverDef {
+  public var saverDef: Tensorflow_SaverDef {
     get {return _storage._saverDef ?? Tensorflow_SaverDef()}
     set {_uniqueStorage()._saverDef = newValue}
   }
   /// Returns true if `saverDef` has been explicitly set.
-  var hasSaverDef: Bool {return _storage._saverDef != nil}
+  public var hasSaverDef: Bool {return _storage._saverDef != nil}
   /// Clears the value of `saverDef`. Subsequent reads from it will return its default value.
-  mutating func clearSaverDef() {_storage._saverDef = nil}
+  public mutating func clearSaverDef() {_storage._saverDef = nil}
 
   /// collection_def: Map from collection name to collections.
   /// See CollectionDef section for details.
-  var collectionDef: Dictionary<String,Tensorflow_CollectionDef> {
+  public var collectionDef: Dictionary<String,Tensorflow_CollectionDef> {
     get {return _storage._collectionDef}
     set {_uniqueStorage()._collectionDef = newValue}
   }
 
   /// signature_def: Map from user supplied key for a signature to a single
   /// SignatureDef.
-  var signatureDef: Dictionary<String,Tensorflow_SignatureDef> {
+  public var signatureDef: Dictionary<String,Tensorflow_SignatureDef> {
     get {return _storage._signatureDef}
     set {_uniqueStorage()._signatureDef = newValue}
   }
 
   /// Asset file def to be used with the defined graph.
-  var assetFileDef: [Tensorflow_AssetFileDef] {
+  public var assetFileDef: [Tensorflow_AssetFileDef] {
     get {return _storage._assetFileDef}
     set {_uniqueStorage()._assetFileDef = newValue}
   }
@@ -89,37 +89,37 @@ public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
 
   /// Meta information regarding the graph to be exported.  To be used by users
   /// of this protocol buffer to encode information regarding their meta graph.
-  struct MetaInfoDef: SwiftProtobuf.Message {
+  public struct MetaInfoDef: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_MetaGraphDef.protoMessageName + ".MetaInfoDef"
 
     /// User specified Version string. Can be the name of the model and revision,
     /// steps this model has been trained to, etc.
-    var metaGraphVersion: String {
+    public var metaGraphVersion: String {
       get {return _storage._metaGraphVersion}
       set {_uniqueStorage()._metaGraphVersion = newValue}
     }
 
     /// A copy of the OpDefs used by the producer of this graph_def.
     /// Descriptions and Ops not used in graph_def are stripped out.
-    var strippedOpList: Tensorflow_OpList {
+    public var strippedOpList: Tensorflow_OpList {
       get {return _storage._strippedOpList ?? Tensorflow_OpList()}
       set {_uniqueStorage()._strippedOpList = newValue}
     }
     /// Returns true if `strippedOpList` has been explicitly set.
-    var hasStrippedOpList: Bool {return _storage._strippedOpList != nil}
+    public var hasStrippedOpList: Bool {return _storage._strippedOpList != nil}
     /// Clears the value of `strippedOpList`. Subsequent reads from it will return its default value.
-    mutating func clearStrippedOpList() {_storage._strippedOpList = nil}
+    public mutating func clearStrippedOpList() {_storage._strippedOpList = nil}
 
     /// A serialized protobuf. Can be the time this meta graph is created, or
     /// modified, or name of the model.
-    var anyInfo: SwiftProtobuf.Google_Protobuf_Any {
+    public var anyInfo: SwiftProtobuf.Google_Protobuf_Any {
       get {return _storage._anyInfo ?? SwiftProtobuf.Google_Protobuf_Any()}
       set {_uniqueStorage()._anyInfo = newValue}
     }
     /// Returns true if `anyInfo` has been explicitly set.
-    var hasAnyInfo: Bool {return _storage._anyInfo != nil}
+    public var hasAnyInfo: Bool {return _storage._anyInfo != nil}
     /// Clears the value of `anyInfo`. Subsequent reads from it will return its default value.
-    mutating func clearAnyInfo() {_storage._anyInfo = nil}
+    public mutating func clearAnyInfo() {_storage._anyInfo = nil}
 
     /// User supplied tag(s) on the meta_graph and included graph_def.
     ///
@@ -127,7 +127,7 @@ public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
     /// Examples: "train", "serve", "gpu", "tpu", etc.
     /// These tags enable loaders to access the MetaGraph(s) appropriate for a
     /// specific use-case or runtime environment.
-    var tags: [String] {
+    public var tags: [String] {
       get {return _storage._tags}
       set {_uniqueStorage()._tags = newValue}
     }
@@ -135,7 +135,7 @@ public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
     /// The __version__ string of the tensorflow build used to write this graph.
     /// This will be populated by the framework, which will overwrite any user
     /// supplied value.
-    var tensorflowVersion: String {
+    public var tensorflowVersion: String {
       get {return _storage._tensorflowVersion}
       set {_uniqueStorage()._tensorflowVersion = newValue}
     }
@@ -143,7 +143,7 @@ public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
     /// The __git_version__ string of the tensorflow build used to write this
     /// graph. This will be populated by the framework, which will overwrite any
     /// user supplied value.
-    var tensorflowGitVersion: String {
+    public var tensorflowGitVersion: String {
       get {return _storage._tensorflowGitVersion}
       set {_uniqueStorage()._tensorflowGitVersion = newValue}
     }
@@ -323,12 +323,12 @@ public struct Tensorflow_MetaGraphDef: SwiftProtobuf.Message {
 public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CollectionDef"
 
-  var kind: OneOf_Kind? {
+  public var kind: OneOf_Kind? {
     get {return _storage._kind}
     set {_uniqueStorage()._kind = newValue}
   }
 
-  var nodeList: Tensorflow_CollectionDef.NodeList {
+  public var nodeList: Tensorflow_CollectionDef.NodeList {
     get {
       if case .nodeList(let v)? = _storage._kind {return v}
       return Tensorflow_CollectionDef.NodeList()
@@ -336,7 +336,7 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .nodeList(newValue)}
   }
 
-  var bytesList: Tensorflow_CollectionDef.BytesList {
+  public var bytesList: Tensorflow_CollectionDef.BytesList {
     get {
       if case .bytesList(let v)? = _storage._kind {return v}
       return Tensorflow_CollectionDef.BytesList()
@@ -344,7 +344,7 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .bytesList(newValue)}
   }
 
-  var int64List: Tensorflow_CollectionDef.Int64List {
+  public var int64List: Tensorflow_CollectionDef.Int64List {
     get {
       if case .int64List(let v)? = _storage._kind {return v}
       return Tensorflow_CollectionDef.Int64List()
@@ -352,7 +352,7 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .int64List(newValue)}
   }
 
-  var floatList: Tensorflow_CollectionDef.FloatList {
+  public var floatList: Tensorflow_CollectionDef.FloatList {
     get {
       if case .floatList(let v)? = _storage._kind {return v}
       return Tensorflow_CollectionDef.FloatList()
@@ -360,7 +360,7 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
     set {_uniqueStorage()._kind = .floatList(newValue)}
   }
 
-  var anyList: Tensorflow_CollectionDef.AnyList {
+  public var anyList: Tensorflow_CollectionDef.AnyList {
     get {
       if case .anyList(let v)? = _storage._kind {return v}
       return Tensorflow_CollectionDef.AnyList()
@@ -370,14 +370,14 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Kind: Equatable {
+  public enum OneOf_Kind: Equatable {
     case nodeList(Tensorflow_CollectionDef.NodeList)
     case bytesList(Tensorflow_CollectionDef.BytesList)
     case int64List(Tensorflow_CollectionDef.Int64List)
     case floatList(Tensorflow_CollectionDef.FloatList)
     case anyList(Tensorflow_CollectionDef.AnyList)
 
-    static func ==(lhs: Tensorflow_CollectionDef.OneOf_Kind, rhs: Tensorflow_CollectionDef.OneOf_Kind) -> Bool {
+    public static func ==(lhs: Tensorflow_CollectionDef.OneOf_Kind, rhs: Tensorflow_CollectionDef.OneOf_Kind) -> Bool {
       switch (lhs, rhs) {
       case (.nodeList(let l), .nodeList(let r)): return l == r
       case (.bytesList(let l), .bytesList(let r)): return l == r
@@ -399,10 +399,10 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   ///       value: "ImageSummary:0"
   ///     }
   ///   }
-  struct NodeList: SwiftProtobuf.Message {
+  public struct NodeList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CollectionDef.protoMessageName + ".NodeList"
 
-    var value: [String] = []
+    public var value: [String] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -446,10 +446,10 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   ///     }
   ///   }
   /// }
-  struct BytesList: SwiftProtobuf.Message {
+  public struct BytesList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CollectionDef.protoMessageName + ".BytesList"
 
-    var value: [Data] = []
+    public var value: [Data] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -481,10 +481,10 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   }
 
   /// Int64List is used for collecting int, int64 and long values.
-  struct Int64List: SwiftProtobuf.Message {
+  public struct Int64List: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CollectionDef.protoMessageName + ".Int64List"
 
-    var value: [Int64] = []
+    public var value: [Int64] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -516,10 +516,10 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   }
 
   /// FloatList is used for collecting float values.
-  struct FloatList: SwiftProtobuf.Message {
+  public struct FloatList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CollectionDef.protoMessageName + ".FloatList"
 
-    var value: [Float] = []
+    public var value: [Float] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -551,10 +551,10 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
   }
 
   /// AnyList is used for collecting Any protos.
-  struct AnyList: SwiftProtobuf.Message {
+  public struct AnyList: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CollectionDef.protoMessageName + ".AnyList"
 
-    var value: [SwiftProtobuf.Google_Protobuf_Any] = []
+    public var value: [SwiftProtobuf.Google_Protobuf_Any] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -672,24 +672,24 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
 public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TensorInfo"
 
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
-  var dtype: Tensorflow_DataType {
+  public var dtype: Tensorflow_DataType {
     get {return _storage._dtype}
     set {_uniqueStorage()._dtype = newValue}
   }
 
-  var tensorShape: Tensorflow_TensorShapeProto {
+  public var tensorShape: Tensorflow_TensorShapeProto {
     get {return _storage._tensorShape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._tensorShape = newValue}
   }
   /// Returns true if `tensorShape` has been explicitly set.
-  var hasTensorShape: Bool {return _storage._tensorShape != nil}
+  public var hasTensorShape: Bool {return _storage._tensorShape != nil}
   /// Clears the value of `tensorShape`. Subsequent reads from it will return its default value.
-  mutating func clearTensorShape() {_storage._tensorShape = nil}
+  public mutating func clearTensorShape() {_storage._tensorShape = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -796,10 +796,10 @@ public struct Tensorflow_SignatureDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SignatureDef"
 
   /// Named input parameters.
-  var inputs: Dictionary<String,Tensorflow_TensorInfo> = [:]
+  public var inputs: Dictionary<String,Tensorflow_TensorInfo> = [:]
 
   /// Named output parameters.
-  var outputs: Dictionary<String,Tensorflow_TensorInfo> = [:]
+  public var outputs: Dictionary<String,Tensorflow_TensorInfo> = [:]
 
   /// Extensible method_name information enabling third-party users to mark a
   /// SignatureDef as supporting a particular method. This enables producers and
@@ -809,7 +809,7 @@ public struct Tensorflow_SignatureDef: SwiftProtobuf.Message {
   /// Note that multiple SignatureDefs in a single MetaGraphDef may have the same
   /// method_name. This is commonly used to support multi-headed computation,
   /// where a single graph computation may return multiple results.
-  var methodName: String = String()
+  public var methodName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -854,19 +854,19 @@ public struct Tensorflow_AssetFileDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AssetFileDef"
 
   /// The tensor to bind the asset filename to.
-  var tensorInfo: Tensorflow_TensorInfo {
+  public var tensorInfo: Tensorflow_TensorInfo {
     get {return _storage._tensorInfo ?? Tensorflow_TensorInfo()}
     set {_uniqueStorage()._tensorInfo = newValue}
   }
   /// Returns true if `tensorInfo` has been explicitly set.
-  var hasTensorInfo: Bool {return _storage._tensorInfo != nil}
+  public var hasTensorInfo: Bool {return _storage._tensorInfo != nil}
   /// Clears the value of `tensorInfo`. Subsequent reads from it will return its default value.
-  mutating func clearTensorInfo() {_storage._tensorInfo = nil}
+  public mutating func clearTensorInfo() {_storage._tensorInfo = nil}
 
   /// The filename within an assets directory. Note: does not include the path
   /// prefix, i.e. directories. For an asset at /tmp/path/vocab.txt, the filename
   /// would be "vocab.txt".
-  var filename: String {
+  public var filename: String {
     get {return _storage._filename}
     set {_uniqueStorage()._filename = newValue}
   }
@@ -935,7 +935,7 @@ extension Tensorflow_MetaGraphDef: SwiftProtobuf._MessageImplementationBase, Swi
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _metaInfoDef = source._metaInfoDef
@@ -956,7 +956,7 @@ extension Tensorflow_MetaGraphDef: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MetaGraphDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._metaInfoDef != other_storage._metaInfoDef {return false}
         if _storage._graphDef != other_storage._graphDef {return false}
         if _storage._saverDef != other_storage._saverDef {return false}
@@ -992,7 +992,7 @@ extension Tensorflow_MetaGraphDef.MetaInfoDef: SwiftProtobuf._MessageImplementat
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _metaGraphVersion = source._metaGraphVersion
@@ -1013,7 +1013,7 @@ extension Tensorflow_MetaGraphDef.MetaInfoDef: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MetaGraphDef.MetaInfoDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._metaGraphVersion != other_storage._metaGraphVersion {return false}
         if _storage._strippedOpList != other_storage._strippedOpList {return false}
         if _storage._anyInfo != other_storage._anyInfo {return false}
@@ -1043,7 +1043,7 @@ extension Tensorflow_CollectionDef: SwiftProtobuf._MessageImplementationBase, Sw
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _kind = source._kind
@@ -1059,7 +1059,7 @@ extension Tensorflow_CollectionDef: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CollectionDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._kind != other_storage._kind {return false}
         return true
       }
@@ -1144,7 +1144,7 @@ extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, Swift
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -1162,7 +1162,7 @@ extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._tensorShape != other_storage._tensorShape {return false}
@@ -1203,7 +1203,7 @@ extension Tensorflow_AssetFileDef: SwiftProtobuf._MessageImplementationBase, Swi
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _tensorInfo = source._tensorInfo
@@ -1220,7 +1220,7 @@ extension Tensorflow_AssetFileDef: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_AssetFileDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._tensorInfo != other_storage._tensorInfo {return false}
         if _storage._filename != other_storage._filename {return false}
         return true

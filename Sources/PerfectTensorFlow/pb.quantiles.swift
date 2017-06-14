@@ -19,14 +19,14 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct BoostedTrees_QuantileConfig: SwiftProtobuf.Message {
+public struct BoostedTrees_QuantileConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".QuantileConfig"
 
   /// Maximum eps error when computing quantile summaries.
-  var eps: Double = 0
+  public var eps: Double = 0
 
   /// Number of quantiles to generate.
-  var numQuantiles: Int64 = 0
+  public var numQuantiles: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -61,21 +61,21 @@ struct BoostedTrees_QuantileConfig: SwiftProtobuf.Message {
   }
 }
 
-struct BoostedTrees_QuantileEntry: SwiftProtobuf.Message {
+public struct BoostedTrees_QuantileEntry: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".QuantileEntry"
 
   /// Value for the entry.
-  var value: Float = 0
+  public var value: Float = 0
 
   /// Weight for the entry.
-  var weight: Float = 0
+  public var weight: Float = 0
 
   /// We need the minimum and maximum rank possible for this entry.
   /// Rank is 0.0 for the absolute minimum and sum of the weights for the maximum
   /// value in the input.
-  var minRank: Float = 0
+  public var minRank: Float = 0
 
-  var maxRank: Float = 0
+  public var maxRank: Float = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -118,10 +118,10 @@ struct BoostedTrees_QuantileEntry: SwiftProtobuf.Message {
   }
 }
 
-struct BoostedTrees_QuantileSummaryState: SwiftProtobuf.Message {
+public struct BoostedTrees_QuantileSummaryState: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".QuantileSummaryState"
 
-  var entries: [BoostedTrees_QuantileEntry] = []
+  public var entries: [BoostedTrees_QuantileEntry] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -152,10 +152,10 @@ struct BoostedTrees_QuantileSummaryState: SwiftProtobuf.Message {
   }
 }
 
-struct BoostedTrees_QuantileStreamState: SwiftProtobuf.Message {
+public struct BoostedTrees_QuantileStreamState: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".QuantileStreamState"
 
-  var summaries: [BoostedTrees_QuantileSummaryState] = []
+  public var summaries: [BoostedTrees_QuantileSummaryState] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

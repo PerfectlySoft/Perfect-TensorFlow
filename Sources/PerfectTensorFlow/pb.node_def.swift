@@ -25,18 +25,18 @@ public struct Tensorflow_NodeDef: SwiftProtobuf.Message {
   /// The name given to this operator. Used for naming inputs,
   /// logging, visualization, etc.  Unique within a single GraphDef.
   /// Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
-  var name: String = String()
+  public var name: String = String()
 
   /// The operation name.  There may be custom parameters in attrs.
   /// Op names starting with an underscore are reserved for internal use.
-  var op: String = String()
+  public var op: String = String()
 
   /// Each input is "node:src_output" with "node" being a string name and
   /// "src_output" indicating which output tensor to use from "node". If
   /// "src_output" is 0 the ":0" suffix can be omitted.  Regular inputs
   /// may optionally be followed by control inputs that have the format
   /// "^node".
-  var input: [String] = []
+  public var input: [String] = []
 
   /// A (possibly partial) specification for the device on which this
   /// node should be placed.
@@ -58,7 +58,7 @@ public struct Tensorflow_NodeDef: SwiftProtobuf.Message {
   /// If the constraints do not resolve to a single device (or if this
   /// field is empty or not present), the runtime will attempt to
   /// choose a device automatically.
-  var device: String = String()
+  public var device: String = String()
 
   /// Operation-specific graph-construction-time configuration.
   /// Note that this should include all attrs defined in the
@@ -72,7 +72,7 @@ public struct Tensorflow_NodeDef: SwiftProtobuf.Message {
   /// The values must have a type matching the corresponding OpDef
   /// attr's type field.
   /// TODO(josh11b): Add some examples here showing best practices.
-  var attr: Dictionary<String,Tensorflow_AttrValue> = [:]
+  public var attr: Dictionary<String,Tensorflow_AttrValue> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

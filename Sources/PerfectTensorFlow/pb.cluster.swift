@@ -39,14 +39,14 @@ public struct Tensorflow_JobDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".JobDef"
 
   /// The name of this job.
-  var name: String = String()
+  public var name: String = String()
 
   /// Mapping from task ID to "hostname:port" string.
   ///
   /// If the `name` field contains "worker", and the `tasks` map contains a
   /// mapping from 7 to "example.org:2222", then the device prefix
   /// "/job:worker/task:7" will be assigned to "example.org:2222".
-  var tasks: Dictionary<Int32,String> = [:]
+  public var tasks: Dictionary<Int32,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -86,7 +86,7 @@ public struct Tensorflow_ClusterDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ClusterDef"
 
   /// The jobs that comprise the cluster.
-  var job: [Tensorflow_JobDef] = []
+  public var job: [Tensorflow_JobDef] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

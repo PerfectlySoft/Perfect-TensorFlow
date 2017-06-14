@@ -39,20 +39,20 @@ public struct Tensorflow_ServerDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ServerDef"
 
   /// The cluster of which this server is a member.
-  var cluster: Tensorflow_ClusterDef {
+  public var cluster: Tensorflow_ClusterDef {
     get {return _storage._cluster ?? Tensorflow_ClusterDef()}
     set {_uniqueStorage()._cluster = newValue}
   }
   /// Returns true if `cluster` has been explicitly set.
-  var hasCluster: Bool {return _storage._cluster != nil}
+  public var hasCluster: Bool {return _storage._cluster != nil}
   /// Clears the value of `cluster`. Subsequent reads from it will return its default value.
-  mutating func clearCluster() {_storage._cluster = nil}
+  public mutating func clearCluster() {_storage._cluster = nil}
 
   /// The name of the job of which this server is a member.
   ///
   /// NOTE(mrry): The `cluster` field must contain a `JobDef` with a `name` field
   /// that matches this name.
-  var jobName: String {
+  public var jobName: String {
     get {return _storage._jobName}
     set {_uniqueStorage()._jobName = newValue}
   }
@@ -61,25 +61,25 @@ public struct Tensorflow_ServerDef: SwiftProtobuf.Message {
   ///
   /// NOTE: The `cluster` field must contain a `JobDef` with a matching `name`
   /// and a mapping in its `tasks` field for this index.
-  var taskIndex: Int32 {
+  public var taskIndex: Int32 {
     get {return _storage._taskIndex}
     set {_uniqueStorage()._taskIndex = newValue}
   }
 
   /// The default configuration for sessions that run on this server.
-  var defaultSessionConfig: Tensorflow_ConfigProto {
+  public var defaultSessionConfig: Tensorflow_ConfigProto {
     get {return _storage._defaultSessionConfig ?? Tensorflow_ConfigProto()}
     set {_uniqueStorage()._defaultSessionConfig = newValue}
   }
   /// Returns true if `defaultSessionConfig` has been explicitly set.
-  var hasDefaultSessionConfig: Bool {return _storage._defaultSessionConfig != nil}
+  public var hasDefaultSessionConfig: Bool {return _storage._defaultSessionConfig != nil}
   /// Clears the value of `defaultSessionConfig`. Subsequent reads from it will return its default value.
-  mutating func clearDefaultSessionConfig() {_storage._defaultSessionConfig = nil}
+  public mutating func clearDefaultSessionConfig() {_storage._defaultSessionConfig = nil}
 
   /// The protocol to be used by this server.
   ///
   /// Acceptable values include: "grpc".
-  var `protocol`: String {
+  public var `protocol`: String {
     get {return _storage._protocol}
     set {_uniqueStorage()._protocol = newValue}
   }
@@ -158,7 +158,7 @@ extension Tensorflow_ServerDef: SwiftProtobuf._MessageImplementationBase, SwiftP
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _cluster = source._cluster
@@ -178,7 +178,7 @@ extension Tensorflow_ServerDef: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ServerDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._cluster != other_storage._cluster {return false}
         if _storage._jobName != other_storage._jobName {return false}
         if _storage._taskIndex != other_storage._taskIndex {return false}

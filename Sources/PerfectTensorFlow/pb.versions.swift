@@ -35,13 +35,13 @@ public struct Tensorflow_VersionDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".VersionDef"
 
   /// The version of the code that produced this data.
-  var producer: Int32 = 0
+  public var producer: Int32 = 0
 
   /// Any consumer below this version is not allowed to consume this data.
-  var minConsumer: Int32 = 0
+  public var minConsumer: Int32 = 0
 
   /// Specific consumer versions which are disallowed (e.g. due to bugs).
-  var badConsumers: [Int32] = []
+  public var badConsumers: [Int32] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

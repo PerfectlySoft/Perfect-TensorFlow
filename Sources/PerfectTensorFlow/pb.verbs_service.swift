@@ -37,15 +37,15 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Channel: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Channel"
 
-  var lid: Int32 = 0
+  public var lid: Int32 = 0
 
-  var qpn: Int32 = 0
+  public var qpn: Int32 = 0
 
-  var psn: Int32 = 0
+  public var psn: Int32 = 0
 
-  var snp: UInt64 = 0
+  public var snp: UInt64 = 0
 
-  var iid: UInt64 = 0
+  public var iid: UInt64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -95,9 +95,9 @@ public struct Tensorflow_Channel: SwiftProtobuf.Message {
 public struct Tensorflow_MemoryRegion: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryRegion"
 
-  var remoteAddr: UInt64 = 0
+  public var remoteAddr: UInt64 = 0
 
-  var rkey: UInt32 = 0
+  public var rkey: UInt32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -135,21 +135,21 @@ public struct Tensorflow_MemoryRegion: SwiftProtobuf.Message {
 public struct Tensorflow_GetRemoteAddressRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GetRemoteAddressRequest"
 
-  var hostName: String {
+  public var hostName: String {
     get {return _storage._hostName}
     set {_uniqueStorage()._hostName = newValue}
   }
 
-  var channel: Tensorflow_Channel {
+  public var channel: Tensorflow_Channel {
     get {return _storage._channel ?? Tensorflow_Channel()}
     set {_uniqueStorage()._channel = newValue}
   }
   /// Returns true if `channel` has been explicitly set.
-  var hasChannel: Bool {return _storage._channel != nil}
+  public var hasChannel: Bool {return _storage._channel != nil}
   /// Clears the value of `channel`. Subsequent reads from it will return its default value.
-  mutating func clearChannel() {_storage._channel = nil}
+  public mutating func clearChannel() {_storage._channel = nil}
 
-  var mr: [Tensorflow_MemoryRegion] {
+  public var mr: [Tensorflow_MemoryRegion] {
     get {return _storage._mr}
     set {_uniqueStorage()._mr = newValue}
   }
@@ -201,21 +201,21 @@ public struct Tensorflow_GetRemoteAddressRequest: SwiftProtobuf.Message {
 public struct Tensorflow_GetRemoteAddressResponse: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GetRemoteAddressResponse"
 
-  var hostName: String {
+  public var hostName: String {
     get {return _storage._hostName}
     set {_uniqueStorage()._hostName = newValue}
   }
 
-  var channel: Tensorflow_Channel {
+  public var channel: Tensorflow_Channel {
     get {return _storage._channel ?? Tensorflow_Channel()}
     set {_uniqueStorage()._channel = newValue}
   }
   /// Returns true if `channel` has been explicitly set.
-  var hasChannel: Bool {return _storage._channel != nil}
+  public var hasChannel: Bool {return _storage._channel != nil}
   /// Clears the value of `channel`. Subsequent reads from it will return its default value.
-  mutating func clearChannel() {_storage._channel = nil}
+  public mutating func clearChannel() {_storage._channel = nil}
 
-  var mr: [Tensorflow_MemoryRegion] {
+  public var mr: [Tensorflow_MemoryRegion] {
     get {return _storage._mr}
     set {_uniqueStorage()._mr = newValue}
   }
@@ -316,7 +316,7 @@ extension Tensorflow_GetRemoteAddressRequest: SwiftProtobuf._MessageImplementati
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _hostName = source._hostName
@@ -334,7 +334,7 @@ extension Tensorflow_GetRemoteAddressRequest: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GetRemoteAddressRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._hostName != other_storage._hostName {return false}
         if _storage._channel != other_storage._channel {return false}
         if _storage._mr != other_storage._mr {return false}
@@ -361,7 +361,7 @@ extension Tensorflow_GetRemoteAddressResponse: SwiftProtobuf._MessageImplementat
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _hostName = source._hostName
@@ -379,7 +379,7 @@ extension Tensorflow_GetRemoteAddressResponse: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GetRemoteAddressResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._hostName != other_storage._hostName {return false}
         if _storage._channel != other_storage._channel {return false}
         if _storage._mr != other_storage._mr {return false}

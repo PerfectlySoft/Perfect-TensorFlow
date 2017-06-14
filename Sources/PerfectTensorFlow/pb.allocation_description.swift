@@ -23,22 +23,22 @@ public struct Tensorflow_AllocationDescription: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AllocationDescription"
 
   /// Total number of bytes requested
-  var requestedBytes: Int64 = 0
+  public var requestedBytes: Int64 = 0
 
   /// Total number of bytes allocated if known
-  var allocatedBytes: Int64 = 0
+  public var allocatedBytes: Int64 = 0
 
   /// Name of the allocator used
-  var allocatorName: String = String()
+  public var allocatorName: String = String()
 
   /// Identifier of the allocated buffer if known
-  var allocationID: Int64 = 0
+  public var allocationID: Int64 = 0
 
   /// Set if this tensor only has one remaining reference
-  var hasSingleReference_p: Bool = false
+  public var hasSingleReference_p: Bool = false
 
   /// Address of the allocation.
-  var ptr: UInt64 = 0
+  public var ptr: UInt64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

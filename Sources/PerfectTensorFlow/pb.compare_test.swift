@@ -21,17 +21,17 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-enum CompareTest_Enum: SwiftProtobuf.Enum {
-  typealias RawValue = Int
+public enum CompareTest_Enum: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
   case a // = 0
   case b // = 1
   case c // = 2
 
-  init() {
+  public init() {
     self = .a
   }
 
-  init?(rawValue: Int) {
+  public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .a
     case 1: self = .b
@@ -40,7 +40,7 @@ enum CompareTest_Enum: SwiftProtobuf.Enum {
     }
   }
 
-  var rawValue: Int {
+  public var rawValue: Int {
     switch self {
     case .a: return 0
     case .b: return 1
@@ -50,10 +50,10 @@ enum CompareTest_Enum: SwiftProtobuf.Enum {
 
 }
 
-struct CompareTest_Small: SwiftProtobuf.Message {
+public struct CompareTest_Small: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Small"
 
-  var strings: [String] = []
+  public var strings: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -84,37 +84,37 @@ struct CompareTest_Small: SwiftProtobuf.Message {
   }
 }
 
-struct CompareTest_Medium: SwiftProtobuf.Message {
+public struct CompareTest_Medium: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Medium"
 
-  var int32S: [Int32] = []
+  public var int32S: [Int32] = []
 
-  var smalls: [CompareTest_Small] = []
+  public var smalls: [CompareTest_Small] = []
 
-  var groupA: [CompareTest_Medium.GroupA] = []
+  public var groupA: [CompareTest_Medium.GroupA] = []
 
-  var floats: [Float] = []
+  public var floats: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct GroupA: SwiftProtobuf.Message {
+  public struct GroupA: SwiftProtobuf.Message {
     public static let protoMessageName: String = CompareTest_Medium.protoMessageName + ".GroupA"
 
-    var groupB: [CompareTest_Medium.GroupA.GroupB] = []
+    public var groupB: [CompareTest_Medium.GroupA.GroupB] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-    struct GroupB: SwiftProtobuf.Message {
+    public struct GroupB: SwiftProtobuf.Message {
       public static let protoMessageName: String = CompareTest_Medium.GroupA.protoMessageName + ".GroupB"
 
-      var strings: String {
+      public var strings: String {
         get {return _strings ?? String()}
         set {_strings = newValue}
       }
       /// Returns true if `strings` has been explicitly set.
-      var hasStrings: Bool {return self._strings != nil}
+      public var hasStrings: Bool {return self._strings != nil}
       /// Clears the value of `strings`. Subsequent reads from it will return its default value.
-      mutating func clearStrings() {self._strings = nil}
+      public mutating func clearStrings() {self._strings = nil}
 
       public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -228,94 +228,94 @@ struct CompareTest_Medium: SwiftProtobuf.Message {
   }
 }
 
-struct CompareTest_Large: SwiftProtobuf.Message {
+public struct CompareTest_Large: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Large"
 
-  var string_: String {
+  public var string_: String {
     get {return _storage._string_ ?? String()}
     set {_uniqueStorage()._string_ = newValue}
   }
   /// Returns true if `string_` has been explicitly set.
-  var hasString_: Bool {return _storage._string_ != nil}
+  public var hasString_: Bool {return _storage._string_ != nil}
   /// Clears the value of `string_`. Subsequent reads from it will return its default value.
-  mutating func clearString_() {_storage._string_ = nil}
+  public mutating func clearString_() {_storage._string_ = nil}
 
-  var int64_: Int64 {
+  public var int64_: Int64 {
     get {return _storage._int64_ ?? 0}
     set {_uniqueStorage()._int64_ = newValue}
   }
   /// Returns true if `int64_` has been explicitly set.
-  var hasInt64_: Bool {return _storage._int64_ != nil}
+  public var hasInt64_: Bool {return _storage._int64_ != nil}
   /// Clears the value of `int64_`. Subsequent reads from it will return its default value.
-  mutating func clearInt64_() {_storage._int64_ = nil}
+  public mutating func clearInt64_() {_storage._int64_ = nil}
 
-  var float_: Float {
+  public var float_: Float {
     get {return _storage._float_ ?? 0}
     set {_uniqueStorage()._float_ = newValue}
   }
   /// Returns true if `float_` has been explicitly set.
-  var hasFloat_: Bool {return _storage._float_ != nil}
+  public var hasFloat_: Bool {return _storage._float_ != nil}
   /// Clears the value of `float_`. Subsequent reads from it will return its default value.
-  mutating func clearFloat_() {_storage._float_ = nil}
+  public mutating func clearFloat_() {_storage._float_ = nil}
 
-  var bool_: Bool {
+  public var bool_: Bool {
     get {return _storage._bool_ ?? false}
     set {_uniqueStorage()._bool_ = newValue}
   }
   /// Returns true if `bool_` has been explicitly set.
-  var hasBool_: Bool {return _storage._bool_ != nil}
+  public var hasBool_: Bool {return _storage._bool_ != nil}
   /// Clears the value of `bool_`. Subsequent reads from it will return its default value.
-  mutating func clearBool_() {_storage._bool_ = nil}
+  public mutating func clearBool_() {_storage._bool_ = nil}
 
-  var enum_: CompareTest_Enum {
+  public var enum_: CompareTest_Enum {
     get {return _storage._enum_ ?? .a}
     set {_uniqueStorage()._enum_ = newValue}
   }
   /// Returns true if `enum_` has been explicitly set.
-  var hasEnum_: Bool {return _storage._enum_ != nil}
+  public var hasEnum_: Bool {return _storage._enum_ != nil}
   /// Clears the value of `enum_`. Subsequent reads from it will return its default value.
-  mutating func clearEnum_() {_storage._enum_ = nil}
+  public mutating func clearEnum_() {_storage._enum_ = nil}
 
-  var int64S: [Int64] {
+  public var int64S: [Int64] {
     get {return _storage._int64S}
     set {_uniqueStorage()._int64S = newValue}
   }
 
-  var medium: CompareTest_Medium {
+  public var medium: CompareTest_Medium {
     get {return _storage._medium ?? CompareTest_Medium()}
     set {_uniqueStorage()._medium = newValue}
   }
   /// Returns true if `medium` has been explicitly set.
-  var hasMedium: Bool {return _storage._medium != nil}
+  public var hasMedium: Bool {return _storage._medium != nil}
   /// Clears the value of `medium`. Subsequent reads from it will return its default value.
-  mutating func clearMedium() {_storage._medium = nil}
+  public mutating func clearMedium() {_storage._medium = nil}
 
-  var small: CompareTest_Small {
+  public var small: CompareTest_Small {
     get {return _storage._small ?? CompareTest_Small()}
     set {_uniqueStorage()._small = newValue}
   }
   /// Returns true if `small` has been explicitly set.
-  var hasSmall: Bool {return _storage._small != nil}
+  public var hasSmall: Bool {return _storage._small != nil}
   /// Clears the value of `small`. Subsequent reads from it will return its default value.
-  mutating func clearSmall() {_storage._small = nil}
+  public mutating func clearSmall() {_storage._small = nil}
 
-  var double_: Double {
+  public var double_: Double {
     get {return _storage._double_ ?? 0}
     set {_uniqueStorage()._double_ = newValue}
   }
   /// Returns true if `double_` has been explicitly set.
-  var hasDouble_: Bool {return _storage._double_ != nil}
+  public var hasDouble_: Bool {return _storage._double_ != nil}
   /// Clears the value of `double_`. Subsequent reads from it will return its default value.
-  mutating func clearDouble_() {_storage._double_ = nil}
+  public mutating func clearDouble_() {_storage._double_ = nil}
 
-  var withMap: CompareTest_WithMap {
+  public var withMap: CompareTest_WithMap {
     get {return _storage._withMap ?? CompareTest_WithMap()}
     set {_uniqueStorage()._withMap = newValue}
   }
   /// Returns true if `withMap` has been explicitly set.
-  var hasWithMap: Bool {return _storage._withMap != nil}
+  public var hasWithMap: Bool {return _storage._withMap != nil}
   /// Clears the value of `withMap`. Subsequent reads from it will return its default value.
-  mutating func clearWithMap() {_storage._withMap = nil}
+  public mutating func clearWithMap() {_storage._withMap = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -396,26 +396,26 @@ struct CompareTest_Large: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct CompareTest_Labeled: SwiftProtobuf.Message {
+public struct CompareTest_Labeled: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Labeled"
 
-  var required: Int32 {
+  public var required: Int32 {
     get {return _required ?? 0}
     set {_required = newValue}
   }
   /// Returns true if `required` has been explicitly set.
-  var hasRequired: Bool {return self._required != nil}
+  public var hasRequired: Bool {return self._required != nil}
   /// Clears the value of `required`. Subsequent reads from it will return its default value.
-  mutating func clearRequired() {self._required = nil}
+  public mutating func clearRequired() {self._required = nil}
 
-  var optional: Int32 {
+  public var optional: Int32 {
     get {return _optional ?? 0}
     set {_optional = newValue}
   }
   /// Returns true if `optional` has been explicitly set.
-  var hasOptional: Bool {return self._optional != nil}
+  public var hasOptional: Bool {return self._optional != nil}
   /// Clears the value of `optional`. Subsequent reads from it will return its default value.
-  mutating func clearOptional() {self._optional = nil}
+  public mutating func clearOptional() {self._optional = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -458,12 +458,12 @@ struct CompareTest_Labeled: SwiftProtobuf.Message {
   fileprivate var _optional: Int32? = nil
 }
 
-struct CompareTest_WithMap: SwiftProtobuf.Message {
+public struct CompareTest_WithMap: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".WithMap"
 
-  var valueMessage: Dictionary<Int32,CompareTest_Small> = [:]
+  public var valueMessage: Dictionary<Int32,CompareTest_Small> = [:]
 
-  var valueString: Dictionary<String,String> = [:]
+  public var valueString: Dictionary<String,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -592,7 +592,7 @@ extension CompareTest_Large: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _string_ = source._string_
@@ -617,7 +617,7 @@ extension CompareTest_Large: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: CompareTest_Large) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._string_ != other_storage._string_ {return false}
         if _storage._int64_ != other_storage._int64_ {return false}
         if _storage._float_ != other_storage._float_ {return false}

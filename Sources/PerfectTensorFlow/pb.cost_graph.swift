@@ -22,67 +22,67 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_CostGraphDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CostGraphDef"
 
-  var node: [Tensorflow_CostGraphDef.Node] = []
+  public var node: [Tensorflow_CostGraphDef.Node] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct Node: SwiftProtobuf.Message {
+  public struct Node: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_CostGraphDef.protoMessageName + ".Node"
 
     /// The name of the node. Names are globally unique.
-    var name: String = String()
+    public var name: String = String()
 
     /// The device of the node. Can be empty if the node is mapped to the
     /// default partition or partitioning hasn't been run yet.
-    var device: String = String()
+    public var device: String = String()
 
     /// The id of the node. Node ids are only unique inside a partition.
-    var id: Int32 = 0
+    public var id: Int32 = 0
 
-    var inputInfo: [Tensorflow_CostGraphDef.Node.InputInfo] = []
+    public var inputInfo: [Tensorflow_CostGraphDef.Node.InputInfo] = []
 
-    var outputInfo: [Tensorflow_CostGraphDef.Node.OutputInfo] = []
+    public var outputInfo: [Tensorflow_CostGraphDef.Node.OutputInfo] = []
 
     /// Temporary memory used by this node.
-    var temporaryMemorySize: Int64 = 0
+    public var temporaryMemorySize: Int64 = 0
 
-    var hostTempMemorySize: Int64 = 0
+    public var hostTempMemorySize: Int64 = 0
 
-    var deviceTempMemorySize: Int64 = 0
+    public var deviceTempMemorySize: Int64 = 0
 
-    var hostPersistentMemorySize: Int64 = 0
+    public var hostPersistentMemorySize: Int64 = 0
 
-    var devicePersistentMemorySize: Int64 = 0
+    public var devicePersistentMemorySize: Int64 = 0
 
     /// Estimate of the computational cost of this node, in microseconds.
-    var computeCost: Int64 = 0
+    public var computeCost: Int64 = 0
 
     /// Analytical estimate of the computational cost of this node, in
     /// microseconds.
-    var computeTime: Int64 = 0
+    public var computeTime: Int64 = 0
 
     /// Analytical estimate of the memory access cost of this node, in
     /// microseconds.
-    var memoryTime: Int64 = 0
+    public var memoryTime: Int64 = 0
 
     /// If true, the output is permanent: it can't be discarded, because this
     /// node is part of the "final output". Nodes may depend on final nodes.
-    var isFinal: Bool = false
+    public var isFinal: Bool = false
 
     /// Ids of the control inputs for this node.
-    var controlInput: [Int32] = []
+    public var controlInput: [Int32] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
     /// Inputs of this node. They must be executed before this node can be
     /// executed. An input is a particular output of another node, specified
     /// by the node id and the output index.
-    struct InputInfo: SwiftProtobuf.Message {
+    public struct InputInfo: SwiftProtobuf.Message {
       public static let protoMessageName: String = Tensorflow_CostGraphDef.Node.protoMessageName + ".InputInfo"
 
-      var precedingNode: Int32 = 0
+      public var precedingNode: Int32 = 0
 
-      var precedingPort: Int32 = 0
+      public var precedingPort: Int32 = 0
 
       public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -118,10 +118,10 @@ public struct Tensorflow_CostGraphDef: SwiftProtobuf.Message {
     }
 
     /// Outputs of this node.
-    struct OutputInfo: SwiftProtobuf.Message {
+    public struct OutputInfo: SwiftProtobuf.Message {
       public static let protoMessageName: String = Tensorflow_CostGraphDef.Node.protoMessageName + ".OutputInfo"
 
-      var size: Int64 {
+      public var size: Int64 {
         get {return _storage._size}
         set {_uniqueStorage()._size = newValue}
       }
@@ -129,21 +129,21 @@ public struct Tensorflow_CostGraphDef: SwiftProtobuf.Message {
       /// If >= 0, the output is an alias of an input. Note that an alias input
       /// may itself be an alias. The algorithm will therefore need to follow
       /// those pointers.
-      var aliasInputPort: Int64 {
+      public var aliasInputPort: Int64 {
         get {return _storage._aliasInputPort}
         set {_uniqueStorage()._aliasInputPort = newValue}
       }
 
-      var shape: Tensorflow_TensorShapeProto {
+      public var shape: Tensorflow_TensorShapeProto {
         get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
         set {_uniqueStorage()._shape = newValue}
       }
       /// Returns true if `shape` has been explicitly set.
-      var hasShape: Bool {return _storage._shape != nil}
+      public var hasShape: Bool {return _storage._shape != nil}
       /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-      mutating func clearShape() {_storage._shape = nil}
+      public mutating func clearShape() {_storage._shape = nil}
 
-      var dtype: Tensorflow_DataType {
+      public var dtype: Tensorflow_DataType {
         get {return _storage._dtype}
         set {_uniqueStorage()._dtype = newValue}
       }
@@ -392,7 +392,7 @@ extension Tensorflow_CostGraphDef.Node.OutputInfo: SwiftProtobuf._MessageImpleme
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _size = source._size
@@ -411,7 +411,7 @@ extension Tensorflow_CostGraphDef.Node.OutputInfo: SwiftProtobuf._MessageImpleme
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CostGraphDef.Node.OutputInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._size != other_storage._size {return false}
         if _storage._aliasInputPort != other_storage._aliasInputPort {return false}
         if _storage._shape != other_storage._shape {return false}

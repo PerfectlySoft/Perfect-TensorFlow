@@ -24,100 +24,100 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Tfprof_OptionsProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OptionsProto"
 
-  var maxDepth: Int64 {
+  public var maxDepth: Int64 {
     get {return _maxDepth ?? 0}
     set {_maxDepth = newValue}
   }
   /// Returns true if `maxDepth` has been explicitly set.
-  var hasMaxDepth: Bool {return self._maxDepth != nil}
+  public var hasMaxDepth: Bool {return self._maxDepth != nil}
   /// Clears the value of `maxDepth`. Subsequent reads from it will return its default value.
-  mutating func clearMaxDepth() {self._maxDepth = nil}
+  public mutating func clearMaxDepth() {self._maxDepth = nil}
 
-  var minBytes: Int64 {
+  public var minBytes: Int64 {
     get {return _minBytes ?? 0}
     set {_minBytes = newValue}
   }
   /// Returns true if `minBytes` has been explicitly set.
-  var hasMinBytes: Bool {return self._minBytes != nil}
+  public var hasMinBytes: Bool {return self._minBytes != nil}
   /// Clears the value of `minBytes`. Subsequent reads from it will return its default value.
-  mutating func clearMinBytes() {self._minBytes = nil}
+  public mutating func clearMinBytes() {self._minBytes = nil}
 
-  var minMicros: Int64 {
+  public var minMicros: Int64 {
     get {return _minMicros ?? 0}
     set {_minMicros = newValue}
   }
   /// Returns true if `minMicros` has been explicitly set.
-  var hasMinMicros: Bool {return self._minMicros != nil}
+  public var hasMinMicros: Bool {return self._minMicros != nil}
   /// Clears the value of `minMicros`. Subsequent reads from it will return its default value.
-  mutating func clearMinMicros() {self._minMicros = nil}
+  public mutating func clearMinMicros() {self._minMicros = nil}
 
-  var minParams: Int64 {
+  public var minParams: Int64 {
     get {return _minParams ?? 0}
     set {_minParams = newValue}
   }
   /// Returns true if `minParams` has been explicitly set.
-  var hasMinParams: Bool {return self._minParams != nil}
+  public var hasMinParams: Bool {return self._minParams != nil}
   /// Clears the value of `minParams`. Subsequent reads from it will return its default value.
-  mutating func clearMinParams() {self._minParams = nil}
+  public mutating func clearMinParams() {self._minParams = nil}
 
-  var minFloatOps: Int64 {
+  public var minFloatOps: Int64 {
     get {return _minFloatOps ?? 0}
     set {_minFloatOps = newValue}
   }
   /// Returns true if `minFloatOps` has been explicitly set.
-  var hasMinFloatOps: Bool {return self._minFloatOps != nil}
+  public var hasMinFloatOps: Bool {return self._minFloatOps != nil}
   /// Clears the value of `minFloatOps`. Subsequent reads from it will return its default value.
-  mutating func clearMinFloatOps() {self._minFloatOps = nil}
+  public mutating func clearMinFloatOps() {self._minFloatOps = nil}
 
-  var deviceRegexes: [String] = []
+  public var deviceRegexes: [String] = []
 
-  var orderBy: String {
+  public var orderBy: String {
     get {return _orderBy ?? String()}
     set {_orderBy = newValue}
   }
   /// Returns true if `orderBy` has been explicitly set.
-  var hasOrderBy: Bool {return self._orderBy != nil}
+  public var hasOrderBy: Bool {return self._orderBy != nil}
   /// Clears the value of `orderBy`. Subsequent reads from it will return its default value.
-  mutating func clearOrderBy() {self._orderBy = nil}
+  public mutating func clearOrderBy() {self._orderBy = nil}
 
-  var accountTypeRegexes: [String] = []
+  public var accountTypeRegexes: [String] = []
 
-  var startNameRegexes: [String] = []
+  public var startNameRegexes: [String] = []
 
-  var trimNameRegexes: [String] = []
+  public var trimNameRegexes: [String] = []
 
-  var showNameRegexes: [String] = []
+  public var showNameRegexes: [String] = []
 
-  var hideNameRegexes: [String] = []
+  public var hideNameRegexes: [String] = []
 
-  var accountDisplayedOpOnly: Bool {
+  public var accountDisplayedOpOnly: Bool {
     get {return _accountDisplayedOpOnly ?? false}
     set {_accountDisplayedOpOnly = newValue}
   }
   /// Returns true if `accountDisplayedOpOnly` has been explicitly set.
-  var hasAccountDisplayedOpOnly: Bool {return self._accountDisplayedOpOnly != nil}
+  public var hasAccountDisplayedOpOnly: Bool {return self._accountDisplayedOpOnly != nil}
   /// Clears the value of `accountDisplayedOpOnly`. Subsequent reads from it will return its default value.
-  mutating func clearAccountDisplayedOpOnly() {self._accountDisplayedOpOnly = nil}
+  public mutating func clearAccountDisplayedOpOnly() {self._accountDisplayedOpOnly = nil}
 
-  var select: [String] = []
+  public var select: [String] = []
 
-  var output: String {
+  public var output: String {
     get {return _output ?? String()}
     set {_output = newValue}
   }
   /// Returns true if `output` has been explicitly set.
-  var hasOutput: Bool {return self._output != nil}
+  public var hasOutput: Bool {return self._output != nil}
   /// Clears the value of `output`. Subsequent reads from it will return its default value.
-  mutating func clearOutput() {self._output = nil}
+  public mutating func clearOutput() {self._output = nil}
 
-  var dumpToFile: String {
+  public var dumpToFile: String {
     get {return _dumpToFile ?? String()}
     set {_dumpToFile = newValue}
   }
   /// Returns true if `dumpToFile` has been explicitly set.
-  var hasDumpToFile: Bool {return self._dumpToFile != nil}
+  public var hasDumpToFile: Bool {return self._dumpToFile != nil}
   /// Clears the value of `dumpToFile`. Subsequent reads from it will return its default value.
-  mutating func clearDumpToFile() {self._dumpToFile = nil}
+  public mutating func clearDumpToFile() {self._dumpToFile = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

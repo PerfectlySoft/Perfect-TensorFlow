@@ -40,60 +40,60 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpInfo"
 
   /// The operation name.  There may be custom parameters in attrs.
-  var op: String {
+  public var op: String {
     get {return _storage._op}
     set {_uniqueStorage()._op = newValue}
   }
 
   /// Custom parameters impacting the behavior of the op.
-  var attr: Dictionary<String,Tensorflow_AttrValue> {
+  public var attr: Dictionary<String,Tensorflow_AttrValue> {
     get {return _storage._attr}
     set {_uniqueStorage()._attr = newValue}
   }
 
-  var inputs: [Tensorflow_OpInfo.TensorProperties] {
+  public var inputs: [Tensorflow_OpInfo.TensorProperties] {
     get {return _storage._inputs}
     set {_uniqueStorage()._inputs = newValue}
   }
 
   /// Device on which the operation is run.
-  var device: Tensorflow_DeviceProperties {
+  public var device: Tensorflow_DeviceProperties {
     get {return _storage._device ?? Tensorflow_DeviceProperties()}
     set {_uniqueStorage()._device = newValue}
   }
   /// Returns true if `device` has been explicitly set.
-  var hasDevice: Bool {return _storage._device != nil}
+  public var hasDevice: Bool {return _storage._device != nil}
   /// Clears the value of `device`. Subsequent reads from it will return its default value.
-  mutating func clearDevice() {_storage._device = nil}
+  public mutating func clearDevice() {_storage._device = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Input types, shapes and values if known.
-  struct TensorProperties: SwiftProtobuf.Message {
+  public struct TensorProperties: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_OpInfo.protoMessageName + ".TensorProperties"
 
-    var dtype: Tensorflow_DataType {
+    public var dtype: Tensorflow_DataType {
       get {return _storage._dtype}
       set {_uniqueStorage()._dtype = newValue}
     }
 
-    var shape: Tensorflow_TensorShapeProto {
+    public var shape: Tensorflow_TensorShapeProto {
       get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
       set {_uniqueStorage()._shape = newValue}
     }
     /// Returns true if `shape` has been explicitly set.
-    var hasShape: Bool {return _storage._shape != nil}
+    public var hasShape: Bool {return _storage._shape != nil}
     /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-    mutating func clearShape() {_storage._shape = nil}
+    public mutating func clearShape() {_storage._shape = nil}
 
-    var value: Tensorflow_TensorProto {
+    public var value: Tensorflow_TensorProto {
       get {return _storage._value ?? Tensorflow_TensorProto()}
       set {_uniqueStorage()._value = newValue}
     }
     /// Returns true if `value` has been explicitly set.
-    var hasValue: Bool {return _storage._value != nil}
+    public var hasValue: Bool {return _storage._value != nil}
     /// Clears the value of `value`. Subsequent reads from it will return its default value.
-    mutating func clearValue() {_storage._value = nil}
+    public mutating func clearValue() {_storage._value = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -190,85 +190,85 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpPerformance"
 
   /// The op
-  var op: Tensorflow_OpInfo {
+  public var op: Tensorflow_OpInfo {
     get {return _storage._op ?? Tensorflow_OpInfo()}
     set {_uniqueStorage()._op = newValue}
   }
   /// Returns true if `op` has been explicitly set.
-  var hasOp: Bool {return _storage._op != nil}
+  public var hasOp: Bool {return _storage._op != nil}
   /// Clears the value of `op`. Subsequent reads from it will return its default value.
-  mutating func clearOp() {_storage._op = nil}
+  public mutating func clearOp() {_storage._op = nil}
 
   /// The node name (optional). Makes it easier to associate the performance data
   /// with a specific graph node.
-  var node: String {
+  public var node: String {
     get {return _storage._node}
     set {_uniqueStorage()._node = newValue}
   }
 
   /// Temporary memory used by this node (in bytes).
-  var temporaryMemorySize: Int64 {
+  public var temporaryMemorySize: Int64 {
     get {return _storage._temporaryMemorySize}
     set {_uniqueStorage()._temporaryMemorySize = newValue}
   }
 
   /// Time it takes to run the op (in nanoseconds).
-  var computeCost: Int64 {
+  public var computeCost: Int64 {
     get {return _storage._computeCost}
     set {_uniqueStorage()._computeCost = newValue}
   }
 
   /// Analytical compute cost (in nanoseconds).
-  var computeTime: Int64 {
+  public var computeTime: Int64 {
     get {return _storage._computeTime}
     set {_uniqueStorage()._computeTime = newValue}
   }
 
   /// Analytical memory access cost (in nanoseconds).
-  var memoryTime: Int64 {
+  public var memoryTime: Int64 {
     get {return _storage._memoryTime}
     set {_uniqueStorage()._memoryTime = newValue}
   }
 
   /// Percentage of theoretical compute performance.
-  var computeEfficiency: Double {
+  public var computeEfficiency: Double {
     get {return _storage._computeEfficiency}
     set {_uniqueStorage()._computeEfficiency = newValue}
   }
 
   /// Percentage of theoretical memory performance.
-  var memoryEfficiency: Double {
+  public var memoryEfficiency: Double {
     get {return _storage._memoryEfficiency}
     set {_uniqueStorage()._memoryEfficiency = newValue}
   }
 
-  var opMemory: Tensorflow_OpPerformance.OpMemory {
+  public var opMemory: Tensorflow_OpPerformance.OpMemory {
     get {return _storage._opMemory ?? Tensorflow_OpPerformance.OpMemory()}
     set {_uniqueStorage()._opMemory = newValue}
   }
   /// Returns true if `opMemory` has been explicitly set.
-  var hasOpMemory: Bool {return _storage._opMemory != nil}
+  public var hasOpMemory: Bool {return _storage._opMemory != nil}
   /// Clears the value of `opMemory`. Subsequent reads from it will return its default value.
-  mutating func clearOpMemory() {_storage._opMemory = nil}
+  public mutating func clearOpMemory() {_storage._opMemory = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Memory usage data for a tensorflow operation.
-  struct OpMemory: SwiftProtobuf.Message {
+  public struct OpMemory: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_OpPerformance.protoMessageName + ".OpMemory"
 
     /// The output information may have memory usage and output shapes.
-    var outputMemory: [Int64] = []
+    public var outputMemory: [Int64] = []
 
     /// Temporary memory allocated by this node.
-    var hostTempMemory: Int64 = 0
+    public var hostTempMemory: Int64 = 0
 
-    var deviceTempMemory: Int64 = 0
+    public var deviceTempMemory: Int64 = 0
 
     /// The persisted_memory doesn't include outputs.
-    var hostPersistentMemory: Int64 = 0
+    public var hostPersistentMemory: Int64 = 0
 
-    var devicePersistentMemory: Int64 = 0
+    public var devicePersistentMemory: Int64 = 0
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -385,7 +385,7 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
 public struct Tensorflow_OpPerformanceList: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpPerformanceList"
 
-  var opPerformance: [Tensorflow_OpPerformance] = []
+  public var opPerformance: [Tensorflow_OpPerformance] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -436,7 +436,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _op = source._op
@@ -455,7 +455,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._op != other_storage._op {return false}
         if _storage._attr != other_storage._attr {return false}
         if _storage._inputs != other_storage._inputs {return false}
@@ -483,7 +483,7 @@ extension Tensorflow_OpInfo.TensorProperties: SwiftProtobuf._MessageImplementati
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _dtype = source._dtype
@@ -501,7 +501,7 @@ extension Tensorflow_OpInfo.TensorProperties: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpInfo.TensorProperties) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._value != other_storage._value {return false}
@@ -540,7 +540,7 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _op = source._op
@@ -564,7 +564,7 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpPerformance) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._op != other_storage._op {return false}
         if _storage._node != other_storage._node {return false}
         if _storage._temporaryMemorySize != other_storage._temporaryMemorySize {return false}

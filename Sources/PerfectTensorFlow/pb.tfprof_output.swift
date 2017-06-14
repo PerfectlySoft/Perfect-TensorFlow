@@ -22,22 +22,22 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Tfprof_TFProfTensorProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFProfTensorProto"
 
-  var dtype: Tensorflow_DataType {
+  public var dtype: Tensorflow_DataType {
     get {return _dtype ?? .dtInvalid}
     set {_dtype = newValue}
   }
   /// Returns true if `dtype` has been explicitly set.
-  var hasDtype: Bool {return self._dtype != nil}
+  public var hasDtype: Bool {return self._dtype != nil}
   /// Clears the value of `dtype`. Subsequent reads from it will return its default value.
-  mutating func clearDtype() {self._dtype = nil}
+  public mutating func clearDtype() {self._dtype = nil}
 
   /// Flatten tensor in row-major.
   /// Only one of the following array is set.
-  var valueDouble: [Double] = []
+  public var valueDouble: [Double] = []
 
-  var valueInt64: [Int64] = []
+  public var valueInt64: [Int64] = []
 
-  var valueStr: [String] = []
+  public var valueStr: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -87,78 +87,78 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFGraphNodeProto"
 
   /// op name.
-  var name: String {
+  public var name: String {
     get {return _storage._name ?? String()}
     set {_uniqueStorage()._name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return _storage._name != nil}
+  public var hasName: Bool {return _storage._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {_storage._name = nil}
+  public mutating func clearName() {_storage._name = nil}
 
   /// tensor value restored from checkpoint.
-  var tensorValue: Tensorflow_Tfprof_TFProfTensorProto {
+  public var tensorValue: Tensorflow_Tfprof_TFProfTensorProto {
     get {return _storage._tensorValue ?? Tensorflow_Tfprof_TFProfTensorProto()}
     set {_uniqueStorage()._tensorValue = newValue}
   }
   /// Returns true if `tensorValue` has been explicitly set.
-  var hasTensorValue: Bool {return _storage._tensorValue != nil}
+  public var hasTensorValue: Bool {return _storage._tensorValue != nil}
   /// Clears the value of `tensorValue`. Subsequent reads from it will return its default value.
-  mutating func clearTensorValue() {_storage._tensorValue = nil}
+  public mutating func clearTensorValue() {_storage._tensorValue = nil}
 
   /// op execution time.
-  var execMicros: Int64 {
+  public var execMicros: Int64 {
     get {return _storage._execMicros ?? 0}
     set {_uniqueStorage()._execMicros = newValue}
   }
   /// Returns true if `execMicros` has been explicitly set.
-  var hasExecMicros: Bool {return _storage._execMicros != nil}
+  public var hasExecMicros: Bool {return _storage._execMicros != nil}
   /// Clears the value of `execMicros`. Subsequent reads from it will return its default value.
-  mutating func clearExecMicros() {_storage._execMicros = nil}
+  public mutating func clearExecMicros() {_storage._execMicros = nil}
 
   /// Total requested bytes by the op.
-  var requestedBytes: Int64 {
+  public var requestedBytes: Int64 {
     get {return _storage._requestedBytes ?? 0}
     set {_uniqueStorage()._requestedBytes = newValue}
   }
   /// Returns true if `requestedBytes` has been explicitly set.
-  var hasRequestedBytes: Bool {return _storage._requestedBytes != nil}
+  public var hasRequestedBytes: Bool {return _storage._requestedBytes != nil}
   /// Clears the value of `requestedBytes`. Subsequent reads from it will return its default value.
-  mutating func clearRequestedBytes() {_storage._requestedBytes = nil}
+  public mutating func clearRequestedBytes() {_storage._requestedBytes = nil}
 
   /// Number of parameters if available.
-  var parameters: Int64 {
+  public var parameters: Int64 {
     get {return _storage._parameters ?? 0}
     set {_uniqueStorage()._parameters = newValue}
   }
   /// Returns true if `parameters` has been explicitly set.
-  var hasParameters: Bool {return _storage._parameters != nil}
+  public var hasParameters: Bool {return _storage._parameters != nil}
   /// Clears the value of `parameters`. Subsequent reads from it will return its default value.
-  mutating func clearParameters() {_storage._parameters = nil}
+  public mutating func clearParameters() {_storage._parameters = nil}
 
   /// Number of float operations.
-  var floatOps: Int64 {
+  public var floatOps: Int64 {
     get {return _storage._floatOps ?? 0}
     set {_uniqueStorage()._floatOps = newValue}
   }
   /// Returns true if `floatOps` has been explicitly set.
-  var hasFloatOps: Bool {return _storage._floatOps != nil}
+  public var hasFloatOps: Bool {return _storage._floatOps != nil}
   /// Clears the value of `floatOps`. Subsequent reads from it will return its default value.
-  mutating func clearFloatOps() {_storage._floatOps = nil}
+  public mutating func clearFloatOps() {_storage._floatOps = nil}
 
   /// Number of inputs to the op.
-  var inputs: Int64 {
+  public var inputs: Int64 {
     get {return _storage._inputs ?? 0}
     set {_uniqueStorage()._inputs = newValue}
   }
   /// Returns true if `inputs` has been explicitly set.
-  var hasInputs: Bool {return _storage._inputs != nil}
+  public var hasInputs: Bool {return _storage._inputs != nil}
   /// Clears the value of `inputs`. Subsequent reads from it will return its default value.
-  mutating func clearInputs() {_storage._inputs = nil}
+  public mutating func clearInputs() {_storage._inputs = nil}
 
   /// Device the op is assigned to.
   /// Since an op can fire multiple kernel calls, there can be multiple devices.
-  var devices: [String] {
+  public var devices: [String] {
     get {return _storage._devices}
     set {_uniqueStorage()._devices = newValue}
   }
@@ -166,60 +166,60 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
   /// The following are the aggregated stats from all accounted descendants and
   /// the op itself. The actual descendants depend on the data structure used
   /// (scope, graph).
-  var totalExecMicros: Int64 {
+  public var totalExecMicros: Int64 {
     get {return _storage._totalExecMicros ?? 0}
     set {_uniqueStorage()._totalExecMicros = newValue}
   }
   /// Returns true if `totalExecMicros` has been explicitly set.
-  var hasTotalExecMicros: Bool {return _storage._totalExecMicros != nil}
+  public var hasTotalExecMicros: Bool {return _storage._totalExecMicros != nil}
   /// Clears the value of `totalExecMicros`. Subsequent reads from it will return its default value.
-  mutating func clearTotalExecMicros() {_storage._totalExecMicros = nil}
+  public mutating func clearTotalExecMicros() {_storage._totalExecMicros = nil}
 
-  var totalRequestedBytes: Int64 {
+  public var totalRequestedBytes: Int64 {
     get {return _storage._totalRequestedBytes ?? 0}
     set {_uniqueStorage()._totalRequestedBytes = newValue}
   }
   /// Returns true if `totalRequestedBytes` has been explicitly set.
-  var hasTotalRequestedBytes: Bool {return _storage._totalRequestedBytes != nil}
+  public var hasTotalRequestedBytes: Bool {return _storage._totalRequestedBytes != nil}
   /// Clears the value of `totalRequestedBytes`. Subsequent reads from it will return its default value.
-  mutating func clearTotalRequestedBytes() {_storage._totalRequestedBytes = nil}
+  public mutating func clearTotalRequestedBytes() {_storage._totalRequestedBytes = nil}
 
-  var totalParameters: Int64 {
+  public var totalParameters: Int64 {
     get {return _storage._totalParameters ?? 0}
     set {_uniqueStorage()._totalParameters = newValue}
   }
   /// Returns true if `totalParameters` has been explicitly set.
-  var hasTotalParameters: Bool {return _storage._totalParameters != nil}
+  public var hasTotalParameters: Bool {return _storage._totalParameters != nil}
   /// Clears the value of `totalParameters`. Subsequent reads from it will return its default value.
-  mutating func clearTotalParameters() {_storage._totalParameters = nil}
+  public mutating func clearTotalParameters() {_storage._totalParameters = nil}
 
-  var totalFloatOps: Int64 {
+  public var totalFloatOps: Int64 {
     get {return _storage._totalFloatOps ?? 0}
     set {_uniqueStorage()._totalFloatOps = newValue}
   }
   /// Returns true if `totalFloatOps` has been explicitly set.
-  var hasTotalFloatOps: Bool {return _storage._totalFloatOps != nil}
+  public var hasTotalFloatOps: Bool {return _storage._totalFloatOps != nil}
   /// Clears the value of `totalFloatOps`. Subsequent reads from it will return its default value.
-  mutating func clearTotalFloatOps() {_storage._totalFloatOps = nil}
+  public mutating func clearTotalFloatOps() {_storage._totalFloatOps = nil}
 
-  var totalInputs: Int64 {
+  public var totalInputs: Int64 {
     get {return _storage._totalInputs ?? 0}
     set {_uniqueStorage()._totalInputs = newValue}
   }
   /// Returns true if `totalInputs` has been explicitly set.
-  var hasTotalInputs: Bool {return _storage._totalInputs != nil}
+  public var hasTotalInputs: Bool {return _storage._totalInputs != nil}
   /// Clears the value of `totalInputs`. Subsequent reads from it will return its default value.
-  mutating func clearTotalInputs() {_storage._totalInputs = nil}
+  public mutating func clearTotalInputs() {_storage._totalInputs = nil}
 
   /// shape information, if available.
-  var shapes: [Tensorflow_TensorShapeProto] {
+  public var shapes: [Tensorflow_TensorShapeProto] {
     get {return _storage._shapes}
     set {_uniqueStorage()._shapes = newValue}
   }
 
   /// Descendants of the graph. The actual descendants depend on the data
   /// structure used (scope, graph).
-  var children: [Tensorflow_Tfprof_TFGraphNodeProto] {
+  public var children: [Tensorflow_Tfprof_TFGraphNodeProto] {
     get {return _storage._children}
     set {_uniqueStorage()._children = newValue}
   }
@@ -321,100 +321,100 @@ public struct Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFCodeNodeProto"
 
   /// A trace in the trace stack.
-  var name: String {
+  public var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return self._name != nil}
+  public var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {self._name = nil}
+  public mutating func clearName() {self._name = nil}
 
   /// code execution time.
-  var execMicros: Int64 {
+  public var execMicros: Int64 {
     get {return _execMicros ?? 0}
     set {_execMicros = newValue}
   }
   /// Returns true if `execMicros` has been explicitly set.
-  var hasExecMicros: Bool {return self._execMicros != nil}
+  public var hasExecMicros: Bool {return self._execMicros != nil}
   /// Clears the value of `execMicros`. Subsequent reads from it will return its default value.
-  mutating func clearExecMicros() {self._execMicros = nil}
+  public mutating func clearExecMicros() {self._execMicros = nil}
 
   /// Total requested bytes by the code.
-  var requestedBytes: Int64 {
+  public var requestedBytes: Int64 {
     get {return _requestedBytes ?? 0}
     set {_requestedBytes = newValue}
   }
   /// Returns true if `requestedBytes` has been explicitly set.
-  var hasRequestedBytes: Bool {return self._requestedBytes != nil}
+  public var hasRequestedBytes: Bool {return self._requestedBytes != nil}
   /// Clears the value of `requestedBytes`. Subsequent reads from it will return its default value.
-  mutating func clearRequestedBytes() {self._requestedBytes = nil}
+  public mutating func clearRequestedBytes() {self._requestedBytes = nil}
 
   /// Number of parameters if available.
-  var parameters: Int64 {
+  public var parameters: Int64 {
     get {return _parameters ?? 0}
     set {_parameters = newValue}
   }
   /// Returns true if `parameters` has been explicitly set.
-  var hasParameters: Bool {return self._parameters != nil}
+  public var hasParameters: Bool {return self._parameters != nil}
   /// Clears the value of `parameters`. Subsequent reads from it will return its default value.
-  mutating func clearParameters() {self._parameters = nil}
+  public mutating func clearParameters() {self._parameters = nil}
 
   /// Number of float operations.
-  var floatOps: Int64 {
+  public var floatOps: Int64 {
     get {return _floatOps ?? 0}
     set {_floatOps = newValue}
   }
   /// Returns true if `floatOps` has been explicitly set.
-  var hasFloatOps: Bool {return self._floatOps != nil}
+  public var hasFloatOps: Bool {return self._floatOps != nil}
   /// Clears the value of `floatOps`. Subsequent reads from it will return its default value.
-  mutating func clearFloatOps() {self._floatOps = nil}
+  public mutating func clearFloatOps() {self._floatOps = nil}
 
   /// The following are the aggregated stats from called descendents and the
   /// trace itself. The actual descendants depend on the data structure used.
-  var totalExecMicros: Int64 {
+  public var totalExecMicros: Int64 {
     get {return _totalExecMicros ?? 0}
     set {_totalExecMicros = newValue}
   }
   /// Returns true if `totalExecMicros` has been explicitly set.
-  var hasTotalExecMicros: Bool {return self._totalExecMicros != nil}
+  public var hasTotalExecMicros: Bool {return self._totalExecMicros != nil}
   /// Clears the value of `totalExecMicros`. Subsequent reads from it will return its default value.
-  mutating func clearTotalExecMicros() {self._totalExecMicros = nil}
+  public mutating func clearTotalExecMicros() {self._totalExecMicros = nil}
 
-  var totalRequestedBytes: Int64 {
+  public var totalRequestedBytes: Int64 {
     get {return _totalRequestedBytes ?? 0}
     set {_totalRequestedBytes = newValue}
   }
   /// Returns true if `totalRequestedBytes` has been explicitly set.
-  var hasTotalRequestedBytes: Bool {return self._totalRequestedBytes != nil}
+  public var hasTotalRequestedBytes: Bool {return self._totalRequestedBytes != nil}
   /// Clears the value of `totalRequestedBytes`. Subsequent reads from it will return its default value.
-  mutating func clearTotalRequestedBytes() {self._totalRequestedBytes = nil}
+  public mutating func clearTotalRequestedBytes() {self._totalRequestedBytes = nil}
 
-  var totalParameters: Int64 {
+  public var totalParameters: Int64 {
     get {return _totalParameters ?? 0}
     set {_totalParameters = newValue}
   }
   /// Returns true if `totalParameters` has been explicitly set.
-  var hasTotalParameters: Bool {return self._totalParameters != nil}
+  public var hasTotalParameters: Bool {return self._totalParameters != nil}
   /// Clears the value of `totalParameters`. Subsequent reads from it will return its default value.
-  mutating func clearTotalParameters() {self._totalParameters = nil}
+  public mutating func clearTotalParameters() {self._totalParameters = nil}
 
-  var totalFloatOps: Int64 {
+  public var totalFloatOps: Int64 {
     get {return _totalFloatOps ?? 0}
     set {_totalFloatOps = newValue}
   }
   /// Returns true if `totalFloatOps` has been explicitly set.
-  var hasTotalFloatOps: Bool {return self._totalFloatOps != nil}
+  public var hasTotalFloatOps: Bool {return self._totalFloatOps != nil}
   /// Clears the value of `totalFloatOps`. Subsequent reads from it will return its default value.
-  mutating func clearTotalFloatOps() {self._totalFloatOps = nil}
+  public mutating func clearTotalFloatOps() {self._totalFloatOps = nil}
 
   /// A set of graph nodes created by the leaf of the call stack.
   /// 'children' field should be empty if graph_nodes is non-empty.
-  var graphNodes: [Tensorflow_Tfprof_TFGraphNodeProto] = []
+  public var graphNodes: [Tensorflow_Tfprof_TFGraphNodeProto] = []
 
   /// Descendants of the graph. The actual descendants depend on the data
   /// structure used (scope, graph).
-  var children: [Tensorflow_Tfprof_TFCodeNodeProto] = []
+  public var children: [Tensorflow_Tfprof_TFCodeNodeProto] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -555,7 +555,7 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -585,7 +585,7 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_TFGraphNodeProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._tensorValue != other_storage._tensorValue {return false}
         if _storage._execMicros != other_storage._execMicros {return false}

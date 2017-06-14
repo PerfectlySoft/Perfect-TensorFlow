@@ -22,9 +22,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_AutoParallelOptions: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AutoParallelOptions"
 
-  var enable: Bool = false
+  public var enable: Bool = false
 
-  var numReplicas: Int32 = 0
+  public var numReplicas: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -62,46 +62,46 @@ public struct Tensorflow_AutoParallelOptions: SwiftProtobuf.Message {
 public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RewriterConfig"
 
-  var optimizeTensorLayout: Bool {
+  public var optimizeTensorLayout: Bool {
     get {return _storage._optimizeTensorLayout}
     set {_uniqueStorage()._optimizeTensorLayout = newValue}
   }
 
-  var disableModelPruning: Bool {
+  public var disableModelPruning: Bool {
     get {return _storage._disableModelPruning}
     set {_uniqueStorage()._disableModelPruning = newValue}
   }
 
-  var constantFolding: Bool {
+  public var constantFolding: Bool {
     get {return _storage._constantFolding}
     set {_uniqueStorage()._constantFolding = newValue}
   }
 
-  var memoryOptimization: Tensorflow_RewriterConfig.MemOptType {
+  public var memoryOptimization: Tensorflow_RewriterConfig.MemOptType {
     get {return _storage._memoryOptimization}
     set {_uniqueStorage()._memoryOptimization = newValue}
   }
 
-  var autoParallel: Tensorflow_AutoParallelOptions {
+  public var autoParallel: Tensorflow_AutoParallelOptions {
     get {return _storage._autoParallel ?? Tensorflow_AutoParallelOptions()}
     set {_uniqueStorage()._autoParallel = newValue}
   }
   /// Returns true if `autoParallel` has been explicitly set.
-  var hasAutoParallel: Bool {return _storage._autoParallel != nil}
+  public var hasAutoParallel: Bool {return _storage._autoParallel != nil}
   /// Clears the value of `autoParallel`. Subsequent reads from it will return its default value.
-  mutating func clearAutoParallel() {_storage._autoParallel = nil}
+  public mutating func clearAutoParallel() {_storage._autoParallel = nil}
 
   /// If non-empty, will use this as an alternative way to specify a list of
   /// optimizations to turn on and the order of the optimizations.
-  var optimizers: [String] {
+  public var optimizers: [String] {
     get {return _storage._optimizers}
     set {_uniqueStorage()._optimizers = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum MemOptType: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum MemOptType: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
 
     /// Fully disabled
     case noMemOpt // = 0
@@ -110,11 +110,11 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
     case manual // = 1
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .noMemOpt
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .noMemOpt
       case 1: self = .manual
@@ -122,7 +122,7 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .noMemOpt: return 0
       case .manual: return 1
@@ -224,7 +224,7 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _optimizeTensorLayout = source._optimizeTensorLayout
@@ -245,7 +245,7 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RewriterConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._optimizeTensorLayout != other_storage._optimizeTensorLayout {return false}
         if _storage._disableModelPruning != other_storage._disableModelPruning {return false}
         if _storage._constantFolding != other_storage._constantFolding {return false}

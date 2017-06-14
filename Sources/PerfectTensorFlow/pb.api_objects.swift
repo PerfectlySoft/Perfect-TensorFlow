@@ -19,26 +19,26 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct ThirdParty_Tensorflow_Tools_Api_TFAPIMember: SwiftProtobuf.Message {
+public struct ThirdParty_Tensorflow_Tools_Api_TFAPIMember: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFAPIMember"
 
-  var name: String {
+  public var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return self._name != nil}
+  public var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {self._name = nil}
+  public mutating func clearName() {self._name = nil}
 
-  var mtype: String {
+  public var mtype: String {
     get {return _mtype ?? String()}
     set {_mtype = newValue}
   }
   /// Returns true if `mtype` has been explicitly set.
-  var hasMtype: Bool {return self._mtype != nil}
+  public var hasMtype: Bool {return self._mtype != nil}
   /// Clears the value of `mtype`. Subsequent reads from it will return its default value.
-  mutating func clearMtype() {self._mtype = nil}
+  public mutating func clearMtype() {self._mtype = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -76,35 +76,35 @@ struct ThirdParty_Tensorflow_Tools_Api_TFAPIMember: SwiftProtobuf.Message {
   fileprivate var _mtype: String? = nil
 }
 
-struct ThirdParty_Tensorflow_Tools_Api_TFAPIMethod: SwiftProtobuf.Message {
+public struct ThirdParty_Tensorflow_Tools_Api_TFAPIMethod: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFAPIMethod"
 
-  var name: String {
+  public var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return self._name != nil}
+  public var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {self._name = nil}
+  public mutating func clearName() {self._name = nil}
 
-  var path: String {
+  public var path: String {
     get {return _path ?? String()}
     set {_path = newValue}
   }
   /// Returns true if `path` has been explicitly set.
-  var hasPath: Bool {return self._path != nil}
+  public var hasPath: Bool {return self._path != nil}
   /// Clears the value of `path`. Subsequent reads from it will return its default value.
-  mutating func clearPath() {self._path = nil}
+  public mutating func clearPath() {self._path = nil}
 
-  var argspec: String {
+  public var argspec: String {
     get {return _argspec ?? String()}
     set {_argspec = newValue}
   }
   /// Returns true if `argspec` has been explicitly set.
-  var hasArgspec: Bool {return self._argspec != nil}
+  public var hasArgspec: Bool {return self._argspec != nil}
   /// Clears the value of `argspec`. Subsequent reads from it will return its default value.
-  mutating func clearArgspec() {self._argspec = nil}
+  public mutating func clearArgspec() {self._argspec = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -147,12 +147,12 @@ struct ThirdParty_Tensorflow_Tools_Api_TFAPIMethod: SwiftProtobuf.Message {
   fileprivate var _argspec: String? = nil
 }
 
-struct ThirdParty_Tensorflow_Tools_Api_TFAPIModule: SwiftProtobuf.Message {
+public struct ThirdParty_Tensorflow_Tools_Api_TFAPIModule: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFAPIModule"
 
-  var member: [ThirdParty_Tensorflow_Tools_Api_TFAPIMember] = []
+  public var member: [ThirdParty_Tensorflow_Tools_Api_TFAPIMember] = []
 
-  var memberMethod: [ThirdParty_Tensorflow_Tools_Api_TFAPIMethod] = []
+  public var memberMethod: [ThirdParty_Tensorflow_Tools_Api_TFAPIMethod] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -187,14 +187,14 @@ struct ThirdParty_Tensorflow_Tools_Api_TFAPIModule: SwiftProtobuf.Message {
   }
 }
 
-struct ThirdParty_Tensorflow_Tools_Api_TFAPIClass: SwiftProtobuf.Message {
+public struct ThirdParty_Tensorflow_Tools_Api_TFAPIClass: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFAPIClass"
 
-  var isInstance: [String] = []
+  public var isInstance: [String] = []
 
-  var member: [ThirdParty_Tensorflow_Tools_Api_TFAPIMember] = []
+  public var member: [ThirdParty_Tensorflow_Tools_Api_TFAPIMember] = []
 
-  var memberMethod: [ThirdParty_Tensorflow_Tools_Api_TFAPIMethod] = []
+  public var memberMethod: [ThirdParty_Tensorflow_Tools_Api_TFAPIMethod] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -233,35 +233,35 @@ struct ThirdParty_Tensorflow_Tools_Api_TFAPIClass: SwiftProtobuf.Message {
   }
 }
 
-struct ThirdParty_Tensorflow_Tools_Api_TFAPIObject: SwiftProtobuf.Message {
+public struct ThirdParty_Tensorflow_Tools_Api_TFAPIObject: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TFAPIObject"
 
-  var path: String {
+  public var path: String {
     get {return _storage._path ?? String()}
     set {_uniqueStorage()._path = newValue}
   }
   /// Returns true if `path` has been explicitly set.
-  var hasPath: Bool {return _storage._path != nil}
+  public var hasPath: Bool {return _storage._path != nil}
   /// Clears the value of `path`. Subsequent reads from it will return its default value.
-  mutating func clearPath() {_storage._path = nil}
+  public mutating func clearPath() {_storage._path = nil}
 
-  var tfModule: ThirdParty_Tensorflow_Tools_Api_TFAPIModule {
+  public var tfModule: ThirdParty_Tensorflow_Tools_Api_TFAPIModule {
     get {return _storage._tfModule ?? ThirdParty_Tensorflow_Tools_Api_TFAPIModule()}
     set {_uniqueStorage()._tfModule = newValue}
   }
   /// Returns true if `tfModule` has been explicitly set.
-  var hasTfModule: Bool {return _storage._tfModule != nil}
+  public var hasTfModule: Bool {return _storage._tfModule != nil}
   /// Clears the value of `tfModule`. Subsequent reads from it will return its default value.
-  mutating func clearTfModule() {_storage._tfModule = nil}
+  public mutating func clearTfModule() {_storage._tfModule = nil}
 
-  var tfClass: ThirdParty_Tensorflow_Tools_Api_TFAPIClass {
+  public var tfClass: ThirdParty_Tensorflow_Tools_Api_TFAPIClass {
     get {return _storage._tfClass ?? ThirdParty_Tensorflow_Tools_Api_TFAPIClass()}
     set {_uniqueStorage()._tfClass = newValue}
   }
   /// Returns true if `tfClass` has been explicitly set.
-  var hasTfClass: Bool {return _storage._tfClass != nil}
+  public var hasTfClass: Bool {return _storage._tfClass != nil}
   /// Clears the value of `tfClass`. Subsequent reads from it will return its default value.
-  mutating func clearTfClass() {_storage._tfClass = nil}
+  public mutating func clearTfClass() {_storage._tfClass = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -385,7 +385,7 @@ extension ThirdParty_Tensorflow_Tools_Api_TFAPIObject: SwiftProtobuf._MessageImp
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _path = source._path
@@ -403,7 +403,7 @@ extension ThirdParty_Tensorflow_Tools_Api_TFAPIObject: SwiftProtobuf._MessageImp
 
   public func _protobuf_generated_isEqualTo(other: ThirdParty_Tensorflow_Tools_Api_TFAPIObject) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._path != other_storage._path {return false}
         if _storage._tfModule != other_storage._tfModule {return false}
         if _storage._tfClass != other_storage._tfClass {return false}

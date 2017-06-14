@@ -30,25 +30,25 @@ public struct Tensorflow_BundleHeaderProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".BundleHeaderProto"
 
   /// Number of data files in the bundle.
-  var numShards: Int32 {
+  public var numShards: Int32 {
     get {return _storage._numShards}
     set {_uniqueStorage()._numShards = newValue}
   }
 
-  var endianness: Tensorflow_BundleHeaderProto.Endianness {
+  public var endianness: Tensorflow_BundleHeaderProto.Endianness {
     get {return _storage._endianness}
     set {_uniqueStorage()._endianness = newValue}
   }
 
   /// Versioning of the tensor bundle format.
-  var version: Tensorflow_VersionDef {
+  public var version: Tensorflow_VersionDef {
     get {return _storage._version ?? Tensorflow_VersionDef()}
     set {_uniqueStorage()._version = newValue}
   }
   /// Returns true if `version` has been explicitly set.
-  var hasVersion: Bool {return _storage._version != nil}
+  public var hasVersion: Bool {return _storage._version != nil}
   /// Clears the value of `version`. Subsequent reads from it will return its default value.
-  mutating func clearVersion() {_storage._version = nil}
+  public mutating func clearVersion() {_storage._version = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -57,17 +57,17 @@ public struct Tensorflow_BundleHeaderProto: SwiftProtobuf.Message {
   /// Defaults to LITTLE, as most modern platforms are little-endian.
   ///
   /// Affects the binary tensor data bytes only, not the metadata in protobufs.
-  enum Endianness: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum Endianness: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case little // = 0
     case big // = 1
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .little
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .little
       case 1: self = .big
@@ -75,7 +75,7 @@ public struct Tensorflow_BundleHeaderProto: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .little: return 0
       case .big: return 1
@@ -132,39 +132,39 @@ public struct Tensorflow_BundleEntryProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".BundleEntryProto"
 
   /// The tensor dtype and shape.
-  var dtype: Tensorflow_DataType {
+  public var dtype: Tensorflow_DataType {
     get {return _storage._dtype}
     set {_uniqueStorage()._dtype = newValue}
   }
 
-  var shape: Tensorflow_TensorShapeProto {
+  public var shape: Tensorflow_TensorShapeProto {
     get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._shape = newValue}
   }
   /// Returns true if `shape` has been explicitly set.
-  var hasShape: Bool {return _storage._shape != nil}
+  public var hasShape: Bool {return _storage._shape != nil}
   /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-  mutating func clearShape() {_storage._shape = nil}
+  public mutating func clearShape() {_storage._shape = nil}
 
   /// The binary content of the tensor lies in:
   ///   File "shard_id": bytes [offset, offset + size).
-  var shardID: Int32 {
+  public var shardID: Int32 {
     get {return _storage._shardID}
     set {_uniqueStorage()._shardID = newValue}
   }
 
-  var offset: Int64 {
+  public var offset: Int64 {
     get {return _storage._offset}
     set {_uniqueStorage()._offset = newValue}
   }
 
-  var size: Int64 {
+  public var size: Int64 {
     get {return _storage._size}
     set {_uniqueStorage()._size = newValue}
   }
 
   /// The CRC32C checksum of the tensor bytes.
-  var crc32C: UInt32 {
+  public var crc32C: UInt32 {
     get {return _storage._crc32C}
     set {_uniqueStorage()._crc32C = newValue}
   }
@@ -176,7 +176,7 @@ public struct Tensorflow_BundleEntryProto: SwiftProtobuf.Message {
   ///   "shard_id", "offset", "size", "crc32c": all IGNORED.
   ///      These information for each slice can be looked up in their own
   ///      BundleEntryProto, keyed by each "slice_name".
-  var slices: [Tensorflow_TensorSliceProto] {
+  public var slices: [Tensorflow_TensorSliceProto] {
     get {return _storage._slices}
     set {_uniqueStorage()._slices = newValue}
   }
@@ -259,7 +259,7 @@ extension Tensorflow_BundleHeaderProto: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _numShards = source._numShards
@@ -277,7 +277,7 @@ extension Tensorflow_BundleHeaderProto: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BundleHeaderProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._numShards != other_storage._numShards {return false}
         if _storage._endianness != other_storage._endianness {return false}
         if _storage._version != other_storage._version {return false}
@@ -319,7 +319,7 @@ extension Tensorflow_BundleEntryProto: SwiftProtobuf._MessageImplementationBase,
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _dtype = source._dtype
@@ -341,7 +341,7 @@ extension Tensorflow_BundleEntryProto: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BundleEntryProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._shardID != other_storage._shardID {return false}

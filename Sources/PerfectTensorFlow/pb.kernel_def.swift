@@ -23,43 +23,43 @@ public struct Tensorflow_KernelDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".KernelDef"
 
   /// Must match the name of an Op.
-  var op: String = String()
+  public var op: String = String()
 
   /// Type of device this kernel runs on.
-  var deviceType: String = String()
+  public var deviceType: String = String()
 
-  var constraint: [Tensorflow_KernelDef.AttrConstraint] = []
+  public var constraint: [Tensorflow_KernelDef.AttrConstraint] = []
 
   /// Names of the Op's input_/output_args that reside in host memory
   /// instead of device memory.
-  var hostMemoryArg: [String] = []
+  public var hostMemoryArg: [String] = []
 
   /// This allows experimental kernels to be registered for an op that
   /// won't be used unless the user specifies a "_kernel" attr with
   /// value matching this.
-  var label: String = String()
+  public var label: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct AttrConstraint: SwiftProtobuf.Message {
+  public struct AttrConstraint: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_KernelDef.protoMessageName + ".AttrConstraint"
 
     /// Name of an attr from the Op.
-    var name: String {
+    public var name: String {
       get {return _storage._name}
       set {_uniqueStorage()._name = newValue}
     }
 
     /// A list of values that this kernel supports for this attr.
     /// Like OpDef.AttrDef.allowed_values, except for kernels instead of Ops.
-    var allowedValues: Tensorflow_AttrValue {
+    public var allowedValues: Tensorflow_AttrValue {
       get {return _storage._allowedValues ?? Tensorflow_AttrValue()}
       set {_uniqueStorage()._allowedValues = newValue}
     }
     /// Returns true if `allowedValues` has been explicitly set.
-    var hasAllowedValues: Bool {return _storage._allowedValues != nil}
+    public var hasAllowedValues: Bool {return _storage._allowedValues != nil}
     /// Clears the value of `allowedValues`. Subsequent reads from it will return its default value.
-    mutating func clearAllowedValues() {_storage._allowedValues = nil}
+    public mutating func clearAllowedValues() {_storage._allowedValues = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -180,7 +180,7 @@ extension Tensorflow_KernelDef.AttrConstraint: SwiftProtobuf._MessageImplementat
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -197,7 +197,7 @@ extension Tensorflow_KernelDef.AttrConstraint: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_KernelDef.AttrConstraint) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._allowedValues != other_storage._allowedValues {return false}
         return true

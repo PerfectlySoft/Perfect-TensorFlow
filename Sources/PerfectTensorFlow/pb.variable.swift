@@ -24,35 +24,35 @@ public struct Tensorflow_VariableDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".VariableDef"
 
   /// Name of the variable tensor.
-  var variableName: String {
+  public var variableName: String {
     get {return _storage._variableName}
     set {_uniqueStorage()._variableName = newValue}
   }
 
   /// Name of the initializer op.
-  var initializerName: String {
+  public var initializerName: String {
     get {return _storage._initializerName}
     set {_uniqueStorage()._initializerName = newValue}
   }
 
   /// Name of the snapshot tensor.
-  var snapshotName: String {
+  public var snapshotName: String {
     get {return _storage._snapshotName}
     set {_uniqueStorage()._snapshotName = newValue}
   }
 
   /// Support for saving variables as slices of a larger variable.
-  var saveSliceInfoDef: Tensorflow_SaveSliceInfoDef {
+  public var saveSliceInfoDef: Tensorflow_SaveSliceInfoDef {
     get {return _storage._saveSliceInfoDef ?? Tensorflow_SaveSliceInfoDef()}
     set {_uniqueStorage()._saveSliceInfoDef = newValue}
   }
   /// Returns true if `saveSliceInfoDef` has been explicitly set.
-  var hasSaveSliceInfoDef: Bool {return _storage._saveSliceInfoDef != nil}
+  public var hasSaveSliceInfoDef: Bool {return _storage._saveSliceInfoDef != nil}
   /// Clears the value of `saveSliceInfoDef`. Subsequent reads from it will return its default value.
-  mutating func clearSaveSliceInfoDef() {_storage._saveSliceInfoDef = nil}
+  public mutating func clearSaveSliceInfoDef() {_storage._saveSliceInfoDef = nil}
 
   /// Whether to represent this as a ResourceVariable.
-  var isResource: Bool {
+  public var isResource: Bool {
     get {return _storage._isResource}
     set {_uniqueStorage()._isResource = newValue}
   }
@@ -113,16 +113,16 @@ public struct Tensorflow_SaveSliceInfoDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SaveSliceInfoDef"
 
   /// Name of the full variable of which this is a slice.
-  var fullName: String = String()
+  public var fullName: String = String()
 
   /// Shape of the full variable.
-  var fullShape: [Int64] = []
+  public var fullShape: [Int64] = []
 
   /// Offset of this variable into the full variable.
-  var varOffset: [Int64] = []
+  public var varOffset: [Int64] = []
 
   /// Shape of this variable.
-  var varShape: [Int64] = []
+  public var varShape: [Int64] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -187,7 +187,7 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _variableName = source._variableName
@@ -207,7 +207,7 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_VariableDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._variableName != other_storage._variableName {return false}
         if _storage._initializerName != other_storage._initializerName {return false}
         if _storage._snapshotName != other_storage._snapshotName {return false}

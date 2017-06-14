@@ -25,14 +25,14 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Example: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Example"
 
-  var features: Tensorflow_Features {
+  public var features: Tensorflow_Features {
     get {return _storage._features ?? Tensorflow_Features()}
     set {_uniqueStorage()._features = newValue}
   }
   /// Returns true if `features` has been explicitly set.
-  var hasFeatures: Bool {return _storage._features != nil}
+  public var hasFeatures: Bool {return _storage._features != nil}
   /// Clears the value of `features`. Subsequent reads from it will return its default value.
-  mutating func clearFeatures() {_storage._features = nil}
+  public mutating func clearFeatures() {_storage._features = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -73,23 +73,23 @@ public struct Tensorflow_Example: SwiftProtobuf.Message {
 public struct Tensorflow_SequenceExample: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SequenceExample"
 
-  var context: Tensorflow_Features {
+  public var context: Tensorflow_Features {
     get {return _storage._context ?? Tensorflow_Features()}
     set {_uniqueStorage()._context = newValue}
   }
   /// Returns true if `context` has been explicitly set.
-  var hasContext: Bool {return _storage._context != nil}
+  public var hasContext: Bool {return _storage._context != nil}
   /// Clears the value of `context`. Subsequent reads from it will return its default value.
-  mutating func clearContext() {_storage._context = nil}
+  public mutating func clearContext() {_storage._context = nil}
 
-  var featureLists: Tensorflow_FeatureLists {
+  public var featureLists: Tensorflow_FeatureLists {
     get {return _storage._featureLists ?? Tensorflow_FeatureLists()}
     set {_uniqueStorage()._featureLists = newValue}
   }
   /// Returns true if `featureLists` has been explicitly set.
-  var hasFeatureLists: Bool {return _storage._featureLists != nil}
+  public var hasFeatureLists: Bool {return _storage._featureLists != nil}
   /// Clears the value of `featureLists`. Subsequent reads from it will return its default value.
-  mutating func clearFeatureLists() {_storage._featureLists = nil}
+  public mutating func clearFeatureLists() {_storage._featureLists = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -145,7 +145,7 @@ extension Tensorflow_Example: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _features = source._features
@@ -161,7 +161,7 @@ extension Tensorflow_Example: SwiftProtobuf._MessageImplementationBase, SwiftPro
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Example) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._features != other_storage._features {return false}
         return true
       }
@@ -184,7 +184,7 @@ extension Tensorflow_SequenceExample: SwiftProtobuf._MessageImplementationBase, 
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _context = source._context
@@ -201,7 +201,7 @@ extension Tensorflow_SequenceExample: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SequenceExample) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._context != other_storage._context {return false}
         if _storage._featureLists != other_storage._featureLists {return false}
         return true

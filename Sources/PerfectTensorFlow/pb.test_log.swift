@@ -24,9 +24,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_EntryValue: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".EntryValue"
 
-  var kind: Tensorflow_EntryValue.OneOf_Kind? = nil
+  public var kind: Tensorflow_EntryValue.OneOf_Kind? = nil
 
-  var doubleValue: Double {
+  public var doubleValue: Double {
     get {
       if case .doubleValue(let v)? = kind {return v}
       return 0
@@ -34,7 +34,7 @@ public struct Tensorflow_EntryValue: SwiftProtobuf.Message {
     set {kind = .doubleValue(newValue)}
   }
 
-  var stringValue: String {
+  public var stringValue: String {
     get {
       if case .stringValue(let v)? = kind {return v}
       return String()
@@ -44,11 +44,11 @@ public struct Tensorflow_EntryValue: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Kind: Equatable {
+  public enum OneOf_Kind: Equatable {
     case doubleValue(Double)
     case stringValue(String)
 
-    static func ==(lhs: Tensorflow_EntryValue.OneOf_Kind, rhs: Tensorflow_EntryValue.OneOf_Kind) -> Bool {
+    public static func ==(lhs: Tensorflow_EntryValue.OneOf_Kind, rhs: Tensorflow_EntryValue.OneOf_Kind) -> Bool {
       switch (lhs, rhs) {
       case (.doubleValue(let l), .doubleValue(let r)): return l == r
       case (.stringValue(let l), .stringValue(let r)): return l == r
@@ -109,22 +109,22 @@ public struct Tensorflow_BenchmarkEntry: SwiftProtobuf.Message {
 
   /// The name of the specific benchmark or test
   /// (e.g. BM_AdjustContrast_gpu_B_W_H)
-  var name: String = String()
+  public var name: String = String()
 
   /// If a benchmark, how many iterations it was run for
-  var iters: Int64 = 0
+  public var iters: Int64 = 0
 
   /// Total cpu time used for all iterations (in seconds)
-  var cpuTime: Double = 0
+  public var cpuTime: Double = 0
 
   /// Total wall time used for all iterations (in seconds)
-  var wallTime: Double = 0
+  public var wallTime: Double = 0
 
   /// Throughput (in MB/s)
-  var throughput: Double = 0
+  public var throughput: Double = 0
 
   /// Generic map from result key to value.
-  var extras: Dictionary<String,Tensorflow_EntryValue> = [:]
+  public var extras: Dictionary<String,Tensorflow_EntryValue> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -178,7 +178,7 @@ public struct Tensorflow_BenchmarkEntry: SwiftProtobuf.Message {
 public struct Tensorflow_BenchmarkEntries: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".BenchmarkEntries"
 
-  var entry: [Tensorflow_BenchmarkEntry] = []
+  public var entry: [Tensorflow_BenchmarkEntry] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -213,13 +213,13 @@ public struct Tensorflow_BuildConfiguration: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".BuildConfiguration"
 
   /// opt, dbg, etc
-  var mode: String = String()
+  public var mode: String = String()
 
   /// CC compiler flags, if known
-  var ccFlags: [String] = []
+  public var ccFlags: [String] = []
 
   /// Bazel compilation options, if known
-  var opts: [String] = []
+  public var opts: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -261,9 +261,9 @@ public struct Tensorflow_BuildConfiguration: SwiftProtobuf.Message {
 public struct Tensorflow_CommitId: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CommitId"
 
-  var kind: Tensorflow_CommitId.OneOf_Kind? = nil
+  public var kind: Tensorflow_CommitId.OneOf_Kind? = nil
 
-  var changelist: Int64 {
+  public var changelist: Int64 {
     get {
       if case .changelist(let v)? = kind {return v}
       return 0
@@ -271,7 +271,7 @@ public struct Tensorflow_CommitId: SwiftProtobuf.Message {
     set {kind = .changelist(newValue)}
   }
 
-  var hash: String {
+  public var hash: String {
     get {
       if case .hash(let v)? = kind {return v}
       return String()
@@ -281,15 +281,15 @@ public struct Tensorflow_CommitId: SwiftProtobuf.Message {
 
   /// Hash of intermediate change between hash/changelist and what was tested.
   /// Not used if the build is from a commit without modifications.
-  var snapshot: String = String()
+  public var snapshot: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Kind: Equatable {
+  public enum OneOf_Kind: Equatable {
     case changelist(Int64)
     case hash(String)
 
-    static func ==(lhs: Tensorflow_CommitId.OneOf_Kind, rhs: Tensorflow_CommitId.OneOf_Kind) -> Bool {
+    public static func ==(lhs: Tensorflow_CommitId.OneOf_Kind, rhs: Tensorflow_CommitId.OneOf_Kind) -> Bool {
       switch (lhs, rhs) {
       case (.changelist(let l), .changelist(let r)): return l == r
       case (.hash(let l), .hash(let r)): return l == r
@@ -345,23 +345,23 @@ public struct Tensorflow_CommitId: SwiftProtobuf.Message {
 public struct Tensorflow_CPUInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CPUInfo"
 
-  var numCores: Int64 = 0
+  public var numCores: Int64 = 0
 
-  var numCoresAllowed: Int64 = 0
+  public var numCoresAllowed: Int64 = 0
 
   /// How fast are these cpus?
-  var mhzPerCpu: Double = 0
+  public var mhzPerCpu: Double = 0
 
   /// Additional cpu information. For example,
   /// Intel Ivybridge with HyperThreading (24 cores) dL1:32KB dL2:256KB dL3:30MB
-  var cpuInfo: String = String()
+  public var cpuInfo: String = String()
 
   /// What kind of cpu scaling is enabled on the host.
   /// Examples include "performance", "ondemand", "conservative", "mixed".
-  var cpuGovernor: String = String()
+  public var cpuGovernor: String = String()
 
   /// Cache sizes (in bytes), e.g. "L2": 262144 (for 256KB)
-  var cacheSize: Dictionary<String,Int64> = [:]
+  public var cacheSize: Dictionary<String,Int64> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -416,10 +416,10 @@ public struct Tensorflow_MemoryInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryInfo"
 
   /// Total virtual memory in bytes
-  var total: Int64 = 0
+  public var total: Int64 = 0
 
   /// Immediately available memory in bytes
-  var available: Int64 = 0
+  public var available: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -458,13 +458,13 @@ public struct Tensorflow_GPUInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GPUInfo"
 
   /// e.g. "Tesla K40c"
-  var model: String = String()
+  public var model: String = String()
 
   /// Final entry in output of "nvidia-smi -L"
-  var uuid: String = String()
+  public var uuid: String = String()
 
   /// e.g. "0000:04:00.0"
-  var busID: String = String()
+  public var busID: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -507,22 +507,22 @@ public struct Tensorflow_PlatformInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".PlatformInfo"
 
   /// e.g. '64bit'
-  var bits: String = String()
+  public var bits: String = String()
 
   /// e.g. 'ELF'
-  var linkage: String = String()
+  public var linkage: String = String()
 
   /// e.g. 'i386'
-  var machine: String = String()
+  public var machine: String = String()
 
   /// e.g. '3.13.0-76-generic'
-  var release: String = String()
+  public var release: String = String()
 
   /// e.g. 'Linux'
-  var system: String = String()
+  public var system: String = String()
 
   /// e.g. '#120-Ubuntu SMP Mon Jan 18 15:59:10 UTC 2016'
-  var version: String = String()
+  public var version: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -578,16 +578,16 @@ public struct Tensorflow_AvailableDeviceInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AvailableDeviceInfo"
 
   /// Device name.
-  var name: String = String()
+  public var name: String = String()
 
   /// Device type, e.g. 'CPU' or 'GPU'.
-  var type: String = String()
+  public var type: String = String()
 
   /// Memory capacity in bytes.
-  var memoryLimit: Int64 = 0
+  public var memoryLimit: Int64 = 0
 
   /// The physical description of this device.
-  var physicalDescription: String = String()
+  public var physicalDescription: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -634,57 +634,57 @@ public struct Tensorflow_MachineConfiguration: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MachineConfiguration"
 
   /// Host name of machine that ran the benchmark.
-  var hostname: String {
+  public var hostname: String {
     get {return _storage._hostname}
     set {_uniqueStorage()._hostname = newValue}
   }
 
   /// Unique serial number of the machine.
-  var serialIdentifier: String {
+  public var serialIdentifier: String {
     get {return _storage._serialIdentifier}
     set {_uniqueStorage()._serialIdentifier = newValue}
   }
 
   /// Additional platform information.
-  var platformInfo: Tensorflow_PlatformInfo {
+  public var platformInfo: Tensorflow_PlatformInfo {
     get {return _storage._platformInfo ?? Tensorflow_PlatformInfo()}
     set {_uniqueStorage()._platformInfo = newValue}
   }
   /// Returns true if `platformInfo` has been explicitly set.
-  var hasPlatformInfo: Bool {return _storage._platformInfo != nil}
+  public var hasPlatformInfo: Bool {return _storage._platformInfo != nil}
   /// Clears the value of `platformInfo`. Subsequent reads from it will return its default value.
-  mutating func clearPlatformInfo() {_storage._platformInfo = nil}
+  public mutating func clearPlatformInfo() {_storage._platformInfo = nil}
 
   /// CPU Information.
-  var cpuInfo: Tensorflow_CPUInfo {
+  public var cpuInfo: Tensorflow_CPUInfo {
     get {return _storage._cpuInfo ?? Tensorflow_CPUInfo()}
     set {_uniqueStorage()._cpuInfo = newValue}
   }
   /// Returns true if `cpuInfo` has been explicitly set.
-  var hasCpuInfo: Bool {return _storage._cpuInfo != nil}
+  public var hasCpuInfo: Bool {return _storage._cpuInfo != nil}
   /// Clears the value of `cpuInfo`. Subsequent reads from it will return its default value.
-  mutating func clearCpuInfo() {_storage._cpuInfo = nil}
+  public mutating func clearCpuInfo() {_storage._cpuInfo = nil}
 
   /// Other devices that are attached and relevant (e.g. GPUInfo).
-  var deviceInfo: [SwiftProtobuf.Google_Protobuf_Any] {
+  public var deviceInfo: [SwiftProtobuf.Google_Protobuf_Any] {
     get {return _storage._deviceInfo}
     set {_uniqueStorage()._deviceInfo = newValue}
   }
 
   /// Devices accessible to the test (e.g. as given by list_local_devices).
-  var availableDeviceInfo: [Tensorflow_AvailableDeviceInfo] {
+  public var availableDeviceInfo: [Tensorflow_AvailableDeviceInfo] {
     get {return _storage._availableDeviceInfo}
     set {_uniqueStorage()._availableDeviceInfo = newValue}
   }
 
-  var memoryInfo: Tensorflow_MemoryInfo {
+  public var memoryInfo: Tensorflow_MemoryInfo {
     get {return _storage._memoryInfo ?? Tensorflow_MemoryInfo()}
     set {_uniqueStorage()._memoryInfo = newValue}
   }
   /// Returns true if `memoryInfo` has been explicitly set.
-  var hasMemoryInfo: Bool {return _storage._memoryInfo != nil}
+  public var hasMemoryInfo: Bool {return _storage._memoryInfo != nil}
   /// Clears the value of `memoryInfo`. Subsequent reads from it will return its default value.
-  mutating func clearMemoryInfo() {_storage._memoryInfo = nil}
+  public mutating func clearMemoryInfo() {_storage._memoryInfo = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -750,7 +750,7 @@ public struct Tensorflow_MachineConfiguration: SwiftProtobuf.Message {
 public struct Tensorflow_RunConfiguration: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RunConfiguration"
 
-  var argument: [String] = []
+  public var argument: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -793,86 +793,86 @@ public struct Tensorflow_TestResults: SwiftProtobuf.Message {
 
   /// The target of the run, e.g.:
   ///  //tensorflow/core:kernels_adjust_contrast_op_benchmark_test
-  var target: String {
+  public var target: String {
     get {return _storage._target}
     set {_uniqueStorage()._target = newValue}
   }
 
   /// The list of tests or benchmarks in this run.
-  var entries: Tensorflow_BenchmarkEntries {
+  public var entries: Tensorflow_BenchmarkEntries {
     get {return _storage._entries ?? Tensorflow_BenchmarkEntries()}
     set {_uniqueStorage()._entries = newValue}
   }
   /// Returns true if `entries` has been explicitly set.
-  var hasEntries: Bool {return _storage._entries != nil}
+  public var hasEntries: Bool {return _storage._entries != nil}
   /// Clears the value of `entries`. Subsequent reads from it will return its default value.
-  mutating func clearEntries() {_storage._entries = nil}
+  public mutating func clearEntries() {_storage._entries = nil}
 
   /// The configuration of the build (compiled opt? with cuda? any copts?)
-  var buildConfiguration: Tensorflow_BuildConfiguration {
+  public var buildConfiguration: Tensorflow_BuildConfiguration {
     get {return _storage._buildConfiguration ?? Tensorflow_BuildConfiguration()}
     set {_uniqueStorage()._buildConfiguration = newValue}
   }
   /// Returns true if `buildConfiguration` has been explicitly set.
-  var hasBuildConfiguration: Bool {return _storage._buildConfiguration != nil}
+  public var hasBuildConfiguration: Bool {return _storage._buildConfiguration != nil}
   /// Clears the value of `buildConfiguration`. Subsequent reads from it will return its default value.
-  mutating func clearBuildConfiguration() {_storage._buildConfiguration = nil}
+  public mutating func clearBuildConfiguration() {_storage._buildConfiguration = nil}
 
   /// The commit id (git hash or changelist)
-  var commitID: Tensorflow_CommitId {
+  public var commitID: Tensorflow_CommitId {
     get {return _storage._commitID ?? Tensorflow_CommitId()}
     set {_uniqueStorage()._commitID = newValue}
   }
   /// Returns true if `commitID` has been explicitly set.
-  var hasCommitID: Bool {return _storage._commitID != nil}
+  public var hasCommitID: Bool {return _storage._commitID != nil}
   /// Clears the value of `commitID`. Subsequent reads from it will return its default value.
-  mutating func clearCommitID() {_storage._commitID = nil}
+  public mutating func clearCommitID() {_storage._commitID = nil}
 
   /// The time the run started (in seconds of UTC time since Unix epoch)
-  var startTime: Int64 {
+  public var startTime: Int64 {
     get {return _storage._startTime}
     set {_uniqueStorage()._startTime = newValue}
   }
 
   /// The amount of time the total run took (wall time in seconds)
-  var runTime: Double {
+  public var runTime: Double {
     get {return _storage._runTime}
     set {_uniqueStorage()._runTime = newValue}
   }
 
   /// Machine-specific parameters (Platform and CPU info)
-  var machineConfiguration: Tensorflow_MachineConfiguration {
+  public var machineConfiguration: Tensorflow_MachineConfiguration {
     get {return _storage._machineConfiguration ?? Tensorflow_MachineConfiguration()}
     set {_uniqueStorage()._machineConfiguration = newValue}
   }
   /// Returns true if `machineConfiguration` has been explicitly set.
-  var hasMachineConfiguration: Bool {return _storage._machineConfiguration != nil}
+  public var hasMachineConfiguration: Bool {return _storage._machineConfiguration != nil}
   /// Clears the value of `machineConfiguration`. Subsequent reads from it will return its default value.
-  mutating func clearMachineConfiguration() {_storage._machineConfiguration = nil}
+  public mutating func clearMachineConfiguration() {_storage._machineConfiguration = nil}
 
   /// Run-specific parameters (arguments, etc)
-  var runConfiguration: Tensorflow_RunConfiguration {
+  public var runConfiguration: Tensorflow_RunConfiguration {
     get {return _storage._runConfiguration ?? Tensorflow_RunConfiguration()}
     set {_uniqueStorage()._runConfiguration = newValue}
   }
   /// Returns true if `runConfiguration` has been explicitly set.
-  var hasRunConfiguration: Bool {return _storage._runConfiguration != nil}
+  public var hasRunConfiguration: Bool {return _storage._runConfiguration != nil}
   /// Clears the value of `runConfiguration`. Subsequent reads from it will return its default value.
-  mutating func clearRunConfiguration() {_storage._runConfiguration = nil}
+  public mutating func clearRunConfiguration() {_storage._runConfiguration = nil}
 
   /// Benchmark target identifier.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
-  var benchmarkType: Tensorflow_TestResults.BenchmarkType {
+  public var benchmarkType: Tensorflow_TestResults.BenchmarkType {
     get {return _storage._benchmarkType}
     set {_uniqueStorage()._benchmarkType = newValue}
   }
 
   /// Used for differentiating between continuous and debug builds.
-  var runMode: String {
+  public var runMode: String {
     get {return _storage._runMode}
     set {_uniqueStorage()._runMode = newValue}
   }
@@ -880,8 +880,8 @@ public struct Tensorflow_TestResults: SwiftProtobuf.Message {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The type of benchmark.
-  enum BenchmarkType: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum BenchmarkType: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
 
     /// Fallback for protos written before Type was introduced.
     case unknown // = 0
@@ -890,11 +890,11 @@ public struct Tensorflow_TestResults: SwiftProtobuf.Message {
     case androidBenchmark // = 3
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .unknown
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .unknown
       case 1: self = .cppMicrobenchmark
@@ -904,7 +904,7 @@ public struct Tensorflow_TestResults: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .unknown: return 0
       case .cppMicrobenchmark: return 1
@@ -1186,7 +1186,7 @@ extension Tensorflow_MachineConfiguration: SwiftProtobuf._MessageImplementationB
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _hostname = source._hostname
@@ -1208,7 +1208,7 @@ extension Tensorflow_MachineConfiguration: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MachineConfiguration) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._hostname != other_storage._hostname {return false}
         if _storage._serialIdentifier != other_storage._serialIdentifier {return false}
         if _storage._platformInfo != other_storage._platformInfo {return false}
@@ -1267,7 +1267,7 @@ extension Tensorflow_TestResults: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _target = source._target
@@ -1293,7 +1293,7 @@ extension Tensorflow_TestResults: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TestResults) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._target != other_storage._target {return false}
         if _storage._entries != other_storage._entries {return false}
         if _storage._buildConfiguration != other_storage._buildConfiguration {return false}

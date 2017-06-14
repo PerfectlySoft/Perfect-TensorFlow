@@ -39,26 +39,26 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// Describes a single operation request.
-struct Xla_OperationRequest: SwiftProtobuf.Message {
+public struct Xla_OperationRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OperationRequest"
 
-  var outputHandle: Xla_ComputationDataHandle {
+  public var outputHandle: Xla_ComputationDataHandle {
     get {return _storage._outputHandle ?? Xla_ComputationDataHandle()}
     set {_uniqueStorage()._outputHandle = newValue}
   }
   /// Returns true if `outputHandle` has been explicitly set.
-  var hasOutputHandle: Bool {return _storage._outputHandle != nil}
+  public var hasOutputHandle: Bool {return _storage._outputHandle != nil}
   /// Clears the value of `outputHandle`. Subsequent reads from it will return its default value.
-  mutating func clearOutputHandle() {_storage._outputHandle = nil}
+  public mutating func clearOutputHandle() {_storage._outputHandle = nil}
 
-  var outputShape: Xla_Shape {
+  public var outputShape: Xla_Shape {
     get {return _storage._outputShape ?? Xla_Shape()}
     set {_uniqueStorage()._outputShape = newValue}
   }
   /// Returns true if `outputShape` has been explicitly set.
-  var hasOutputShape: Bool {return _storage._outputShape != nil}
+  public var hasOutputShape: Bool {return _storage._outputShape != nil}
   /// Clears the value of `outputShape`. Subsequent reads from it will return its default value.
-  mutating func clearOutputShape() {_storage._outputShape = nil}
+  public mutating func clearOutputShape() {_storage._outputShape = nil}
 
   /// For operations which call embedded computations such as "Map", these are
   /// the version(s) that the embedded computation should be called at. A version
@@ -71,21 +71,21 @@ struct Xla_OperationRequest: SwiftProtobuf.Message {
   ///
   /// "While" operation takes two; index 0 is the "condition" version and index 1
   /// is the "body" version.
-  var embeddedComputationVersions: [Int64] {
+  public var embeddedComputationVersions: [Int64] {
     get {return _storage._embeddedComputationVersions}
     set {_uniqueStorage()._embeddedComputationVersions = newValue}
   }
 
   /// The actual request, which in itself is a tagged union of all possible
   /// operation request types.
-  var request: Xla_OpRequest {
+  public var request: Xla_OpRequest {
     get {return _storage._request ?? Xla_OpRequest()}
     set {_uniqueStorage()._request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  var hasRequest: Bool {return _storage._request != nil}
+  public var hasRequest: Bool {return _storage._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  mutating func clearRequest() {_storage._request = nil}
+  public mutating func clearRequest() {_storage._request = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -137,28 +137,28 @@ struct Xla_OperationRequest: SwiftProtobuf.Message {
 
 /// Describes a sequence of operation requests which define an XLA
 /// computation.
-struct Xla_SessionComputation: SwiftProtobuf.Message {
+public struct Xla_SessionComputation: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SessionComputation"
 
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
   /// The ComputationHandle used to refer to this computation in the XLA
   /// service.
-  var computationHandle: Xla_ComputationHandle {
+  public var computationHandle: Xla_ComputationHandle {
     get {return _storage._computationHandle ?? Xla_ComputationHandle()}
     set {_uniqueStorage()._computationHandle = newValue}
   }
   /// Returns true if `computationHandle` has been explicitly set.
-  var hasComputationHandle: Bool {return _storage._computationHandle != nil}
+  public var hasComputationHandle: Bool {return _storage._computationHandle != nil}
   /// Clears the value of `computationHandle`. Subsequent reads from it will return its default value.
-  mutating func clearComputationHandle() {_storage._computationHandle = nil}
+  public mutating func clearComputationHandle() {_storage._computationHandle = nil}
 
   /// Map from ComputationDataHandle value to operation request. The highest
   /// ComputationDataHandle value corresponds to the root of the computation.
-  var requests: Dictionary<Int64,Xla_OperationRequest> {
+  public var requests: Dictionary<Int64,Xla_OperationRequest> {
     get {return _storage._requests}
     set {_uniqueStorage()._requests = newValue}
   }
@@ -213,45 +213,45 @@ struct Xla_SessionComputation: SwiftProtobuf.Message {
 /// This message is used to serialize a computation that has been built via the
 /// XLA service API, along with its dependencies, for purposes such as
 /// analysis/replay/file-storage.
-struct Xla_SessionModule: SwiftProtobuf.Message {
+public struct Xla_SessionModule: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SessionModule"
 
   /// The entry computation, which was requested for serialization. This may have
   /// referred to embedded computations, which are reflected below.
-  var entry: Xla_SessionComputation {
+  public var entry: Xla_SessionComputation {
     get {return _storage._entry ?? Xla_SessionComputation()}
     set {_uniqueStorage()._entry = newValue}
   }
   /// Returns true if `entry` has been explicitly set.
-  var hasEntry: Bool {return _storage._entry != nil}
+  public var hasEntry: Bool {return _storage._entry != nil}
   /// Clears the value of `entry`. Subsequent reads from it will return its default value.
-  mutating func clearEntry() {_storage._entry = nil}
+  public mutating func clearEntry() {_storage._entry = nil}
 
   /// Embedded computations that are transitively referred to by the entry
   /// computation.
-  var embeddedComputations: [Xla_SessionComputation] {
+  public var embeddedComputations: [Xla_SessionComputation] {
     get {return _storage._embeddedComputations}
     set {_uniqueStorage()._embeddedComputations = newValue}
   }
 
   /// The arguments passed to the computation.
-  var arguments: [Xla_Literal] {
+  public var arguments: [Xla_Literal] {
     get {return _storage._arguments}
     set {_uniqueStorage()._arguments = newValue}
   }
 
   /// The result of the computation.
-  var result: Xla_Literal {
+  public var result: Xla_Literal {
     get {return _storage._result ?? Xla_Literal()}
     set {_uniqueStorage()._result = newValue}
   }
   /// Returns true if `result` has been explicitly set.
-  var hasResult: Bool {return _storage._result != nil}
+  public var hasResult: Bool {return _storage._result != nil}
   /// Clears the value of `result`. Subsequent reads from it will return its default value.
-  mutating func clearResult() {_storage._result = nil}
+  public mutating func clearResult() {_storage._result = nil}
 
   /// The name of the platform used to run the computation.
-  var executionPlatform: String {
+  public var executionPlatform: String {
     get {return _storage._executionPlatform}
     set {_uniqueStorage()._executionPlatform = newValue}
   }
@@ -328,7 +328,7 @@ extension Xla_OperationRequest: SwiftProtobuf._MessageImplementationBase, SwiftP
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _outputHandle = source._outputHandle
@@ -347,7 +347,7 @@ extension Xla_OperationRequest: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Xla_OperationRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._outputHandle != other_storage._outputHandle {return false}
         if _storage._outputShape != other_storage._outputShape {return false}
         if _storage._embeddedComputationVersions != other_storage._embeddedComputationVersions {return false}
@@ -375,7 +375,7 @@ extension Xla_SessionComputation: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -393,7 +393,7 @@ extension Xla_SessionComputation: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Xla_SessionComputation) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._computationHandle != other_storage._computationHandle {return false}
         if _storage._requests != other_storage._requests {return false}
@@ -424,7 +424,7 @@ extension Xla_SessionModule: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _entry = source._entry
@@ -444,7 +444,7 @@ extension Xla_SessionModule: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Xla_SessionModule) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._entry != other_storage._entry {return false}
         if _storage._embeddedComputations != other_storage._embeddedComputations {return false}
         if _storage._arguments != other_storage._arguments {return false}

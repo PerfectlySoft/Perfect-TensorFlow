@@ -26,21 +26,21 @@ public struct Tensorflow_ResourceHandle: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ResourceHandle"
 
   /// Unique name for the device containing the resource.
-  var device: String = String()
+  public var device: String = String()
 
   /// Container in which this resource is placed.
-  var container: String = String()
+  public var container: String = String()
 
   /// Unique name of this resource.
-  var name: String = String()
+  public var name: String = String()
 
   /// Hash code for the type of the resource. Is only valid in the same device
   /// and in the same execution.
-  var hashCode: UInt64 = 0
+  public var hashCode: UInt64 = 0
 
   /// For debug-only, the name of the type pointed to by this handle, if
   /// available.
-  var maybeTypeName: String = String()
+  public var maybeTypeName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

@@ -23,7 +23,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_GraphDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".GraphDef"
 
-  var node: [Tensorflow_NodeDef] {
+  public var node: [Tensorflow_NodeDef] {
     get {return _storage._node}
     set {_uniqueStorage()._node = newValue}
   }
@@ -31,19 +31,19 @@ public struct Tensorflow_GraphDef: SwiftProtobuf.Message {
   /// Compatibility versions of the graph.  See core/public/version.h for version
   /// history.  The GraphDef version is distinct from the TensorFlow version, and
   /// each release of TensorFlow will support a range of GraphDef versions.
-  var versions: Tensorflow_VersionDef {
+  public var versions: Tensorflow_VersionDef {
     get {return _storage._versions ?? Tensorflow_VersionDef()}
     set {_uniqueStorage()._versions = newValue}
   }
   /// Returns true if `versions` has been explicitly set.
-  var hasVersions: Bool {return _storage._versions != nil}
+  public var hasVersions: Bool {return _storage._versions != nil}
   /// Clears the value of `versions`. Subsequent reads from it will return its default value.
-  mutating func clearVersions() {_storage._versions = nil}
+  public mutating func clearVersions() {_storage._versions = nil}
 
   /// Deprecated single version field; use versions above instead.  Since all
   /// GraphDef changes before "versions" was introduced were forward
   /// compatible, this field is entirely ignored.
-  var version: Int32 {
+  public var version: Int32 {
     get {return _storage._version}
     set {_uniqueStorage()._version = newValue}
   }
@@ -76,14 +76,14 @@ public struct Tensorflow_GraphDef: SwiftProtobuf.Message {
   ///     consumer may want to use Tuple() mechanism to ensure the
   ///     consumer does not start until all return values of the callee
   ///     function are ready.
-  var library: Tensorflow_FunctionDefLibrary {
+  public var library: Tensorflow_FunctionDefLibrary {
     get {return _storage._library ?? Tensorflow_FunctionDefLibrary()}
     set {_uniqueStorage()._library = newValue}
   }
   /// Returns true if `library` has been explicitly set.
-  var hasLibrary: Bool {return _storage._library != nil}
+  public var hasLibrary: Bool {return _storage._library != nil}
   /// Clears the value of `library`. Subsequent reads from it will return its default value.
-  mutating func clearLibrary() {_storage._library = nil}
+  public mutating func clearLibrary() {_storage._library = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -153,7 +153,7 @@ extension Tensorflow_GraphDef: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _node = source._node
@@ -172,7 +172,7 @@ extension Tensorflow_GraphDef: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GraphDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._node != other_storage._node {return false}
         if _storage._versions != other_storage._versions {return false}
         if _storage._version != other_storage._version {return false}

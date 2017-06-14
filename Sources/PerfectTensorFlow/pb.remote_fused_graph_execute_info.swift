@@ -26,42 +26,42 @@ public struct Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RemoteFusedGraphExecuteInfo"
 
   /// Definition of remote graph
-  var remoteGraph: Tensorflow_GraphDef {
+  public var remoteGraph: Tensorflow_GraphDef {
     get {return _storage._remoteGraph ?? Tensorflow_GraphDef()}
     set {_uniqueStorage()._remoteGraph = newValue}
   }
   /// Returns true if `remoteGraph` has been explicitly set.
-  var hasRemoteGraph: Bool {return _storage._remoteGraph != nil}
+  public var hasRemoteGraph: Bool {return _storage._remoteGraph != nil}
   /// Clears the value of `remoteGraph`. Subsequent reads from it will return its default value.
-  mutating func clearRemoteGraph() {_storage._remoteGraph = nil}
+  public mutating func clearRemoteGraph() {_storage._remoteGraph = nil}
 
   /// Remote fused graph input node name
-  var graphInputNodeName: [String] {
+  public var graphInputNodeName: [String] {
     get {return _storage._graphInputNodeName}
     set {_uniqueStorage()._graphInputNodeName = newValue}
   }
 
   /// Remote fused graph output node name
-  var graphOutputNodeName: [String] {
+  public var graphOutputNodeName: [String] {
     get {return _storage._graphOutputNodeName}
     set {_uniqueStorage()._graphOutputNodeName = newValue}
   }
 
   /// Executor's name
-  var executorName: String {
+  public var executorName: String {
     get {return _storage._executorName}
     set {_uniqueStorage()._executorName = newValue}
   }
 
   /// Optional: Parameters given to the executor
-  var serializedExecutorParameters: Data {
+  public var serializedExecutorParameters: Data {
     get {return _storage._serializedExecutorParameters}
     set {_uniqueStorage()._serializedExecutorParameters = newValue}
   }
 
   /// Optional: Default graph input tensor shape used to allocate memory
   /// before executing op
-  var defaultGraphInputTensorShape: [Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto] {
+  public var defaultGraphInputTensorShape: [Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto] {
     get {return _storage._defaultGraphInputTensorShape}
     set {_uniqueStorage()._defaultGraphInputTensorShape = newValue}
   }
@@ -70,15 +70,15 @@ public struct Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf.Message {
   /// before executing op
   /// TODO(satok): Remote output tensor shape once shape information is stored
   /// in NodeDef
-  var defaultGraphOutputTensorShape: [Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto] {
+  public var defaultGraphOutputTensorShape: [Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto] {
     get {return _storage._defaultGraphOutputTensorShape}
     set {_uniqueStorage()._defaultGraphOutputTensorShape = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum NodeType: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum NodeType: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case unused // = 0
     case graphInput // = 1
     case graphOutput // = 2
@@ -87,11 +87,11 @@ public struct Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf.Message {
     case borderOutput // = 5
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .unused
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .unused
       case 1: self = .graphInput
@@ -103,7 +103,7 @@ public struct Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .unused: return 0
       case .graphInput: return 1
@@ -117,22 +117,22 @@ public struct Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf.Message {
 
   }
 
-  struct TensorShapeTypeProto: SwiftProtobuf.Message {
+  public struct TensorShapeTypeProto: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_RemoteFusedGraphExecuteInfo.protoMessageName + ".TensorShapeTypeProto"
 
-    var dtype: Tensorflow_DataType {
+    public var dtype: Tensorflow_DataType {
       get {return _storage._dtype}
       set {_uniqueStorage()._dtype = newValue}
     }
 
-    var shape: Tensorflow_TensorShapeProto {
+    public var shape: Tensorflow_TensorShapeProto {
       get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
       set {_uniqueStorage()._shape = newValue}
     }
     /// Returns true if `shape` has been explicitly set.
-    var hasShape: Bool {return _storage._shape != nil}
+    public var hasShape: Bool {return _storage._shape != nil}
     /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-    mutating func clearShape() {_storage._shape = nil}
+    public mutating func clearShape() {_storage._shape = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -258,7 +258,7 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf._MessageImplemen
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _remoteGraph = source._remoteGraph
@@ -280,7 +280,7 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RemoteFusedGraphExecuteInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._remoteGraph != other_storage._remoteGraph {return false}
         if _storage._graphInputNodeName != other_storage._graphInputNodeName {return false}
         if _storage._graphOutputNodeName != other_storage._graphOutputNodeName {return false}
@@ -320,7 +320,7 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto: SwiftProt
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _dtype = source._dtype
@@ -337,7 +337,7 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto: SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         return true

@@ -42,29 +42,29 @@ public struct Tensorflow_SavedSliceMeta: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SavedSliceMeta"
 
   /// Name of the tensor.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
   /// Shape of the tensor
-  var shape: Tensorflow_TensorShapeProto {
+  public var shape: Tensorflow_TensorShapeProto {
     get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._shape = newValue}
   }
   /// Returns true if `shape` has been explicitly set.
-  var hasShape: Bool {return _storage._shape != nil}
+  public var hasShape: Bool {return _storage._shape != nil}
   /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-  mutating func clearShape() {_storage._shape = nil}
+  public mutating func clearShape() {_storage._shape = nil}
 
   /// Type of the tensor
-  var type: Tensorflow_DataType {
+  public var type: Tensorflow_DataType {
     get {return _storage._type}
     set {_uniqueStorage()._type = newValue}
   }
 
   /// Explicit list of slices saved in the checkpoint file.
-  var slice: [Tensorflow_TensorSliceProto] {
+  public var slice: [Tensorflow_TensorSliceProto] {
     get {return _storage._slice}
     set {_uniqueStorage()._slice = newValue}
   }
@@ -123,21 +123,21 @@ public struct Tensorflow_SavedTensorSliceMeta: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SavedTensorSliceMeta"
 
   /// Each SavedSliceMeta describes the slices for one tensor.
-  var tensor: [Tensorflow_SavedSliceMeta] {
+  public var tensor: [Tensorflow_SavedSliceMeta] {
     get {return _storage._tensor}
     set {_uniqueStorage()._tensor = newValue}
   }
 
   /// Compatibility version of this checkpoint.  See core/public/version.h
   /// for version history.
-  var versions: Tensorflow_VersionDef {
+  public var versions: Tensorflow_VersionDef {
     get {return _storage._versions ?? Tensorflow_VersionDef()}
     set {_uniqueStorage()._versions = newValue}
   }
   /// Returns true if `versions` has been explicitly set.
-  var hasVersions: Bool {return _storage._versions != nil}
+  public var hasVersions: Bool {return _storage._versions != nil}
   /// Clears the value of `versions`. Subsequent reads from it will return its default value.
-  mutating func clearVersions() {_storage._versions = nil}
+  public mutating func clearVersions() {_storage._versions = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -186,32 +186,32 @@ public struct Tensorflow_SavedSlice: SwiftProtobuf.Message {
 
   /// Name of the tensor that this slice belongs to. This must be identical to
   /// the name used to encode the key for this record.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
   /// Extent of the slice.  Must have one entry for each of the dimension of the
   /// tensor that this slice belongs to.
-  var slice: Tensorflow_TensorSliceProto {
+  public var slice: Tensorflow_TensorSliceProto {
     get {return _storage._slice ?? Tensorflow_TensorSliceProto()}
     set {_uniqueStorage()._slice = newValue}
   }
   /// Returns true if `slice` has been explicitly set.
-  var hasSlice: Bool {return _storage._slice != nil}
+  public var hasSlice: Bool {return _storage._slice != nil}
   /// Clears the value of `slice`. Subsequent reads from it will return its default value.
-  mutating func clearSlice() {_storage._slice = nil}
+  public mutating func clearSlice() {_storage._slice = nil}
 
   /// The raw data of the slice is stored as a TensorProto. Only raw data are
   /// stored (we don't fill in fields such as dtype or tensor_shape).
-  var data: Tensorflow_TensorProto {
+  public var data: Tensorflow_TensorProto {
     get {return _storage._data ?? Tensorflow_TensorProto()}
     set {_uniqueStorage()._data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
-  var hasData: Bool {return _storage._data != nil}
+  public var hasData: Bool {return _storage._data != nil}
   /// Clears the value of `data`. Subsequent reads from it will return its default value.
-  mutating func clearData() {_storage._data = nil}
+  public mutating func clearData() {_storage._data = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -264,24 +264,24 @@ public struct Tensorflow_SavedTensorSlices: SwiftProtobuf.Message {
 
   /// This is only present at the first item of each checkpoint file and serves
   /// as a table of contents, listing all the tensor slices saved in this file.
-  var meta: Tensorflow_SavedTensorSliceMeta {
+  public var meta: Tensorflow_SavedTensorSliceMeta {
     get {return _storage._meta ?? Tensorflow_SavedTensorSliceMeta()}
     set {_uniqueStorage()._meta = newValue}
   }
   /// Returns true if `meta` has been explicitly set.
-  var hasMeta: Bool {return _storage._meta != nil}
+  public var hasMeta: Bool {return _storage._meta != nil}
   /// Clears the value of `meta`. Subsequent reads from it will return its default value.
-  mutating func clearMeta() {_storage._meta = nil}
+  public mutating func clearMeta() {_storage._meta = nil}
 
   /// This exists in all but the first item of each checkpoint file.
-  var data: Tensorflow_SavedSlice {
+  public var data: Tensorflow_SavedSlice {
     get {return _storage._data ?? Tensorflow_SavedSlice()}
     set {_uniqueStorage()._data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
-  var hasData: Bool {return _storage._data != nil}
+  public var hasData: Bool {return _storage._data != nil}
   /// Clears the value of `data`. Subsequent reads from it will return its default value.
-  mutating func clearData() {_storage._data = nil}
+  public mutating func clearData() {_storage._data = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -343,7 +343,7 @@ extension Tensorflow_SavedSliceMeta: SwiftProtobuf._MessageImplementationBase, S
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -362,7 +362,7 @@ extension Tensorflow_SavedSliceMeta: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SavedSliceMeta) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._type != other_storage._type {return false}
@@ -388,7 +388,7 @@ extension Tensorflow_SavedTensorSliceMeta: SwiftProtobuf._MessageImplementationB
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _tensor = source._tensor
@@ -405,7 +405,7 @@ extension Tensorflow_SavedTensorSliceMeta: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SavedTensorSliceMeta) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._tensor != other_storage._tensor {return false}
         if _storage._versions != other_storage._versions {return false}
         return true
@@ -431,7 +431,7 @@ extension Tensorflow_SavedSlice: SwiftProtobuf._MessageImplementationBase, Swift
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -449,7 +449,7 @@ extension Tensorflow_SavedSlice: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SavedSlice) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._slice != other_storage._slice {return false}
         if _storage._data != other_storage._data {return false}
@@ -474,7 +474,7 @@ extension Tensorflow_SavedTensorSlices: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _meta = source._meta
@@ -491,7 +491,7 @@ extension Tensorflow_SavedTensorSlices: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SavedTensorSlices) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._meta != other_storage._meta {return false}
         if _storage._data != other_storage._data {return false}
         return true

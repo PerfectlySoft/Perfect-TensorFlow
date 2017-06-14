@@ -22,19 +22,19 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_AllocatorMemoryUsed: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".AllocatorMemoryUsed"
 
-  var allocatorName: String = String()
+  public var allocatorName: String = String()
 
   /// These are per-node allocator memory stats.
-  var totalBytes: Int64 = 0
+  public var totalBytes: Int64 = 0
 
-  var peakBytes: Int64 = 0
+  public var peakBytes: Int64 = 0
 
   /// The bytes that are not deallocated.
-  var liveBytes: Int64 = 0
+  public var liveBytes: Int64 = 0
 
   /// These are snapshots of the overall allocator memory stats.
   /// The number of live bytes currently allocated by the allocator.
-  var allocatorBytesInUse: Int64 = 0
+  public var allocatorBytesInUse: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -85,19 +85,19 @@ public struct Tensorflow_AllocatorMemoryUsed: SwiftProtobuf.Message {
 public struct Tensorflow_NodeOutput: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".NodeOutput"
 
-  var slot: Int32 {
+  public var slot: Int32 {
     get {return _storage._slot}
     set {_uniqueStorage()._slot = newValue}
   }
 
-  var tensorDescription: Tensorflow_TensorDescription {
+  public var tensorDescription: Tensorflow_TensorDescription {
     get {return _storage._tensorDescription ?? Tensorflow_TensorDescription()}
     set {_uniqueStorage()._tensorDescription = newValue}
   }
   /// Returns true if `tensorDescription` has been explicitly set.
-  var hasTensorDescription: Bool {return _storage._tensorDescription != nil}
+  public var hasTensorDescription: Bool {return _storage._tensorDescription != nil}
   /// Clears the value of `tensorDescription`. Subsequent reads from it will return its default value.
-  mutating func clearTensorDescription() {_storage._tensorDescription = nil}
+  public mutating func clearTensorDescription() {_storage._tensorDescription = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -143,17 +143,17 @@ public struct Tensorflow_NodeOutput: SwiftProtobuf.Message {
 public struct Tensorflow_MemoryStats: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemoryStats"
 
-  var hostTempMemorySize: Int64 = 0
+  public var hostTempMemorySize: Int64 = 0
 
-  var deviceTempMemorySize: Int64 = 0
+  public var deviceTempMemorySize: Int64 = 0
 
-  var hostPersistentMemorySize: Int64 = 0
+  public var hostPersistentMemorySize: Int64 = 0
 
-  var devicePersistentMemorySize: Int64 = 0
+  public var devicePersistentMemorySize: Int64 = 0
 
-  var hostPersistentTensorAllocIds: [Int64] = []
+  public var hostPersistentTensorAllocIds: [Int64] = []
 
-  var devicePersistentTensorAllocIds: [Int64] = []
+  public var devicePersistentTensorAllocIds: [Int64] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -212,69 +212,69 @@ public struct Tensorflow_NodeExecStats: SwiftProtobuf.Message {
   /// the full string name.  Either all processes should agree on a
   /// global id (cost_id?) for each node, or we should use a hash of
   /// the name.
-  var nodeName: String {
+  public var nodeName: String {
     get {return _storage._nodeName}
     set {_uniqueStorage()._nodeName = newValue}
   }
 
-  var allStartMicros: Int64 {
+  public var allStartMicros: Int64 {
     get {return _storage._allStartMicros}
     set {_uniqueStorage()._allStartMicros = newValue}
   }
 
-  var opStartRelMicros: Int64 {
+  public var opStartRelMicros: Int64 {
     get {return _storage._opStartRelMicros}
     set {_uniqueStorage()._opStartRelMicros = newValue}
   }
 
-  var opEndRelMicros: Int64 {
+  public var opEndRelMicros: Int64 {
     get {return _storage._opEndRelMicros}
     set {_uniqueStorage()._opEndRelMicros = newValue}
   }
 
-  var allEndRelMicros: Int64 {
+  public var allEndRelMicros: Int64 {
     get {return _storage._allEndRelMicros}
     set {_uniqueStorage()._allEndRelMicros = newValue}
   }
 
-  var memory: [Tensorflow_AllocatorMemoryUsed] {
+  public var memory: [Tensorflow_AllocatorMemoryUsed] {
     get {return _storage._memory}
     set {_uniqueStorage()._memory = newValue}
   }
 
-  var output: [Tensorflow_NodeOutput] {
+  public var output: [Tensorflow_NodeOutput] {
     get {return _storage._output}
     set {_uniqueStorage()._output = newValue}
   }
 
-  var timelineLabel: String {
+  public var timelineLabel: String {
     get {return _storage._timelineLabel}
     set {_uniqueStorage()._timelineLabel = newValue}
   }
 
-  var scheduledMicros: Int64 {
+  public var scheduledMicros: Int64 {
     get {return _storage._scheduledMicros}
     set {_uniqueStorage()._scheduledMicros = newValue}
   }
 
-  var threadID: UInt32 {
+  public var threadID: UInt32 {
     get {return _storage._threadID}
     set {_uniqueStorage()._threadID = newValue}
   }
 
-  var referencedTensor: [Tensorflow_AllocationDescription] {
+  public var referencedTensor: [Tensorflow_AllocationDescription] {
     get {return _storage._referencedTensor}
     set {_uniqueStorage()._referencedTensor = newValue}
   }
 
-  var memoryStats: Tensorflow_MemoryStats {
+  public var memoryStats: Tensorflow_MemoryStats {
     get {return _storage._memoryStats ?? Tensorflow_MemoryStats()}
     set {_uniqueStorage()._memoryStats = newValue}
   }
   /// Returns true if `memoryStats` has been explicitly set.
-  var hasMemoryStats: Bool {return _storage._memoryStats != nil}
+  public var hasMemoryStats: Bool {return _storage._memoryStats != nil}
   /// Clears the value of `memoryStats`. Subsequent reads from it will return its default value.
-  mutating func clearMemoryStats() {_storage._memoryStats = nil}
+  public mutating func clearMemoryStats() {_storage._memoryStats = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -359,9 +359,9 @@ public struct Tensorflow_NodeExecStats: SwiftProtobuf.Message {
 public struct Tensorflow_DeviceStepStats: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DeviceStepStats"
 
-  var device: String = String()
+  public var device: String = String()
 
-  var nodeStats: [Tensorflow_NodeExecStats] = []
+  public var nodeStats: [Tensorflow_NodeExecStats] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -399,7 +399,7 @@ public struct Tensorflow_DeviceStepStats: SwiftProtobuf.Message {
 public struct Tensorflow_StepStats: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".StepStats"
 
-  var devStats: [Tensorflow_DeviceStepStats] = []
+  public var devStats: [Tensorflow_DeviceStepStats] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -466,7 +466,7 @@ extension Tensorflow_NodeOutput: SwiftProtobuf._MessageImplementationBase, Swift
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _slot = source._slot
@@ -483,7 +483,7 @@ extension Tensorflow_NodeOutput: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NodeOutput) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._slot != other_storage._slot {return false}
         if _storage._tensorDescription != other_storage._tensorDescription {return false}
         return true
@@ -549,7 +549,7 @@ extension Tensorflow_NodeExecStats: SwiftProtobuf._MessageImplementationBase, Sw
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _nodeName = source._nodeName
@@ -576,7 +576,7 @@ extension Tensorflow_NodeExecStats: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NodeExecStats) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._allStartMicros != other_storage._allStartMicros {return false}
         if _storage._opStartRelMicros != other_storage._opStartRelMicros {return false}

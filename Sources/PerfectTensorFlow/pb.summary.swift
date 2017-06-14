@@ -25,7 +25,7 @@ public struct Tensorflow_SummaryDescription: SwiftProtobuf.Message {
 
   /// Hint on how plugins should process the data in this series.
   /// Supported values include "scalar", "histogram", "image", "audio"
-  var typeHint: String = String()
+  public var typeHint: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -61,24 +61,24 @@ public struct Tensorflow_SummaryDescription: SwiftProtobuf.Message {
 public struct Tensorflow_HistogramProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".HistogramProto"
 
-  var min: Double = 0
+  public var min: Double = 0
 
-  var max: Double = 0
+  public var max: Double = 0
 
-  var num: Double = 0
+  public var num: Double = 0
 
-  var sum: Double = 0
+  public var sum: Double = 0
 
-  var sumSquares: Double = 0
+  public var sumSquares: Double = 0
 
   /// Parallel arrays encoding the bucket boundaries and the bucket values.
   /// bucket(i) is the count for the bucket i.  The range for
   /// a bucket is:
   ///   i == 0:  -DBL_MAX .. bucket_limit(0)
   ///   i != 0:  bucket_limit(i-1) .. bucket_limit(i)
-  var bucketLimit: [Double] = []
+  public var bucketLimit: [Double] = []
 
-  var bucket: [Double] = []
+  public var bucket: [Double] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -143,17 +143,17 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Summary"
 
   /// Set of values for the summary.
-  var value: [Tensorflow_Summary.Value] = []
+  public var value: [Tensorflow_Summary.Value] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct Image: SwiftProtobuf.Message {
+  public struct Image: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_Summary.protoMessageName + ".Image"
 
     /// Dimensions of the image.
-    var height: Int32 = 0
+    public var height: Int32 = 0
 
-    var width: Int32 = 0
+    public var width: Int32 = 0
 
     /// Valid colorspace values are
     ///   1 - grayscale
@@ -162,11 +162,11 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     ///   4 - RGBA
     ///   5 - DIGITAL_YUV
     ///   6 - BGRA
-    var colorspace: Int32 = 0
+    public var colorspace: Int32 = 0
 
     /// Image data in encoded format.  All image formats supported by
     /// image_codec::CoderUtil can be stored here.
-    var encodedImageString: Data = SwiftProtobuf.Internal.emptyData
+    public var encodedImageString: Data = SwiftProtobuf.Internal.emptyData
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -209,23 +209,23 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     }
   }
 
-  struct Audio: SwiftProtobuf.Message {
+  public struct Audio: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_Summary.protoMessageName + ".Audio"
 
     /// Sample rate of the audio in Hz.
-    var sampleRate: Float = 0
+    public var sampleRate: Float = 0
 
     /// Number of channels of audio.
-    var numChannels: Int64 = 0
+    public var numChannels: Int64 = 0
 
     /// Length of the audio in frames (samples per channel).
-    var lengthFrames: Int64 = 0
+    public var lengthFrames: Int64 = 0
 
     /// Encoded audio data and its associated RFC 2045 content type (e.g.
     /// "audio/wav").
-    var encodedAudioString: Data = SwiftProtobuf.Internal.emptyData
+    public var encodedAudioString: Data = SwiftProtobuf.Internal.emptyData
 
-    var contentType: String = String()
+    public var contentType: String = String()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -272,7 +272,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     }
   }
 
-  struct Value: SwiftProtobuf.Message {
+  public struct Value: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_Summary.protoMessageName + ".Value"
 
     /// Name of the node that output this summary; in general, the name of a
@@ -280,7 +280,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     /// a ":\d+" suffix will be appended, like "some_op:13".
     /// Might not be set for legacy summaries (i.e. those not using the tensor
     /// value field)
-    var nodeName: String {
+    public var nodeName: String {
       get {return _storage._nodeName}
       set {_uniqueStorage()._nodeName = newValue}
     }
@@ -292,18 +292,18 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     ///
     /// Tag is usually "op_name:value_name", where "op_name" itself can have
     /// structure to indicate grouping.
-    var tag: String {
+    public var tag: String {
       get {return _storage._tag}
       set {_uniqueStorage()._tag = newValue}
     }
 
     /// Value associated with the tag.
-    var value: OneOf_Value? {
+    public var value: OneOf_Value? {
       get {return _storage._value}
       set {_uniqueStorage()._value = newValue}
     }
 
-    var simpleValue: Float {
+    public var simpleValue: Float {
       get {
         if case .simpleValue(let v)? = _storage._value {return v}
         return 0
@@ -311,7 +311,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       set {_uniqueStorage()._value = .simpleValue(newValue)}
     }
 
-    var obsoleteOldStyleHistogram: Data {
+    public var obsoleteOldStyleHistogram: Data {
       get {
         if case .obsoleteOldStyleHistogram(let v)? = _storage._value {return v}
         return SwiftProtobuf.Internal.emptyData
@@ -319,7 +319,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       set {_uniqueStorage()._value = .obsoleteOldStyleHistogram(newValue)}
     }
 
-    var image: Tensorflow_Summary.Image {
+    public var image: Tensorflow_Summary.Image {
       get {
         if case .image(let v)? = _storage._value {return v}
         return Tensorflow_Summary.Image()
@@ -327,7 +327,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       set {_uniqueStorage()._value = .image(newValue)}
     }
 
-    var histo: Tensorflow_HistogramProto {
+    public var histo: Tensorflow_HistogramProto {
       get {
         if case .histo(let v)? = _storage._value {return v}
         return Tensorflow_HistogramProto()
@@ -335,7 +335,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       set {_uniqueStorage()._value = .histo(newValue)}
     }
 
-    var audio: Tensorflow_Summary.Audio {
+    public var audio: Tensorflow_Summary.Audio {
       get {
         if case .audio(let v)? = _storage._value {return v}
         return Tensorflow_Summary.Audio()
@@ -343,7 +343,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       set {_uniqueStorage()._value = .audio(newValue)}
     }
 
-    var tensor: Tensorflow_TensorProto {
+    public var tensor: Tensorflow_TensorProto {
       get {
         if case .tensor(let v)? = _storage._value {return v}
         return Tensorflow_TensorProto()
@@ -354,7 +354,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
     /// Value associated with the tag.
-    enum OneOf_Value: Equatable {
+    public enum OneOf_Value: Equatable {
       case simpleValue(Float)
       case obsoleteOldStyleHistogram(Data)
       case image(Tensorflow_Summary.Image)
@@ -362,7 +362,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
       case audio(Tensorflow_Summary.Audio)
       case tensor(Tensorflow_TensorProto)
 
-      static func ==(lhs: Tensorflow_Summary.Value.OneOf_Value, rhs: Tensorflow_Summary.Value.OneOf_Value) -> Bool {
+      public static func ==(lhs: Tensorflow_Summary.Value.OneOf_Value, rhs: Tensorflow_Summary.Value.OneOf_Value) -> Bool {
         switch (lhs, rhs) {
         case (.simpleValue(let l), .simpleValue(let r)): return l == r
         case (.obsoleteOldStyleHistogram(let l), .obsoleteOldStyleHistogram(let r)): return l == r
@@ -608,7 +608,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _nodeName = source._nodeName
@@ -626,7 +626,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Summary.Value) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._tag != other_storage._tag {return false}
         if _storage._value != other_storage._value {return false}

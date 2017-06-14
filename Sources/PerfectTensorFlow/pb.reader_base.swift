@@ -24,13 +24,13 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_ReaderBaseState: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ReaderBaseState"
 
-  var workStarted: Int64 = 0
+  public var workStarted: Int64 = 0
 
-  var workFinished: Int64 = 0
+  public var workFinished: Int64 = 0
 
-  var numRecordsProduced: Int64 = 0
+  public var numRecordsProduced: Int64 = 0
 
-  var currentWork: Data = SwiftProtobuf.Internal.emptyData
+  public var currentWork: Data = SwiftProtobuf.Internal.emptyData
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

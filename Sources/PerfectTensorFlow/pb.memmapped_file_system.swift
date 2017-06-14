@@ -38,9 +38,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_MemmappedFileSystemDirectoryElement: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemmappedFileSystemDirectoryElement"
 
-  var offset: UInt64 = 0
+  public var offset: UInt64 = 0
 
-  var name: String = String()
+  public var name: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -79,7 +79,7 @@ public struct Tensorflow_MemmappedFileSystemDirectoryElement: SwiftProtobuf.Mess
 public struct Tensorflow_MemmappedFileSystemDirectory: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MemmappedFileSystemDirectory"
 
-  var element: [Tensorflow_MemmappedFileSystemDirectoryElement] = []
+  public var element: [Tensorflow_MemmappedFileSystemDirectoryElement] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

@@ -25,18 +25,18 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Event"
 
   /// Timestamp of the event.
-  var wallTime: Double {
+  public var wallTime: Double {
     get {return _storage._wallTime}
     set {_uniqueStorage()._wallTime = newValue}
   }
 
   /// Global step of the event.
-  var step: Int64 {
+  public var step: Int64 {
     get {return _storage._step}
     set {_uniqueStorage()._step = newValue}
   }
 
-  var what: OneOf_What? {
+  public var what: OneOf_What? {
     get {return _storage._what}
     set {_uniqueStorage()._what = newValue}
   }
@@ -45,7 +45,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   /// This is use to identify the contents of the record IO files
   /// easily.  Current version is "brain.Event:2".  All versions
   /// start with "brain.Event:".
-  var fileVersion: String {
+  public var fileVersion: String {
     get {
       if case .fileVersion(let v)? = _storage._what {return v}
       return String()
@@ -54,7 +54,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   }
 
   /// An encoded version of a GraphDef.
-  var graphDef: Data {
+  public var graphDef: Data {
     get {
       if case .graphDef(let v)? = _storage._what {return v}
       return SwiftProtobuf.Internal.emptyData
@@ -63,7 +63,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   }
 
   /// A summary was generated.
-  var summary: Tensorflow_Summary {
+  public var summary: Tensorflow_Summary {
     get {
       if case .summary(let v)? = _storage._what {return v}
       return Tensorflow_Summary()
@@ -73,7 +73,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
 
   /// The user output a log message. Not all messages are logged, only ones
   /// generated via the Python tensorboard_logging module.
-  var logMessage: Tensorflow_LogMessage {
+  public var logMessage: Tensorflow_LogMessage {
     get {
       if case .logMessage(let v)? = _storage._what {return v}
       return Tensorflow_LogMessage()
@@ -82,7 +82,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   }
 
   /// The state of the session which can be used for restarting after crashes.
-  var sessionLog: Tensorflow_SessionLog {
+  public var sessionLog: Tensorflow_SessionLog {
     get {
       if case .sessionLog(let v)? = _storage._what {return v}
       return Tensorflow_SessionLog()
@@ -91,7 +91,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   }
 
   /// The metadata returned by running a session.run() call.
-  var taggedRunMetadata: Tensorflow_TaggedRunMetadata {
+  public var taggedRunMetadata: Tensorflow_TaggedRunMetadata {
     get {
       if case .taggedRunMetadata(let v)? = _storage._what {return v}
       return Tensorflow_TaggedRunMetadata()
@@ -100,7 +100,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
   }
 
   /// An encoded version of a MetaGraphDef.
-  var metaGraphDef: Data {
+  public var metaGraphDef: Data {
     get {
       if case .metaGraphDef(let v)? = _storage._what {return v}
       return SwiftProtobuf.Internal.emptyData
@@ -110,7 +110,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_What: Equatable {
+  public enum OneOf_What: Equatable {
     /// An event file was started, with the specified version.
     /// This is use to identify the contents of the record IO files
     /// easily.  Current version is "brain.Event:2".  All versions
@@ -130,7 +130,7 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
     /// An encoded version of a MetaGraphDef.
     case metaGraphDef(Data)
 
-    static func ==(lhs: Tensorflow_Event.OneOf_What, rhs: Tensorflow_Event.OneOf_What) -> Bool {
+    public static func ==(lhs: Tensorflow_Event.OneOf_What, rhs: Tensorflow_Event.OneOf_What) -> Bool {
       switch (lhs, rhs) {
       case (.fileVersion(let l), .fileVersion(let r)): return l == r
       case (.graphDef(let l), .graphDef(let r)): return l == r
@@ -250,14 +250,14 @@ public struct Tensorflow_Event: SwiftProtobuf.Message {
 public struct Tensorflow_LogMessage: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".LogMessage"
 
-  var level: Tensorflow_LogMessage.Level = .unknown
+  public var level: Tensorflow_LogMessage.Level = .unknown
 
-  var message: String = String()
+  public var message: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum Level: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum Level: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case unknown // = 0
 
     /// Note: The logging level 10 cannot be named DEBUG. Some software
@@ -271,11 +271,11 @@ public struct Tensorflow_LogMessage: SwiftProtobuf.Message {
     case fatal // = 50
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .unknown
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .unknown
       case 10: self = .debugging
@@ -287,7 +287,7 @@ public struct Tensorflow_LogMessage: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .unknown: return 0
       case .debugging: return 10
@@ -336,28 +336,28 @@ public struct Tensorflow_LogMessage: SwiftProtobuf.Message {
 public struct Tensorflow_SessionLog: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SessionLog"
 
-  var status: Tensorflow_SessionLog.SessionStatus = .statusUnspecified
+  public var status: Tensorflow_SessionLog.SessionStatus = .statusUnspecified
 
   /// This checkpoint_path contains both the path and filename.
-  var checkpointPath: String = String()
+  public var checkpointPath: String = String()
 
-  var msg: String = String()
+  public var msg: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum SessionStatus: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum SessionStatus: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case statusUnspecified // = 0
     case start // = 1
     case stop // = 2
     case checkpoint // = 3
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .statusUnspecified
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .statusUnspecified
       case 1: self = .start
@@ -367,7 +367,7 @@ public struct Tensorflow_SessionLog: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .statusUnspecified: return 0
       case .start: return 1
@@ -419,11 +419,11 @@ public struct Tensorflow_TaggedRunMetadata: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TaggedRunMetadata"
 
   /// Tag name associated with this metadata.
-  var tag: String = String()
+  public var tag: String = String()
 
   /// Byte-encoded version of the `RunMetadata` proto in order to allow lazy
   /// deserialization.
-  var runMetadata: Data = SwiftProtobuf.Internal.emptyData
+  public var runMetadata: Data = SwiftProtobuf.Internal.emptyData
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -482,7 +482,7 @@ extension Tensorflow_Event: SwiftProtobuf._MessageImplementationBase, SwiftProto
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _wallTime = source._wallTime
@@ -500,7 +500,7 @@ extension Tensorflow_Event: SwiftProtobuf._MessageImplementationBase, SwiftProto
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Event) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._wallTime != other_storage._wallTime {return false}
         if _storage._step != other_storage._step {return false}
         if _storage._what != other_storage._what {return false}

@@ -37,9 +37,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Contrib_Tensorboard_TraceInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TraceInfo"
 
-  var ops: [Tensorflow_Contrib_Tensorboard_OpInfo] = []
+  public var ops: [Tensorflow_Contrib_Tensorboard_OpInfo] = []
 
-  var files: [Tensorflow_Contrib_Tensorboard_FileInfo] = []
+  public var files: [Tensorflow_Contrib_Tensorboard_FileInfo] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -77,17 +77,17 @@ public struct Tensorflow_Contrib_Tensorboard_TraceInfo: SwiftProtobuf.Message {
 public struct Tensorflow_Contrib_Tensorboard_OpInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpInfo"
 
-  var name: String = String()
+  public var name: String = String()
 
-  var opType: String = String()
+  public var opType: String = String()
 
-  var device: String = String()
+  public var device: String = String()
 
-  var traceback: [Tensorflow_Contrib_Tensorboard_LineTrace] = []
+  public var traceback: [Tensorflow_Contrib_Tensorboard_LineTrace] = []
 
-  var inputs: [Tensorflow_Contrib_Tensorboard_TensorInfo] = []
+  public var inputs: [Tensorflow_Contrib_Tensorboard_TensorInfo] = []
 
-  var outputs: [Tensorflow_Contrib_Tensorboard_TensorInfo] = []
+  public var outputs: [Tensorflow_Contrib_Tensorboard_TensorInfo] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -142,10 +142,10 @@ public struct Tensorflow_Contrib_Tensorboard_LineTrace: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".LineTrace"
 
   /// Absolute file path.
-  var filePath: String = String()
+  public var filePath: String = String()
 
   /// 1-based line number.
-  var lineNumber: UInt32 = 0
+  public var lineNumber: UInt32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -185,16 +185,16 @@ public struct Tensorflow_Contrib_Tensorboard_TensorInfo: SwiftProtobuf.Message {
 
   /// Size of the tensor for each dimension. Value of -1 denotes "unknown"
   /// size for that dimension.
-  var shape: [Int32] = []
+  public var shape: [Int32] = []
 
   /// The data type of the tensor.
-  var dtype: String = String()
+  public var dtype: String = String()
 
   /// Number of bytes per element in the tensor.
-  var numBytesPerElem: UInt32 = 0
+  public var numBytesPerElem: UInt32 = 0
 
   /// List of operation names that consume this tensor.
-  var consumers: [String] = []
+  public var consumers: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -241,13 +241,13 @@ public struct Tensorflow_Contrib_Tensorboard_FileInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".FileInfo"
 
   /// Absolute file path to the source code.
-  var filePath: String = String()
+  public var filePath: String = String()
 
-  var sourceCode: String = String()
+  public var sourceCode: String = String()
 
   /// Map from end of statement to start of statement. End and start are 0-based
   /// line indexes.
-  var multilineStatements: Dictionary<UInt32,UInt32> = [:]
+  public var multilineStatements: Dictionary<UInt32,UInt32> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

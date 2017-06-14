@@ -23,48 +23,48 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Tfprof_CodeDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CodeDef"
 
-  var traces: [Tensorflow_Tfprof_CodeDef.Trace] = []
+  public var traces: [Tensorflow_Tfprof_CodeDef.Trace] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct Trace: SwiftProtobuf.Message {
+  public struct Trace: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_Tfprof_CodeDef.protoMessageName + ".Trace"
 
-    var file: String {
+    public var file: String {
       get {return _file ?? String()}
       set {_file = newValue}
     }
     /// Returns true if `file` has been explicitly set.
-    var hasFile: Bool {return self._file != nil}
+    public var hasFile: Bool {return self._file != nil}
     /// Clears the value of `file`. Subsequent reads from it will return its default value.
-    mutating func clearFile() {self._file = nil}
+    public mutating func clearFile() {self._file = nil}
 
-    var lineno: Int32 {
+    public var lineno: Int32 {
       get {return _lineno ?? 0}
       set {_lineno = newValue}
     }
     /// Returns true if `lineno` has been explicitly set.
-    var hasLineno: Bool {return self._lineno != nil}
+    public var hasLineno: Bool {return self._lineno != nil}
     /// Clears the value of `lineno`. Subsequent reads from it will return its default value.
-    mutating func clearLineno() {self._lineno = nil}
+    public mutating func clearLineno() {self._lineno = nil}
 
-    var function: String {
+    public var function: String {
       get {return _function ?? String()}
       set {_function = newValue}
     }
     /// Returns true if `function` has been explicitly set.
-    var hasFunction: Bool {return self._function != nil}
+    public var hasFunction: Bool {return self._function != nil}
     /// Clears the value of `function`. Subsequent reads from it will return its default value.
-    mutating func clearFunction() {self._function = nil}
+    public mutating func clearFunction() {self._function = nil}
 
-    var line: String {
+    public var line: String {
       get {return _line ?? String()}
       set {_line = newValue}
     }
     /// Returns true if `line` has been explicitly set.
-    var hasLine: Bool {return self._line != nil}
+    public var hasLine: Bool {return self._line != nil}
     /// Clears the value of `line`. Subsequent reads from it will return its default value.
-    mutating func clearLine() {self._line = nil}
+    public mutating func clearLine() {self._line = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -143,43 +143,43 @@ public struct Tensorflow_Tfprof_OpLogEntry: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpLogEntry"
 
   /// op name.
-  var name: String {
+  public var name: String {
     get {return _storage._name ?? String()}
     set {_uniqueStorage()._name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return _storage._name != nil}
+  public var hasName: Bool {return _storage._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {_storage._name = nil}
+  public mutating func clearName() {_storage._name = nil}
 
   /// float_ops is filled by tfprof Python API when called. It requires the
   /// op has RegisterStatistics defined. Currently, Conv2D, MatMul, etc, are
   /// implemented.
-  var floatOps: Int64 {
+  public var floatOps: Int64 {
     get {return _storage._floatOps ?? 0}
     set {_uniqueStorage()._floatOps = newValue}
   }
   /// Returns true if `floatOps` has been explicitly set.
-  var hasFloatOps: Bool {return _storage._floatOps != nil}
+  public var hasFloatOps: Bool {return _storage._floatOps != nil}
   /// Clears the value of `floatOps`. Subsequent reads from it will return its default value.
-  mutating func clearFloatOps() {_storage._floatOps = nil}
+  public mutating func clearFloatOps() {_storage._floatOps = nil}
 
   /// User can define extra op type information for an op. This allows the user
   /// to select a group of ops precisely using op_type as a key.
-  var types: [String] {
+  public var types: [String] {
     get {return _storage._types}
     set {_uniqueStorage()._types = newValue}
   }
 
   /// Used to support tfprof "code" view.
-  var codeDef: Tensorflow_Tfprof_CodeDef {
+  public var codeDef: Tensorflow_Tfprof_CodeDef {
     get {return _storage._codeDef ?? Tensorflow_Tfprof_CodeDef()}
     set {_uniqueStorage()._codeDef = newValue}
   }
   /// Returns true if `codeDef` has been explicitly set.
-  var hasCodeDef: Bool {return _storage._codeDef != nil}
+  public var hasCodeDef: Bool {return _storage._codeDef != nil}
   /// Clears the value of `codeDef`. Subsequent reads from it will return its default value.
-  mutating func clearCodeDef() {_storage._codeDef = nil}
+  public mutating func clearCodeDef() {_storage._codeDef = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -232,7 +232,7 @@ public struct Tensorflow_Tfprof_OpLogEntry: SwiftProtobuf.Message {
 public struct Tensorflow_Tfprof_OpLog: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpLog"
 
-  var logEntries: [Tensorflow_Tfprof_OpLogEntry] = []
+  public var logEntries: [Tensorflow_Tfprof_OpLogEntry] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -313,7 +313,7 @@ extension Tensorflow_Tfprof_OpLogEntry: SwiftProtobuf._MessageImplementationBase
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -332,7 +332,7 @@ extension Tensorflow_Tfprof_OpLogEntry: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_OpLogEntry) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._floatOps != other_storage._floatOps {return false}
         if _storage._types != other_storage._types {return false}

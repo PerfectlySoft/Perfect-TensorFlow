@@ -24,19 +24,19 @@ public struct Tensorflow_DebugTensorWatch: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DebugTensorWatch"
 
   /// Name of the node to watch.
-  var nodeName: String = String()
+  public var nodeName: String = String()
 
   /// Output slot to watch.
   /// The semantics of output_slot == -1 is that the node is only watched for
   /// completion, but not for any output tensors. See NodeCompletionCallback
   /// in debug_gateway.h.
   /// TODO(cais): Implement this semantics.
-  var outputSlot: Int32 = 0
+  public var outputSlot: Int32 = 0
 
   /// Name(s) of the debugging op(s).
   /// One or more than one probes on a tensor.
   /// e.g., {"DebugIdentity", "DebugNanCount"}
-  var debugOps: [String] = []
+  public var debugOps: [String] = []
 
   /// URL(s) for debug targets(s).
   ///   E.g., "file:///foo/tfdbg_dump", "grpc://localhost:11011"
@@ -49,11 +49,11 @@ public struct Tensorflow_DebugTensorWatch: SwiftProtobuf.Message {
   /// debug_urls to make sure that the streamed or dumped events do not overlap
   /// among the invocations.
   /// TODO(cais): More visible documentation of this in g3docs.
-  var debugUrls: [String] = []
+  public var debugUrls: [String] = []
 
   /// Do not error out if debug op creation fails (e.g., due to dtype
   /// incompatibility). Instead, just log the failure.
-  var tolerateDebugOpCreationFailures: Bool = false
+  public var tolerateDebugOpCreationFailures: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -105,12 +105,12 @@ public struct Tensorflow_DebugOptions: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DebugOptions"
 
   /// Debugging options
-  var debugTensorWatchOpts: [Tensorflow_DebugTensorWatch] = []
+  public var debugTensorWatchOpts: [Tensorflow_DebugTensorWatch] = []
 
   /// Caller-specified global step count.
   /// Note that this is distinct from the session run count and the executor
   /// step count.
-  var globalStep: Int64 = 0
+  public var globalStep: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

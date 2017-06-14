@@ -26,9 +26,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_Tfcompile_TensorId: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TensorId"
 
-  var nodeName: String = String()
+  public var nodeName: String = String()
 
-  var outputIndex: Int64 = 0
+  public var outputIndex: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -68,26 +68,26 @@ public struct Tensorflow_Tfcompile_TensorId: SwiftProtobuf.Message {
 public struct Tensorflow_Tfcompile_Feed: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Feed"
 
-  var id: Tensorflow_Tfcompile_TensorId {
+  public var id: Tensorflow_Tfcompile_TensorId {
     get {return _storage._id ?? Tensorflow_Tfcompile_TensorId()}
     set {_uniqueStorage()._id = newValue}
   }
   /// Returns true if `id` has been explicitly set.
-  var hasID: Bool {return _storage._id != nil}
+  public var hasID: Bool {return _storage._id != nil}
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  mutating func clearID() {_storage._id = nil}
+  public mutating func clearID() {_storage._id = nil}
 
-  var shape: Tensorflow_TensorShapeProto {
+  public var shape: Tensorflow_TensorShapeProto {
     get {return _storage._shape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._shape = newValue}
   }
   /// Returns true if `shape` has been explicitly set.
-  var hasShape: Bool {return _storage._shape != nil}
+  public var hasShape: Bool {return _storage._shape != nil}
   /// Clears the value of `shape`. Subsequent reads from it will return its default value.
-  mutating func clearShape() {_storage._shape = nil}
+  public mutating func clearShape() {_storage._shape = nil}
 
   /// Optional name for generated code.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
@@ -141,17 +141,17 @@ public struct Tensorflow_Tfcompile_Feed: SwiftProtobuf.Message {
 public struct Tensorflow_Tfcompile_Fetch: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Fetch"
 
-  var id: Tensorflow_Tfcompile_TensorId {
+  public var id: Tensorflow_Tfcompile_TensorId {
     get {return _storage._id ?? Tensorflow_Tfcompile_TensorId()}
     set {_uniqueStorage()._id = newValue}
   }
   /// Returns true if `id` has been explicitly set.
-  var hasID: Bool {return _storage._id != nil}
+  public var hasID: Bool {return _storage._id != nil}
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  mutating func clearID() {_storage._id = nil}
+  public mutating func clearID() {_storage._id = nil}
 
   /// Optional name for generated code.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
@@ -202,11 +202,11 @@ public struct Tensorflow_Tfcompile_Config: SwiftProtobuf.Message {
 
   /// Each feed is a positional input argument for the generated function.  The
   /// order of each entry matches the order of each input argument.
-  var feed: [Tensorflow_Tfcompile_Feed] = []
+  public var feed: [Tensorflow_Tfcompile_Feed] = []
 
   /// Each fetch is a positional output argument for the generated function.  The
   /// order of each entry matches the order of each output argument.
-  var fetch: [Tensorflow_Tfcompile_Fetch] = []
+  public var fetch: [Tensorflow_Tfcompile_Fetch] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -273,7 +273,7 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _id = source._id
@@ -291,7 +291,7 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Feed) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._id != other_storage._id {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._name != other_storage._name {return false}
@@ -316,7 +316,7 @@ extension Tensorflow_Tfcompile_Fetch: SwiftProtobuf._MessageImplementationBase, 
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _id = source._id
@@ -333,7 +333,7 @@ extension Tensorflow_Tfcompile_Fetch: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Fetch) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._id != other_storage._id {return false}
         if _storage._name != other_storage._name {return false}
         return true

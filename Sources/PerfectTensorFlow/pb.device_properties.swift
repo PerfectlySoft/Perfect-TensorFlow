@@ -38,45 +38,45 @@ public struct Tensorflow_DeviceProperties: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DeviceProperties"
 
   /// Device type (CPU, GPU, ...)
-  var type: String = String()
+  public var type: String = String()
 
   /// Vendor (Intel, nvidia, ...)
-  var vendor: String = String()
+  public var vendor: String = String()
 
   /// Model (Haswell, K40, ...)
-  var model: String = String()
+  public var model: String = String()
 
   /// Core Frequency in Mhz
-  var frequency: Int64 = 0
+  public var frequency: Int64 = 0
 
   /// Number of cores
-  var numCores: Int64 = 0
+  public var numCores: Int64 = 0
 
   /// Version of the tools and libraries used with this device (e.g. gcc 4.9,
   /// cudnn 5.1)
-  var environment: Dictionary<String,String> = [:]
+  public var environment: Dictionary<String,String> = [:]
 
   /// Number of registers per core.
-  var numRegisters: Int64 = 0
+  public var numRegisters: Int64 = 0
 
   /// L1 cache size in bytes
-  var l1CacheSize: Int64 = 0
+  public var l1CacheSize: Int64 = 0
 
   /// L2 cache size in bytes
-  var l2CacheSize: Int64 = 0
+  public var l2CacheSize: Int64 = 0
 
   /// L3 cache size in bytes
-  var l3CacheSize: Int64 = 0
+  public var l3CacheSize: Int64 = 0
 
   /// Shared memory size per multiprocessor in bytes. This field is
   /// applicable to GPUs only.
-  var sharedMemorySizePerMultiprocessor: Int64 = 0
+  public var sharedMemorySizePerMultiprocessor: Int64 = 0
 
   /// Memory size in bytes
-  var memorySize: Int64 = 0
+  public var memorySize: Int64 = 0
 
   /// Memory bandwidth in KB/s
-  var bandwidth: Int64 = 0
+  public var bandwidth: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

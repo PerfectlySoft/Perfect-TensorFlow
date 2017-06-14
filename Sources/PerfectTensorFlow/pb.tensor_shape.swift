@@ -38,17 +38,17 @@ public struct Tensorflow_TensorShapeProto: SwiftProtobuf.Message {
   /// in-memory layout of RowMajor Eigen tensors.
   ///
   /// If "dim.size()" > 0, "unknown_rank" must be false.
-  var dim: [Tensorflow_TensorShapeProto.Dim] = []
+  public var dim: [Tensorflow_TensorShapeProto.Dim] = []
 
   /// If true, the number of dimensions in the shape is unknown.
   ///
   /// If true, "dim.size()" must be 0.
-  var unknownRank: Bool = false
+  public var unknownRank: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// One dimension of the tensor.
-  struct Dim: SwiftProtobuf.Message {
+  public struct Dim: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_TensorShapeProto.protoMessageName + ".Dim"
 
     /// Size of the tensor in that dimension.
@@ -56,10 +56,10 @@ public struct Tensorflow_TensorShapeProto: SwiftProtobuf.Message {
     /// shapes (values of -1 mean "unknown" dimension).  Certain wrappers
     /// that work with TensorShapeProto may fail at runtime when deserializing
     /// a TensorShapeProto containing a dim value of -1.
-    var size: Int64 = 0
+    public var size: Int64 = 0
 
     /// Optional name of the tensor dimension.
-    var name: String = String()
+    public var name: String = String()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 

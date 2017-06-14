@@ -24,10 +24,10 @@ public struct Tensorflow_ValuesDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ValuesDef"
 
   /// Value names that have been seen in this context.
-  var values: [String] = []
+  public var values: [String] = []
 
   /// Value names referenced by but external to this context.
-  var externalValues: Dictionary<String,String> = [:]
+  public var externalValues: Dictionary<String,String> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -67,38 +67,38 @@ public struct Tensorflow_CondContextDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".CondContextDef"
 
   /// Name of the context.
-  var contextName: String {
+  public var contextName: String {
     get {return _storage._contextName}
     set {_uniqueStorage()._contextName = newValue}
   }
 
   /// Name of the pred tensor.
-  var predName: String {
+  public var predName: String {
     get {return _storage._predName}
     set {_uniqueStorage()._predName = newValue}
   }
 
   /// Name of the pivot tensor.
-  var pivotName: String {
+  public var pivotName: String {
     get {return _storage._pivotName}
     set {_uniqueStorage()._pivotName = newValue}
   }
 
   /// Branch prediction. 0 or 1.
-  var branch: Int32 {
+  public var branch: Int32 {
     get {return _storage._branch}
     set {_uniqueStorage()._branch = newValue}
   }
 
   /// Values and external values in control flow context.
-  var valuesDef: Tensorflow_ValuesDef {
+  public var valuesDef: Tensorflow_ValuesDef {
     get {return _storage._valuesDef ?? Tensorflow_ValuesDef()}
     set {_uniqueStorage()._valuesDef = newValue}
   }
   /// Returns true if `valuesDef` has been explicitly set.
-  var hasValuesDef: Bool {return _storage._valuesDef != nil}
+  public var hasValuesDef: Bool {return _storage._valuesDef != nil}
   /// Clears the value of `valuesDef`. Subsequent reads from it will return its default value.
-  mutating func clearValuesDef() {_storage._valuesDef = nil}
+  public mutating func clearValuesDef() {_storage._valuesDef = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -157,68 +157,68 @@ public struct Tensorflow_WhileContextDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".WhileContextDef"
 
   /// Name of the context.
-  var contextName: String {
+  public var contextName: String {
     get {return _storage._contextName}
     set {_uniqueStorage()._contextName = newValue}
   }
 
   /// The number of iterations allowed to run in parallel.
-  var parallelIterations: Int32 {
+  public var parallelIterations: Int32 {
     get {return _storage._parallelIterations}
     set {_uniqueStorage()._parallelIterations = newValue}
   }
 
   /// Whether backprop is enabled for this while loop.
-  var backProp: Bool {
+  public var backProp: Bool {
     get {return _storage._backProp}
     set {_uniqueStorage()._backProp = newValue}
   }
 
   /// Whether GPU-CPU memory swap is enabled for this loop.
-  var swapMemory: Bool {
+  public var swapMemory: Bool {
     get {return _storage._swapMemory}
     set {_uniqueStorage()._swapMemory = newValue}
   }
 
   /// Name of the pivot tensor.
-  var pivotName: String {
+  public var pivotName: String {
     get {return _storage._pivotName}
     set {_uniqueStorage()._pivotName = newValue}
   }
 
   /// Name of the pivot_for_pred tensor.
-  var pivotForPredName: String {
+  public var pivotForPredName: String {
     get {return _storage._pivotForPredName}
     set {_uniqueStorage()._pivotForPredName = newValue}
   }
 
   /// Name of the pivot_for_body tensor.
-  var pivotForBodyName: String {
+  public var pivotForBodyName: String {
     get {return _storage._pivotForBodyName}
     set {_uniqueStorage()._pivotForBodyName = newValue}
   }
 
   /// List of names for exit tensors.
-  var loopExitNames: [String] {
+  public var loopExitNames: [String] {
     get {return _storage._loopExitNames}
     set {_uniqueStorage()._loopExitNames = newValue}
   }
 
   /// List of names for enter tensors.
-  var loopEnterNames: [String] {
+  public var loopEnterNames: [String] {
     get {return _storage._loopEnterNames}
     set {_uniqueStorage()._loopEnterNames = newValue}
   }
 
   /// Values and external values in control flow context.
-  var valuesDef: Tensorflow_ValuesDef {
+  public var valuesDef: Tensorflow_ValuesDef {
     get {return _storage._valuesDef ?? Tensorflow_ValuesDef()}
     set {_uniqueStorage()._valuesDef = newValue}
   }
   /// Returns true if `valuesDef` has been explicitly set.
-  var hasValuesDef: Bool {return _storage._valuesDef != nil}
+  public var hasValuesDef: Bool {return _storage._valuesDef != nil}
   /// Clears the value of `valuesDef`. Subsequent reads from it will return its default value.
-  mutating func clearValuesDef() {_storage._valuesDef = nil}
+  public mutating func clearValuesDef() {_storage._valuesDef = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -328,7 +328,7 @@ extension Tensorflow_CondContextDef: SwiftProtobuf._MessageImplementationBase, S
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _contextName = source._contextName
@@ -348,7 +348,7 @@ extension Tensorflow_CondContextDef: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CondContextDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._contextName != other_storage._contextName {return false}
         if _storage._predName != other_storage._predName {return false}
         if _storage._pivotName != other_storage._pivotName {return false}
@@ -391,7 +391,7 @@ extension Tensorflow_WhileContextDef: SwiftProtobuf._MessageImplementationBase, 
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _contextName = source._contextName
@@ -416,7 +416,7 @@ extension Tensorflow_WhileContextDef: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_WhileContextDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._contextName != other_storage._contextName {return false}
         if _storage._parallelIterations != other_storage._parallelIterations {return false}
         if _storage._backProp != other_storage._backProp {return false}

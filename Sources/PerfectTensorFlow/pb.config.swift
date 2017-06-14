@@ -26,7 +26,7 @@ public struct Tensorflow_GPUOptions: SwiftProtobuf.Message {
   /// available GPU memory to pre-allocate for each process.  1 means
   /// to pre-allocate all of the GPU memory, 0.5 means the process
   /// allocates ~50% of the available GPU memory.
-  var perProcessGpuMemoryFraction: Double = 0
+  public var perProcessGpuMemoryFraction: Double = 0
 
   /// The type of GPU allocation strategy to use.
   ///
@@ -36,16 +36,16 @@ public struct Tensorflow_GPUOptions: SwiftProtobuf.Message {
   ///
   /// "BFC": A "Best-fit with coalescing" algorithm, simplified from a
   ///        version of dlmalloc.
-  var allocatorType: String = String()
+  public var allocatorType: String = String()
 
   /// Delay deletion of up to this many bytes to reduce the number of
   /// interactions with gpu driver code.  If 0, the system chooses
   /// a reasonable default (several MBs).
-  var deferredDeletionBytes: Int64 = 0
+  public var deferredDeletionBytes: Int64 = 0
 
   /// If true, the allocator does not pre-allocate the entire specified
   /// GPU memory region, instead starting small and growing as needed.
-  var allowGrowth: Bool = false
+  public var allowGrowth: Bool = false
 
   /// A comma-separated list of GPU ids that determines the 'visible'
   /// to 'virtual' mapping of GPU devices.  For example, if TensorFlow
@@ -62,17 +62,17 @@ public struct Tensorflow_GPUOptions: SwiftProtobuf.Message {
   /// after the process starts.  Users are required to use vendor
   /// specific mechanisms (e.g., CUDA_VISIBLE_DEVICES) to control the
   /// physical to visible device mapping prior to invoking TensorFlow.
-  var visibleDeviceList: String = String()
+  public var visibleDeviceList: String = String()
 
   /// In the event polling loop sleep this many microseconds between
   /// PollEvents calls, when the queue is not empty.  If value is not
   /// set or set to 0, gets set to a non-zero default.
-  var pollingActiveDelayUsecs: Int32 = 0
+  public var pollingActiveDelayUsecs: Int32 = 0
 
   /// In the event polling loop sleep this many millisconds between
   /// PollEvents calls, when the queue is empty.  If value is not
   /// set or set to 0, gets set to a non-zero default.
-  var pollingInactiveDelayMsecs: Int32 = 0
+  public var pollingInactiveDelayMsecs: Int32 = 0
 
   /// Force all tensors to be gpu_compatible. On a GPU-enabled TensorFlow,
   /// enabling this option forces all CPU tensors to be allocated with Cuda
@@ -84,7 +84,7 @@ public struct Tensorflow_GPUOptions: SwiftProtobuf.Message {
   /// enabled by default for unknown or very large models, since all Cuda pinned
   /// memory is unpageable, having too much pinned memory might negatively impact
   /// the overall host system performance.
-  var forceGpuCompatible: Bool = false
+  public var forceGpuCompatible: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -148,23 +148,23 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OptimizerOptions"
 
   /// If true, optimize the graph using common subexpression elimination.
-  var doCommonSubexpressionElimination: Bool = false
+  public var doCommonSubexpressionElimination: Bool = false
 
   /// If true, perform constant folding optimization on the graph.
-  var doConstantFolding: Bool = false
+  public var doConstantFolding: Bool = false
 
   /// If true, perform function inlining on the graph.
-  var doFunctionInlining: Bool = false
+  public var doFunctionInlining: Bool = false
 
-  var optLevel: Tensorflow_OptimizerOptions.Level = .l1
+  public var optLevel: Tensorflow_OptimizerOptions.Level = .l1
 
-  var globalJitLevel: Tensorflow_OptimizerOptions.GlobalJitLevel = .default
+  public var globalJitLevel: Tensorflow_OptimizerOptions.GlobalJitLevel = .default
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// Optimization level
-  enum Level: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum Level: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
 
     /// L1 is the default level.
     /// Optimization performed at L1 :
@@ -176,11 +176,11 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
     case l0 // = -1
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .l1
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case -1: self = .l0
       case 0: self = .l1
@@ -188,7 +188,7 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .l0: return -1
       case .l1: return 0
@@ -199,8 +199,8 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
   }
 
   /// Control the use of the compiler/jit.  Experimental.
-  enum GlobalJitLevel: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum GlobalJitLevel: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
 
     /// Default setting ("off" now, but later expected to be "on")
     case `default` // = 0
@@ -214,11 +214,11 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
     case on2 // = 2
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .default
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case -1: self = .off
       case 0: self = .default
@@ -228,7 +228,7 @@ public struct Tensorflow_OptimizerOptions: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .off: return -1
       case .default: return 0
@@ -288,39 +288,39 @@ public struct Tensorflow_GraphOptions: SwiftProtobuf.Message {
 
   /// If true, use control flow to schedule the activation of Recv nodes.
   /// (Currently ignored.)
-  var enableRecvScheduling: Bool {
+  public var enableRecvScheduling: Bool {
     get {return _storage._enableRecvScheduling}
     set {_uniqueStorage()._enableRecvScheduling = newValue}
   }
 
   /// Options controlling how graph is optimized.
-  var optimizerOptions: Tensorflow_OptimizerOptions {
+  public var optimizerOptions: Tensorflow_OptimizerOptions {
     get {return _storage._optimizerOptions ?? Tensorflow_OptimizerOptions()}
     set {_uniqueStorage()._optimizerOptions = newValue}
   }
   /// Returns true if `optimizerOptions` has been explicitly set.
-  var hasOptimizerOptions: Bool {return _storage._optimizerOptions != nil}
+  public var hasOptimizerOptions: Bool {return _storage._optimizerOptions != nil}
   /// Clears the value of `optimizerOptions`. Subsequent reads from it will return its default value.
-  mutating func clearOptimizerOptions() {_storage._optimizerOptions = nil}
+  public mutating func clearOptimizerOptions() {_storage._optimizerOptions = nil}
 
   /// The number of steps to run before returning a cost model detailing
   /// the memory usage and performance of each node of the graph. 0 means
   /// no cost model.
-  var buildCostModel: Int64 {
+  public var buildCostModel: Int64 {
     get {return _storage._buildCostModel}
     set {_uniqueStorage()._buildCostModel = newValue}
   }
 
   /// The number of steps to skip before collecting statistics for the
   /// cost model.
-  var buildCostModelAfter: Int64 {
+  public var buildCostModelAfter: Int64 {
     get {return _storage._buildCostModelAfter}
     set {_uniqueStorage()._buildCostModelAfter = newValue}
   }
 
   /// Annotate each Node with Op output shape data, to the extent it can
   /// be statically inferred.
-  var inferShapes: Bool {
+  public var inferShapes: Bool {
     get {return _storage._inferShapes}
     set {_uniqueStorage()._inferShapes = newValue}
   }
@@ -332,33 +332,33 @@ public struct Tensorflow_GraphOptions: SwiftProtobuf.Message {
   /// process.  In particular, it allows the client to continue work in
   /// a session after adding a node to a graph whose placement
   /// constraints are unsatisfiable.
-  var placePrunedGraph: Bool {
+  public var placePrunedGraph: Bool {
     get {return _storage._placePrunedGraph}
     set {_uniqueStorage()._placePrunedGraph = newValue}
   }
 
   /// If true, transfer float values between processes as bfloat16.
-  var enableBfloat16Sendrecv: Bool {
+  public var enableBfloat16Sendrecv: Bool {
     get {return _storage._enableBfloat16Sendrecv}
     set {_uniqueStorage()._enableBfloat16Sendrecv = newValue}
   }
 
   /// If > 0, record a timeline every this many steps.
   /// EXPERIMENTAL: This currently has no effect in MasterSession.
-  var timelineStep: Int32 {
+  public var timelineStep: Int32 {
     get {return _storage._timelineStep}
     set {_uniqueStorage()._timelineStep = newValue}
   }
 
   /// Options that control the type and amount of graph rewriting.
-  var rewriteOptions: Tensorflow_RewriterConfig {
+  public var rewriteOptions: Tensorflow_RewriterConfig {
     get {return _storage._rewriteOptions ?? Tensorflow_RewriterConfig()}
     set {_uniqueStorage()._rewriteOptions = newValue}
   }
   /// Returns true if `rewriteOptions` has been explicitly set.
-  var hasRewriteOptions: Bool {return _storage._rewriteOptions != nil}
+  public var hasRewriteOptions: Bool {return _storage._rewriteOptions != nil}
   /// Clears the value of `rewriteOptions`. Subsequent reads from it will return its default value.
-  mutating func clearRewriteOptions() {_storage._rewriteOptions = nil}
+  public mutating func clearRewriteOptions() {_storage._rewriteOptions = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -435,7 +435,7 @@ public struct Tensorflow_ThreadPoolOptionProto: SwiftProtobuf.Message {
   ///
   /// 0 means the system picks a value based on where this option proto is used
   /// (see the declaration of the specific field for more info).
-  var numThreads: Int32 = 0
+  public var numThreads: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -474,7 +474,7 @@ public struct Tensorflow_RPCOptions: SwiftProtobuf.Message {
   /// If false (the default option), TensorFlow may use an optimized
   /// transport for client-master communication that avoids the RPC
   /// stack. This option is primarily for used testing the RPC stack.
-  var useRpcForInprocessMaster: Bool = false
+  public var useRpcForInprocessMaster: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -514,7 +514,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// number of devices of that type to use.  If a particular device
   /// type is not found in the map, the system picks an appropriate
   /// number.
-  var deviceCount: Dictionary<String,Int32> {
+  public var deviceCount: Dictionary<String,Int32> {
     get {return _storage._deviceCount}
     set {_uniqueStorage()._deviceCount = newValue}
   }
@@ -522,7 +522,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// The execution of an individual op (for some op types) can be
   /// parallelized on a pool of intra_op_parallelism_threads.
   /// 0 means the system picks an appropriate number.
-  var intraOpParallelismThreads: Int32 {
+  public var intraOpParallelismThreads: Int32 {
     get {return _storage._intraOpParallelismThreads}
     set {_uniqueStorage()._intraOpParallelismThreads = newValue}
   }
@@ -535,7 +535,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// Note that the first Session created in the process sets the
   /// number of threads for all future sessions unless use_per_session_threads is
   /// true or session_inter_op_thread_pool is configured.
-  var interOpParallelismThreads: Int32 {
+  public var interOpParallelismThreads: Int32 {
     get {return _storage._interOpParallelismThreads}
     set {_uniqueStorage()._interOpParallelismThreads = newValue}
   }
@@ -549,7 +549,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// This option is deprecated. The same effect can be achieved by setting
   /// session_inter_op_thread_pool to have one element, whose num_threads equals
   /// inter_op_parallelism_threads.
-  var usePerSessionThreads: Bool {
+  public var usePerSessionThreads: Bool {
     get {return _storage._usePerSessionThreads}
     set {_uniqueStorage()._usePerSessionThreads = newValue}
   }
@@ -562,7 +562,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// a Run call can select the thread pool to use.
   ///
   /// If a pool's num_threads is 0, then inter_op_parallelism_threads is used.
-  var sessionInterOpThreadPool: [Tensorflow_ThreadPoolOptionProto] {
+  public var sessionInterOpThreadPool: [Tensorflow_ThreadPoolOptionProto] {
     get {return _storage._sessionInterOpThreadPool}
     set {_uniqueStorage()._sessionInterOpThreadPool = newValue}
   }
@@ -570,7 +570,7 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// Assignment of Nodes to Devices is recomputed every placement_period
   /// steps until the system warms up (at which point the recomputation
   /// typically slows down automatically).
-  var placementPeriod: Int32 {
+  public var placementPeriod: Int32 {
     get {return _storage._placementPeriod}
     set {_uniqueStorage()._placementPeriod = newValue}
   }
@@ -578,20 +578,20 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   /// When any filters are present sessions will ignore all devices which do not
   /// match the filters. Each filter can be partially specified, e.g. "/job:ps"
   /// "/job:worker/replica:3", etc.
-  var deviceFilters: [String] {
+  public var deviceFilters: [String] {
     get {return _storage._deviceFilters}
     set {_uniqueStorage()._deviceFilters = newValue}
   }
 
   /// Options that apply to all GPUs.
-  var gpuOptions: Tensorflow_GPUOptions {
+  public var gpuOptions: Tensorflow_GPUOptions {
     get {return _storage._gpuOptions ?? Tensorflow_GPUOptions()}
     set {_uniqueStorage()._gpuOptions = newValue}
   }
   /// Returns true if `gpuOptions` has been explicitly set.
-  var hasGpuOptions: Bool {return _storage._gpuOptions != nil}
+  public var hasGpuOptions: Bool {return _storage._gpuOptions != nil}
   /// Clears the value of `gpuOptions`. Subsequent reads from it will return its default value.
-  mutating func clearGpuOptions() {_storage._gpuOptions = nil}
+  public mutating func clearGpuOptions() {_storage._gpuOptions = nil}
 
   /// Whether soft placement is allowed. If allow_soft_placement is true,
   /// an op will be placed on CPU if
@@ -600,54 +600,54 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
   ///   2. no GPU devices are known or registered
   /// or
   ///   3. need to co-locate with reftype input(s) which are from CPU.
-  var allowSoftPlacement: Bool {
+  public var allowSoftPlacement: Bool {
     get {return _storage._allowSoftPlacement}
     set {_uniqueStorage()._allowSoftPlacement = newValue}
   }
 
   /// Whether device placements should be logged.
-  var logDevicePlacement: Bool {
+  public var logDevicePlacement: Bool {
     get {return _storage._logDevicePlacement}
     set {_uniqueStorage()._logDevicePlacement = newValue}
   }
 
   /// Options that apply to all graphs.
-  var graphOptions: Tensorflow_GraphOptions {
+  public var graphOptions: Tensorflow_GraphOptions {
     get {return _storage._graphOptions ?? Tensorflow_GraphOptions()}
     set {_uniqueStorage()._graphOptions = newValue}
   }
   /// Returns true if `graphOptions` has been explicitly set.
-  var hasGraphOptions: Bool {return _storage._graphOptions != nil}
+  public var hasGraphOptions: Bool {return _storage._graphOptions != nil}
   /// Clears the value of `graphOptions`. Subsequent reads from it will return its default value.
-  mutating func clearGraphOptions() {_storage._graphOptions = nil}
+  public mutating func clearGraphOptions() {_storage._graphOptions = nil}
 
   /// Global timeout for all blocking operations in this session.  If non-zero,
   /// and not overridden on a per-operation basis, this value will be used as the
   /// deadline for all blocking operations.
-  var operationTimeoutInMs: Int64 {
+  public var operationTimeoutInMs: Int64 {
     get {return _storage._operationTimeoutInMs}
     set {_uniqueStorage()._operationTimeoutInMs = newValue}
   }
 
   /// Options that apply when this session uses the distributed runtime.
-  var rpcOptions: Tensorflow_RPCOptions {
+  public var rpcOptions: Tensorflow_RPCOptions {
     get {return _storage._rpcOptions ?? Tensorflow_RPCOptions()}
     set {_uniqueStorage()._rpcOptions = newValue}
   }
   /// Returns true if `rpcOptions` has been explicitly set.
-  var hasRpcOptions: Bool {return _storage._rpcOptions != nil}
+  public var hasRpcOptions: Bool {return _storage._rpcOptions != nil}
   /// Clears the value of `rpcOptions`. Subsequent reads from it will return its default value.
-  mutating func clearRpcOptions() {_storage._rpcOptions = nil}
+  public mutating func clearRpcOptions() {_storage._rpcOptions = nil}
 
   /// Optional list of all workers to use in this session.
-  var clusterDef: Tensorflow_ClusterDef {
+  public var clusterDef: Tensorflow_ClusterDef {
     get {return _storage._clusterDef ?? Tensorflow_ClusterDef()}
     set {_uniqueStorage()._clusterDef = newValue}
   }
   /// Returns true if `clusterDef` has been explicitly set.
-  var hasClusterDef: Bool {return _storage._clusterDef != nil}
+  public var hasClusterDef: Bool {return _storage._clusterDef != nil}
   /// Clears the value of `clusterDef`. Subsequent reads from it will return its default value.
-  mutating func clearClusterDef() {_storage._clusterDef = nil}
+  public mutating func clearClusterDef() {_storage._clusterDef = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -741,57 +741,57 @@ public struct Tensorflow_ConfigProto: SwiftProtobuf.Message {
 public struct Tensorflow_RunOptions: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RunOptions"
 
-  var traceLevel: Tensorflow_RunOptions.TraceLevel {
+  public var traceLevel: Tensorflow_RunOptions.TraceLevel {
     get {return _storage._traceLevel}
     set {_uniqueStorage()._traceLevel = newValue}
   }
 
   /// Time to wait for operation to complete in milliseconds.
-  var timeoutInMs: Int64 {
+  public var timeoutInMs: Int64 {
     get {return _storage._timeoutInMs}
     set {_uniqueStorage()._timeoutInMs = newValue}
   }
 
   /// The thread pool to use, if session_inter_op_thread_pool is configured.
-  var interOpThreadPool: Int32 {
+  public var interOpThreadPool: Int32 {
     get {return _storage._interOpThreadPool}
     set {_uniqueStorage()._interOpThreadPool = newValue}
   }
 
   /// Whether the partition graph(s) executed by the executor(s) should be
   /// outputted via RunMetadata.
-  var outputPartitionGraphs: Bool {
+  public var outputPartitionGraphs: Bool {
     get {return _storage._outputPartitionGraphs}
     set {_uniqueStorage()._outputPartitionGraphs = newValue}
   }
 
   /// EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
-  var debugOptions: Tensorflow_DebugOptions {
+  public var debugOptions: Tensorflow_DebugOptions {
     get {return _storage._debugOptions ?? Tensorflow_DebugOptions()}
     set {_uniqueStorage()._debugOptions = newValue}
   }
   /// Returns true if `debugOptions` has been explicitly set.
-  var hasDebugOptions: Bool {return _storage._debugOptions != nil}
+  public var hasDebugOptions: Bool {return _storage._debugOptions != nil}
   /// Clears the value of `debugOptions`. Subsequent reads from it will return its default value.
-  mutating func clearDebugOptions() {_storage._debugOptions = nil}
+  public mutating func clearDebugOptions() {_storage._debugOptions = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// TODO(pbar) Turn this into a TraceOptions proto which allows
   /// tracing to be controlled in a more orthogonal manner?
-  enum TraceLevel: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum TraceLevel: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
     case noTrace // = 0
     case softwareTrace // = 1
     case hardwareTrace // = 2
     case fullTrace // = 3
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .noTrace
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .noTrace
       case 1: self = .softwareTrace
@@ -801,7 +801,7 @@ public struct Tensorflow_RunOptions: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .noTrace: return 0
       case .softwareTrace: return 1
@@ -870,27 +870,27 @@ public struct Tensorflow_RunMetadata: SwiftProtobuf.Message {
   /// Statistics traced for this step. Populated if tracing is turned on via the
   /// "RunOptions" proto.
   /// EXPERIMENTAL: The format and set of events may change in future versions.
-  var stepStats: Tensorflow_StepStats {
+  public var stepStats: Tensorflow_StepStats {
     get {return _storage._stepStats ?? Tensorflow_StepStats()}
     set {_uniqueStorage()._stepStats = newValue}
   }
   /// Returns true if `stepStats` has been explicitly set.
-  var hasStepStats: Bool {return _storage._stepStats != nil}
+  public var hasStepStats: Bool {return _storage._stepStats != nil}
   /// Clears the value of `stepStats`. Subsequent reads from it will return its default value.
-  mutating func clearStepStats() {_storage._stepStats = nil}
+  public mutating func clearStepStats() {_storage._stepStats = nil}
 
   /// The cost graph for the computation defined by the run call.
-  var costGraph: Tensorflow_CostGraphDef {
+  public var costGraph: Tensorflow_CostGraphDef {
     get {return _storage._costGraph ?? Tensorflow_CostGraphDef()}
     set {_uniqueStorage()._costGraph = newValue}
   }
   /// Returns true if `costGraph` has been explicitly set.
-  var hasCostGraph: Bool {return _storage._costGraph != nil}
+  public var hasCostGraph: Bool {return _storage._costGraph != nil}
   /// Clears the value of `costGraph`. Subsequent reads from it will return its default value.
-  mutating func clearCostGraph() {_storage._costGraph = nil}
+  public mutating func clearCostGraph() {_storage._costGraph = nil}
 
   /// Graphs of the partitions executed by executors.
-  var partitionGraphs: [Tensorflow_GraphDef] {
+  public var partitionGraphs: [Tensorflow_GraphDef] {
     get {return _storage._partitionGraphs}
     set {_uniqueStorage()._partitionGraphs = newValue}
   }
@@ -1031,7 +1031,7 @@ extension Tensorflow_GraphOptions: SwiftProtobuf._MessageImplementationBase, Swi
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _enableRecvScheduling = source._enableRecvScheduling
@@ -1055,7 +1055,7 @@ extension Tensorflow_GraphOptions: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GraphOptions) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._enableRecvScheduling != other_storage._enableRecvScheduling {return false}
         if _storage._optimizerOptions != other_storage._optimizerOptions {return false}
         if _storage._buildCostModel != other_storage._buildCostModel {return false}
@@ -1134,7 +1134,7 @@ extension Tensorflow_ConfigProto: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _deviceCount = source._deviceCount
@@ -1163,7 +1163,7 @@ extension Tensorflow_ConfigProto: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ConfigProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._deviceCount != other_storage._deviceCount {return false}
         if _storage._intraOpParallelismThreads != other_storage._intraOpParallelismThreads {return false}
         if _storage._interOpParallelismThreads != other_storage._interOpParallelismThreads {return false}
@@ -1205,7 +1205,7 @@ extension Tensorflow_RunOptions: SwiftProtobuf._MessageImplementationBase, Swift
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _traceLevel = source._traceLevel
@@ -1225,7 +1225,7 @@ extension Tensorflow_RunOptions: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunOptions) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._traceLevel != other_storage._traceLevel {return false}
         if _storage._timeoutInMs != other_storage._timeoutInMs {return false}
         if _storage._interOpThreadPool != other_storage._interOpThreadPool {return false}
@@ -1263,7 +1263,7 @@ extension Tensorflow_RunMetadata: SwiftProtobuf._MessageImplementationBase, Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _stepStats = source._stepStats
@@ -1281,7 +1281,7 @@ extension Tensorflow_RunMetadata: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunMetadata) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._stepStats != other_storage._stepStats {return false}
         if _storage._costGraph != other_storage._costGraph {return false}
         if _storage._partitionGraphs != other_storage._partitionGraphs {return false}

@@ -25,27 +25,27 @@ public struct Tensorflow_SaverDef: SwiftProtobuf.Message {
 
   /// The name of the tensor in which to specify the filename when saving or
   /// restoring a model checkpoint.
-  var filenameTensorName: String = String()
+  public var filenameTensorName: String = String()
 
   /// The operation to run when saving a model checkpoint.
-  var saveTensorName: String = String()
+  public var saveTensorName: String = String()
 
   /// The operation to run when restoring a model checkpoint.
-  var restoreOpName: String = String()
+  public var restoreOpName: String = String()
 
   /// Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
-  var maxToKeep: Int32 = 0
+  public var maxToKeep: Int32 = 0
 
   /// Shard the save files, one per device that has Variable nodes.
-  var sharded: Bool = false
+  public var sharded: Bool = false
 
   /// How often to keep an additional checkpoint. If not specified, only the last
   /// "max_to_keep" checkpoints are kept; if specified, in addition to keeping
   /// the last "max_to_keep" checkpoints, an additional checkpoint will be kept
   /// for every n hours of training.
-  var keepCheckpointEveryNHours: Float = 0
+  public var keepCheckpointEveryNHours: Float = 0
 
-  var version: Tensorflow_SaverDef.CheckpointFormatVersion = .legacy
+  public var version: Tensorflow_SaverDef.CheckpointFormatVersion = .legacy
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -53,8 +53,8 @@ public struct Tensorflow_SaverDef: SwiftProtobuf.Message {
   /// Usually, each subclass of BaseSaverBuilder works with a particular
   /// version/format.  However, it is possible that the same builder may be
   /// upgraded to support a newer checkpoint format in the future.
-  enum CheckpointFormatVersion: SwiftProtobuf.Enum {
-    typealias RawValue = Int
+  public enum CheckpointFormatVersion: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
 
     /// Internal legacy format.
     case legacy // = 0
@@ -66,11 +66,11 @@ public struct Tensorflow_SaverDef: SwiftProtobuf.Message {
     case v2 // = 2
     case UNRECOGNIZED(Int)
 
-    init() {
+    public init() {
       self = .legacy
     }
 
-    init?(rawValue: Int) {
+    public init?(rawValue: Int) {
       switch rawValue {
       case 0: self = .legacy
       case 1: self = .v1
@@ -79,7 +79,7 @@ public struct Tensorflow_SaverDef: SwiftProtobuf.Message {
       }
     }
 
-    var rawValue: Int {
+    public var rawValue: Int {
       switch self {
       case .legacy: return 0
       case .v1: return 1

@@ -24,20 +24,20 @@ public struct Tensorflow_QueueRunnerDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".QueueRunnerDef"
 
   /// Queue name.
-  var queueName: String = String()
+  public var queueName: String = String()
 
   /// A list of enqueue operations.
-  var enqueueOpName: [String] = []
+  public var enqueueOpName: [String] = []
 
   /// The operation to run to close the queue.
-  var closeOpName: String = String()
+  public var closeOpName: String = String()
 
   /// The operation to run to cancel the queue.
-  var cancelOpName: String = String()
+  public var cancelOpName: String = String()
 
   /// A list of exception types considered to signal a safely closed queue
   /// if raised during enqueue operations.
-  var queueClosedExceptionTypes: [Tensorflow_Error_Code] = []
+  public var queueClosedExceptionTypes: [Tensorflow_Error_Code] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 

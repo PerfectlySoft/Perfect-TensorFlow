@@ -37,10 +37,10 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_SpriteMetadata: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SpriteMetadata"
 
-  var imagePath: String = String()
+  public var imagePath: String = String()
 
   /// [width, height] of a single image in the sprite.
-  var singleImageDim: [UInt32] = []
+  public var singleImageDim: [UInt32] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -78,40 +78,40 @@ public struct Tensorflow_SpriteMetadata: SwiftProtobuf.Message {
 public struct Tensorflow_EmbeddingInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".EmbeddingInfo"
 
-  var tensorName: String {
+  public var tensorName: String {
     get {return _storage._tensorName}
     set {_uniqueStorage()._tensorName = newValue}
   }
 
-  var metadataPath: String {
+  public var metadataPath: String {
     get {return _storage._metadataPath}
     set {_uniqueStorage()._metadataPath = newValue}
   }
 
-  var bookmarksPath: String {
+  public var bookmarksPath: String {
     get {return _storage._bookmarksPath}
     set {_uniqueStorage()._bookmarksPath = newValue}
   }
 
   /// Shape of the 2D tensor [N x D]. If missing, it will be inferred from the
   /// model checkpoint.
-  var tensorShape: [UInt32] {
+  public var tensorShape: [UInt32] {
     get {return _storage._tensorShape}
     set {_uniqueStorage()._tensorShape = newValue}
   }
 
-  var sprite: Tensorflow_SpriteMetadata {
+  public var sprite: Tensorflow_SpriteMetadata {
     get {return _storage._sprite ?? Tensorflow_SpriteMetadata()}
     set {_uniqueStorage()._sprite = newValue}
   }
   /// Returns true if `sprite` has been explicitly set.
-  var hasSprite: Bool {return _storage._sprite != nil}
+  public var hasSprite: Bool {return _storage._sprite != nil}
   /// Clears the value of `sprite`. Subsequent reads from it will return its default value.
-  mutating func clearSprite() {_storage._sprite = nil}
+  public mutating func clearSprite() {_storage._sprite = nil}
 
   /// Path to the TSV file holding the tensor values. If missing, the tensor
   /// is assumed to be stored in the model checkpoint.
-  var tensorPath: String {
+  public var tensorPath: String {
     get {return _storage._tensorPath}
     set {_uniqueStorage()._tensorPath = newValue}
   }
@@ -176,13 +176,13 @@ public struct Tensorflow_ProjectorConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ProjectorConfig"
 
   /// Path to the checkpoint file. Use either this or model_checkpoint_dir.
-  var modelCheckpointPath: String = String()
+  public var modelCheckpointPath: String = String()
 
-  var embeddings: [Tensorflow_EmbeddingInfo] = []
+  public var embeddings: [Tensorflow_EmbeddingInfo] = []
 
   /// Path to the checkpoint directory. The directory will be scanned for the
   /// latest checkpoint file.
-  var modelCheckpointDir: String = String()
+  public var modelCheckpointDir: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -259,7 +259,7 @@ extension Tensorflow_EmbeddingInfo: SwiftProtobuf._MessageImplementationBase, Sw
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _tensorName = source._tensorName
@@ -280,7 +280,7 @@ extension Tensorflow_EmbeddingInfo: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_EmbeddingInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._tensorName != other_storage._tensorName {return false}
         if _storage._metadataPath != other_storage._metadataPath {return false}
         if _storage._bookmarksPath != other_storage._bookmarksPath {return false}

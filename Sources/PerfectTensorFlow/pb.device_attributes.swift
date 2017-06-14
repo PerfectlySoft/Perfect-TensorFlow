@@ -24,7 +24,7 @@ public struct Tensorflow_DeviceLocality: SwiftProtobuf.Message {
 
   /// Optional bus locality of device.  Default value of 0 means
   /// no specific locality.  Specific localities are indexed from 1.
-  var busID: Int32 = 0
+  public var busID: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -59,43 +59,43 @@ public struct Tensorflow_DeviceAttributes: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DeviceAttributes"
 
   /// Fully specified name of the device within a cluster.
-  var name: String {
+  public var name: String {
     get {return _storage._name}
     set {_uniqueStorage()._name = newValue}
   }
 
   /// String representation of device_type.
-  var deviceType: String {
+  public var deviceType: String {
     get {return _storage._deviceType}
     set {_uniqueStorage()._deviceType = newValue}
   }
 
   /// Memory capacity of device in bytes.
-  var memoryLimit: Int64 {
+  public var memoryLimit: Int64 {
     get {return _storage._memoryLimit}
     set {_uniqueStorage()._memoryLimit = newValue}
   }
 
   /// Platform-specific data about device that may be useful
   /// for supporting efficient data transfers.
-  var locality: Tensorflow_DeviceLocality {
+  public var locality: Tensorflow_DeviceLocality {
     get {return _storage._locality ?? Tensorflow_DeviceLocality()}
     set {_uniqueStorage()._locality = newValue}
   }
   /// Returns true if `locality` has been explicitly set.
-  var hasLocality: Bool {return _storage._locality != nil}
+  public var hasLocality: Bool {return _storage._locality != nil}
   /// Clears the value of `locality`. Subsequent reads from it will return its default value.
-  mutating func clearLocality() {_storage._locality = nil}
+  public mutating func clearLocality() {_storage._locality = nil}
 
   /// A device is assigned a global unique number each time it is
   /// initialized. "incarnation" should never be 0.
-  var incarnation: UInt64 {
+  public var incarnation: UInt64 {
     get {return _storage._incarnation}
     set {_uniqueStorage()._incarnation = newValue}
   }
 
   /// String representation of the physical device that this device maps to.
-  var physicalDeviceDesc: String {
+  public var physicalDeviceDesc: String {
     get {return _storage._physicalDeviceDesc}
     set {_uniqueStorage()._physicalDeviceDesc = newValue}
   }
@@ -192,7 +192,7 @@ extension Tensorflow_DeviceAttributes: SwiftProtobuf._MessageImplementationBase,
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _name = source._name
@@ -213,7 +213,7 @@ extension Tensorflow_DeviceAttributes: SwiftProtobuf._MessageImplementationBase,
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DeviceAttributes) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._name != other_storage._name {return false}
         if _storage._deviceType != other_storage._deviceType {return false}
         if _storage._memoryLimit != other_storage._memoryLimit {return false}

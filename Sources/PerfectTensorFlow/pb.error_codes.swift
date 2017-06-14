@@ -32,8 +32,8 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 /// the most specific error code that applies.  For example, prefer
 /// OUT_OF_RANGE over FAILED_PRECONDITION if both codes apply.
 /// Similarly prefer NOT_FOUND or ALREADY_EXISTS over FAILED_PRECONDITION.
-enum Tensorflow_Error_Code: SwiftProtobuf.Enum {
-  typealias RawValue = Int
+public enum Tensorflow_Error_Code: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
 
   /// Not an error; returned on success
   case ok // = 0
@@ -162,11 +162,11 @@ enum Tensorflow_Error_Code: SwiftProtobuf.Enum {
   case doNotUseReservedForFutureExpansionUseDefaultInSwitchInstead_ // = 20
   case UNRECOGNIZED(Int)
 
-  init() {
+  public init() {
     self = .ok
   }
 
-  init?(rawValue: Int) {
+  public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .ok
     case 1: self = .cancelled
@@ -190,7 +190,7 @@ enum Tensorflow_Error_Code: SwiftProtobuf.Enum {
     }
   }
 
-  var rawValue: Int {
+  public var rawValue: Int {
     switch self {
     case .ok: return 0
     case .cancelled: return 1

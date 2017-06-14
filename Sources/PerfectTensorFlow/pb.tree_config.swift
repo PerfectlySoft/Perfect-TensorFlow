@@ -23,12 +23,12 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TreeNode"
 
-  var node: OneOf_Node? {
+  public var node: OneOf_Node? {
     get {return _storage._node}
     set {_uniqueStorage()._node = newValue}
   }
 
-  var leaf: Tensorflow_BoostedTrees_Trees_Leaf {
+  public var leaf: Tensorflow_BoostedTrees_Trees_Leaf {
     get {
       if case .leaf(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_Leaf()
@@ -36,7 +36,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .leaf(newValue)}
   }
 
-  var denseFloatBinarySplit: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
+  public var denseFloatBinarySplit: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
     get {
       if case .denseFloatBinarySplit(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit()
@@ -44,7 +44,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .denseFloatBinarySplit(newValue)}
   }
 
-  var sparseFloatBinarySplitDefaultLeft: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft {
+  public var sparseFloatBinarySplitDefaultLeft: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft {
     get {
       if case .sparseFloatBinarySplitDefaultLeft(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft()
@@ -52,7 +52,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .sparseFloatBinarySplitDefaultLeft(newValue)}
   }
 
-  var sparseFloatBinarySplitDefaultRight: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight {
+  public var sparseFloatBinarySplitDefaultRight: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight {
     get {
       if case .sparseFloatBinarySplitDefaultRight(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight()
@@ -60,7 +60,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .sparseFloatBinarySplitDefaultRight(newValue)}
   }
 
-  var categoricalIDBinarySplit: Tensorflow_BoostedTrees_Trees_CategoricalIdBinarySplit {
+  public var categoricalIDBinarySplit: Tensorflow_BoostedTrees_Trees_CategoricalIdBinarySplit {
     get {
       if case .categoricalIDBinarySplit(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_CategoricalIdBinarySplit()
@@ -68,7 +68,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .categoricalIDBinarySplit(newValue)}
   }
 
-  var categoricalIDSetMembershipBinarySplit: Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySplit {
+  public var categoricalIDSetMembershipBinarySplit: Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySplit {
     get {
       if case .categoricalIDSetMembershipBinarySplit(let v)? = _storage._node {return v}
       return Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySplit()
@@ -76,18 +76,18 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     set {_uniqueStorage()._node = .categoricalIDSetMembershipBinarySplit(newValue)}
   }
 
-  var nodeMetadata: Tensorflow_BoostedTrees_Trees_TreeNodeMetadata {
+  public var nodeMetadata: Tensorflow_BoostedTrees_Trees_TreeNodeMetadata {
     get {return _storage._nodeMetadata ?? Tensorflow_BoostedTrees_Trees_TreeNodeMetadata()}
     set {_uniqueStorage()._nodeMetadata = newValue}
   }
   /// Returns true if `nodeMetadata` has been explicitly set.
-  var hasNodeMetadata: Bool {return _storage._nodeMetadata != nil}
+  public var hasNodeMetadata: Bool {return _storage._nodeMetadata != nil}
   /// Clears the value of `nodeMetadata`. Subsequent reads from it will return its default value.
-  mutating func clearNodeMetadata() {_storage._nodeMetadata = nil}
+  public mutating func clearNodeMetadata() {_storage._nodeMetadata = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Node: Equatable {
+  public enum OneOf_Node: Equatable {
     case leaf(Tensorflow_BoostedTrees_Trees_Leaf)
     case denseFloatBinarySplit(Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit)
     case sparseFloatBinarySplitDefaultLeft(Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft)
@@ -95,7 +95,7 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf.Message {
     case categoricalIDBinarySplit(Tensorflow_BoostedTrees_Trees_CategoricalIdBinarySplit)
     case categoricalIDSetMembershipBinarySplit(Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySplit)
 
-    static func ==(lhs: Tensorflow_BoostedTrees_Trees_TreeNode.OneOf_Node, rhs: Tensorflow_BoostedTrees_Trees_TreeNode.OneOf_Node) -> Bool {
+    public static func ==(lhs: Tensorflow_BoostedTrees_Trees_TreeNode.OneOf_Node, rhs: Tensorflow_BoostedTrees_Trees_TreeNode.OneOf_Node) -> Bool {
       switch (lhs, rhs) {
       case (.leaf(let l), .leaf(let r)): return l == r
       case (.denseFloatBinarySplit(let l), .denseFloatBinarySplit(let r)): return l == r
@@ -210,20 +210,20 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNodeMetadata: SwiftProtobuf.Mess
   public static let protoMessageName: String = _protobuf_package + ".TreeNodeMetadata"
 
   /// The gain associated with this node.
-  var gain: Float {
+  public var gain: Float {
     get {return _storage._gain}
     set {_uniqueStorage()._gain = newValue}
   }
 
   /// The original leaf node before this node was split.
-  var originalLeaf: Tensorflow_BoostedTrees_Trees_Leaf {
+  public var originalLeaf: Tensorflow_BoostedTrees_Trees_Leaf {
     get {return _storage._originalLeaf ?? Tensorflow_BoostedTrees_Trees_Leaf()}
     set {_uniqueStorage()._originalLeaf = newValue}
   }
   /// Returns true if `originalLeaf` has been explicitly set.
-  var hasOriginalLeaf: Bool {return _storage._originalLeaf != nil}
+  public var hasOriginalLeaf: Bool {return _storage._originalLeaf != nil}
   /// Clears the value of `originalLeaf`. Subsequent reads from it will return its default value.
-  mutating func clearOriginalLeaf() {_storage._originalLeaf = nil}
+  public mutating func clearOriginalLeaf() {_storage._originalLeaf = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -269,14 +269,14 @@ public struct Tensorflow_BoostedTrees_Trees_TreeNodeMetadata: SwiftProtobuf.Mess
 public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Leaf"
 
-  var leaf: OneOf_Leaf? {
+  public var leaf: OneOf_Leaf? {
     get {return _storage._leaf}
     set {_uniqueStorage()._leaf = newValue}
   }
 
   /// See learning/decision_trees/proto/generic_tree_model.proto?l=133
   /// for a description of how vector and sparse_vector might be used.
-  var vector: Tensorflow_BoostedTrees_Trees_Vector {
+  public var vector: Tensorflow_BoostedTrees_Trees_Vector {
     get {
       if case .vector(let v)? = _storage._leaf {return v}
       return Tensorflow_BoostedTrees_Trees_Vector()
@@ -284,7 +284,7 @@ public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
     set {_uniqueStorage()._leaf = .vector(newValue)}
   }
 
-  var sparseVector: Tensorflow_BoostedTrees_Trees_SparseVector {
+  public var sparseVector: Tensorflow_BoostedTrees_Trees_SparseVector {
     get {
       if case .sparseVector(let v)? = _storage._leaf {return v}
       return Tensorflow_BoostedTrees_Trees_SparseVector()
@@ -294,13 +294,13 @@ public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Leaf: Equatable {
+  public enum OneOf_Leaf: Equatable {
     /// See learning/decision_trees/proto/generic_tree_model.proto?l=133
     /// for a description of how vector and sparse_vector might be used.
     case vector(Tensorflow_BoostedTrees_Trees_Vector)
     case sparseVector(Tensorflow_BoostedTrees_Trees_SparseVector)
 
-    static func ==(lhs: Tensorflow_BoostedTrees_Trees_Leaf.OneOf_Leaf, rhs: Tensorflow_BoostedTrees_Trees_Leaf.OneOf_Leaf) -> Bool {
+    public static func ==(lhs: Tensorflow_BoostedTrees_Trees_Leaf.OneOf_Leaf, rhs: Tensorflow_BoostedTrees_Trees_Leaf.OneOf_Leaf) -> Bool {
       switch (lhs, rhs) {
       case (.vector(let l), .vector(let r)): return l == r
       case (.sparseVector(let l), .sparseVector(let r)): return l == r
@@ -365,7 +365,7 @@ public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
 public struct Tensorflow_BoostedTrees_Trees_Vector: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".Vector"
 
-  var value: [Float] = []
+  public var value: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -399,9 +399,9 @@ public struct Tensorflow_BoostedTrees_Trees_Vector: SwiftProtobuf.Message {
 public struct Tensorflow_BoostedTrees_Trees_SparseVector: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SparseVector"
 
-  var index: [Int32] = []
+  public var index: [Int32] = []
 
-  var value: [Float] = []
+  public var value: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -442,15 +442,15 @@ public struct Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit: SwiftProtobuf
 
   /// Float feature column and split threshold describing
   /// the rule feature <= threshold.
-  var featureColumn: Int32 = 0
+  public var featureColumn: Int32 = 0
 
-  var threshold: Float = 0
+  public var threshold: Float = 0
 
   /// Node children indexing into a contiguous
   /// vector of nodes starting from the root.
-  var leftID: Int32 = 0
+  public var leftID: Int32 = 0
 
-  var rightID: Int32 = 0
+  public var rightID: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -497,14 +497,14 @@ public struct Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit: SwiftProtobuf
 public struct Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SparseFloatBinarySplitDefaultLeft"
 
-  var split: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
+  public var split: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
     get {return _storage._split ?? Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit()}
     set {_uniqueStorage()._split = newValue}
   }
   /// Returns true if `split` has been explicitly set.
-  var hasSplit: Bool {return _storage._split != nil}
+  public var hasSplit: Bool {return _storage._split != nil}
   /// Clears the value of `split`. Subsequent reads from it will return its default value.
-  mutating func clearSplit() {_storage._split = nil}
+  public mutating func clearSplit() {_storage._split = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -546,14 +546,14 @@ public struct Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft: S
 public struct Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SparseFloatBinarySplitDefaultRight"
 
-  var split: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
+  public var split: Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit {
     get {return _storage._split ?? Tensorflow_BoostedTrees_Trees_DenseFloatBinarySplit()}
     set {_uniqueStorage()._split = newValue}
   }
   /// Returns true if `split` has been explicitly set.
-  var hasSplit: Bool {return _storage._split != nil}
+  public var hasSplit: Bool {return _storage._split != nil}
   /// Clears the value of `split`. Subsequent reads from it will return its default value.
-  mutating func clearSplit() {_storage._split = nil}
+  public mutating func clearSplit() {_storage._split = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -597,15 +597,15 @@ public struct Tensorflow_BoostedTrees_Trees_CategoricalIdBinarySplit: SwiftProto
 
   /// Categorical feature column and Id describing
   /// the rule feature == Id.
-  var featureColumn: Int32 = 0
+  public var featureColumn: Int32 = 0
 
-  var featureID: Int64 = 0
+  public var featureID: Int64 = 0
 
   /// Node children indexing into a contiguous
   /// vector of nodes starting from the root.
-  var leftID: Int32 = 0
+  public var leftID: Int32 = 0
 
-  var rightID: Int32 = 0
+  public var rightID: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -654,16 +654,16 @@ public struct Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySpli
 
   /// Categorical feature column and Id describing
   /// the rule feature ∈ feature_ids.
-  var featureColumn: Int32 = 0
+  public var featureColumn: Int32 = 0
 
   /// Sorted list of Ids in the set.
-  var featureIds: [Int64] = []
+  public var featureIds: [Int64] = []
 
   /// Node children indexing into a contiguous
   /// vector of nodes starting from the root.
-  var leftID: Int32 = 0
+  public var leftID: Int32 = 0
 
-  var rightID: Int32 = 0
+  public var rightID: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -713,7 +713,7 @@ public struct Tensorflow_BoostedTrees_Trees_CategoricalIdSetMembershipBinarySpli
 public struct Tensorflow_BoostedTrees_Trees_DecisionTreeConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DecisionTreeConfig"
 
-  var nodes: [Tensorflow_BoostedTrees_Trees_TreeNode] = []
+  public var nodes: [Tensorflow_BoostedTrees_Trees_TreeNode] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -749,13 +749,13 @@ public struct Tensorflow_BoostedTrees_Trees_DecisionTreeMetadata: SwiftProtobuf.
 
   /// How many times tree weight was updated (due to reweighting of the final
   /// ensemble, dropout, shrinkage etc).
-  var numTreeWeightUpdates: Int32 = 0
+  public var numTreeWeightUpdates: Int32 = 0
 
   /// Number of layers grown for this tree.
-  var numLayersGrown: Int32 = 0
+  public var numLayersGrown: Int32 = 0
 
   /// Whether the tree is finalized in that no more layers can be grown.
-  var isFinalized: Bool = false
+  public var isFinalized: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -799,11 +799,11 @@ public struct Tensorflow_BoostedTrees_Trees_GrowingMetadata: SwiftProtobuf.Messa
 
   /// Number of trees that we have attempted to build. After pruning, these
   /// trees might have been removed.
-  var numTreesAttempted: Int64 = 0
+  public var numTreesAttempted: Int64 = 0
 
   /// Number of layers that we have attempted to build. After pruning, these
   /// layers might have been removed.
-  var numLayersAttempted: Int64 = 0
+  public var numLayersAttempted: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -842,30 +842,30 @@ public struct Tensorflow_BoostedTrees_Trees_GrowingMetadata: SwiftProtobuf.Messa
 public struct Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".DecisionTreeEnsembleConfig"
 
-  var trees: [Tensorflow_BoostedTrees_Trees_DecisionTreeConfig] {
+  public var trees: [Tensorflow_BoostedTrees_Trees_DecisionTreeConfig] {
     get {return _storage._trees}
     set {_uniqueStorage()._trees = newValue}
   }
 
-  var treeWeights: [Float] {
+  public var treeWeights: [Float] {
     get {return _storage._treeWeights}
     set {_uniqueStorage()._treeWeights = newValue}
   }
 
-  var treeMetadata: [Tensorflow_BoostedTrees_Trees_DecisionTreeMetadata] {
+  public var treeMetadata: [Tensorflow_BoostedTrees_Trees_DecisionTreeMetadata] {
     get {return _storage._treeMetadata}
     set {_uniqueStorage()._treeMetadata = newValue}
   }
 
   /// Metadata that is used during the training.
-  var growingMetadata: Tensorflow_BoostedTrees_Trees_GrowingMetadata {
+  public var growingMetadata: Tensorflow_BoostedTrees_Trees_GrowingMetadata {
     get {return _storage._growingMetadata ?? Tensorflow_BoostedTrees_Trees_GrowingMetadata()}
     set {_uniqueStorage()._growingMetadata = newValue}
   }
   /// Returns true if `growingMetadata` has been explicitly set.
-  var hasGrowingMetadata: Bool {return _storage._growingMetadata != nil}
+  public var hasGrowingMetadata: Bool {return _storage._growingMetadata != nil}
   /// Clears the value of `growingMetadata`. Subsequent reads from it will return its default value.
-  mutating func clearGrowingMetadata() {_storage._growingMetadata = nil}
+  public mutating func clearGrowingMetadata() {_storage._growingMetadata = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -936,7 +936,7 @@ extension Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf._MessageImplemen
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _node = source._node
@@ -953,7 +953,7 @@ extension Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_TreeNode) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._node != other_storage._node {return false}
         if _storage._nodeMetadata != other_storage._nodeMetadata {return false}
         return true
@@ -977,7 +977,7 @@ extension Tensorflow_BoostedTrees_Trees_TreeNodeMetadata: SwiftProtobuf._Message
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _gain = source._gain
@@ -994,7 +994,7 @@ extension Tensorflow_BoostedTrees_Trees_TreeNodeMetadata: SwiftProtobuf._Message
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_TreeNodeMetadata) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._gain != other_storage._gain {return false}
         if _storage._originalLeaf != other_storage._originalLeaf {return false}
         return true
@@ -1017,7 +1017,7 @@ extension Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf._MessageImplementati
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _leaf = source._leaf
@@ -1033,7 +1033,7 @@ extension Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_Leaf) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._leaf != other_storage._leaf {return false}
         return true
       }
@@ -1098,7 +1098,7 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft: Swift
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _split = source._split
@@ -1114,7 +1114,7 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft: Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._split != other_storage._split {return false}
         return true
       }
@@ -1135,7 +1135,7 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight: Swif
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _split = source._split
@@ -1151,7 +1151,7 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight: Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._split != other_storage._split {return false}
         return true
       }
@@ -1256,7 +1256,7 @@ extension Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig: SwiftProtobu
 
     static let defaultInstance = _StorageClass()
 
-    public init() {}
+    private init() {}
 
     init(copying source: _StorageClass) {
       _trees = source._trees
@@ -1275,7 +1275,7 @@ extension Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig: SwiftProtobu
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) -> Bool in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._trees != other_storage._trees {return false}
         if _storage._treeWeights != other_storage._treeWeights {return false}
         if _storage._treeMetadata != other_storage._treeMetadata {return false}
