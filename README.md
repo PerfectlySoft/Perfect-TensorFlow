@@ -54,7 +54,7 @@ The framework is Alpha testing now. Documents and examples are coming soon.
 ### TensorFlow C API Library Installation
 
 Perfect-TensorFlow is based on TensorFlow C API, i.e., `libtensorflow.so` on runtime.
-This project contains two express CPU v1.1.0 installation scripts for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.mac.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.mac.sh) for macOS X or [`install.linux.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.linux.sh).
+This project contains an express CPU v1.1.0 installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh).
 
 For more installation options, such as GPU/CPU and multiple versions on the same machine, please check TensorFlow website: [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
 
@@ -105,7 +105,7 @@ let tensor = try TF.Tensor.Scalar("Hello, Perfect TensorFlow! 🇨🇳🇨🇦")
 
 // declare a new graph
 let g = try TF.Graph()
-      
+
 // turn the tensor into an operation
 let op = try g.const(tensor: tensor, name: "hello")
 
@@ -123,7 +123,7 @@ print(s2)
 ### Matrix Operations
 
 
-As you can see, Swift version of TensorFlow keeps the same principals of the original one, i.e., create tensors, save tensors into graph, define the operations and then run the session & check the result. 
+As you can see, Swift version of TensorFlow keeps the same principals of the original one, i.e., create tensors, save tensors into graph, define the operations and then run the session & check the result.
 
 Here is an other simple example of matrix operations in Perfect TensorFlow:
 
@@ -132,8 +132,8 @@ Here is an other simple example of matrix operations in Perfect TensorFlow:
 | 1 2 |   |0 1|   |0 1|
 | 3 4 | * |0 0| = |0 3|
 */
-// input the matrix. 
-// *NOTE* no matter how many dimensions a matrix may have, 
+// input the matrix.
+// *NOTE* no matter how many dimensions a matrix may have,
 // the matrix should always input as an flattened array
 let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
 let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
@@ -170,12 +170,12 @@ let metaBuf = try TF.Buffer()
 // load the session
 let session = try g.load(
 	exportDir: "/path/to/saved/model",
-	tags: ["tag1", "tag2", ...], 
+	tags: ["tag1", "tag2", ...],
 	metaGraphDef: metaBuf)
 ```
 
 A detailed example of loading model can be found in the [Perfect TensorFlow Testing Examples](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L349-L390).
- 
+
 ## Issues
 
 We are transitioning to using JIRA for all bugs and support related issues, therefore the GitHub issues has been disabled.

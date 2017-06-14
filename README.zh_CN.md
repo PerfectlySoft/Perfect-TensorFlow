@@ -55,7 +55,7 @@
 
 Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是您的计算机上在运行时必须安装 `libtensorflow.so`动态链接库。
 
-本项目包含了两个用于快速安装该链接库 CPU v1.1.0版本的脚本，一个用于macOS而另外一个用于Ubuntu Linux。默认安装路径为`/usr/local/lib/libtensorflow.so`。您可以根据平台要求下载并运行 [`install.mac.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.mac.sh)或[`install.linux.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.linux.sh).
+本项目包含了一个用于快速安装该链接库 CPU v1.1.0版本的脚本，默认安装路径为`/usr/local/lib/libtensorflow.so`。您可以根据平台要求下载并运行 [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh)。
 
 更多的安装选项，如需要在同一台计算机上同时安装CPU/GPU或者多个不同版本，请参考官网网站： [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
 
@@ -105,7 +105,7 @@ let tensor = try TF.Tensor.Scalar("你好，Perfect TensorFlow! 🇨🇳🇨🇦
 
 // 声明一个流程图
 let g = try TF.Graph()
-      
+
 // 将张量节点加入流程图
 let op = try g.const(tensor: tensor, name: "hello")
 
@@ -168,7 +168,7 @@ let metaBuf = try TF.Buffer()
 // 还原会话
 let session = try g.load(
 	exportDir: "/path/to/saved/model",
-	tags: ["tag1", "tag2", ...], 
+	tags: ["tag1", "tag2", ...],
 	metaGraphDef: metaBuf)
 ```
 
