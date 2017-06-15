@@ -274,7 +274,8 @@ public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
     set {_uniqueStorage()._leaf = newValue}
   }
 
-  /// See learning/decision_trees/proto/generic_tree_model.proto?l=133
+  /// See third_party/tensorflow/contrib/decision_trees/
+  /// proto/generic_tree_model.proto
   /// for a description of how vector and sparse_vector might be used.
   public var vector: Tensorflow_BoostedTrees_Trees_Vector {
     get {
@@ -295,7 +296,8 @@ public struct Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf.Message {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Leaf: Equatable {
-    /// See learning/decision_trees/proto/generic_tree_model.proto?l=133
+    /// See third_party/tensorflow/contrib/decision_trees/
+    /// proto/generic_tree_model.proto
     /// for a description of how vector and sparse_vector might be used.
     case vector(Tensorflow_BoostedTrees_Trees_Vector)
     case sparseVector(Tensorflow_BoostedTrees_Trees_SparseVector)

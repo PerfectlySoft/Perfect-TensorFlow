@@ -235,14 +235,14 @@ public struct Xla_SessionModule: SwiftProtobuf.Message {
   }
 
   /// The arguments passed to the computation.
-  public var arguments: [Xla_Literal] {
+  public var arguments: [Xla_LiteralProto] {
     get {return _storage._arguments}
     set {_uniqueStorage()._arguments = newValue}
   }
 
   /// The result of the computation.
-  public var result: Xla_Literal {
-    get {return _storage._result ?? Xla_Literal()}
+  public var result: Xla_LiteralProto {
+    get {return _storage._result ?? Xla_LiteralProto()}
     set {_uniqueStorage()._result = newValue}
   }
   /// Returns true if `result` has been explicitly set.
@@ -418,8 +418,8 @@ extension Xla_SessionModule: SwiftProtobuf._MessageImplementationBase, SwiftProt
   fileprivate class _StorageClass {
     var _entry: Xla_SessionComputation? = nil
     var _embeddedComputations: [Xla_SessionComputation] = []
-    var _arguments: [Xla_Literal] = []
-    var _result: Xla_Literal? = nil
+    var _arguments: [Xla_LiteralProto] = []
+    var _result: Xla_LiteralProto? = nil
     var _executionPlatform: String = String()
 
     static let defaultInstance = _StorageClass()

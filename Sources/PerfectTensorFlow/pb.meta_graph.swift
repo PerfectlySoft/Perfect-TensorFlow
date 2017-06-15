@@ -672,9 +672,30 @@ public struct Tensorflow_CollectionDef: SwiftProtobuf.Message {
 public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TensorInfo"
 
+  public var encoding: OneOf_Encoding? {
+    get {return _storage._encoding}
+    set {_uniqueStorage()._encoding = newValue}
+  }
+
+  /// For dense `Tensor`s, the name of the tensor in the graph.
   public var name: String {
-    get {return _storage._name}
-    set {_uniqueStorage()._name = newValue}
+    get {
+      if case .name(let v)? = _storage._encoding {return v}
+      return String()
+    }
+    set {_uniqueStorage()._encoding = .name(newValue)}
+  }
+
+  /// There are many possible encodings of sparse matrices
+  /// (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
+  /// uses only the COO encoding.  This is supported and documented in the
+  /// SparseTensor Python class.
+  public var cooSparse: Tensorflow_TensorInfo.CooSparse {
+    get {
+      if case .cooSparse(let v)? = _storage._encoding {return v}
+      return Tensorflow_TensorInfo.CooSparse()
+    }
+    set {_uniqueStorage()._encoding = .cooSparse(newValue)}
   }
 
   public var dtype: Tensorflow_DataType {
@@ -682,6 +703,9 @@ public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
     set {_uniqueStorage()._dtype = newValue}
   }
 
+  /// The static shape should be recorded here, to the extent that it can
+  /// be known in advance.  In the case of a SparseTensor, this field describes
+  /// the logical shape of the represented tensor (aka dense_shape).
   public var tensorShape: Tensorflow_TensorShapeProto {
     get {return _storage._tensorShape ?? Tensorflow_TensorShapeProto()}
     set {_uniqueStorage()._tensorShape = newValue}
@@ -692,6 +716,77 @@ public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
   public mutating func clearTensorShape() {_storage._tensorShape = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum OneOf_Encoding: Equatable {
+    /// For dense `Tensor`s, the name of the tensor in the graph.
+    case name(String)
+    /// There are many possible encodings of sparse matrices
+    /// (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
+    /// uses only the COO encoding.  This is supported and documented in the
+    /// SparseTensor Python class.
+    case cooSparse(Tensorflow_TensorInfo.CooSparse)
+
+    public static func ==(lhs: Tensorflow_TensorInfo.OneOf_Encoding, rhs: Tensorflow_TensorInfo.OneOf_Encoding) -> Bool {
+      switch (lhs, rhs) {
+      case (.name(let l), .name(let r)): return l == r
+      case (.cooSparse(let l), .cooSparse(let r)): return l == r
+      default: return false
+      }
+    }
+  }
+
+  /// For sparse tensors, The COO encoding stores a triple of values, indices,
+  /// and shape.
+  public struct CooSparse: SwiftProtobuf.Message {
+    public static let protoMessageName: String = Tensorflow_TensorInfo.protoMessageName + ".CooSparse"
+
+    /// The shape of the values Tensor is [?].  Its dtype must be the dtype of
+    /// the SparseTensor as a whole, given in the enclosing TensorInfo.
+    public var valuesTensorName: String = String()
+
+    /// The indices Tensor must have dtype int64 and shape [?, ?].
+    public var indicesTensorName: String = String()
+
+    /// The dynamic logical shape represented by the SparseTensor is recorded in
+    /// the Tensor referenced here.  It must have dtype int64 and shape [?].
+    public var denseShapeTensorName: String = String()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+
+    /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+    /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+    /// initializers are defined in the SwiftProtobuf library. See the Message and
+    /// Message+*Additions` files.
+    public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularStringField(value: &self.valuesTensorName)
+        case 2: try decoder.decodeSingularStringField(value: &self.indicesTensorName)
+        case 3: try decoder.decodeSingularStringField(value: &self.denseShapeTensorName)
+        default: break
+        }
+      }
+    }
+
+    /// Used by the encoding methods of the SwiftProtobuf library, not generally
+    /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+    /// other serializer methods are defined in the SwiftProtobuf library. See the
+    /// `Message` and `Message+*Additions` files.
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+      if !self.valuesTensorName.isEmpty {
+        try visitor.visitSingularStringField(value: self.valuesTensorName, fieldNumber: 1)
+      }
+      if !self.indicesTensorName.isEmpty {
+        try visitor.visitSingularStringField(value: self.indicesTensorName, fieldNumber: 2)
+      }
+      if !self.denseShapeTensorName.isEmpty {
+        try visitor.visitSingularStringField(value: self.denseShapeTensorName, fieldNumber: 3)
+      }
+      try unknownFields.traverse(visitor: &visitor)
+    }
+  }
 
   public init() {}
 
@@ -704,9 +799,21 @@ public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 1: try decoder.decodeSingularStringField(value: &_storage._name)
+        case 1:
+          if _storage._encoding != nil {try decoder.handleConflictingOneOf()}
+          var v: String?
+          try decoder.decodeSingularStringField(value: &v)
+          if let v = v {_storage._encoding = .name(v)}
         case 2: try decoder.decodeSingularEnumField(value: &_storage._dtype)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._tensorShape)
+        case 4:
+          var v: Tensorflow_TensorInfo.CooSparse?
+          if let current = _storage._encoding {
+            try decoder.handleConflictingOneOf()
+            if case .cooSparse(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._encoding = .cooSparse(v)}
         default: break
         }
       }
@@ -719,14 +826,17 @@ public struct Tensorflow_TensorInfo: SwiftProtobuf.Message {
   /// `Message` and `Message+*Additions` files.
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._name.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 1)
+      if case .name(let v)? = _storage._encoding {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 1)
       }
       if _storage._dtype != .dtInvalid {
         try visitor.visitSingularEnumField(value: _storage._dtype, fieldNumber: 2)
       }
       if let v = _storage._tensorShape {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if case .cooSparse(let v)? = _storage._encoding {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -1133,12 +1243,13 @@ extension Tensorflow_CollectionDef.AnyList: SwiftProtobuf._MessageImplementation
 extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
+    4: .standard(proto: "coo_sparse"),
     2: .same(proto: "dtype"),
     3: .standard(proto: "tensor_shape"),
   ]
 
   fileprivate class _StorageClass {
-    var _name: String = String()
+    var _encoding: Tensorflow_TensorInfo.OneOf_Encoding?
     var _dtype: Tensorflow_DataType = .dtInvalid
     var _tensorShape: Tensorflow_TensorShapeProto? = nil
 
@@ -1147,7 +1258,7 @@ extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, Swift
     private init() {}
 
     init(copying source: _StorageClass) {
-      _name = source._name
+      _encoding = source._encoding
       _dtype = source._dtype
       _tensorShape = source._tensorShape
     }
@@ -1163,13 +1274,29 @@ extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, Swift
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorInfo) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
-        if _storage._name != other_storage._name {return false}
+        if _storage._encoding != other_storage._encoding {return false}
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._tensorShape != other_storage._tensorShape {return false}
         return true
       }
       if !storagesAreEqual {return false}
     }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tensorflow_TensorInfo.CooSparse: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "values_tensor_name"),
+    2: .standard(proto: "indices_tensor_name"),
+    3: .standard(proto: "dense_shape_tensor_name"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorInfo.CooSparse) -> Bool {
+    if self.valuesTensorName != other.valuesTensorName {return false}
+    if self.indicesTensorName != other.indicesTensorName {return false}
+    if self.denseShapeTensorName != other.denseShapeTensorName {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }

@@ -206,7 +206,7 @@ public class TensorFlow {
   public typealias Tfprof_OptionsProto = Tensorflow_Tfprof_OptionsProto
   public typealias Tfprof_TFProfTensorProto = Tensorflow_Tfprof_TFProfTensorProto
   public typealias Tfprof_TFGraphNodeProto = Tensorflow_Tfprof_TFGraphNodeProto
-  public typealias Tfprof_TFCodeNodeProto = Tensorflow_Tfprof_TFCodeNodeProto
+  //public typealias Tfprof_TFCodeNodeProto = Tensorflow_Tfprof_TFCodeNodeProto
   public typealias Contrib_Tensorboard_TraceInfo = Tensorflow_Contrib_Tensorboard_TraceInfo
   public typealias Contrib_Tensorboard_OpInfo = Tensorflow_Contrib_Tensorboard_OpInfo
   public typealias Contrib_Tensorboard_LineTrace = Tensorflow_Contrib_Tensorboard_LineTrace

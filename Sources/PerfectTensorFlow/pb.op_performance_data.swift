@@ -56,6 +56,12 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
     set {_uniqueStorage()._inputs = newValue}
   }
 
+  /// Optional description of the op outputs
+  public var outputs: [Tensorflow_OpInfo.TensorProperties] {
+    get {return _storage._outputs}
+    set {_uniqueStorage()._outputs = newValue}
+  }
+
   /// Device on which the operation is run.
   public var device: Tensorflow_DeviceProperties {
     get {return _storage._device ?? Tensorflow_DeviceProperties()}
@@ -68,7 +74,7 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  /// Input types, shapes and values if known.
+  /// Input data types, shapes and values if known.
   public struct TensorProperties: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_OpInfo.protoMessageName + ".TensorProperties"
 
@@ -154,6 +160,7 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
         case 2: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Tensorflow_AttrValue>.self, value: &_storage._attr)
         case 3: try decoder.decodeRepeatedMessageField(value: &_storage._inputs)
         case 4: try decoder.decodeSingularMessageField(value: &_storage._device)
+        case 5: try decoder.decodeRepeatedMessageField(value: &_storage._outputs)
         default: break
         }
       }
@@ -177,6 +184,9 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
       }
       if let v = _storage._device {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      }
+      if !_storage._outputs.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._outputs, fieldNumber: 5)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -425,6 +435,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
     1: .same(proto: "op"),
     2: .same(proto: "attr"),
     3: .same(proto: "inputs"),
+    5: .same(proto: "outputs"),
     4: .same(proto: "device"),
   ]
 
@@ -432,6 +443,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
     var _op: String = String()
     var _attr: Dictionary<String,Tensorflow_AttrValue> = [:]
     var _inputs: [Tensorflow_OpInfo.TensorProperties] = []
+    var _outputs: [Tensorflow_OpInfo.TensorProperties] = []
     var _device: Tensorflow_DeviceProperties? = nil
 
     static let defaultInstance = _StorageClass()
@@ -442,6 +454,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
       _op = source._op
       _attr = source._attr
       _inputs = source._inputs
+      _outputs = source._outputs
       _device = source._device
     }
   }
@@ -459,6 +472,7 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
         if _storage._op != other_storage._op {return false}
         if _storage._attr != other_storage._attr {return false}
         if _storage._inputs != other_storage._inputs {return false}
+        if _storage._outputs != other_storage._outputs {return false}
         if _storage._device != other_storage._device {return false}
         return true
       }

@@ -679,6 +679,16 @@ public struct Tensorflow_ResetResponse: SwiftProtobuf.Message {
 public struct Tensorflow_ListDevicesRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".ListDevicesRequest"
 
+  /// Optional: session_handle must be returned by a CreateSession call to the
+  /// same master service.
+  ///
+  /// When session_handle is empty, the ClusterSpec provided when the master was
+  /// started is used to compute the available devices. If the session_handle is
+  /// provided but not recognized, an error is returned. Finally, if a valid
+  /// session_handle is provided, the cluster configuration for that session is
+  /// used when computing the response.
+  public var sessionHandle: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -688,7 +698,11 @@ public struct Tensorflow_ListDevicesRequest: SwiftProtobuf.Message {
   /// initializers are defined in the SwiftProtobuf library. See the Message and
   /// Message+*Additions` files.
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.sessionHandle)
+      default: break
+      }
     }
   }
 
@@ -697,6 +711,9 @@ public struct Tensorflow_ListDevicesRequest: SwiftProtobuf.Message {
   /// other serializer methods are defined in the SwiftProtobuf library. See the
   /// `Message` and `Message+*Additions` files.
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.sessionHandle.isEmpty {
+      try visitor.visitSingularStringField(value: self.sessionHandle, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 }
@@ -1034,9 +1051,12 @@ extension Tensorflow_ResetResponse: SwiftProtobuf._MessageImplementationBase, Sw
 }
 
 extension Tensorflow_ListDevicesRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "session_handle"),
+  ]
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ListDevicesRequest) -> Bool {
+    if self.sessionHandle != other.sessionHandle {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }

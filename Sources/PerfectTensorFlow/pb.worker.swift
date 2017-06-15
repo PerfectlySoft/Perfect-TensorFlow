@@ -494,7 +494,7 @@ public struct Tensorflow_ExecutorOpts: SwiftProtobuf.Message {
 public struct Tensorflow_RunGraphRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RunGraphRequest"
 
-  /// session_handle is the the master-generated unique id for this session.
+  /// session_handle is the master-generated unique id for this session.
   /// If session_handle is non-empty, it must be the same as used when
   /// registering the graph. If it is empty, a single global namespace is used to
   /// search for the graph_handle.

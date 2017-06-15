@@ -133,6 +133,90 @@ public struct Tensorflow_HistogramProto: SwiftProtobuf.Message {
   }
 }
 
+/// A SummaryMetadata encapsulates information on which plugins are able to make
+/// use of a certain summary value.
+public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".SummaryMetadata"
+
+  /// A list of plugin data. A single summary value instance may be used by more
+  /// than 1 plugin.
+  public var pluginData: [Tensorflow_SummaryMetadata.PluginData] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct PluginData: SwiftProtobuf.Message {
+    public static let protoMessageName: String = Tensorflow_SummaryMetadata.protoMessageName + ".PluginData"
+
+    /// The name of the plugin this data pertains to.
+    public var pluginName: String = String()
+
+    /// The content to store for the plugin. The best practice is for this JSON
+    /// string to be the canonical JSON serialization of a protocol buffer
+    /// defined by the plugin. Converting that protobuf to and from JSON is the
+    /// responsibility of the plugin code, and is not enforced by
+    /// TensorFlow/TensorBoard.
+    public var content: String = String()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+
+    /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+    /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+    /// initializers are defined in the SwiftProtobuf library. See the Message and
+    /// Message+*Additions` files.
+    public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularStringField(value: &self.pluginName)
+        case 2: try decoder.decodeSingularStringField(value: &self.content)
+        default: break
+        }
+      }
+    }
+
+    /// Used by the encoding methods of the SwiftProtobuf library, not generally
+    /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+    /// other serializer methods are defined in the SwiftProtobuf library. See the
+    /// `Message` and `Message+*Additions` files.
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+      if !self.pluginName.isEmpty {
+        try visitor.visitSingularStringField(value: self.pluginName, fieldNumber: 1)
+      }
+      if !self.content.isEmpty {
+        try visitor.visitSingularStringField(value: self.content, fieldNumber: 2)
+      }
+      try unknownFields.traverse(visitor: &visitor)
+    }
+  }
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedMessageField(value: &self.pluginData)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.pluginData.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.pluginData, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 /// A Summary is a set of named values to be displayed by the
 /// visualizer.
 ///
@@ -275,27 +359,33 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
   public struct Value: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_Summary.protoMessageName + ".Value"
 
-    /// Name of the node that output this summary; in general, the name of a
-    /// TensorSummary node. If the node in question has multiple outputs, then
-    /// a ":\d+" suffix will be appended, like "some_op:13".
-    /// Might not be set for legacy summaries (i.e. those not using the tensor
-    /// value field)
+    /// This field is deprecated and will not be set.
     public var nodeName: String {
       get {return _storage._nodeName}
       set {_uniqueStorage()._nodeName = newValue}
     }
 
-    /// Tag name for the data.  Will only be used by legacy summaries
-    /// (ie. those not using the tensor value field)
-    /// For legacy summaries, will be used as the title of the graph
-    /// in the visualizer.
-    ///
-    /// Tag is usually "op_name:value_name", where "op_name" itself can have
-    /// structure to indicate grouping.
+    /// Tag name for the data. Used by TensorBoard plugins to organize data. Tags
+    /// are often organized by scope (which contains slashes to convey
+    /// hierarchy). For example: foo/bar/0
     public var tag: String {
       get {return _storage._tag}
       set {_uniqueStorage()._tag = newValue}
     }
+
+    /// Contains metadata on the summary value such as which plugins may use it.
+    /// Take note that many summary values may lack a metadata field. This is
+    /// because the FileWriter only keeps a metadata object on the first summary
+    /// value with a certain tag for each tag. TensorBoard then remembers which
+    /// tags are associated with which plugins. This saves space.
+    public var metadata: Tensorflow_SummaryMetadata {
+      get {return _storage._metadata ?? Tensorflow_SummaryMetadata()}
+      set {_uniqueStorage()._metadata = newValue}
+    }
+    /// Returns true if `metadata` has been explicitly set.
+    public var hasMetadata: Bool {return _storage._metadata != nil}
+    /// Clears the value of `metadata`. Subsequent reads from it will return its default value.
+    public mutating func clearMetadata() {_storage._metadata = nil}
 
     /// Value associated with the tag.
     public var value: OneOf_Value? {
@@ -430,6 +520,7 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
             }
             try decoder.decodeSingularMessageField(value: &v)
             if let v = v {_storage._value = .tensor(v)}
+          case 9: try decoder.decodeSingularMessageField(value: &_storage._metadata)
           default: break
           }
         }
@@ -464,6 +555,9 @@ public struct Tensorflow_Summary: SwiftProtobuf.Message {
         }
         if case .tensor(let v)? = _storage._value {
           try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+        }
+        if let v = _storage._metadata {
+          try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
         }
       }
       try unknownFields.traverse(visitor: &visitor)
@@ -539,6 +633,32 @@ extension Tensorflow_HistogramProto: SwiftProtobuf._MessageImplementationBase, S
   }
 }
 
+extension Tensorflow_SummaryMetadata: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "plugin_data"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_SummaryMetadata) -> Bool {
+    if self.pluginData != other.pluginData {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tensorflow_SummaryMetadata.PluginData: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "plugin_name"),
+    2: .same(proto: "content"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_SummaryMetadata.PluginData) -> Bool {
+    if self.pluginName != other.pluginName {return false}
+    if self.content != other.content {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
 extension Tensorflow_Summary: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
@@ -593,6 +713,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     7: .standard(proto: "node_name"),
     1: .same(proto: "tag"),
+    9: .same(proto: "metadata"),
     2: .standard(proto: "simple_value"),
     3: .standard(proto: "obsolete_old_style_histogram"),
     4: .same(proto: "image"),
@@ -604,6 +725,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
   fileprivate class _StorageClass {
     var _nodeName: String = String()
     var _tag: String = String()
+    var _metadata: Tensorflow_SummaryMetadata? = nil
     var _value: Tensorflow_Summary.Value.OneOf_Value?
 
     static let defaultInstance = _StorageClass()
@@ -613,6 +735,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
     init(copying source: _StorageClass) {
       _nodeName = source._nodeName
       _tag = source._tag
+      _metadata = source._metadata
       _value = source._value
     }
   }
@@ -629,6 +752,7 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._tag != other_storage._tag {return false}
+        if _storage._metadata != other_storage._metadata {return false}
         if _storage._value != other_storage._value {return false}
         return true
       }

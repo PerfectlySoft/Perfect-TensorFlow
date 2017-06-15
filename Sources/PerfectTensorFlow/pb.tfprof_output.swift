@@ -146,16 +146,6 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
   /// Clears the value of `floatOps`. Subsequent reads from it will return its default value.
   public mutating func clearFloatOps() {_storage._floatOps = nil}
 
-  /// Number of inputs to the op.
-  public var inputs: Int64 {
-    get {return _storage._inputs ?? 0}
-    set {_uniqueStorage()._inputs = newValue}
-  }
-  /// Returns true if `inputs` has been explicitly set.
-  public var hasInputs: Bool {return _storage._inputs != nil}
-  /// Clears the value of `inputs`. Subsequent reads from it will return its default value.
-  public mutating func clearInputs() {_storage._inputs = nil}
-
   /// Device the op is assigned to.
   /// Since an op can fire multiple kernel calls, there can be multiple devices.
   public var devices: [String] {
@@ -163,8 +153,8 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
     set {_uniqueStorage()._devices = newValue}
   }
 
-  /// The following are the aggregated stats from all accounted descendants and
-  /// the op itself. The actual descendants depend on the data structure used
+  /// The following are the aggregated stats from all accounted children and
+  /// the node itself. The actual children depend on the data structure used
   /// (scope, graph).
   public var totalExecMicros: Int64 {
     get {return _storage._totalExecMicros ?? 0}
@@ -202,19 +192,16 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
   /// Clears the value of `totalFloatOps`. Subsequent reads from it will return its default value.
   public mutating func clearTotalFloatOps() {_storage._totalFloatOps = nil}
 
-  public var totalInputs: Int64 {
-    get {return _storage._totalInputs ?? 0}
-    set {_uniqueStorage()._totalInputs = newValue}
-  }
-  /// Returns true if `totalInputs` has been explicitly set.
-  public var hasTotalInputs: Bool {return _storage._totalInputs != nil}
-  /// Clears the value of `totalInputs`. Subsequent reads from it will return its default value.
-  public mutating func clearTotalInputs() {_storage._totalInputs = nil}
-
   /// shape information, if available.
+  /// TODO(xpan): Why is this repeated?
   public var shapes: [Tensorflow_TensorShapeProto] {
     get {return _storage._shapes}
     set {_uniqueStorage()._shapes = newValue}
+  }
+
+  public var inputShapes: Dictionary<Int32,Tensorflow_TensorShapeProto> {
+    get {return _storage._inputShapes}
+    set {_uniqueStorage()._inputShapes = newValue}
   }
 
   /// Descendants of the graph. The actual descendants depend on the data
@@ -241,17 +228,16 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
         case 2: try decoder.decodeSingularInt64Field(value: &_storage._execMicros)
         case 3: try decoder.decodeSingularInt64Field(value: &_storage._requestedBytes)
         case 4: try decoder.decodeSingularInt64Field(value: &_storage._parameters)
-        case 5: try decoder.decodeSingularInt64Field(value: &_storage._inputs)
         case 6: try decoder.decodeSingularInt64Field(value: &_storage._totalExecMicros)
         case 7: try decoder.decodeSingularInt64Field(value: &_storage._totalRequestedBytes)
         case 8: try decoder.decodeSingularInt64Field(value: &_storage._totalParameters)
-        case 9: try decoder.decodeSingularInt64Field(value: &_storage._totalInputs)
         case 10: try decoder.decodeRepeatedStringField(value: &_storage._devices)
         case 11: try decoder.decodeRepeatedMessageField(value: &_storage._shapes)
         case 12: try decoder.decodeRepeatedMessageField(value: &_storage._children)
         case 13: try decoder.decodeSingularInt64Field(value: &_storage._floatOps)
         case 14: try decoder.decodeSingularInt64Field(value: &_storage._totalFloatOps)
         case 15: try decoder.decodeSingularMessageField(value: &_storage._tensorValue)
+        case 16: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufInt32,Tensorflow_TensorShapeProto>.self, value: &_storage._inputShapes)
         default: break
         }
       }
@@ -276,9 +262,6 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
       if let v = _storage._parameters {
         try visitor.visitSingularInt64Field(value: v, fieldNumber: 4)
       }
-      if let v = _storage._inputs {
-        try visitor.visitSingularInt64Field(value: v, fieldNumber: 5)
-      }
       if let v = _storage._totalExecMicros {
         try visitor.visitSingularInt64Field(value: v, fieldNumber: 6)
       }
@@ -287,9 +270,6 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
       }
       if let v = _storage._totalParameters {
         try visitor.visitSingularInt64Field(value: v, fieldNumber: 8)
-      }
-      if let v = _storage._totalInputs {
-        try visitor.visitSingularInt64Field(value: v, fieldNumber: 9)
       }
       if !_storage._devices.isEmpty {
         try visitor.visitRepeatedStringField(value: _storage._devices, fieldNumber: 10)
@@ -309,6 +289,9 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
       if let v = _storage._tensorValue {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
       }
+      if !_storage._inputShapes.isEmpty {
+        try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufInt32,Tensorflow_TensorShapeProto>.self, value: _storage._inputShapes, fieldNumber: 16)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -316,11 +299,17 @@ public struct Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-/// A node in TensorFlow Python call trace stack. Used by code view.
-public struct Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf.Message {
-  public static let protoMessageName: String = _protobuf_package + ".TFCodeNodeProto"
+/// A node that groups multiple TFGraphNodeProto.
+/// Depending on the 'view', the semantics of the TFmultiGraphNodeProto
+/// is different:
+/// code view: A node groups all TensorFlow graph nodes created by the
+///            Python code.
+/// op view:   A node groups all TensorFlow graph nodes that are of type
+///            of the op (e.g. MatMul, Conv2D).
+public struct Tensorflow_Tfprof_TFMultiGraphNodeProto: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".TFMultiGraphNodeProto"
 
-  /// A trace in the trace stack.
+  /// Name of the node.
   public var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
@@ -370,8 +359,8 @@ public struct Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf.Message {
   /// Clears the value of `floatOps`. Subsequent reads from it will return its default value.
   public mutating func clearFloatOps() {self._floatOps = nil}
 
-  /// The following are the aggregated stats from called descendents and the
-  /// trace itself. The actual descendants depend on the data structure used.
+  /// The following are the aggregated stats from descendants.
+  /// The actual descendants depend on the data structure used.
   public var totalExecMicros: Int64 {
     get {return _totalExecMicros ?? 0}
     set {_totalExecMicros = newValue}
@@ -408,13 +397,12 @@ public struct Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf.Message {
   /// Clears the value of `totalFloatOps`. Subsequent reads from it will return its default value.
   public mutating func clearTotalFloatOps() {self._totalFloatOps = nil}
 
-  /// A set of graph nodes created by the leaf of the call stack.
-  /// 'children' field should be empty if graph_nodes is non-empty.
+  /// TensorFlow graph nodes contained by the TFMultiGraphNodeProto.
   public var graphNodes: [Tensorflow_Tfprof_TFGraphNodeProto] = []
 
-  /// Descendants of the graph. The actual descendants depend on the data
-  /// structure used (scope, graph).
-  public var children: [Tensorflow_Tfprof_TFCodeNodeProto] = []
+  /// Descendants of the node. The actual descendants depend on the data
+  /// structure used.
+  public var children: [Tensorflow_Tfprof_TFMultiGraphNodeProto] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -525,14 +513,13 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
     3: .standard(proto: "requested_bytes"),
     4: .same(proto: "parameters"),
     13: .standard(proto: "float_ops"),
-    5: .same(proto: "inputs"),
     10: .same(proto: "devices"),
     6: .standard(proto: "total_exec_micros"),
     7: .standard(proto: "total_requested_bytes"),
     8: .standard(proto: "total_parameters"),
     14: .standard(proto: "total_float_ops"),
-    9: .standard(proto: "total_inputs"),
     11: .same(proto: "shapes"),
+    16: .standard(proto: "input_shapes"),
     12: .same(proto: "children"),
   ]
 
@@ -543,14 +530,13 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
     var _requestedBytes: Int64? = nil
     var _parameters: Int64? = nil
     var _floatOps: Int64? = nil
-    var _inputs: Int64? = nil
     var _devices: [String] = []
     var _totalExecMicros: Int64? = nil
     var _totalRequestedBytes: Int64? = nil
     var _totalParameters: Int64? = nil
     var _totalFloatOps: Int64? = nil
-    var _totalInputs: Int64? = nil
     var _shapes: [Tensorflow_TensorShapeProto] = []
+    var _inputShapes: Dictionary<Int32,Tensorflow_TensorShapeProto> = [:]
     var _children: [Tensorflow_Tfprof_TFGraphNodeProto] = []
 
     static let defaultInstance = _StorageClass()
@@ -564,14 +550,13 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
       _requestedBytes = source._requestedBytes
       _parameters = source._parameters
       _floatOps = source._floatOps
-      _inputs = source._inputs
       _devices = source._devices
       _totalExecMicros = source._totalExecMicros
       _totalRequestedBytes = source._totalRequestedBytes
       _totalParameters = source._totalParameters
       _totalFloatOps = source._totalFloatOps
-      _totalInputs = source._totalInputs
       _shapes = source._shapes
+      _inputShapes = source._inputShapes
       _children = source._children
     }
   }
@@ -592,14 +577,13 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
         if _storage._requestedBytes != other_storage._requestedBytes {return false}
         if _storage._parameters != other_storage._parameters {return false}
         if _storage._floatOps != other_storage._floatOps {return false}
-        if _storage._inputs != other_storage._inputs {return false}
         if _storage._devices != other_storage._devices {return false}
         if _storage._totalExecMicros != other_storage._totalExecMicros {return false}
         if _storage._totalRequestedBytes != other_storage._totalRequestedBytes {return false}
         if _storage._totalParameters != other_storage._totalParameters {return false}
         if _storage._totalFloatOps != other_storage._totalFloatOps {return false}
-        if _storage._totalInputs != other_storage._totalInputs {return false}
         if _storage._shapes != other_storage._shapes {return false}
+        if _storage._inputShapes != other_storage._inputShapes {return false}
         if _storage._children != other_storage._children {return false}
         return true
       }
@@ -610,7 +594,7 @@ extension Tensorflow_Tfprof_TFGraphNodeProto: SwiftProtobuf._MessageImplementati
   }
 }
 
-extension Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Tensorflow_Tfprof_TFMultiGraphNodeProto: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .standard(proto: "exec_micros"),
@@ -625,7 +609,7 @@ extension Tensorflow_Tfprof_TFCodeNodeProto: SwiftProtobuf._MessageImplementatio
     11: .same(proto: "children"),
   ]
 
-  public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_TFCodeNodeProto) -> Bool {
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_TFMultiGraphNodeProto) -> Bool {
     if self._name != other._name {return false}
     if self._execMicros != other._execMicros {return false}
     if self._requestedBytes != other._requestedBytes {return false}
