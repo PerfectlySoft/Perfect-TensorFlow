@@ -48,6 +48,24 @@
 
 目前本函数库处于阿尔法测试状态，很快会有详细文档和更多案例支持。
 
+## 关于开发
+
+我们欢迎各类样例！以下文件构成了Perfect-TensorFlow核心：
+
+```
+Sources
+├── PerfectTensorFlow
+│   ├── APILoader.swift (886 行代码，直接从tensorflow/c/c_api.h翻译而来)
+│   ├── PerfectTensorFlow.swift (2277 行代码)
+└── TensorFlowAPI
+    ├── TensorFlowAPI.c (72 行代码)
+    └── include
+        └── TensorFlowAPI.h (137 行代码)
+```
+
+所有以`pb.*.swift`命名的文件（总共目前超过四万五千行）都是从根目录下的 `updateprotos.sh` 文件自动创建的。很不幸的是，用了这个脚本之后，您仍然需要手工编辑 **PerfectTensorFlow.swift** 中的 `public typealias`部分以保持编译一致。
+
+迄今为止暂时没有计划在Swift源代码中创建这些源文件，原因是因为Perfect-TensorFlow是Perfect软件框架体系组成部分之一，虽然可以独立使用，但是也必须符合Perfect的SPM软件包管理器编译标准。尽管如此，我们当然欢迎各类项目合并更新申请、各类意见和建议！
 
 ## 快速上手
 
