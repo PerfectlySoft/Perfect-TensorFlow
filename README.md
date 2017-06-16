@@ -73,7 +73,7 @@ Up to now there is no such a plan to generate these protocol buffer files dynami
 ### TensorFlow C API Library Installation
 
 Perfect-TensorFlow is based on TensorFlow C API, i.e., `libtensorflow.so` on runtime.
-This project contains an express CPU v1.1.0 installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh).
+This project contains an express CPU v1.1.0 installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh). Before running this script, please make sure that `wget` has been installed onto your computer, otherwise please run either `brew install wget` for macOS or `sudo apt-get install wget` for Ubuntu first.
 
 For more installation options, such as GPU/CPU and multiple versions on the same machine, please check TensorFlow website: [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
 
