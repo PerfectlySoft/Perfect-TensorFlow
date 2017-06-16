@@ -198,7 +198,7 @@ let session = try g.load(
 	metaGraphDef: metaBuf)
 ```
 
-A detailed example of loading model can be found in the [Perfect TensorFlow Testing Examples](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L349-L390).
+A detailed example of loading model can be found in the [Perfect TensorFlow Testing Examples](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L480-L538).
 
 ## Issues
 

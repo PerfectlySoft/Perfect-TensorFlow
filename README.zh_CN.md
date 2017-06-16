@@ -195,7 +195,7 @@ let session = try g.load(
 	metaGraphDef: metaBuf)
 ```
 
-详细例子请参考 [Perfect TensorFlow 测试用例](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L349-L390).
+详细例子请参考 [Perfect TensorFlow 测试用例](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L480-L538).
 
 
 ### 问题报告、内容贡献和客户支持
