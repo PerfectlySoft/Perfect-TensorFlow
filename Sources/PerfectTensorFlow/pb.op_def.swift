@@ -537,7 +537,8 @@ extension Tensorflow_OpDef: SwiftProtobuf._MessageImplementationBase, SwiftProto
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._name != other_storage._name {return false}
         if _storage._inputArg != other_storage._inputArg {return false}
         if _storage._outputArg != other_storage._outputArg {return false}
@@ -626,7 +627,8 @@ extension Tensorflow_OpDef.AttrDef: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpDef.AttrDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._name != other_storage._name {return false}
         if _storage._type != other_storage._type {return false}
         if _storage._defaultValue != other_storage._defaultValue {return false}

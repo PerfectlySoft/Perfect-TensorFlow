@@ -510,7 +510,8 @@ extension Tensorflow_Serving_Signatures: SwiftProtobuf._MessageImplementationBas
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_Signatures) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._defaultSignature != other_storage._defaultSignature {return false}
         if _storage._namedSignatures != other_storage._namedSignatures {return false}
         return true
@@ -563,7 +564,8 @@ extension Tensorflow_Serving_AssetFile: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_AssetFile) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._tensorBinding != other_storage._tensorBinding {return false}
         if _storage._filename != other_storage._filename {return false}
         return true
@@ -603,7 +605,8 @@ extension Tensorflow_Serving_Signature: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_Signature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._type != other_storage._type {return false}
         return true
       }
@@ -643,7 +646,8 @@ extension Tensorflow_Serving_RegressionSignature: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_RegressionSignature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._input != other_storage._input {return false}
         if _storage._output != other_storage._output {return false}
         return true
@@ -687,7 +691,8 @@ extension Tensorflow_Serving_ClassificationSignature: SwiftProtobuf._MessageImpl
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Serving_ClassificationSignature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._input != other_storage._input {return false}
         if _storage._classes != other_storage._classes {return false}
         if _storage._scores != other_storage._scores {return false}

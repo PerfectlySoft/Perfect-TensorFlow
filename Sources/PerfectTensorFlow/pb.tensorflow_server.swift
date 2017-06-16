@@ -178,7 +178,8 @@ extension Tensorflow_ServerDef: SwiftProtobuf._MessageImplementationBase, SwiftP
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ServerDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._cluster != other_storage._cluster {return false}
         if _storage._jobName != other_storage._jobName {return false}
         if _storage._taskIndex != other_storage._taskIndex {return false}

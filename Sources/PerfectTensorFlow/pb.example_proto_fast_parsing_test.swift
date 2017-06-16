@@ -189,7 +189,8 @@ extension Tensorflow_ExampleWithExtras: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ExampleWithExtras) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._features != other_storage._features {return false}
         if _storage._extra1 != other_storage._extra1 {return false}
         if _storage._extra2 != other_storage._extra2 {return false}

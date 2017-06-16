@@ -207,7 +207,8 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_VariableDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._variableName != other_storage._variableName {return false}
         if _storage._initializerName != other_storage._initializerName {return false}
         if _storage._snapshotName != other_storage._snapshotName {return false}

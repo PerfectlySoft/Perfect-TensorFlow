@@ -327,7 +327,8 @@ extension Tensorflow_DeviceMap.NamedDevice: SwiftProtobuf._MessageImplementation
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DeviceMap.NamedDevice) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._name != other_storage._name {return false}
         if _storage._device != other_storage._device {return false}
         return true

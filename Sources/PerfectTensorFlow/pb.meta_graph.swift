@@ -1066,7 +1066,8 @@ extension Tensorflow_MetaGraphDef: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MetaGraphDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._metaInfoDef != other_storage._metaInfoDef {return false}
         if _storage._graphDef != other_storage._graphDef {return false}
         if _storage._saverDef != other_storage._saverDef {return false}
@@ -1123,7 +1124,8 @@ extension Tensorflow_MetaGraphDef.MetaInfoDef: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MetaGraphDef.MetaInfoDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._metaGraphVersion != other_storage._metaGraphVersion {return false}
         if _storage._strippedOpList != other_storage._strippedOpList {return false}
         if _storage._anyInfo != other_storage._anyInfo {return false}
@@ -1169,7 +1171,8 @@ extension Tensorflow_CollectionDef: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_CollectionDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._kind != other_storage._kind {return false}
         return true
       }
@@ -1273,7 +1276,8 @@ extension Tensorflow_TensorInfo: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._encoding != other_storage._encoding {return false}
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._tensorShape != other_storage._tensorShape {return false}
@@ -1347,7 +1351,8 @@ extension Tensorflow_AssetFileDef: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_AssetFileDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._tensorInfo != other_storage._tensorInfo {return false}
         if _storage._filename != other_storage._filename {return false}
         return true

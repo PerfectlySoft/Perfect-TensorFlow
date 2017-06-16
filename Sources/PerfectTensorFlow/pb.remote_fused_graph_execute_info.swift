@@ -280,7 +280,8 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RemoteFusedGraphExecuteInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._remoteGraph != other_storage._remoteGraph {return false}
         if _storage._graphInputNodeName != other_storage._graphInputNodeName {return false}
         if _storage._graphOutputNodeName != other_storage._graphOutputNodeName {return false}
@@ -337,7 +338,8 @@ extension Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto: SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RemoteFusedGraphExecuteInfo.TensorShapeTypeProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         return true

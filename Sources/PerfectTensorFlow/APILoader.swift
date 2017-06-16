@@ -76,7 +76,7 @@ public class TFLib {
   public static var DataTypeSize: @convention(c) (Int32) -> Int = { _ in return 0 }
 
   /// Return a new status object.
-  public static var NewStatus: @convention(c) () -> OpaquePointer? = { _ in return OpaquePointer(bitPattern: 0) }
+  public static var NewStatus: @convention(c) () -> OpaquePointer? = { return OpaquePointer(bitPattern: 0) }
 
   /// Delete a previously created status object.
   public static var DeleteStatus: @convention(c) (OpaquePointer) -> Void = { _ in }
@@ -142,7 +142,7 @@ public class TFLib {
 
   /// Return the length of the tensor in the "dim_index" dimension.
   /// REQUIRES: 0 <= dim_index < TF_NumDims(tensor)
-  public static var Dim: @convention(c) (OpaquePointer, Int32) -> Int64 = { _ in return 0 }
+  public static var Dim: @convention(c) (OpaquePointer, Int32) -> Int64 = { _, _ in return 0 }
 
   /// Return the size of the underlying data in bytes.
   public static var TensorByteSize: @convention(c) (OpaquePointer) -> Int = { _ in return 0 }
@@ -352,11 +352,11 @@ public class TFLib {
 
   public static var OperationNumOutputs: @convention(c) (OpaquePointer) -> Int32 = { _ in return 0 }
   public static var OperationOutputType: @convention(c) (TF_Output) -> Int32 = { _ in return 0 }
-  public static var OperationOutputListLength: @convention(c) (OpaquePointer, UnsafePointer<CChar>, OpaquePointer) -> Int32 = { _ in return 0 }
+  public static var OperationOutputListLength: @convention(c) (OpaquePointer, UnsafePointer<CChar>, OpaquePointer) -> Int32 = { _, _, _ in return 0 }
 
   public static var OperationNumInputs: @convention(c) (OpaquePointer) -> Int32 = { _ in return 0 }
   public static var OperationInputType: @convention(c) (TF_Input) -> Int32 = { _ in return 0 }
-  public static var OperationInputListLength: @convention(c) (OpaquePointer, UnsafePointer<CChar>, OpaquePointer) -> Int32 = { _ in return 0 }
+  public static var OperationInputListLength: @convention(c) (OpaquePointer, UnsafePointer<CChar>, OpaquePointer) -> Int32 = { _, _, _ in return 0 }
 
   /// In this code:
   ///   TF_Output producer = TF_OperationInput(consumer);
@@ -399,7 +399,7 @@ public class TFLib {
   /// modification of the graph can increase the number of control
   /// outputs.  Returns the number of control outputs (should match
   /// TF_OperationNumControlOutputs(oper)).
-  public static var OperationGetControlOutputs: @convention(c) (OpaquePointer, UnsafeMutablePointer<OpaquePointer>, Int32) -> Int32 = { _ in return 0 }
+  public static var OperationGetControlOutputs: @convention(c) (OpaquePointer, UnsafeMutablePointer<OpaquePointer>, Int32) -> Int32 = { _, _, _ in return 0 }
 
   /// Returns metadata about the value of the attribute `attr_name` of `oper`.
   public static var OperationGetAttrMetadata: @convention(c) (OpaquePointer, UnsafePointer<CChar>, OpaquePointer) -> TF_AttrMetadata = { _, _, _ in return TF_AttrMetadata() }

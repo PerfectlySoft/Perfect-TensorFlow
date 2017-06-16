@@ -128,7 +128,8 @@ extension Tensorflow_TensorDescription: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorDescription) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._allocationDescription != other_storage._allocationDescription {return false}

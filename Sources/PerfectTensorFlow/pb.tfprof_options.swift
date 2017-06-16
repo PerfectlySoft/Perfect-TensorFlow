@@ -331,7 +331,8 @@ extension Tensorflow_Tfprof_OptionsProto: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_OptionsProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._maxDepth != other_storage._maxDepth {return false}
         if _storage._minBytes != other_storage._minBytes {return false}
         if _storage._minMicros != other_storage._minMicros {return false}

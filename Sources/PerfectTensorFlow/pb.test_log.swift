@@ -1208,7 +1208,8 @@ extension Tensorflow_MachineConfiguration: SwiftProtobuf._MessageImplementationB
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_MachineConfiguration) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._hostname != other_storage._hostname {return false}
         if _storage._serialIdentifier != other_storage._serialIdentifier {return false}
         if _storage._platformInfo != other_storage._platformInfo {return false}
@@ -1293,7 +1294,8 @@ extension Tensorflow_TestResults: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TestResults) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._target != other_storage._target {return false}
         if _storage._entries != other_storage._entries {return false}
         if _storage._buildConfiguration != other_storage._buildConfiguration {return false}

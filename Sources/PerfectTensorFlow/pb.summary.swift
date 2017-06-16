@@ -749,7 +749,8 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Summary.Value) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._tag != other_storage._tag {return false}
         if _storage._metadata != other_storage._metadata {return false}

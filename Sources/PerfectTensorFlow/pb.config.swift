@@ -1055,7 +1055,8 @@ extension Tensorflow_GraphOptions: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GraphOptions) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._enableRecvScheduling != other_storage._enableRecvScheduling {return false}
         if _storage._optimizerOptions != other_storage._optimizerOptions {return false}
         if _storage._buildCostModel != other_storage._buildCostModel {return false}
@@ -1163,7 +1164,8 @@ extension Tensorflow_ConfigProto: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ConfigProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._deviceCount != other_storage._deviceCount {return false}
         if _storage._intraOpParallelismThreads != other_storage._intraOpParallelismThreads {return false}
         if _storage._interOpParallelismThreads != other_storage._interOpParallelismThreads {return false}
@@ -1225,7 +1227,8 @@ extension Tensorflow_RunOptions: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunOptions) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._traceLevel != other_storage._traceLevel {return false}
         if _storage._timeoutInMs != other_storage._timeoutInMs {return false}
         if _storage._interOpThreadPool != other_storage._interOpThreadPool {return false}
@@ -1281,7 +1284,8 @@ extension Tensorflow_RunMetadata: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RunMetadata) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._stepStats != other_storage._stepStats {return false}
         if _storage._costGraph != other_storage._costGraph {return false}
         if _storage._partitionGraphs != other_storage._partitionGraphs {return false}

@@ -403,7 +403,8 @@ extension ThirdParty_Tensorflow_Tools_Api_TFAPIObject: SwiftProtobuf._MessageImp
 
   public func _protobuf_generated_isEqualTo(other: ThirdParty_Tensorflow_Tools_Api_TFAPIObject) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._path != other_storage._path {return false}
         if _storage._tfModule != other_storage._tfModule {return false}
         if _storage._tfClass != other_storage._tfClass {return false}

@@ -955,7 +955,8 @@ extension Tensorflow_BoostedTrees_Trees_TreeNode: SwiftProtobuf._MessageImplemen
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_TreeNode) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._node != other_storage._node {return false}
         if _storage._nodeMetadata != other_storage._nodeMetadata {return false}
         return true
@@ -996,7 +997,8 @@ extension Tensorflow_BoostedTrees_Trees_TreeNodeMetadata: SwiftProtobuf._Message
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_TreeNodeMetadata) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._gain != other_storage._gain {return false}
         if _storage._originalLeaf != other_storage._originalLeaf {return false}
         return true
@@ -1035,7 +1037,8 @@ extension Tensorflow_BoostedTrees_Trees_Leaf: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_Leaf) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._leaf != other_storage._leaf {return false}
         return true
       }
@@ -1116,7 +1119,8 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft: Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultLeft) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._split != other_storage._split {return false}
         return true
       }
@@ -1153,7 +1157,8 @@ extension Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight: Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_SparseFloatBinarySplitDefaultRight) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._split != other_storage._split {return false}
         return true
       }
@@ -1277,7 +1282,8 @@ extension Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig: SwiftProtobu
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_BoostedTrees_Trees_DecisionTreeEnsembleConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._trees != other_storage._trees {return false}
         if _storage._treeWeights != other_storage._treeWeights {return false}
         if _storage._treeMetadata != other_storage._treeMetadata {return false}

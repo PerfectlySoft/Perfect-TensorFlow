@@ -326,7 +326,8 @@ extension Tensorflow_OpGenOverride.AttrDefault: SwiftProtobuf._MessageImplementa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpGenOverride.AttrDefault) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._name != other_storage._name {return false}
         if _storage._value != other_storage._value {return false}
         return true

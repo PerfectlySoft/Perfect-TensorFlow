@@ -483,7 +483,8 @@ extension Tensorflow_NodeOutput: SwiftProtobuf._MessageImplementationBase, Swift
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NodeOutput) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._slot != other_storage._slot {return false}
         if _storage._tensorDescription != other_storage._tensorDescription {return false}
         return true
@@ -576,7 +577,8 @@ extension Tensorflow_NodeExecStats: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_NodeExecStats) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._allStartMicros != other_storage._allStartMicros {return false}
         if _storage._opStartRelMicros != other_storage._opStartRelMicros {return false}

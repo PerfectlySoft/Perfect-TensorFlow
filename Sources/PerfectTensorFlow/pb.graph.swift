@@ -172,7 +172,8 @@ extension Tensorflow_GraphDef: SwiftProtobuf._MessageImplementationBase, SwiftPr
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GraphDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._node != other_storage._node {return false}
         if _storage._versions != other_storage._versions {return false}
         if _storage._version != other_storage._version {return false}

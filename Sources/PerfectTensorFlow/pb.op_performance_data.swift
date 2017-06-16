@@ -468,7 +468,8 @@ extension Tensorflow_OpInfo: SwiftProtobuf._MessageImplementationBase, SwiftProt
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpInfo) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._op != other_storage._op {return false}
         if _storage._attr != other_storage._attr {return false}
         if _storage._inputs != other_storage._inputs {return false}
@@ -515,7 +516,8 @@ extension Tensorflow_OpInfo.TensorProperties: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpInfo.TensorProperties) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._value != other_storage._value {return false}
@@ -578,7 +580,8 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_OpPerformance) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
+		let _storage = _args.0; let other_storage = _args.1
         if _storage._op != other_storage._op {return false}
         if _storage._node != other_storage._node {return false}
         if _storage._temporaryMemorySize != other_storage._temporaryMemorySize {return false}

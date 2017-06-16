@@ -20,6 +20,7 @@
 import Foundation
 import TensorFlowAPI
 
+typealias SwiftArray<T> = Array<T>
 public extension Data {
   public static func From(_ string: String) -> Data {
     return string.withCString { p -> Data in
@@ -455,7 +456,7 @@ public class TensorFlow {
         guard sz > 0, let p = TFLib.TensorData(tensor) else { return [Int8]() }
         let q = p.bindMemory(to: Int8.self, capacity: sz)
         let buffered = UnsafeBufferPointer(start: q, count: sz)
-        return Array(buffered)
+        return SwiftArray(buffered)
       }//end get
       set {
         let sz = self.bytesCount
@@ -661,7 +662,7 @@ public class TensorFlow {
 
       let p = data.bindMemory(to: T.self, capacity: count)
       let array = UnsafeBufferPointer<T>(start: p, count: count)
-      return Array(array)
+      return SwiftArray(array)
     }//end func asArray
 
     public var strings: [Data] {
