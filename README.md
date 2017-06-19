@@ -198,7 +198,12 @@ let session = try g.load(
 	metaGraphDef: metaBuf)
 ```
 
-A detailed example of loading model can be found in the [Perfect TensorFlow Testing Examples](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L480-L538).
+### Computer Vision Demo
+
+A detailed example of Perfect TensorFlow for Computer Vision can be found in this repo: [Perfect TensorFlow Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision), where you can upload any local images or draw a scribble online to test if the server can recognize the picture content:
+
+<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot1.png?raw=true'></img>
+<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
 
 ## Issues
 

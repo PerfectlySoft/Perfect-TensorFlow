@@ -195,7 +195,12 @@ let session = try g.load(
 	metaGraphDef: metaBuf)
 ```
 
-详细例子请参考 [Perfect TensorFlow 测试用例](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift#L480-L538).
+### 机器视觉服务器展示
+
+您可以参考下列网址获得Perfect TensorFlow在人工智能机器视觉服务器上的应用：[Perfect TensorFlow Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision)，在这个服务器上您可以上传或者手绘任何一个图片来测试服务器是否认得这个物品：
+
+<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot1.png?raw=true'></img>
+<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
 
 
 ### 问题报告、内容贡献和客户支持
