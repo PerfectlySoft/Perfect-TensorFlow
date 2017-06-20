@@ -150,49 +150,57 @@ class PerfectTensorFlowTests: XCTestCase {
       let img = try LabelImage()
       guard let eight = Data.Load("/tmp/testdata/8.jpg") else
       { throw TF.Panic.FAULT(reason: "hand write file 8.jpg not found")}
-      let x = try img.match(image: eight)
-      XCTAssertGreaterThan(x, 0)
-      print(x)
+      for _ in 0 ... 30 {
+        #if os(Linux)
+          let x = try img.match(image: eight)
+          XCTAssertEqual(x, 536)
+        #else
+          autoreleasepool(invoking: {
+            do {
+              let x = try img.match(image: eight)
+              XCTAssertEqual(x, 536)
+            }catch {
+              XCTFail("label loop: \(error)")
+            }
+          })
+        #endif
+      }
     }catch {
       XCTFail("label: \(error)")
     }
   }
 
   class LabelImage {
-    let g: TF.Graph
+    let def: TF.GraphDef
 
     public init(_ modelPath:String = "/tmp/testdata/tensorflow_inception_graph.pb") throws {
-      g = try TF.Graph()
       guard let bytes = Data.Load(modelPath) else { throw TF.Panic.INVALID }
-      let def = try TF.GraphDef(serializedData: bytes)
-      try g.import(definition: def)
-      let inp = try g.searchOperation(forName: "input")
-      print(inp)
+      def = try TF.GraphDef(serializedData: bytes)
     }
 
     public func match(image: Data) throws -> Int {
-      let normalized = try constructAndExecuteGraphToNormalizeImage(imageBytes: image)
-      let possibilities = try executeInceptionGraph(image: normalized)
+      let g = try TF.Graph()
+      try g.import(definition: def)
+      let normalized = try constructAndExecuteGraphToNormalizeImage(g, imageBytes: image)
+      let possibilities = try executeInceptionGraph(g, image: normalized)
       guard let m = possibilities.max(), let i = possibilities.index(of: m) else {
         throw TF.Panic.INVALID
       }//end guard
-      print("max", m)
       return i
     }
 
-    private func executeInceptionGraph(image: TF.Tensor) throws -> [Float] {
+    private func executeInceptionGraph(_ g: TF.Graph, image: TF.Tensor) throws -> [Float] {
       let results = try g.runner().feed("input", tensor: image).fetch("output").run()
       guard results.count > 0 else { throw TF.Panic.INVALID }
       let result = results[0]
       guard result.dimensionCount == 2 else { throw TF.Panic.INVALID }
       let shape = result.dim
       guard shape[0] == 1 else { throw TF.Panic.INVALID }
-      print(shape[1])
       let res: [Float] = try result.asArray()
       return res
     }//end exec
 
-    public func constructAndExecuteGraphToNormalizeImage(imageBytes: Data) throws -> TF.Tensor {
+    public func constructAndExecuteGraphToNormalizeImage(_ g: TF.Graph, imageBytes: Data) throws -> TF.Tensor{
       let H:Int32 = 224
       let W:Int32 = 224
       let mean:Float = 117
@@ -1057,7 +1065,6 @@ class PerfectTensorFlowTests: XCTestCase {
   func testOpList() {
     do {
       let oplist = try TF.OperationList()
-      print(oplist.operations.count)
       XCTAssertGreaterThan(oplist.operations.count, 0)
     }catch {
       XCTFail("OpList: \(error)")

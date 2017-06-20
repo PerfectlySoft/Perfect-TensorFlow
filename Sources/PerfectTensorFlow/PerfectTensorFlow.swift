@@ -594,8 +594,12 @@ public class TensorFlow {
 
 
     deinit {
-      if autoDestroy {
+      if autoDestroy { //, let mem = TFLib.TensorData(tensor) {
+        // let sz = TFLib.TensorByteSize(tensor)
         TFLib.DeleteTensor(tensor)
+        // if sz > 0 {
+          // mem.deallocate(bytes:sz, alignedTo: 0)
+        //}//end if
       }//end if
     }
 
@@ -1530,14 +1534,13 @@ public class TensorFlow {
       }//end if
 
       let pOutputs = UnsafeMutablePointer<Output>.allocate(capacity: count)
+      defer { pOutputs.deallocate(capacity: count) }
       TFLib.GraphImportGraphDefWithReturnOutputs(graph, buf.buffer, options.options, pOutputs, Int32(count),  status.status)
       guard status.code == .OK else {
-        pOutputs.deallocate(capacity: count)
         throw Panic.FAULT(reason: status.message)
       }//end guard
       let buffered = UnsafeMutableBufferPointer<Output>(start: pOutputs, count: count)
       let outputs = Array(buffered)
-      pOutputs.deallocate(capacity: count)
       return outputs
     }//end func
 
@@ -1671,7 +1674,7 @@ public class TensorFlow {
 
     public func constant<T>(name: String, value: T, index:Int = 0) throws -> Output {
       let t = try Tensor.Scalar(value)
-      return try self.const(tensor: t, name: name).asOutput(0)
+      return try self.const(tensor: t, name: name).asOutput(index)
     }
 
     public func constantArray<T>(name: String, value: [T], index:Int = 0) throws -> Output {
