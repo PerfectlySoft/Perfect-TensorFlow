@@ -366,7 +366,7 @@ let list = graph.operations
 
 上述大部分矩阵运算操作可以在[Perfect TensorFlow 机器视觉演示程序](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/Sources/main.swift#L62-L72) 中找到例子。
 
-⚠️**注意**⚠️ 如果希望从流程图内加载一个预先保存好的会话模型，请调用`graph.load()`方法，详见[Load A Session](#load-a-session)
+⚠️**注意**⚠️ 如果希望从流程图内加载一个预先保存好的会话模型，请调用`graph.load()`方法，详见[Load A Session](#load-a-session-runner)
 
 ## Session
 
@@ -433,8 +433,6 @@ class Runner {
 	public func run() throws -> [Tensor]
 }
 ```
-
-Since you may want to feed / fetch / add targets to the session with more than one time, you can chain everything up like this:
 
 考虑到您可能会针对一个运算会话追加多个输入/输出或者目标操作，那么您可以采用下列方式进行链式编程：
 

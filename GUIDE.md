@@ -372,7 +372,7 @@ There is also a rich and growing set of methods for construct operations from di
 
 A Full demo of almost all the express operation creations above can be found on the source code of [Perfect TensorFlow Computer Vision Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/Sources/main.swift#L62-L72)
 
-⚠️**NOTE**⚠️ To load a graph from a saved model, use `graph.load()` method and will get a session object, see [Load A Session](#load-a-session)
+⚠️**NOTE**⚠️ To load a graph from a saved model, use `graph.load()` method and will get a session object, see [Load A Session](#load-a-session-runner)
 
 ## Session
 
