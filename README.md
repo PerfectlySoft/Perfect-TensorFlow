@@ -205,6 +205,10 @@ A detailed example of Perfect TensorFlow for Computer Vision can be found in thi
 <img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot1.png?raw=true'></img>
 <img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
 
+## Next Step
+
+More details of programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md)
+
 ## Issues
 
 We are transitioning to using JIRA for all bugs and support related issues, therefore the GitHub issues has been disabled.

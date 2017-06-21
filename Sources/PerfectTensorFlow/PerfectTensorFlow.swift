@@ -450,6 +450,7 @@ public class TensorFlow {
     let tensor : OpaquePointer
     var autoDestroy = true
 
+    /// get a buffer copy from the tensor value
     public var data: [Int8] {
       get {
         let sz = self.bytesCount
@@ -603,7 +604,7 @@ public class TensorFlow {
       }//end if
     }
 
-    /// check data type
+    /// check data type of the value / element of value array
     public var `type`: DataType? {
       get {
         return DataType(rawValue: Int(TFLib.TensorType(tensor)))
@@ -944,7 +945,7 @@ public class TensorFlow {
 
     /// set attributes for the operation to build
     /// - parameters:
-    ///   - attributes: a dictionary of attributes of the operation, key for the attribute name. Valid attributes inlcude Int64, [Int64], Float, [Float], Bool, [Bool], DataType, [DataType], String, [String], Shape, [Shape], Tensor, [Tensor], TensorProto, [TensorProto], Data
+    ///   - attributes: a dictionary of attributes of the operation, key for the attribute name. Valid attributes include Int64, [Int64], Float, [Float], Bool, [Bool], DataType, [DataType], String, [String], Shape, [Shape], Tensor, [Tensor], TensorProto, [TensorProto], Data
     /// - throws: Panic
     /// - returns: OperationBuilder object after setting
     public func `set`(attributes: [String: Any] = [:]) throws -> OperationBuilder {
@@ -1227,24 +1228,24 @@ public class TensorFlow {
 
     /// get size of the input list array
     /// - parameters:
-    ///   - arguments: an arguement string
+    ///   - arguments: an argument string
     /// - throws: Panic
     /// - returns: size of the input list
-    public func sizeOfInputList(arguement: String) throws -> Int {
+    public func sizeOfInputList(argument: String) throws -> Int {
       let status = try Status()
-      let size = Int(TFLib.OperationInputListLength(operation, arguement, status.status))
+      let size = Int(TFLib.OperationInputListLength(operation, argument, status.status))
       guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
       return size
     }//end func
 
     /// get size of the output list array
     /// - parameters:
-    ///   - arguments: an arguement string
+    ///   - arguments: an argument string
     /// - throws: Panic
     /// - returns: size of the output list
-    public func sizeOfOutputList(arguement: String) throws -> Int {
+    public func sizeOfOutputList(argument: String) throws -> Int {
       let status = try Status()
-      let size = Int(TFLib.OperationOutputListLength(operation, arguement, status.status))
+      let size = Int(TFLib.OperationOutputListLength(operation, argument, status.status))
       guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
       return size
     }//end func
@@ -1576,8 +1577,8 @@ public class TensorFlow {
     ///   - tags: must include the set of tags used to identify one MetaGraphDef in the SavedModel.
     /// - returns: a new session object
     /// - throws: Panic
-    public func load(sessionOptions: SessionOptions? = nil, runOptions: Buffer? = nil, exportDir: String, tags: [String], metaGraphDef: Buffer) throws -> Session {
-      return try Session(sessionOptions: sessionOptions, runOptions: runOptions, exportDir: exportDir, tags: tags, graph: self, metaGraphDef: metaGraphDef)
+    public func load(sessionOptions: SessionOptions? = nil, runOptions: Buffer? = nil, exportDir: String, tags: [String], metaGraphDef: Buffer) throws -> Runner {
+      return try Runner(graph: self, sessionOptions: sessionOptions, runOptions: runOptions, exportDir: exportDir, tags: tags, metaGraphDef: metaGraphDef)
     }//end session
 
     public func const(tensor: Tensor, `type`: String = "Const", name: String = "const") throws -> Operation {
@@ -1593,6 +1594,11 @@ public class TensorFlow {
 
     public func scalar(_ v: Int, name: String = "scalar") throws -> Operation {
       let x = try Tensor.Scalar(Int32(v))
+      return try self.const(tensor: x, name: name)
+    }//end ScalarConst
+
+    public func scalar(_ v: Float, name: String = "scalar") throws -> Operation {
+      let x = try Tensor.Scalar(Float32(v))
       return try self.const(tensor: x, name: name)
     }//end ScalarConst
 
@@ -2009,8 +2015,7 @@ public class TensorFlow {
     var outputs: [Output] = []
     var targets: [Operation] = []
     var runOptions: Buffer?
-    var metaGraphDef: Buffer
-
+    let session: Session
     let g: Graph
 
     /// Use t instead of the Tensor referred to by executing the operation referred to by output.
@@ -2077,13 +2082,17 @@ public class TensorFlow {
 
     public init(graph: Graph) throws {
       g = graph
-      metaGraphDef = try Buffer()
+      session = try g.newSession()
     }//end init
 
+    public init(graph: Graph, sessionOptions: SessionOptions? = nil, runOptions: Buffer? = nil, exportDir: String, tags: [String], metaGraphDef: Buffer) throws {
+      g = graph
+      session = try Session(sessionOptions: sessionOptions, runOptions: runOptions, exportDir: exportDir, tags: tags, graph: g, metaGraphDef: metaGraphDef)
+    }
     /// Execute the graph fragments necessary to compute all requested fetches.
     public func run() throws -> [Tensor] {
-      let s = try g.newSession()
-      return try s.run(inputs: inputs, outputs: outputs, targets: targets, options: runOptions, metaData: metaGraphDef)
+      let meta = try Buffer()
+      return try session.run(inputs: inputs, outputs: outputs, targets: targets, options: runOptions, metaData: meta)
     }//end run
   }//end class
 

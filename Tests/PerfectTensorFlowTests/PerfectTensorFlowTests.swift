@@ -176,6 +176,7 @@ class PerfectTensorFlowTests: XCTestCase {
     public init(_ modelPath:String = "/tmp/testdata/tensorflow_inception_graph.pb") throws {
       guard let bytes = Data.Load(modelPath) else { throw TF.Panic.INVALID }
       def = try TF.GraphDef(serializedData: bytes)
+
     }
 
     public func match(image: Data) throws -> Int {
@@ -490,7 +491,7 @@ class PerfectTensorFlowTests: XCTestCase {
       let graph = try TF.Graph()
       let metaBuf = try TF.Buffer()
 
-      let session = try graph.load(exportDir: "/tmp/testdata/half_plus_two/00000123", tags: [SavedModel.kSavedModelTagServe], metaGraphDef: metaBuf)
+      let runner = try graph.load(exportDir: "/tmp/testdata/half_plus_two/00000123", tags: [SavedModel.kSavedModelTagServe], metaGraphDef: metaBuf)
 
       guard let data = metaBuf.data else {
         XCTFail("saved model: no data")
@@ -528,8 +529,15 @@ class PerfectTensorFlowTests: XCTestCase {
 
       let output_op = try graph.searchOperation(forName: "y").output(0)
 
-      let outArray = try session.run(inputs: [(input_op, input_op_value)], outputs: [output_op])
+
+      let outArray = try runner
+        .feed(input_op, tensor: input_op_value)
+        .fetch(output_op)
+        .run()
+
       XCTAssertGreaterThan(outArray.count, 0)
+
+
       let out = outArray[0]
 
       XCTAssertEqual(out.type ?? TF.DataType.dtInvalid, TF.DataType.dtFloat)
@@ -774,7 +782,7 @@ class PerfectTensorFlowTests: XCTestCase {
         return
       }//end guard
       XCTAssertEqual(tp, TF.DataType.dtInt32)
-      let sz = try feed.sizeOfOutputList(arguement: "output")
+      let sz = try feed.sizeOfOutputList(argument: "output")
       XCTAssertEqual(sz, 1)
       XCTAssertEqual(0, feed.numberOfInputs)
       let consumers = TF.Operation.Consumers(output: feedOut0)
@@ -794,9 +802,9 @@ class PerfectTensorFlowTests: XCTestCase {
       XCTAssertEqual(1, add.numberOfOutputs)
       XCTAssertEqual(TF.Operation.TypeOf(output: add.output(0)) ?? TF.DataType.dtInvalid, TF.DataType.dtInt32)
 
-      XCTAssertEqual(1, try add.sizeOfOutputList(arguement: "sum"))
+      XCTAssertEqual(1, try add.sizeOfOutputList(argument: "sum"))
       XCTAssertEqual(2, add.numberOfInputs)
-      XCTAssertEqual(2, try add.sizeOfInputList(arguement: "inputs"))
+      XCTAssertEqual(2, try add.sizeOfInputList(argument: "inputs"))
       let add0 = add.asInput(0)
       let add1 = add.asInput(1)
       XCTAssertEqual(TF.Operation.TypeOf(input: add0) ?? TF.DataType.dtInvalid, TF.DataType.dtInt32)
@@ -900,7 +908,7 @@ class PerfectTensorFlowTests: XCTestCase {
         return
       }//end guard
       XCTAssertEqual(tp, TF.DataType.dtInt32)
-      let sz = try feed.sizeOfOutputList(arguement: "output")
+      let sz = try feed.sizeOfOutputList(argument: "output")
       XCTAssertEqual(sz, 1)
       XCTAssertEqual(0, feed.numberOfInputs)
       let consumers = TF.Operation.Consumers(output: feedOut0)
