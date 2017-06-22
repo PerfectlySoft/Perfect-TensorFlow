@@ -71,6 +71,10 @@ All other Swift sources named as 'pb.*.swift', which is totally up to 45,000+ li
 
 Up to now there is no such a plan to generate these protocol buffer files dynamically in the Swift Source since Perfect-TensorFlow is a part of Perfect, although it can run independently, all features of Perfect framework are built by Swift Package Manager for consistency consideration. However, since the project is also fast growing, all pull request, ideas, suggestions and comments are welcome!
 
+## API Guide
+
+API programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md)
+
 ## Quick Start
 
 ### TensorFlow C API Library Installation
@@ -202,12 +206,8 @@ let session = try g.load(
 
 A detailed example of Perfect TensorFlow for Computer Vision can be found in this repo: [Perfect TensorFlow Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision), where you can upload any local images or draw a scribble online to test if the server can recognize the picture content:
 
-<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot1.png?raw=true'></img>
 <img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
 
-## Next Step
-
-More details of programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md)
 
 ## Issues
 

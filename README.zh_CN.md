@@ -50,7 +50,7 @@
 
 ## 项目状态
 
-目前本函数库处于贝塔测试状态。
+目前本函数库处于beta测试状态。
 
 ## 关于开发
 
@@ -70,6 +70,10 @@ Sources
 所有以`pb.*.swift`命名的文件（总共目前超过四万五千行）都是从根目录下的 `updateprotos.sh` 文件自动创建的。很不幸的是，用了这个脚本之后，您仍然需要手工编辑 **PerfectTensorFlow.swift** 中的 `public typealias`部分以保持编译一致。
 
 迄今为止暂时没有计划在Swift源代码中创建这些源文件，原因是因为Perfect-TensorFlow是Perfect软件框架体系组成部分之一，虽然可以独立使用，但是也必须符合Perfect的SPM软件包管理器编译标准。尽管如此，我们当然欢迎各类项目合并更新申请、各类意见和建议！
+
+## 编程指南
+
+详细编程指南请参考这里： [Perfect TensorFlow 编程指南](GUIDE.zh_CN.md)
 
 ## 快速上手
 
@@ -200,12 +204,7 @@ let session = try g.load(
 
 您可以参考下列网址获得Perfect TensorFlow在人工智能机器视觉服务器上的应用：[Perfect TensorFlow Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision)，在这个服务器上您可以上传或者手绘任何一个图片来测试服务器是否认得这个物品：
 
-<img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot1.png?raw=true'></img>
 <img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
-
-## 下一步
-
-更多编程细节请参考[Perfect TensorFlow 使用指南](GUIDE.zh_CN.md)
 
 ### 问题报告、内容贡献和客户支持
 
