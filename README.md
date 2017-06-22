@@ -50,11 +50,11 @@ Ensure you have installed and activated the latest Swift 3.1 tool chain; The sou
 
 ## Project Status
 
-The framework is Alpha testing now. Documents and examples are coming soon.
+The framework is Beta testing now. 
 
 ## Development Notes
 
-All examples are welcome! These files are the key part of Perfect-TensorFlow:
+These files are the key part of Perfect-TensorFlow:
 
 ```
 Sources

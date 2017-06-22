@@ -1,4 +1,5 @@
 # Perfect TensorFlow
+
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
         <img src="http://perfect.org/assets/github/perfect_github_2_0_0.jpg" alt="Get Involved with Perfect!" width="854" />
@@ -49,11 +50,11 @@
 
 ## 项目状态
 
-目前本函数库处于阿尔法测试状态，很快会有详细文档和更多案例支持。
+目前本函数库处于贝塔测试状态。
 
 ## 关于开发
 
-我们欢迎各类样例！以下文件构成了Perfect-TensorFlow核心：
+以下文件构成了Perfect-TensorFlow核心：
 
 ```
 Sources
