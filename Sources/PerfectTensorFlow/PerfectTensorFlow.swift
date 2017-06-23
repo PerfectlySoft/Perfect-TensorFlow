@@ -448,7 +448,7 @@ public class TensorFlow {
   /// Express wrapper of Tensor
   public class Tensor : CustomStringConvertible {
     let tensor : OpaquePointer
-    var autoDestroy = true
+    internal var autoDestroy = true
 
     /// get a buffer copy from the tensor value
     public var data: [Int8] {
@@ -593,14 +593,9 @@ public class TensorFlow {
       return t
     }
 
-
     deinit {
-      if autoDestroy { //, let mem = TFLib.TensorData(tensor) {
-        // let sz = TFLib.TensorByteSize(tensor)
+      if autoDestroy {
         TFLib.DeleteTensor(tensor)
-        // if sz > 0 {
-          // mem.deallocate(bytes:sz, alignedTo: 0)
-        //}//end if
       }//end if
     }
 
@@ -1887,7 +1882,11 @@ public class TensorFlow {
       do {
         let status = try Status()
         TFLib.DeleteSession(session, status.status)
+        if status.code != .OK {
+          print("delete session fault: \(status.message)")
+        }//end if
       }catch {
+        print("delete session: \(error)")
       }//end try
     }//end deinit
 
@@ -1987,6 +1986,8 @@ public class TensorFlow {
 
       if szOutput > 0,  let p = pOutputValues {
         let values = UnsafeMutableBufferPointer<OpaquePointer>(start: p, count: szOutput)
+
+        // WARNING: tensors created here are WILD - autodestroy = false
         outputTensors = Array(values).map { Tensor(handle: $0) }
         p.deallocate(capacity: szOutput)
       } else {
@@ -1995,6 +1996,8 @@ public class TensorFlow {
 
       guard s.code == .OK else { throw Panic.FAULT(reason: s.message) }
 
+      // WARNING: all tensors created by array must set autodestroy to true!!!
+      outputTensors.forEach { $0.autoDestroy = true }
       return outputTensors
     }//end fun
 
@@ -2225,6 +2228,7 @@ public class TensorFlow {
 
       if szOutputs > 0, let p = pOutputValues {
         let values = UnsafeMutableBufferPointer<OpaquePointer>(start: p, count: szOutputs)
+        // WARNING: tensors created here are WILD - autodestroy = false
         outputTensors = Array(values).map { Tensor(handle: $0) }
         p.deallocate(capacity: szOutputs)
       } else {
@@ -2234,6 +2238,9 @@ public class TensorFlow {
 
       guard s.code == .OK else
       { throw Panic.FAULT(reason: s.message) }
+
+      // WARNING: all tensors created by array must set autodestroy to true!!!
+      outputTensors.forEach { $0.autoDestroy = true }
 
       return outputTensors
     }//end func

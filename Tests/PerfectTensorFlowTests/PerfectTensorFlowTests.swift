@@ -142,7 +142,8 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testHelloExpress", testHelloExpress),
     ("testBasic", testBasic),
     ("testBasicExpress", testBasicExpress),
-    ("testLabels", testLabels)
+    ("testLabels", testLabels),
+    ("testSessionLeak", testSessionLeak)
   ]
 
   func testLabels() {
@@ -150,7 +151,7 @@ class PerfectTensorFlowTests: XCTestCase {
       let img = try LabelImage()
       guard let eight = Data.Load("/tmp/testdata/8.jpg") else
       { throw TF.Panic.FAULT(reason: "hand write file 8.jpg not found")}
-      for _ in 0 ... 30 {
+      for _ in 0 ... 10 {
         #if os(Linux)
           let x = try img.match(image: eight)
           XCTAssertEqual(x, 536)
@@ -280,6 +281,41 @@ class PerfectTensorFlowTests: XCTestCase {
       XCTAssertEqual(m, r)
     }catch {
       XCTFail("basic: \(error)")
+    }
+  }
+
+  func testSessionLeak() {
+    let hello = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
+    for _ in 0 ... 100 {
+      #if os(Linux)
+        do {
+          let g = try TF.Graph()
+          let tensor = try TF.Tensor.Scalar(hello)
+          let op = try g.const(tensor: tensor, name: "hello")
+          let o = try g.runner().fetch(op).addTarget(op).run()
+          let data = o[0].data
+          let decoded = try TF.Decode(strings: data, count: 1)
+          let s2 = decoded[0].string
+          XCTAssertEqual(hello, s2)
+        }catch {
+          XCTFail("hello: \(error)")
+        }
+      #else
+        autoreleasepool(invoking: {
+          do {
+            let g = try TF.Graph()
+            let tensor = try TF.Tensor.Scalar(hello)
+            let op = try g.const(tensor: tensor, name: "hello")
+            let o = try g.runner().fetch(op).addTarget(op).run()
+            let data = o[0].data
+            let decoded = try TF.Decode(strings: data, count: 1)
+            let s2 = decoded[0].string
+            XCTAssertEqual(hello, s2)
+          }catch {
+            XCTFail("hello: \(error)")
+          }
+        })
+      #endif
     }
   }
 
