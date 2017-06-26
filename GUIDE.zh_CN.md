@@ -274,7 +274,7 @@ public class OperationBuilder {
 
 一旦用辅助工具类OperationBuilder成功构造运算操作，该运算操作内的所有属性和值都可以通过下列方法进行访问：
 
-|Instance Interface|Type|Description|
+|接口函数/属性|类型|说明|
 |---------------|----|-----------|
 |fun attribute(forKey: String)|[AttrValue](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/attr_value.proto)|根据属性名称查看当前运算操作的某个属性|
 |var NodeDefinition|[NodeDef](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/node_def.proto)|获取节点定义|
@@ -345,7 +345,7 @@ let list = graph.operations
 以下是在流程图内构造运算操作的常用方法：
 
 
-|名称|说明|距离|
+|名称|说明|举例|
 |----|-----------|-------|
 |const|构造常量|`let x = try graph.const(tensor: t, name: "Const_0")`|
 |placeholder|构造一个占位操作|`let feed = try graph.placeholder(name: "feed")`|
@@ -464,7 +464,7 @@ let runner = try g.load(
 
 这样的话，如果模型里面包括签名，则可以读出来：
 
-```
+``` swift
 if let data = metaBuf.data {
 	let meta = try TF.MetaGraphDef(serializedData: data)
 	let signature_def = meta.signatureDef["某些签名"] 

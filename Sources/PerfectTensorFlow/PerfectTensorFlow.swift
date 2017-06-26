@@ -20,6 +20,22 @@
 import Foundation
 import TensorFlowAPI
 
+public extension Array {
+
+  /// method that can 'completely' flatten a multi-dimensional array
+  public static func Flat (_ array: Array<Any>) -> Array<Any> {
+    if let a = array as? Array<Array<Any>> {
+      return Flat(a.flatMap({$0}))
+    }
+    return array.flatMap{$0}
+  }//end func
+
+  /// instance method
+  public func flat() -> Array<Any> {
+    return Array.Flat(self)
+  }
+}
+
 typealias SwiftArray<T> = Array<T>
 public extension Data {
   public static func From(_ string: String) -> Data {
