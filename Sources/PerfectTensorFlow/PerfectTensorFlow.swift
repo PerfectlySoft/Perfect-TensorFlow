@@ -566,23 +566,23 @@ public class TensorFlow {
     /// Create a tensor by passing its value
     /// type can be Int, Float,... or String / Data
     /// - parameters:
-    ///   - dimenisons: the shape / dimensions of the tensor. for example, python tf.constant([[1,2,3],[4,5,6]]) will be dimensions: [2,3] here
+    ///   - dimensions: the shape / dimensions of the tensor. for example, python tf.constant([[1,2,3],[4,5,6]]) will be dimensions: [2,3] here
     ///   - value: flattened value array of the tensor to pass, i.e., no matter how many dimensions the tensor has, the value must be flattened into a serialized array.  e.g, python tf.constant([[1,2,3],[4,5,6]]) will be equivalent to try Tensor.Array(dimensions: [2,3], [1,2,3,4,5,6])
     /// - returns:
     ///   Tensor
     /// - throws:
     ///   Panic
-    public static func Array<T> (dimenisons:[Int64], value: [T]) throws -> Tensor {
-      let count = Int(dimenisons.reduce(1) { $0 * $1 })
+    public static func Array<T> (dimensions:[Int64], value: [T]) throws -> Tensor {
+      let count = Int(dimensions.reduce(1) { $0 * $1 })
       guard let _ = TFLib.libDLL,
-        let tp = DType<T>().matched, dimenisons.count > 0,
+        let tp = DType<T>().matched, dimensions.count > 0,
         value.count == count else {
         throw Panic.INVALID
       }//end guard
       let unitSize = try TensorFlow.SizeOf(Type: tp)
       if unitSize > 0 {
         let size = unitSize * count
-        let t = try Tensor(dataType: tp, size: size, dimensions: dimenisons)
+        let t = try Tensor(dataType: tp, size: size, dimensions: dimensions)
         guard let p = TFLib.TensorData(t.tensor) else {
           throw Panic.CALL
         }//end guard
@@ -604,7 +604,7 @@ public class TensorFlow {
       }//end if
 
       let buf = try TensorFlow.Encode(strings: dataArray)
-      let t = try Tensor(dataType: tp, size: buf.count, dimensions: dimenisons)
+      let t = try Tensor(dataType: tp, size: buf.count, dimensions: dimensions)
       t.data = buf
       return t
     }
@@ -1631,7 +1631,7 @@ public class TensorFlow {
     }//end LessThan
 
     public func floatConst2x2(values: [Float], name: String) throws -> Operation {
-      let tensor = try Tensor.Array(dimenisons: [2,2], value: values)
+      let tensor = try Tensor.Array(dimensions: [2,2], value: values)
       return try self.opBuilder(name: name, type: "Const")
         .set(attributes: ["value": tensor, "dtype": DataType.dtFloat]).build()
     }//end FloatConst2x2
@@ -1695,7 +1695,7 @@ public class TensorFlow {
     }
 
     public func constantArray<T>(name: String, value: [T], index:Int = 0) throws -> Output {
-      let t = try Tensor.Array(dimenisons: [Int64(value.count)], value: value)
+      let t = try Tensor.Array(dimensions: [Int64(value.count)], value: value)
       return try self.const(tensor: t, name: name).asOutput(index)
     }
 

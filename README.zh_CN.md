@@ -165,8 +165,8 @@ let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
 let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
 
 // 根据矩阵创建张量
-let tA = try TF.Tensor.Array(dimenisons: [2,2], value: srcA)
-let tB = try TF.Tensor.Array(dimenisons: [2,2], value: srcB)
+let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
 
 // 将张量转化为流程图节点
 let g = try TF.Graph()

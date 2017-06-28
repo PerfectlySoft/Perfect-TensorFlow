@@ -156,7 +156,7 @@ As you can see, Swift version of TensorFlow keeps the same principals of the ori
 Here is an other simple example of matrix operations in Perfect TensorFlow:
 
 ``` swift
-/* Matrix Muliply:
+/* Matrix Multiply:
 | 1 2 |   |0 1|   |0 1|
 | 3 4 | * |0 0| = |0 3|
 */
@@ -166,9 +166,9 @@ Here is an other simple example of matrix operations in Perfect TensorFlow:
 let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
 let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
 
-// create tensors for these matrics
-let tA = try TF.Tensor.Array(dimenisons: [2,2], value: srcA)
-let tB = try TF.Tensor.Array(dimenisons: [2,2], value: srcB)
+// create tensors for these matrices
+let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
 
 // adding tensors to graph
 let g = try TF.Graph()

@@ -235,8 +235,8 @@ class PerfectTensorFlowTests: XCTestCase {
        */
       let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
       let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
-      let tA = try TF.Tensor.Array(dimenisons: [2,2], value: srcA)
-      let tB = try TF.Tensor.Array(dimenisons: [2,2], value: srcB)
+      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
       let tgtA:[Float] = try tA.asArray()
       let tgtB:[Float] = try tB.asArray()
       XCTAssertEqual(srcA, tgtA)
@@ -264,8 +264,8 @@ class PerfectTensorFlowTests: XCTestCase {
        */
       let srcA:[Float] = [1, 2, 3, 4]
       let srcB:[Float] = [0, 0, 1, 0]
-      let tA = try TF.Tensor.Array(dimenisons: [2,2], value: srcA)
-      let tB = try TF.Tensor.Array(dimenisons: [2,2], value: srcB)
+      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
       let tgtA:[Float] = try tA.asArray()
       let tgtB:[Float] = try tB.asArray()
       XCTAssertEqual(srcA, tgtA)
@@ -561,7 +561,7 @@ class PerfectTensorFlowTests: XCTestCase {
       }//next
 
       let input_op = try graph.searchOperation(forName: "tf_example").output(0)
-      let input_op_value = try TF.Tensor.Array(dimenisons: [Int64(4)], value: dataArray)
+      let input_op_value = try TF.Tensor.Array(dimensions: [Int64(4)], value: dataArray)
 
       let output_op = try graph.searchOperation(forName: "y").output(0)
 
@@ -592,8 +592,8 @@ class PerfectTensorFlowTests: XCTestCase {
   func testShapeInference() {
     do {
       let graph = try TF.Graph()
-      let vec2Tensor = try TF.Tensor.Array(dimenisons: [Int64(2)], value: [Int8(1), Int8(2)])
-      let vec3Tensor = try TF.Tensor.Array(dimenisons: [Int64(3)], value: [Int8(1), Int8(2), Int8(3)])
+      let vec2Tensor = try TF.Tensor.Array(dimensions: [Int64(2)], value: [Int8(1), Int8(2)])
+      let vec3Tensor = try TF.Tensor.Array(dimensions: [Int64(3)], value: [Int8(1), Int8(2), Int8(3)])
       let vec2 = try graph.const(tensor: vec2Tensor, name: "vec2")
       let vec3 = try graph.const(tensor: vec3Tensor, name: "vec3")
 
