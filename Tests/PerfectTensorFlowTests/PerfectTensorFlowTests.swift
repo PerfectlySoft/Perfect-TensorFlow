@@ -597,10 +597,10 @@ class PerfectTensorFlowTests: XCTestCase {
       let vec2 = try graph.const(tensor: vec2Tensor, name: "vec2")
       let vec3 = try graph.const(tensor: vec3Tensor, name: "vec3")
 
-      /** TESTING NOTE: SHOULD RETURN NIL - UNEXPECTED NOT NIL **/
-      _ = try graph.add(left: vec2, right: vec3)
+      let x = try graph.add(left: vec2, right: vec3)
+      XCTAssertNil(x)
     }catch {
-      XCTFail("shape infer: \(error)")
+      XCTAssertNotNil(error)
     }
   }//end test
 
@@ -1019,7 +1019,7 @@ class PerfectTensorFlowTests: XCTestCase {
   }
 
   func testVersion() {
-    XCTAssertEqual(TF.Version, "1.1.0")
+    XCTAssertEqual(TF.Version, "1.2.0")
   }
 
   func testSize() {
