@@ -629,7 +629,7 @@ public class TFLib {
   /// supports. See
   /// https://www.tensorflow.org/code/tensorflow/cc/gradients/README.md
   /// for instructions on how to add C++ more gradients.
-  public static var AddGradients: @convention(c) (OpaquePointer, UnsafePointer<TF_Output>?, Int32, UnsafePointer<TF_Output>?, Int32, UnsafeMutablePointer<TF_Output>?, OpaquePointer, UnsafeMutablePointer<TF_Output>?) -> Void = { _, _, _, _, _, _, _, _  in }
+  public static var AddGradients: @convention(c) (OpaquePointer, UnsafePointer<TF_Output>?, Int32, UnsafePointer<TF_Output>?, Int32, UnsafePointer<TF_Output>?, OpaquePointer, UnsafeMutablePointer<TF_Output>?) -> Void = { _, _, _, _, _, _, _, _  in }
 
 
   /// Return a new execution session with the associated graph, or NULL on error.

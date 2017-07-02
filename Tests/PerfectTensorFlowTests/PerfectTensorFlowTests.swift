@@ -143,9 +143,137 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testBasic", testBasic),
     ("testBasicExpress", testBasicExpress),
     ("testLabels", testLabels),
-    ("testSessionLeak", testSessionLeak)
+    ("testSessionLeak", testSessionLeak),
+    ("testGradients", testGradients)
   ]
 
+  func testGradients() {
+    do {
+      let grad = TestGradients()
+      try grad.test(true)
+      try grad.test(false)
+    }catch {
+      XCTFail("gradients: \(error)")
+    }
+  }
+
+  class TestGradients {
+
+    public func test(_ providingDX: Bool) throws {
+      let success = try buildSuccessGraph()
+      let expected = try buildExpectedGraph(providingDX)
+      let _ = try addGradients(providingDX, graph: success.graph, inputs: success.inputs, outputs: success.outputs)
+
+      guard let def0 = success.graph.definition,
+        let def1 = expected.graph.definition else {
+        throw TF.Panic.FAULT(reason: "Unexpected Graph Definition after Adding Gradients")
+      }
+
+      let n0 = def0.node
+      let n1 = def1.node // n1 may have two more operations: M1/M2, but gradients are the same
+      for i in 0 ..< n0.count {
+        let a = n0[i]
+        let b = n1[i]
+        print(a.name, b.name)
+        XCTAssertEqual(a, b)
+      }
+    }
+    public func buildSuccessGraph() throws ->
+      (graph: TF.Graph, inputs:[TF.Output], outputs: [TF.Output])
+    {
+      // Construct the following graph:
+      //            |
+      //           z|
+      //            |
+      //          MatMul
+      //         /       \
+      //        ^         ^
+      //        |         |
+      //       x|        y|
+      //        |         |
+      //        |         |
+      //      Const_0    Const_1
+      //
+      let srcA:[Float] = [1,2,3,4]
+      let srcB:[Float] = [1,0,0,1]
+
+      // create tensors for these matrices
+      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+
+      let g = try TF.Graph()
+      // adding tensors to graph
+      let A = try g.const(tensor: tA, name: "Const_0")
+      let B = try g.const(tensor: tB, name: "Const_1")
+      let M = try g.matMul(l: A, r: B, name: "MatMul")
+      return (graph: g, inputs:[A.asOutput(0), B.asOutput(0)], outputs:[M.asOutput(0)])
+    }
+
+    public func buildExpectedGraph(_ providingDX: Bool) throws ->
+      (graph: TF.Graph, dy: [TF.Output])
+    {
+      // The expected graph looks like this if grad_inputs_provided.
+      // If grad_inputs_provided is false, Const_0 will be a OnesLike op.
+      //      ^             ^
+      //    dy|           dx|        // MatMul Gradient Graph
+      //      |             |
+      //   MatMul_2      MatMul_1
+      //   ^   ^          ^    ^
+      //   |   |----------|    |
+      //   |        ^          |
+      //   |      dz|          |
+      //   |        |          |
+      //   |     Const_3       |
+      //   |                   |
+      //   |        ^          |
+      //   |       z|          |     // MatMul Forward Graph
+      //   |        |          |
+      //   |      MatMul       |
+      //   |     /       \     |
+      //   |    ^         ^    |
+      //   |    |         |    |
+      //   |---x|        y|----|
+      //        |         |
+      //        |         |
+      //      Const_0   Const_1
+      let srcA:[Float] = [1,2,3,4]
+      let srcB:[Float] = [1,0,0,1]
+
+      // create tensors for these matrices
+      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
+      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+
+      let g = try TF.Graph()
+      // adding tensors to graph
+      let A = try g.const(tensor: tA, name: "Const_0")
+      let B = try g.const(tensor: tB, name: "Const_1")
+      let M = try g.matMul(l: A, r: B, name: "MatMul")
+
+      let C: TF.Operation
+      if providingDX {
+        let srcC: [Float] = [1, 1, 1, 1]
+        let tC = try TF.Tensor.Array(dimensions: [2,2], value: srcC)
+        C = try g.const(tensor: tC, name: "GradInputs")
+      } else {
+        C = try g.OnesLike(inp: M, name: "OnesLike")
+      }//end if
+
+      let M1 = try g.matMul(l: C, r: B, name: "MatMul_1", transposeA: false, transposeB: true)
+      let M2 = try g.matMul(l: A, r: C, name: "MatMul_2", transposeA: true, transposeB: false)
+      return (graph: g, dy: [M1.asOutput(0), M2.asOutput(0)])
+    }
+
+    public func addGradients(_ providingDX: Bool, graph: TF.Graph, inputs: [TF.Output], outputs: [TF.Output]) throws -> [TF.Output] {
+      if providingDX {
+        let dxArray:[Float] = [1,1,1,1]
+        let dxValue = try TF.Tensor.Array(dimensions: [2,2], value: dxArray)
+        let dx = try graph.const(tensor: dxValue, name: "GradInputs").asOutput(0)
+        return try graph.addGradients(y: outputs, x: inputs, dx: [dx])
+      } else {
+        return try graph.addGradients(y: outputs, x: inputs)
+      }
+    }
+  }
   func testLabels() {
     do {
       let img = try LabelImage()

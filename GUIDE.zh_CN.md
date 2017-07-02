@@ -363,6 +363,8 @@ let list = graph.operations
 |resizeBilinear|双线性图像尺寸调制|`let resizes = try g.resizeBilinear(images: images, size: size)`|
 |cast|将输出类型进行强制转换|`let cast = try g.cast(value: jpeg, dtype: TF.DataType.dtFloat)`|
 |expandDims|扩大维度|`let images = try g.expandDims(input: cast, dim: batch)`|
+|addGradients|偏导数计算|`let dy = try g.addGradients(y: y, x: x, dx: [dx])`|
+
 
 上述大部分矩阵运算操作可以在[Perfect TensorFlow 机器视觉演示程序](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/Sources/main.swift#L62-L72) 中找到例子。
 

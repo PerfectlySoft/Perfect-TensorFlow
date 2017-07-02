@@ -81,7 +81,7 @@ Sources
 
 Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是您的计算机上在运行时必须安装 `libtensorflow.so`动态链接库。
 
-本项目包含了一个用于快速安装该链接库 CPU v1.1.0版本的脚本，默认安装路径为`/usr/local/lib/libtensorflow.so`。您可以根据平台要求下载并运行 [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh)。运行该脚本之前请确定 `wget`已经安装到您的计算机上；如果还没装，请首先用`brew install wget`（适用于macOS）或者 `sudo apt-get install wget` （适用于Ubuntu）命令安装`wget`组件。
+本项目包含了一个用于快速安装该链接库 CPU v1.2.0版本的脚本，默认安装路径为`/usr/local/lib/libtensorflow.so`。您可以根据平台要求下载并运行 [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh)。运行该脚本之前请确定 `wget`已经安装到您的计算机上；如果还没装，请首先用`brew install wget`（适用于macOS）或者 `sudo apt-get install wget` （适用于Ubuntu）命令安装`wget`组件。
 
 
 更多的安装选项，如需要在同一台计算机上同时安装CPU/GPU或者多个不同版本，请参考官网网站： [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)

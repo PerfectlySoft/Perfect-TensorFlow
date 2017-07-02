@@ -462,9 +462,14 @@ public class TensorFlow {
   }//end SizeOf
 
   /// Express wrapper of Tensor
-  public class Tensor : CustomStringConvertible {
+  public class Tensor : CustomStringConvertible, Equatable {
     let tensor : OpaquePointer
     internal var autoDestroy = true
+
+    /// compare two operations
+    public static func == (a: Tensor, b: Tensor) -> Bool {
+      return a.data == b.data && a.dim == b.dim
+    }//end func
 
     /// get a buffer copy from the tensor value
     public var data: [Int8] {
@@ -1387,26 +1392,48 @@ public class TensorFlow {
       return try OperationBuilder(graph: self, name: name, type: type)
     }//end func
 
-    /*
-     /// INCOMING FUNCION (NOT AVAILABLE IN libtensorflow CPU v1.1.0
-    public func addGradients(y: [Output], x: [Output], dx: [Output]) throws -> [Output] {
+    /// Adds operations to compute the partial derivatives of sum of `y`s w.r.t `x`s,
+    /// i.e., d(y_1 + y_2 + ...)/dx_1, d(y_1 + y_2 + ...)/dx_2...
+    /// `dx` are used as initial gradients (which represent the symbolic partial
+    /// derivatives of some loss function `L` w.r.t. `y`).
+    /// `dx` must be nullptr or have size `ny`.
+    /// If `dx` is nullptr, the implementation will use dx of `OnesLike` for all
+    /// shapes in `y`.
+    /// The partial derivatives are returned in `dy`. `dy` should be allocated to
+    /// size `nx`.
+    ///
+    // WARNING: This function does not yet support all the gradients that python
+    /// supports. See
+    /// https://www.tensorflow.org/code/tensorflow/cc/gradients/README.md
+    /// for instructions on how to add C++ more gradients.
+    public func addGradients(y: [Output], x: [Output], dx: [Output] = []) throws -> [Output] {
       guard let _ = TFLib.libDLL else { throw Panic.DLL(reason: "Library Not Ready") }
       let s = try Status()
-      let px = ArrayPointer(x)
-      let py = ArrayPointer(y)
-      let pdx = ArrayPointer(dx)
-      let pdy = UnsafeMutablePointer<Output>.allocate(capacity: x.count)
-      TFLib.AddGradients(graph, py.pointer, Int32(py.size), px.pointer, Int32(px.size), pdx.pointer, s.status, pdy)
-      guard s.code == .OK else {
-        pdy.deallocate(capacity: x.count)
-        throw Panic.FAULT(reason: s.message)
+      let countX = x.count
+      let countY = y.count
+      guard countY > 0 else {
+        return [Output]()
       }//end guard
-      let array = Array(UnsafeBufferPointer<Output>(start: pdy, count: x.count))
-      pdy.deallocate(capacity: x.count)
-      return array
-    }//end func
+      let dy = UnsafeMutablePointer<Output>.allocate(capacity: countX)
+      defer {
+        dy.deallocate(capacity: countX)
+      }//end dy
+      let pY = y.withUnsafeBufferPointer { $0.baseAddress }
+      let pX = x.withUnsafeBufferPointer { $0.baseAddress }
 
-    */
+      var pdx = UnsafePointer<Output>(bitPattern: 0)
+      if dx.count > 0 {
+        guard dx.count == countY else { throw Panic.FAULT(reason: "dx must have size of y")}
+        pdx = dx.withUnsafeBufferPointer { $0.baseAddress }
+      }//end if
+
+      TFLib.AddGradients(graph, pY, Int32(countY), pX, Int32(countX), pdx, s.status, dy)
+
+      guard s.code == .OK else { throw Panic.FAULT(reason: s.message) }
+      let pdy = UnsafeBufferPointer(start: dy, count: countY)
+      return Array(pdy)
+    }
+
     /// set a tensor with a specific shape
     /// - parameters:
     ///   - output: an output of current graph
@@ -2042,7 +2069,7 @@ public class TensorFlow {
       inputs.append((output, tensor))
       return self
     }//end feed
-
+    
     /**
      * Avoid evaluating operation and substitute tensor for the value it produces.
      *

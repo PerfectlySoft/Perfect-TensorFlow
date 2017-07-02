@@ -369,6 +369,7 @@ There is also a rich and growing set of methods for construct operations from di
 |resizeBilinear| resize a bilinear image|`let resizes = try g.resizeBilinear(images: images, size: size)`|
 |cast|cast an output to a specific data type|`let cast = try g.cast(value: jpeg, dtype: TF.DataType.dtFloat)`|
 |expandDims|expand dimensions|`let images = try g.expandDims(input: cast, dim: batch)`|
+|addGradients|partial derivatives|`let dy = try g.addGradients(y: y, x: x, dx: [dx])`|
 
 A Full demo of almost all the express operation creations above can be found on the source code of [Perfect TensorFlow Computer Vision Demo](https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/Sources/main.swift#L62-L72)
 
