@@ -178,6 +178,16 @@ let datastr = tensor.strings
 let str = datastr.map { $0.string }
 ```
 
+### Matrix
+
+Since Perfect-TensorFlow v1.2.1, however, you can apply a multi-dimensional array to a tensor as a matrix without considering the shape or dimensions. The equivalent example of above will look like:
+
+``` swift
+let M = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+```
+
+⚠️**NOTES**⚠️ Element in a Matrix must be number!
+
 ### Raw Data of a Tensor
 
 To access raw data of a tensor, you can use either `data` property, or `withDataPointer()` method with better performance but tricky pointer operations - and property of `bytesCount` and `type` will be useful in this case:

@@ -161,14 +161,8 @@ Here is an other simple example of matrix operations in Perfect TensorFlow:
 | 3 4 | * |0 0| = |0 3|
 */
 // input the matrix.
-// *NOTE* no matter how many dimensions a matrix may have,
-// the matrix should always input as an flattened array
-let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
-let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
-
-// create tensors for these matrices
-let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
-let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+let tA = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+let tB = try TF.Tensor.Matrix([[0, 0], [1, 0]])
 
 // adding tensors to graph
 let g = try TF.Graph()

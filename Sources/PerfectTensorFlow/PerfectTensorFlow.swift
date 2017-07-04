@@ -34,6 +34,36 @@ public extension Array {
   public func flat() -> Array<Any> {
     return Array.Flat(self)
   }
+
+  public var shape: [Int] {
+    var _shape = [Int]()
+    var a = self as Array<Any>
+    while a.count > 0 {
+      _shape.append(a.count)
+      if let b = a as? Array<Array<Any>> , let c = b.first {
+        a = c
+      } else {
+        break
+      }//end if
+    }//end while
+    return _shape
+  }//end var
+
+  public func column(index: Int) -> Array<Any> {
+    var b = [Any]()
+    let s = shape
+    guard s.count > 1, index > -1, index < s[1],
+      let a = self as? Array<Array<Any>> else {
+        if index > -1 && index < self.count {
+          b.append(self[index])
+        }//end if
+        return b
+    }//end guard
+    a.forEach { c in
+      b.append(c[index])
+    }//next
+    return b
+  }//end func
 }
 
 typealias SwiftArray<T> = Array<T>
@@ -568,6 +598,41 @@ public class TensorFlow {
       }//end if
     }//end tensor
 
+    /// Create a tensor from a Matrix. *NOTE* Element must be number
+    /// - parameters:
+    ///   - matrix: Matrix in form of Array[Array[Array ... Array[Number]]]
+    ///   - throws: Panic.FAULT
+    /// - returns: tensor
+    public static func Matrix(_ matrix: Array<Any>) throws -> Tensor {
+      let shape = matrix.shape.map { Int64($0) }
+      let flattened = matrix.flat()
+      let f: [Float]
+      if flattened is [UInt8], let i = flattened as? [UInt8] {
+        f = i.map { Float($0) }
+      } else if flattened is [UInt32], let i = flattened as? [UInt32] {
+        f = i.map { Float($0) }
+      } else if flattened is [UInt], let i = flattened as? [UInt] {
+        f = i.map { Float($0) }
+      } else if flattened is [UInt64], let i = flattened as? [UInt64] {
+        f = i.map { Float($0) }
+      } else if flattened is [Int8], let i = flattened as? [Int8] {
+        f = i.map { Float($0) }
+      } else if flattened is [Int32], let i = flattened as? [Int32] {
+        f = i.map { Float($0) }
+      } else if flattened is [Int], let i = flattened as? [Int] {
+        f = i.map { Float($0) }
+      } else if flattened is [Int64], let i = flattened as? [Int64] {
+        f = i.map { Float($0) }
+      } else if flattened is [Float], let i = flattened as? [Float] {
+        f = i
+      } else if flattened is [Double], let i = flattened as? [Double] {
+        f = i.map { Float($0) }
+      } else {
+        throw Panic.FAULT(reason: "Matrix Element Must Be Number")
+      }//end if
+      return try Array(dimensions: shape, value: f)
+    }
+
     /// Create a tensor by passing its value
     /// type can be Int, Float,... or String / Data
     /// - parameters:
@@ -577,6 +642,7 @@ public class TensorFlow {
     ///   Tensor
     /// - throws:
     ///   Panic
+
     public static func Array<T> (dimensions:[Int64], value: [T]) throws -> Tensor {
       let count = Int(dimensions.reduce(1) { $0 * $1 })
       guard let _ = TFLib.libDLL,

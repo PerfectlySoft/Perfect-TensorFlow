@@ -176,6 +176,16 @@ let datastr = tensor.strings
 let str = datastr.map { $0.string }
 ```
 
+### Matrix
+
+自从 Perfect-TensorFlow v1.2.1 版本开始，您可以直接输入矩阵作为张量了！上述例子现在可以改写为：
+
+``` swift
+let M = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+```
+
+⚠️**NOTES**⚠️ Element in a Matrix must be number!
+
 ### 访问张量原始数据
 
 如果您希望在程序中访问张量的原始数据，您可以使用`data`属性，或者调用`withDataPointer()`方法通过指针进行访问（虽然有些技巧性难度，但是性能要快很多）——这种情况下`byteCount`属性（张量数据在内存中的大小）和`type`（张量数据类型）会有很大用处：

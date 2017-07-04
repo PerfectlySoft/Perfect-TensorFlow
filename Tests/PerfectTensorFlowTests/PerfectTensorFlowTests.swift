@@ -144,8 +144,19 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testBasicExpress", testBasicExpress),
     ("testLabels", testLabels),
     ("testSessionLeak", testSessionLeak),
-    ("testGradients", testGradients)
+    ("testGradients", testGradients),
+    ("testMatrix", testMatrix),
+    ("testBasicImproved",testBasicImproved)
   ]
+
+  func testMatrix() {
+    let x = [[1, 2, 3], [4, 5, 6]]
+    let y = [[[1,2],[3,4],[5,6]],[[7,8],[9,10],[11,12]],[[13,14],[15,16],[17,18]],[[19,20],[21,22],[23,24]]]
+    XCTAssertEqual(x.shape, [2, 3])
+    XCTAssertEqual(y.shape, [4, 3, 2])
+    XCTAssertEqual(x[1][2], 6)
+    XCTAssertEqual(x.column(index: 1) as! [Int], [2, 5])
+  }
 
   func testGradients() {
     do {
@@ -351,6 +362,29 @@ class PerfectTensorFlowTests: XCTestCase {
       return s[0]
     }//end normalize
 
+  }
+
+  func testBasicImproved() {
+    do {
+      /*
+       Matrix Test:
+       | 1 2 |  |0 1|  |0 1|
+       |     |* |   |= |   |
+       | 3 4 |  |0 0|  |0 3|
+       */
+      let tA = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+      let tB = try TF.Tensor.Matrix([[0, 0], [1, 0]])
+      let g = try TF.Graph()
+      let A = try g.const(tensor: tA, name: "Const_0")
+      let B = try g.const(tensor: tB, name: "Const_1")
+      let v = try g.matMul(l: A, r: B, name: "v", transposeB: true)
+      let o = try g.runner().fetch(v).addTarget(v).run()
+      let m:[Float] = try o[0].asArray()
+      let r:[Float] = [0, 1, 0, 3]
+      XCTAssertEqual(m, r)
+    }catch {
+      XCTFail("improved: \(error)")
+    }
   }
 
   func testBasicExpress() {

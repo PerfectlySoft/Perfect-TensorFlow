@@ -160,13 +160,8 @@ print(s2)
 | 3 4 | * |0 0| = |0 3|
 */
 // 输入矩阵
-// *注意* 不管目标矩阵的维度到底是多少，输入时必须按照扁平化处理，即所有元素一个挨一个列出
-let srcA:[Float] = [[1, 2], [3, 4]].flatMap { $0 }
-let srcB:[Float] = [[0, 0], [1, 0]].flatMap { $0 }
-
-// 根据矩阵创建张量
-let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
-let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+let tA = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+let tB = try TF.Tensor.Matrix([[0, 0], [1, 0]])
 
 // 将张量转化为流程图节点
 let g = try TF.Graph()
