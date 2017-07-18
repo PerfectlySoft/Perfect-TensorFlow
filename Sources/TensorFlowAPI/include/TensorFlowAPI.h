@@ -124,6 +124,7 @@ typedef struct TF_WhileParams {
 // API for driving Graph execution.
 
 typedef struct TF_Session TF_Session;
+typedef struct TF_DeviceList TF_DeviceList;
 
 // Load plugins containing custom ops and kernels
 

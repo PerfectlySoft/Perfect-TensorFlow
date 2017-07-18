@@ -1930,6 +1930,33 @@ public class TensorFlow {
 
     let session: OpaquePointer
 
+    /// return all devices for this session in a dictionary.
+    /// each key in the dictionary represents a device name,
+    /// and the value is a tuple of device type and its memory size, in bytes
+    public var devices: [String:(`type`:String, memory: Int64)] {
+      var dev: [String:(`type`:String, memory: Int64)] = [:]
+
+      guard let _ = TFLib.libDLL, let status = try? Status(),
+        let list = TFLib.SessionListDevices(session, status.status),
+        status.code == .OK else { return dev }
+
+      defer { TFLib.DeleteDeviceList(list) }
+      for i in 0 ..< TFLib.DeviceListCount(list) {
+        if let nm = TFLib.DeviceListName(list, i, status.status),
+          status.code == .OK,
+          let tp = TFLib.DeviceListType(list, i, status.status),
+          status.code == .OK {
+          let mem = TFLib.DeviceListMemoryBytes(list, i, status.status)
+          if status.code == .OK,
+            let dname = String(utf8String: nm),
+            let dtype = String(utf8String: tp) {
+            dev[dname] = (type: dtype, memory: mem)
+          }
+        }
+      }
+      return dev
+    }
+
     /// Return a new execution session with the associated graph, or NULL on error. *graph must be a valid graph (not deleted or nullptr). This function will prevent the graph from being deleted until TF_DeleteSession() is called. Does not take ownership of opts.
     /// - parameters:
     ///   - graph: the parent graph

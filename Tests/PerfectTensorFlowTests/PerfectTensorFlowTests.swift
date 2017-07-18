@@ -181,13 +181,20 @@ class PerfectTensorFlowTests: XCTestCase {
       }
 
       let n0 = def0.node
-      let n1 = def1.node // n1 may have two more operations: M1/M2, but gradients are the same
+      let n1 = def1.node
+      XCTAssertEqual(n0.count, n1.count)
       for i in 0 ..< n0.count {
-        let a = n0[i]
-        let b = n1[i]
-        print(a.name, b.name)
-        XCTAssertEqual(a, b)
+        let n = n0[i]
+        let m = n1[i]
+        XCTAssertEqual(n.name, m.name)
+        XCTAssertEqual(n.op, m.op)
+        for key in n.attr.keys {
+          let v = n.attr[key]
+          let w = m.attr[key]
+          XCTAssertEqual(v, w)
+        }
       }
+
     }
     public func buildSuccessGraph() throws ->
       (graph: TF.Graph, inputs:[TF.Output], outputs: [TF.Output])
@@ -205,12 +212,12 @@ class PerfectTensorFlowTests: XCTestCase {
       //        |         |
       //      Const_0    Const_1
       //
-      let srcA:[Float] = [1,2,3,4]
-      let srcB:[Float] = [1,0,0,1]
+      let srcA:[[Float]] = [[1,2],[3,4]]
+      let srcB:[[Float]] = [[1,0],[0,1]]
 
       // create tensors for these matrices
-      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
-      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+      let tA = try TF.Tensor.Matrix(srcA)
+      let tB = try TF.Tensor.Matrix(srcB)
 
       let g = try TF.Graph()
       // adding tensors to graph
@@ -247,12 +254,12 @@ class PerfectTensorFlowTests: XCTestCase {
       //        |         |
       //        |         |
       //      Const_0   Const_1
-      let srcA:[Float] = [1,2,3,4]
-      let srcB:[Float] = [1,0,0,1]
+      let srcA:[[Float]] = [[1,2],[3,4]]
+      let srcB:[[Float]] = [[1,0],[0,1]]
 
       // create tensors for these matrices
-      let tA = try TF.Tensor.Array(dimensions: [2,2], value: srcA)
-      let tB = try TF.Tensor.Array(dimensions: [2,2], value: srcB)
+      let tA = try TF.Tensor.Matrix(srcA)
+      let tB = try TF.Tensor.Matrix(srcB)
 
       let g = try TF.Graph()
       // adding tensors to graph
@@ -262,8 +269,8 @@ class PerfectTensorFlowTests: XCTestCase {
 
       let C: TF.Operation
       if providingDX {
-        let srcC: [Float] = [1, 1, 1, 1]
-        let tC = try TF.Tensor.Array(dimensions: [2,2], value: srcC)
+        let srcC: [[Float]] = [[1, 1], [1, 1]]
+        let tC = try TF.Tensor.Matrix(srcC)
         C = try g.const(tensor: tC, name: "GradInputs")
       } else {
         C = try g.OnesLike(inp: M, name: "OnesLike")
@@ -276,8 +283,8 @@ class PerfectTensorFlowTests: XCTestCase {
 
     public func addGradients(_ providingDX: Bool, graph: TF.Graph, inputs: [TF.Output], outputs: [TF.Output]) throws -> [TF.Output] {
       if providingDX {
-        let dxArray:[Float] = [1,1,1,1]
-        let dxValue = try TF.Tensor.Array(dimensions: [2,2], value: dxArray)
+        let dxArray:[[Float]] = [[1, 1], [1, 1]]
+        let dxValue = try TF.Tensor.Matrix(dxArray)
         let dx = try graph.const(tensor: dxValue, name: "GradInputs").asOutput(0)
         return try graph.addGradients(y: outputs, x: inputs, dx: [dx])
       } else {
@@ -1181,7 +1188,7 @@ class PerfectTensorFlowTests: XCTestCase {
   }
 
   func testVersion() {
-    XCTAssertEqual(TF.Version, "1.2.0")
+    XCTAssertEqual(TF.Version, "1.2.1")
   }
 
   func testSize() {

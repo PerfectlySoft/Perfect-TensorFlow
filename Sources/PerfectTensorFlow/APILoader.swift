@@ -695,6 +695,42 @@ public class TFLib {
   /// On failure, output_values[] contains NULLs.
   public static var SessionRun: @convention(c) (OpaquePointer, UnsafePointer<TF_Buffer>?, UnsafePointer<TF_Output>?, UnsafePointer<OpaquePointer>?, Int32, UnsafePointer<TF_Output>?, UnsafeMutablePointer<OpaquePointer>?, Int32, UnsafePointer<OpaquePointer>?, Int32, UnsafeMutablePointer<TF_Buffer>?, OpaquePointer) -> Void = { _, _, _, _, _, _, _, _, _, _, _, _ in }
 
+  /// Lists all devices in a TF_Session.
+  ///
+  /// Caller takes ownership of the returned TF_DeviceList* which must eventually
+  /// be freed with a call to TF_DeleteDeviceList.
+  public static var SessionListDevices: @convention(c) (OpaquePointer, OpaquePointer) -> OpaquePointer? = { _, _ in return nil }
+
+  /// Deallocates the device list.
+  public static var DeleteDeviceList: @convention(c) (OpaquePointer) -> Void = { _ in}
+
+  /// Counts the number of elements in the device list.
+  public static var DeviceListCount: @convention(c) (OpaquePointer) -> Int32 = { _ in return 0 }
+
+  /// Retrieves the full name of the device (e.g. /job:worker/replica:0/...)
+  /// The return value will be a pointer to a null terminated string. The caller
+  /// must not modify or delete the string. It will be deallocated upon a call to
+  /// TF_DeleteDeviceList.
+  ///
+  /// If index is out of bounds, an error code will be set in the status object,
+  /// and a null pointer will be returned.
+  public static var DeviceListName: @convention(c) (OpaquePointer, Int32, OpaquePointer) -> UnsafePointer<CChar>? = { _, _, _ in return nil }
+
+  /// Retrieves the type of the device at the given index.
+  ///
+  /// The caller must not modify or delete the string. It will be deallocated upon
+  /// a call to TF_DeleteDeviceList.
+  ///
+  /// If index is out of bounds, an error code will be set in the status object,
+  /// and a null pointer will be returned.
+  public static var DeviceListType: @convention(c) (OpaquePointer, Int32, OpaquePointer) -> UnsafePointer<CChar>? = { _, _, _ in return nil }
+
+  /// Retrieve the amount of memory associated with a given device.
+  ///
+  /// If index is out of bounds, an error code will be set in the status object,
+  /// and -1 will be returned.
+  public static var DeviceListMemoryBytes: @convention(c) (OpaquePointer, Int32, OpaquePointer) -> Int64 = { _, _, _ in return 0 }
+
   /// Set up the graph with the intended feeds (inputs) and fetches (outputs) for a
   /// sequence of partial run calls.
   ///
@@ -758,7 +794,13 @@ public class TFLib {
       throw Panic.DLL(reason: String(cString: dlerror()))
     }//end lib
     libDLL = lib
-    // AddGradients = try LoadFunction(lib, "TF_AddGradients")
+    // SessionListDevices = try LoadFunction(lib, "TF_SessionListDevices")
+    // DeleteDeviceList = try LoadFunction(lib, "TF_DeleteDeviceList")
+    // DeviceListCount = try LoadFunction(lib, "TF_DeviceListCount")
+    // DeviceListName = try LoadFunction(lib, "TF_DeviceListName")
+    // DeviceListType = try LoadFunction(lib, "TF_DeviceListType")
+    // DeviceListMemoryBytes = try LoadFunction(lib, "TF_DeviceListMemoryBytes")
+    AddGradients = try LoadFunction(lib, "TF_AddGradients")
     SetAttrValueProto = try LoadFunction(lib, "TF_SetAttrValueProto")
     GetAllOpList = try LoadFunction(lib, "TF_GetAllOpList")
     DeleteLibraryHandle = try LoadFunction(lib, "TF_DeleteLibraryHandle")

@@ -1,17 +1,18 @@
 # This script is for CI Server
+VERSION=1.2.1
 echo 'Clean Temp Files'
 rm -rf /tmp/testdata
 echo 'Unzip test pack'
 tar xzf testpack.tgz -C /tmp/
 if  [[ $OSTYPE =~ darwin* ]]; then
 	echo 'get darwin library'
-	curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-1.2.0.tar.gz -o /tmp/testdata/darwin.lib.tgz
+	curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-$VERSION.tar.gz -o /tmp/testdata/darwin.lib.tgz
 	mkdir /tmp/testdata/darwin
 	echo 'expand darwin library'
 	tar xzf /tmp/testdata/darwin.lib.tgz -C /tmp/testdata/darwin
 else
 	echo 'get linux library'
-	curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.2.0.tar.gz -o /tmp/testdata/linux.lib.tgz
+	curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-$VERSION.tar.gz -o /tmp/testdata/linux.lib.tgz
 	mkdir /tmp/testdata/linux
 	echo 'expand linux library'
 	tar xzf /tmp/testdata/linux.lib.tgz -C /tmp/testdata/linux

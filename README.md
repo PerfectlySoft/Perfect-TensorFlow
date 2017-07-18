@@ -50,7 +50,7 @@ Ensure you have installed and activated the latest Swift 3.1 tool chain; The sou
 
 ## Project Status
 
-The framework is Beta testing now. 
+The framework is Beta testing now.
 
 ## Development Notes
 
@@ -80,7 +80,7 @@ API programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md)
 ### TensorFlow C API Library Installation
 
 Perfect-TensorFlow is based on TensorFlow C API, i.e., `libtensorflow.so` on runtime.
-This project contains an express CPU v1.2.0 installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh). Before running this script, please make sure that `wget` has been installed onto your computer, otherwise please run either `brew install wget` for macOS or `sudo apt-get install wget` for Ubuntu first.
+This project contains an express CPU v1.2.1 installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh). Before running this script, please make sure that `wget` has been installed onto your computer, otherwise please run either `brew install wget` for macOS or `sudo apt-get install wget` for Ubuntu first.
 
 For more installation options, such as GPU/CPU and multiple versions on the same machine, please check TensorFlow website: [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
 
@@ -101,7 +101,7 @@ import TensorFlowAPI
 // This is the Swift version of TensorFlow classes and objects
 import PerfectTensorFlow
 
-// To keep the naming consistency with TensorFlow in other languages such as 
+// To keep the naming consistency with TensorFlow in other languages such as
 // Python or Java, making an alias of `TensorFlow` Class is a good idea:
 public typealias TF = TensorFlow
 ```
@@ -111,7 +111,7 @@ public typealias TF = TensorFlow
 ⚠️NOTE⚠️ Prior to use **ANY ACTUAL FUNCTIONS** of Perfect TensorFlow framework, `TF.Open()` must be called first:
 
 ``` swift
-// this action will load all api functions defined 
+// this action will load all api functions defined
 // in /usr/local/lib/libtensorflow.so
 try TF.Open()
 ```
