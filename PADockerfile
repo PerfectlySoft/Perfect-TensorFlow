@@ -1,1 +1,1 @@
-RUN wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.2.0.tar.gz -O /tmp/tflib.tgz && tar xvf /tmp/tflib.tgz -C /usr/local ./lib/libtensorflow.so && rm /tmp/tflib.tgz
+RUN wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.2.1.tar.gz -O /tmp/tflib.tgz && tar xvf /tmp/tflib.tgz -C /usr/local ./lib/libtensorflow.so && rm /tmp/tflib.tgz
