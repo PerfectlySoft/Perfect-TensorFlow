@@ -11,6 +11,7 @@ if  [[ $OSTYPE =~ darwin* ]]; then
 	echo 'expand darwin library'
 	tar xzf /tmp/testdata/darwin.lib.tgz -C /tmp/testdata/darwin
 	BUILDPATH=.build
+	TESTOUT=test-results-darwin.txt
 else
 	echo 'get linux library'
 	curl https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-$VERSION.tar.gz -o /tmp/testdata/linux.lib.tgz
@@ -18,14 +19,13 @@ else
 	echo 'expand linux library'
 	tar xzf /tmp/testdata/linux.lib.tgz -C /tmp/testdata/linux
 	BUILDPATH=.build_lin
+	TESTOUT=test-results.txt
 fi
 echo 'download AI model'
 curl https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip -o /tmp/testdata/in.zip
 echo 'unzip model file'
 unzip /tmp/testdata/in.zip -d /tmp/testdata/
 echo 'testing ... '
-rm -rf .build
-rm Package.pins
-swift test --build-path=$BUILDPATH > test-results.txt
-# swift test
-# rm -rf /tmp/testdata
+rm -rf $BUILDPATH
+swift test --build-path=$BUILDPATH > $TESTOUT
+cat $TESTOUT

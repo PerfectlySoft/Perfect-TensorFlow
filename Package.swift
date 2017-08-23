@@ -25,7 +25,6 @@ let package = Package(
       Target(name: "PerfectTensorFlow", dependencies: ["TensorFlowAPI"])
     ],
     dependencies: [
-      .Package(url: "https://github.com/PerfectlySoft/Perfect.git", majorVersion: 2),
       .Package(url: "https://github.com/apple/swift-protobuf-runtime.git", majorVersion:0)
     ]
 )

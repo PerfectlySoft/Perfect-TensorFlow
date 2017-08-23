@@ -19,7 +19,6 @@
 
 import Foundation
 import TensorFlowAPI
-import PerfectLib
 
 public extension Array {
 
@@ -305,7 +304,6 @@ public class TensorFlow {
   public typealias TracingRequest = Tensorflow_TracingRequest
   public typealias TracingResponse = Tensorflow_TracingResponse
 
-  public static var BuildingID = ""
   /// DLL Loader, must be called before all methods
   /// - parameters:
   ///   - library: path of libtensorflow to load
@@ -314,7 +312,6 @@ public class TensorFlow {
     try TFLib.Open(library)
     let r = TF_LoadPatchLibrary(library)
     guard r == 0 else { throw Panic.DLL(reason: "Unable to Load Patch")}
-    BuildingID = PerfectLib.UUID().string
   }//end func
 
   /// DLL resource release
@@ -2165,7 +2162,7 @@ public class TensorFlow {
       inputs.append((output, tensor))
       return self
     }//end feed
-    
+
     /**
      * Avoid evaluating operation and substitute tensor for the value it produces.
      *
