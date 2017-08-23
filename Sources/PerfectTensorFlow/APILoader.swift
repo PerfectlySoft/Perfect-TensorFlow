@@ -794,12 +794,12 @@ public class TFLib {
       throw Panic.DLL(reason: String(cString: dlerror()))
     }//end lib
     libDLL = lib
-    // SessionListDevices = try LoadFunction(lib, "TF_SessionListDevices")
-    // DeleteDeviceList = try LoadFunction(lib, "TF_DeleteDeviceList")
-    // DeviceListCount = try LoadFunction(lib, "TF_DeviceListCount")
-    // DeviceListName = try LoadFunction(lib, "TF_DeviceListName")
-    // DeviceListType = try LoadFunction(lib, "TF_DeviceListType")
-    // DeviceListMemoryBytes = try LoadFunction(lib, "TF_DeviceListMemoryBytes")
+    SessionListDevices = try LoadFunction(lib, "TF_SessionListDevices")
+    DeleteDeviceList = try LoadFunction(lib, "TF_DeleteDeviceList")
+    DeviceListCount = try LoadFunction(lib, "TF_DeviceListCount")
+    DeviceListName = try LoadFunction(lib, "TF_DeviceListName")
+    DeviceListType = try LoadFunction(lib, "TF_DeviceListType")
+    DeviceListMemoryBytes = try LoadFunction(lib, "TF_DeviceListMemoryBytes")
     AddGradients = try LoadFunction(lib, "TF_AddGradients")
     SetAttrValueProto = try LoadFunction(lib, "TF_SetAttrValueProto")
     GetAllOpList = try LoadFunction(lib, "TF_GetAllOpList")

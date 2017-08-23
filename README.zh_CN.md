@@ -50,7 +50,7 @@
 
 ## 项目状态
 
-目前本函数库处于beta测试状态。
+目前本函数库遵从 TensorFlow v1.3.0 C语言 API 功能特征。
 
 ## 关于开发
 
@@ -59,12 +59,12 @@
 ```
 Sources
 ├── PerfectTensorFlow
-│   ├── APILoader.swift (886 行代码，直接从tensorflow/c/c_api.h翻译而来)
-│   ├── PerfectTensorFlow.swift (2277 行代码)
+│   ├── APILoader.swift (928 行代码，直接从tensorflow/c/c_api.h翻译而来)
+│   ├── PerfectTensorFlow.swift (2436 行代码)
 └── TensorFlowAPI
     ├── TensorFlowAPI.c (72 行代码)
     └── include
-        └── TensorFlowAPI.h (137 行代码)
+        └── TensorFlowAPI.h (138 行代码)
 ```
 
 所有以`pb.*.swift`命名的文件（总共目前超过四万五千行）都是从根目录下的 `updateprotos.sh` 文件自动创建的。很不幸的是，用了这个脚本之后，您仍然需要手工编辑 **PerfectTensorFlow.swift** 中的 `public typealias`部分以保持编译一致。
