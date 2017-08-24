@@ -27,5 +27,7 @@ echo 'unzip model file'
 unzip /tmp/testdata/in.zip -d /tmp/testdata/
 echo 'testing ... '
 rm -rf $BUILDPATH
-swift test --build-path=$BUILDPATH > $TESTOUT
+time swift build --build-path=$BUILDPATH
+time swift build -c release --build-path=$BUILDPATH
+time swift test --build-path=$BUILDPATH > $TESTOUT
 cat $TESTOUT
