@@ -1,5 +1,5 @@
 # This script is for CI Server
-VERSION=1.3.0
+VERSION=`cat VERSION`
 echo 'Clean Temp Files'
 rm -rf /tmp/testdata
 echo 'Unzip test pack'
@@ -27,6 +27,8 @@ echo 'unzip model file'
 unzip /tmp/testdata/in.zip -d /tmp/testdata/
 echo 'testing ... '
 rm -rf $BUILDPATH
+rm -rf Package.pins
+rm -rf Package.resolved
 time swift build --build-path=$BUILDPATH
 time swift build -c release --build-path=$BUILDPATH
 time swift test --build-path=$BUILDPATH > $TESTOUT
