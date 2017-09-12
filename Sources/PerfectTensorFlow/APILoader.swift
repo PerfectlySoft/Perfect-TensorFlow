@@ -790,7 +790,7 @@ public class TFLib {
   ///
   /// If successful, status is set to OK and function is added to g
   /// Otherwise, status is set to the encountered error and g is unmodified
-  public static var GraphAddFunction: @convention(c) (OpaquePointer, OpaquePointer, OpaquePointer) -> Void = { _, _, _ in }
+  public static var GraphAddFunction: @convention(c) (OpaquePointer, OpaquePointer, OpaquePointer?) -> Void = { _, _, _ in }
 
   /// Create a TF_Function from a TF_Graph
   ///

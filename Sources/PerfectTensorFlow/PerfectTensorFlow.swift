@@ -1797,6 +1797,29 @@ public class TensorFlow {
         return try self.opBuilder(name: nm, type: type)
           .add(input: in1).add(input: in2).build().output(index)
     }
+
+    public func toFunction(_ name: String, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil) throws -> Function? {
+      return nil
+    }
+
+    public class Function {
+      let g: Graph
+      let ref: OpaquePointer
+
+      public init(_ graph: Graph, reference: OpaquePointer) {
+        g = graph
+        ref = reference
+      }
+
+      public func add () {
+        TFLib.GraphAddFunction(g.graph, ref, nil)
+      }
+
+      public func delete() {
+        TFLib.DeleteFunction(ref)
+      }
+    }
+
   }//end graph
 
   /// class wrapper of Graph Definition Options
