@@ -1,3 +1,4 @@
+#!/bin/bash
 # This script is for CI Server
 VERSION=`cat VERSION`
 echo 'Clean Temp Files'

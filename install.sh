@@ -1,3 +1,4 @@
+#!/bin/bash
 OSABR=$(echo $(uname)|tr '[:upper:]' '[:lower:]')
 DWN=/tmp/libtensorflow.tgz
 VERSION=`cat VERSION`

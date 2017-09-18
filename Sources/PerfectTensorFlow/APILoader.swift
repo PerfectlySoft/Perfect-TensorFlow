@@ -894,18 +894,38 @@ public class TFLib {
       throw Panic.DLL(reason: String(cString: dlerror()))
     }//end lib
     libDLL = lib
-    // GraphAddFunction = try LoadFunction(lib, "TF_GraphAddFunction")
-    // GraphToFunction = try LoadFunction(lib, "TF_GraphToFunction")
-    // FunctionToFunctionDef = try LoadFunction(lib, "TF_FunctionToFunctionDef")
-    // DeleteFunction = try LoadFunction(lib, "TF_DeleteFunction")
-    
-    SessionListDevices = try LoadFunction(lib, "TF_SessionListDevices")
-    DeleteDeviceList = try LoadFunction(lib, "TF_DeleteDeviceList")
-    DeviceListCount = try LoadFunction(lib, "TF_DeviceListCount")
-    DeviceListName = try LoadFunction(lib, "TF_DeviceListName")
-    DeviceListType = try LoadFunction(lib, "TF_DeviceListType")
-    DeviceListMemoryBytes = try LoadFunction(lib, "TF_DeviceListMemoryBytes")
-    AddGradients = try LoadFunction(lib, "TF_AddGradients")
+    Version = try LoadFunction(lib, "TF_Version")
+
+    guard let v = Version() else {
+      throw Panic.DLL(reason: "Unresoved version info")
+    }
+
+    let ver = String(cString: v)
+
+    guard ver >= "1.1.0" else {
+      throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
+    }
+
+    if ver > "1.3.0" {
+      GraphAddFunction = try LoadFunction(lib, "TF_GraphAddFunction")
+      GraphToFunction = try LoadFunction(lib, "TF_GraphToFunction")
+      FunctionToFunctionDef = try LoadFunction(lib, "TF_FunctionToFunctionDef")
+      DeleteFunction = try LoadFunction(lib, "TF_DeleteFunction")
+    }
+
+    if ver >= "1.2.1" {
+      SessionListDevices = try LoadFunction(lib, "TF_SessionListDevices")
+      DeleteDeviceList = try LoadFunction(lib, "TF_DeleteDeviceList")
+      DeviceListCount = try LoadFunction(lib, "TF_DeviceListCount")
+      DeviceListName = try LoadFunction(lib, "TF_DeviceListName")
+      DeviceListType = try LoadFunction(lib, "TF_DeviceListType")
+      DeviceListMemoryBytes = try LoadFunction(lib, "TF_DeviceListMemoryBytes")
+    }
+
+    if ver >= "1.2.0" {
+      AddGradients = try LoadFunction(lib, "TF_AddGradients")
+    }
+
     SetAttrValueProto = try LoadFunction(lib, "TF_SetAttrValueProto")
     GetAllOpList = try LoadFunction(lib, "TF_GetAllOpList")
     DeleteLibraryHandle = try LoadFunction(lib, "TF_DeleteLibraryHandle")
@@ -1021,7 +1041,6 @@ public class TFLib {
     DeleteStatus = try LoadFunction(lib, "TF_DeleteStatus")
     NewStatus = try LoadFunction(lib, "TF_NewStatus")
     DataTypeSize = try LoadFunction(lib, "TF_DataTypeSize")
-    Version = try LoadFunction(lib, "TF_Version")
   }//end open
 
   /// static library closing
