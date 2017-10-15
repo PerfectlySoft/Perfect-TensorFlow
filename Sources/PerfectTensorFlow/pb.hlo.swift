@@ -1048,8 +1048,9 @@ extension Xla_HloInstructionProto: SwiftProtobuf._MessageImplementationBase, Swi
 
   public func _protobuf_generated_isEqualTo(other: Xla_HloInstructionProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._name != other_storage._name {return false}
         if _storage._opcode != other_storage._opcode {return false}
         if _storage._shape != other_storage._shape {return false}
@@ -1163,8 +1164,9 @@ extension Xla_LogicalBufferProto: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Xla_LogicalBufferProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._id != other_storage._id {return false}
         if _storage._size != other_storage._size {return false}
         if _storage._definedAt != other_storage._definedAt {return false}
@@ -1327,8 +1329,9 @@ extension Xla_BufferAssignmentProto.BufferAlias: SwiftProtobuf._MessageImplement
 
   public func _protobuf_generated_isEqualTo(other: Xla_BufferAssignmentProto.BufferAlias) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._sourceBufferID != other_storage._sourceBufferID {return false}
         if _storage._location != other_storage._location {return false}
         return true
@@ -1372,8 +1375,9 @@ extension Xla_HloProto: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf.
 
   public func _protobuf_generated_isEqualTo(other: Xla_HloProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._hloModule != other_storage._hloModule {return false}
         if _storage._hloOrdering != other_storage._hloOrdering {return false}
         if _storage._bufferAssignment != other_storage._bufferAssignment {return false}

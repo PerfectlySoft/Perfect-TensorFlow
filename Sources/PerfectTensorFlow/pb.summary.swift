@@ -138,9 +138,27 @@ public struct Tensorflow_HistogramProto: SwiftProtobuf.Message {
 public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".SummaryMetadata"
 
-  /// A list of plugin data. A single summary value instance may be used by more
-  /// than 1 plugin.
-  public var pluginData: [Tensorflow_SummaryMetadata.PluginData] = []
+  /// Data that associates a summary with a certain plugin.
+  public var pluginData: Tensorflow_SummaryMetadata.PluginData {
+    get {return _storage._pluginData ?? Tensorflow_SummaryMetadata.PluginData()}
+    set {_uniqueStorage()._pluginData = newValue}
+  }
+  /// Returns true if `pluginData` has been explicitly set.
+  public var hasPluginData: Bool {return _storage._pluginData != nil}
+  /// Clears the value of `pluginData`. Subsequent reads from it will return its default value.
+  public mutating func clearPluginData() {_storage._pluginData = nil}
+
+  /// Display name for viewing in TensorBoard.
+  public var displayName: String {
+    get {return _storage._displayName}
+    set {_uniqueStorage()._displayName = newValue}
+  }
+
+  /// Longform readable description of the summary sequence. Markdown supported.
+  public var summaryDescription: String {
+    get {return _storage._summaryDescription}
+    set {_uniqueStorage()._summaryDescription = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -197,10 +215,15 @@ public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
   /// initializers are defined in the SwiftProtobuf library. See the Message and
   /// Message+*Additions` files.
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeRepeatedMessageField(value: &self.pluginData)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._pluginData)
+        case 2: try decoder.decodeSingularStringField(value: &_storage._displayName)
+        case 3: try decoder.decodeSingularStringField(value: &_storage._summaryDescription)
+        default: break
+        }
       }
     }
   }
@@ -210,11 +233,21 @@ public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
   /// other serializer methods are defined in the SwiftProtobuf library. See the
   /// `Message` and `Message+*Additions` files.
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.pluginData.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.pluginData, fieldNumber: 1)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._pluginData {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if !_storage._displayName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._displayName, fieldNumber: 2)
+      }
+      if !_storage._summaryDescription.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._summaryDescription, fieldNumber: 3)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// A Summary is a set of named values to be displayed by the
@@ -636,10 +669,45 @@ extension Tensorflow_HistogramProto: SwiftProtobuf._MessageImplementationBase, S
 extension Tensorflow_SummaryMetadata: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "plugin_data"),
+    2: .standard(proto: "display_name"),
+    3: .standard(proto: "summary_description"),
   ]
 
+  fileprivate class _StorageClass {
+    var _pluginData: Tensorflow_SummaryMetadata.PluginData? = nil
+    var _displayName: String = String()
+    var _summaryDescription: String = String()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _pluginData = source._pluginData
+      _displayName = source._displayName
+      _summaryDescription = source._summaryDescription
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public func _protobuf_generated_isEqualTo(other: Tensorflow_SummaryMetadata) -> Bool {
-    if self.pluginData != other.pluginData {return false}
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._pluginData != other_storage._pluginData {return false}
+        if _storage._displayName != other_storage._displayName {return false}
+        if _storage._summaryDescription != other_storage._summaryDescription {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if unknownFields != other.unknownFields {return false}
     return true
   }
@@ -749,8 +817,9 @@ extension Tensorflow_Summary.Value: SwiftProtobuf._MessageImplementationBase, Sw
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Summary.Value) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._nodeName != other_storage._nodeName {return false}
         if _storage._tag != other_storage._tag {return false}
         if _storage._metadata != other_storage._metadata {return false}

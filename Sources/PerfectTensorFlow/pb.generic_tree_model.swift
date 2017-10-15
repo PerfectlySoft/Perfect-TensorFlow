@@ -1532,8 +1532,9 @@ extension Tensorflow_DecisionTrees_Model: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_Model) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._model != other_storage._model {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
         return true
@@ -1577,8 +1578,9 @@ extension Tensorflow_DecisionTrees_ModelAndFeatures: SwiftProtobuf._MessageImple
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_ModelAndFeatures) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._features != other_storage._features {return false}
         if _storage._model != other_storage._model {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
@@ -1620,8 +1622,9 @@ extension Tensorflow_DecisionTrees_ModelAndFeatures.Feature: SwiftProtobuf._Mess
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_ModelAndFeatures.Feature) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._featureID != other_storage._featureID {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
         return true
@@ -1667,8 +1670,9 @@ extension Tensorflow_DecisionTrees_Ensemble: SwiftProtobuf._MessageImplementatio
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_Ensemble) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._members != other_storage._members {return false}
         if _storage._combinationTechnique != other_storage._combinationTechnique {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
@@ -1713,8 +1717,9 @@ extension Tensorflow_DecisionTrees_Ensemble.Member: SwiftProtobuf._MessageImplem
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_Ensemble.Member) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._submodel != other_storage._submodel {return false}
         if _storage._submodelID != other_storage._submodelID {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
@@ -1805,8 +1810,9 @@ extension Tensorflow_DecisionTrees_TreeNode: SwiftProtobuf._MessageImplementatio
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_TreeNode) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._nodeID != other_storage._nodeID {return false}
         if _storage._depth != other_storage._depth {return false}
         if _storage._subtreeSize != other_storage._subtreeSize {return false}
@@ -1857,8 +1863,9 @@ extension Tensorflow_DecisionTrees_BinaryNode: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_BinaryNode) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._leftChildID != other_storage._leftChildID {return false}
         if _storage._rightChildID != other_storage._rightChildID {return false}
         if _storage._defaultDirection != other_storage._defaultDirection {return false}
@@ -1933,8 +1940,9 @@ extension Tensorflow_DecisionTrees_Leaf: SwiftProtobuf._MessageImplementationBas
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_Leaf) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._leaf != other_storage._leaf {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
         return true
@@ -1975,8 +1983,9 @@ extension Tensorflow_DecisionTrees_FeatureId: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_FeatureId) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._id != other_storage._id {return false}
         if _storage._additionalData != other_storage._additionalData {return false}
         return true
@@ -2035,8 +2044,9 @@ extension Tensorflow_DecisionTrees_InequalityTest: SwiftProtobuf._MessageImpleme
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_InequalityTest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._featureSum != other_storage._featureSum {return false}
         if _storage._type != other_storage._type {return false}
         if _storage._threshold != other_storage._threshold {return false}
@@ -2088,8 +2098,9 @@ extension Tensorflow_DecisionTrees_Value: SwiftProtobuf._MessageImplementationBa
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_Value) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._value != other_storage._value {return false}
         return true
       }

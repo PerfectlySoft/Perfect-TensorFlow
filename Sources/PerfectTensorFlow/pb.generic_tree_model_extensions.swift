@@ -128,8 +128,9 @@ extension Tensorflow_DecisionTrees_MatchingValuesTest: SwiftProtobuf._MessageImp
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_DecisionTrees_MatchingValuesTest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._featureID != other_storage._featureID {return false}
         if _storage._value != other_storage._value {return false}
         if _storage._inverse != other_storage._inverse {return false}
