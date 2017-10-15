@@ -262,8 +262,9 @@ extension Tensorflow_FunctionDef: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_FunctionDef) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._signature != other_storage._signature {return false}
         if _storage._attr != other_storage._attr {return false}
         if _storage._nodeDef != other_storage._nodeDef {return false}

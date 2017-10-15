@@ -59,10 +59,10 @@ public struct Tensorflow_SaverDef: SwiftProtobuf.Message {
     /// Internal legacy format.
     case legacy // = 0
 
-    /// Current format: tf.Saver() which works with tensorflow::table::Table.
+    /// Deprecated format: tf.Saver() which works with tensorflow::table::Table.
     case v1 // = 1
 
-    /// Experimental format under development.
+    /// Current format: more efficient.
     case v2 // = 2
     case UNRECOGNIZED(Int)
 

@@ -1077,8 +1077,9 @@ extension Tensorflow_Test_TestAllTypes: SwiftProtobuf._MessageImplementationBase
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Test_TestAllTypes) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._optionalInt32 != other_storage._optionalInt32 {return false}
         if _storage._optionalInt64 != other_storage._optionalInt64 {return false}
         if _storage._optionalUint32 != other_storage._optionalUint32 {return false}
@@ -1180,8 +1181,9 @@ extension Tensorflow_Test_TestAllTypes.NestedMessage: SwiftProtobuf._MessageImpl
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Test_TestAllTypes.NestedMessage) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._optionalInt32 != other_storage._optionalInt32 {return false}
         if _storage._repeatedInt32 != other_storage._repeatedInt32 {return false}
         if _storage._msg != other_storage._msg {return false}
@@ -1239,8 +1241,9 @@ extension Tensorflow_Test_NestedTestAllTypes: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Test_NestedTestAllTypes) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._child != other_storage._child {return false}
         if _storage._payload != other_storage._payload {return false}
         if _storage._mapStringToInt64 != other_storage._mapStringToInt64 {return false}

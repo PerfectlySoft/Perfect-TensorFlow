@@ -92,6 +92,15 @@ public struct Tensorflow_Tfcompile_Feed: SwiftProtobuf.Message {
     set {_uniqueStorage()._name = newValue}
   }
 
+  /// Optional data type. This is not normally required, as the graph itself
+  /// contains this information. However, if the node being fed is an op that
+  /// is not linked into the tfcompile binary, then the type cannot be inferred
+  /// from the node; in this case, the type should be set here.
+  public var type: Tensorflow_DataType {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -108,6 +117,7 @@ public struct Tensorflow_Tfcompile_Feed: SwiftProtobuf.Message {
         case 1: try decoder.decodeSingularMessageField(value: &_storage._id)
         case 2: try decoder.decodeSingularMessageField(value: &_storage._shape)
         case 3: try decoder.decodeSingularStringField(value: &_storage._name)
+        case 4: try decoder.decodeSingularEnumField(value: &_storage._type)
         default: break
         }
       }
@@ -128,6 +138,9 @@ public struct Tensorflow_Tfcompile_Feed: SwiftProtobuf.Message {
       }
       if !_storage._name.isEmpty {
         try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 3)
+      }
+      if _storage._type != .dtInvalid {
+        try visitor.visitSingularEnumField(value: _storage._type, fieldNumber: 4)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -264,12 +277,14 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
     1: .same(proto: "id"),
     2: .same(proto: "shape"),
     3: .same(proto: "name"),
+    4: .same(proto: "type"),
   ]
 
   fileprivate class _StorageClass {
     var _id: Tensorflow_Tfcompile_TensorId? = nil
     var _shape: Tensorflow_TensorShapeProto? = nil
     var _name: String = String()
+    var _type: Tensorflow_DataType = .dtInvalid
 
     static let defaultInstance = _StorageClass()
 
@@ -279,6 +294,7 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
       _id = source._id
       _shape = source._shape
       _name = source._name
+      _type = source._type
     }
   }
 
@@ -291,11 +307,13 @@ extension Tensorflow_Tfcompile_Feed: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Feed) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._id != other_storage._id {return false}
         if _storage._shape != other_storage._shape {return false}
         if _storage._name != other_storage._name {return false}
+        if _storage._type != other_storage._type {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -334,8 +352,9 @@ extension Tensorflow_Tfcompile_Fetch: SwiftProtobuf._MessageImplementationBase, 
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfcompile_Fetch) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._id != other_storage._id {return false}
         if _storage._name != other_storage._name {return false}
         return true

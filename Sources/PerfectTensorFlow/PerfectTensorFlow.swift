@@ -201,7 +201,7 @@ public class TensorFlow {
   public typealias QueueRunnerDef = Tensorflow_QueueRunnerDef
   public typealias ReaderBaseState = Tensorflow_ReaderBaseState
   public typealias RemoteFusedGraphExecuteInfo = Tensorflow_RemoteFusedGraphExecuteInfo
-  public typealias ResourceHandle = Tensorflow_ResourceHandle
+  public typealias ResourceHandle = Tensorflow_ResourceHandleProto
   public typealias AutoParallelOptions = Tensorflow_AutoParallelOptions
   public typealias RewriterConfig = Tensorflow_RewriterConfig
   public typealias SavedModel = Tensorflow_SavedModel
@@ -249,10 +249,10 @@ public class TensorFlow {
   public typealias Tfcompile_Config = Tensorflow_Tfcompile_Config
   public typealias Tfprof_CodeDef = Tensorflow_Tfprof_CodeDef
   public typealias Tfprof_OpLogEntry = Tensorflow_Tfprof_OpLogEntry
-  public typealias Tfprof_OpLog = Tensorflow_Tfprof_OpLog
+  public typealias Tfprof_OpLog = Tensorflow_Tfprof_OpLogProto
   public typealias Tfprof_OptionsProto = Tensorflow_Tfprof_OptionsProto
   public typealias Tfprof_TFProfTensorProto = Tensorflow_Tfprof_TFProfTensorProto
-  public typealias Tfprof_TFGraphNodeProto = Tensorflow_Tfprof_TFGraphNodeProto
+  //public typealias Tfprof_TFGraphNodeProto = Tensorflow_Tfprof_TFGraphNodeProto
   //public typealias Tfprof_TFCodeNodeProto = Tensorflow_Tfprof_TFCodeNodeProto
   public typealias Contrib_Tensorboard_TraceInfo = Tensorflow_Contrib_Tensorboard_TraceInfo
   public typealias Contrib_Tensorboard_OpInfo = Tensorflow_Contrib_Tensorboard_OpInfo

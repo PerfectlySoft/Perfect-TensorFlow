@@ -59,6 +59,8 @@ public struct Tensorflow_AutoParallelOptions: SwiftProtobuf.Message {
   }
 }
 
+/// Graph rewriting is experimental and subject to change, not covered by any
+/// API stability guarantees.
 public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RewriterConfig"
 
@@ -77,11 +79,16 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
     set {_uniqueStorage()._constantFolding = newValue}
   }
 
+  /// Configures memory optimization passes through the meta-optimizer. Has no
+  /// effect on manually requested memory optimization passes in the optimizers
+  /// field.
   public var memoryOptimization: Tensorflow_RewriterConfig.MemOptType {
     get {return _storage._memoryOptimization}
     set {_uniqueStorage()._memoryOptimization = newValue}
   }
 
+  /// Configures AutoParallel optimization passes either through the
+  /// meta-optimizer or when manually specified through the optimizers field.
   public var autoParallel: Tensorflow_AutoParallelOptions {
     get {return _storage._autoParallel ?? Tensorflow_AutoParallelOptions()}
     set {_uniqueStorage()._autoParallel = newValue}
@@ -92,7 +99,14 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public mutating func clearAutoParallel() {_storage._autoParallel = nil}
 
   /// If non-empty, will use this as an alternative way to specify a list of
-  /// optimizations to turn on and the order of the optimizations.
+  /// optimizations to turn on and the order of the optimizations (replacing the
+  /// meta-optimizer).
+  ///
+  /// Of the RewriterConfig options, only the AutoParallel configuration options
+  /// (the auto_parallel field) apply to manually requested optimization passes
+  /// ("autoparallel"). Memory optimization passes ("memory") invoked here are
+  /// not configurable (in contrast to memory optimization passes through the
+  /// meta-optimizer) and act only on manual op annotations.
   public var optimizers: [String] {
     get {return _storage._optimizers}
     set {_uniqueStorage()._optimizers = newValue}
@@ -103,11 +117,15 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public enum MemOptType: SwiftProtobuf.Enum {
     public typealias RawValue = Int
 
-    /// Fully disabled
+    /// Disabled in the meta-optimizer.
     case noMemOpt // = 0
 
-    /// Driven by manual annotations
+    /// Driven by manual op-level annotations.
     case manual // = 1
+
+    /// Driven by heuristics. The behavior of these heuristics is subject to
+    /// change. Currently includes an experimental recomputation heuristic.
+    case heuristics // = 2
     case UNRECOGNIZED(Int)
 
     public init() {
@@ -118,6 +136,7 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
       switch rawValue {
       case 0: self = .noMemOpt
       case 1: self = .manual
+      case 2: self = .heuristics
       default: self = .UNRECOGNIZED(rawValue)
       }
     }
@@ -126,6 +145,7 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
       switch self {
       case .noMemOpt: return 0
       case .manual: return 1
+      case .heuristics: return 2
       case .UNRECOGNIZED(let i): return i
       }
     }
@@ -245,8 +265,9 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_RewriterConfig) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._optimizeTensorLayout != other_storage._optimizeTensorLayout {return false}
         if _storage._disableModelPruning != other_storage._disableModelPruning {return false}
         if _storage._constantFolding != other_storage._constantFolding {return false}
@@ -266,5 +287,6 @@ extension Tensorflow_RewriterConfig.MemOptType: SwiftProtobuf._ProtoNameProvidin
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "NO_MEM_OPT"),
     1: .same(proto: "MANUAL"),
+    2: .same(proto: "HEURISTICS"),
   ]
 }

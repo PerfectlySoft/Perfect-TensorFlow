@@ -116,7 +116,7 @@ public struct Tensorflow_TensorProto: SwiftProtobuf.Message {
   }
 
   /// DT_RESOURCE
-  public var resourceHandleVal: [Tensorflow_ResourceHandle] {
+  public var resourceHandleVal: [Tensorflow_ResourceHandleProto] {
     get {return _storage._resourceHandleVal}
     set {_uniqueStorage()._resourceHandleVal = newValue}
   }
@@ -245,7 +245,7 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
     var _int64Val: [Int64] = []
     var _boolVal: [Bool] = []
     var _dcomplexVal: [Double] = []
-    var _resourceHandleVal: [Tensorflow_ResourceHandle] = []
+    var _resourceHandleVal: [Tensorflow_ResourceHandleProto] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -278,8 +278,9 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_TensorProto) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._dtype != other_storage._dtype {return false}
         if _storage._tensorShape != other_storage._tensorShape {return false}
         if _storage._versionNumber != other_storage._versionNumber {return false}

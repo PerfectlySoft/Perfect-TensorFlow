@@ -334,8 +334,9 @@ extension Tensorflow_GetRemoteAddressRequest: SwiftProtobuf._MessageImplementati
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GetRemoteAddressRequest) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._hostName != other_storage._hostName {return false}
         if _storage._channel != other_storage._channel {return false}
         if _storage._mr != other_storage._mr {return false}
@@ -380,8 +381,9 @@ extension Tensorflow_GetRemoteAddressResponse: SwiftProtobuf._MessageImplementat
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_GetRemoteAddressResponse) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) -> Bool in
-		let _storage = _args.0; let other_storage = _args.1
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._hostName != other_storage._hostName {return false}
         if _storage._channel != other_storage._channel {return false}
         if _storage._mr != other_storage._mr {return false}
