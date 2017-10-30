@@ -73,7 +73,9 @@ Sources
 
 ## 编程指南
 
-详细编程指南请参考这里： [Perfect TensorFlow 编程指南](GUIDE.zh_CN.md)
+详细编程指南请参考这里： [Perfect TensorFlow 编程指南](GUIDE.zh_CN.md)。
+
+另外，本项目同样包括了丰富的各种TensorFlow接口特性，比如**TensorFlow event事件** 和 **summary 总结**，用于 **TensorBoard**统计分析模型指标。详见 [Perfect TensorFlow 测试脚本](Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift)。
 
 ## 快速上手
 

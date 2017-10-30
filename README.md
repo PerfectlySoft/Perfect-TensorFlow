@@ -73,7 +73,9 @@ Up to now there is no such a plan to generate these protocol buffer files dynami
 
 ## API Guide
 
-API programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md)
+API programming topics can be found in [Perfect TensorFlow Guide](GUIDE.md).
+
+Also, there are many features that has already embedded in the testing script, such as **TensorFlow event** and **summary** for **TensorBoard** report and benchmarking. Please check the [Perfect TensorFlow Testing Script](Tests/PerfectTensorFlowTests/PerfectTensorFlowTests.swift) for detail.
 
 ## Quick Start
 

@@ -147,7 +147,8 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testGradients", testGradients),
     ("testMatrix", testMatrix),
     ("testBasicImproved",testBasicImproved),
-    ("testDevices", testDevices)
+    ("testDevices", testDevices),
+    ("testEventAndSummary", testEventAndSummary)
   ]
 
   func testDevices() {
@@ -1294,6 +1295,40 @@ class PerfectTensorFlowTests: XCTestCase {
       XCTAssertGreaterThan(oplist.operations.count, 0)
     }catch {
       XCTFail("OpList: \(error)")
+    }
+  }
+
+  func testEventAndSummary() {
+    var event = TF.Event()
+    event.fileVersion = "1.3.0"
+    event.wallTime = Date().timeIntervalSince1970
+    event.step = 0
+    do {
+      /*
+       Matrix Test:
+       | 1 2 |  |0 1|  |0 1|
+       |     |* |   |= |   |
+       | 3 4 |  |0 0|  |0 3|
+       */
+      let tA = try TF.Tensor.Matrix([[1, 2], [3, 4]])
+      let tB = try TF.Tensor.Matrix([[0, 0], [1, 0]])
+      let g = try TF.Graph()
+      let A = try g.const(tensor: tA, name: "Const_0")
+      let B = try g.const(tensor: tB, name: "Const_1")
+      _ = try g.matMul(l: A, r: B, name: "v", transposeB: true)
+      guard let def = try g.definition?.serializedData() else {
+        XCTFail("undefined")
+        return
+      }
+      event.graphDef = def
+      let value = try TF.Summary.Value(serializedData: try event.serializedData())
+      var summary = TF.Summary()
+      summary.value = [value]
+      let summaryData = try summary.serializedData()
+      guard let url = URL(string: "file:///tmp/written.summary.data") else { XCTFail(); return }
+      try summaryData.write(to: url)
+    }catch {
+      XCTFail("improved: \(error)")
     }
   }
 }
