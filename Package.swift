@@ -1,3 +1,5 @@
+// swift-tools-version:4.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 //
 //  Package.swift
 //  Perfect-TensorFlow
@@ -16,15 +18,28 @@
 //
 //===----------------------------------------------------------------------===//
 //
+
 import PackageDescription
 
 let package = Package(
     name: "PerfectTensorFlow",
-    targets: [
-      Target(name: "TensorFlowAPI", dependencies: []),
-      Target(name: "PerfectTensorFlow", dependencies: ["TensorFlowAPI"])
+    products: [
+        .library(
+            name: "PerfectTensorFlow",
+            targets: ["PerfectTensorFlow"]),
     ],
     dependencies: [
-      .Package(url: "https://github.com/apple/swift-protobuf.git", majorVersion:1)
+      .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.0.0")
+    ],
+    targets: [
+        .target(
+            name: "TensorFlowAPI",
+            dependencies: []),
+        .target(
+            name: "PerfectTensorFlow",
+            dependencies: ["TensorFlowAPI", "SwiftProtobuf"]),
+        .testTarget(
+            name: "PerfectTensorFlowTests",
+            dependencies: ["PerfectTensorFlow"]),
     ]
 )

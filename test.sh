@@ -19,6 +19,8 @@ else
 	mkdir /tmp/testdata/linux
 	echo 'expand linux library'
 	tar xzf /tmp/testdata/linux.lib.tgz -C /tmp/testdata/linux
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/testdata/linux/lib
+	ldconfig
 	BUILDPATH=.build_lin
 	TESTOUT=test-results.txt
 fi

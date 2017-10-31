@@ -6,5 +6,7 @@ URL=https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-$O
 echo $URL
 wget $URL -O $DWN
 sudo tar xvf $DWN -C /usr/local ./lib/libtensorflow.so
+sudo tar xvf $DWN -C /usr/local ./lib/libtensorflow_framework.so
 rm -f $DWN
 ls -l /usr/local/lib/libtensorflow.so
+ls -l /usr/local/lib/libtensorflow_framework.so

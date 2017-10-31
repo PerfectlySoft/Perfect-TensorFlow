@@ -1202,7 +1202,7 @@ class PerfectTensorFlowTests: XCTestCase {
   }
 
   func testVersion() {
-    XCTAssertEqual(TF.Version, "1.3.0")
+    XCTAssertTrue(TF.Version > "1.1.0")
   }
 
   func testSize() {

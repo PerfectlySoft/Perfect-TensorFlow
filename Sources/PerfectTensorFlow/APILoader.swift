@@ -906,7 +906,7 @@ public class TFLib {
       throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
     }
 
-    if ver > "1.3.0" {
+    if ver > "1.5.0" {
       GraphAddFunction = try LoadFunction(lib, "TF_GraphAddFunction")
       GraphToFunction = try LoadFunction(lib, "TF_GraphToFunction")
       FunctionToFunctionDef = try LoadFunction(lib, "TF_FunctionToFunctionDef")
