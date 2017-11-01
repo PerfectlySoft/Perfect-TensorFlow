@@ -311,21 +311,19 @@ class PerfectTensorFlowTests: XCTestCase {
       let img = try LabelImage()
       guard let eight = Data.Load("/tmp/testdata/8.jpg") else
       { throw TF.Panic.FAULT(reason: "hand write file 8.jpg not found")}
-      for _ in 0 ... 10 {
-        #if os(Linux)
-          let x = try img.match(image: eight)
-          XCTAssertEqual(x, 536)
-        #else
-          autoreleasepool(invoking: {
-            do {
-              let x = try img.match(image: eight)
-              XCTAssertEqual(x, 536)
-            }catch {
-              XCTFail("label loop: \(error)")
-            }
-          })
-        #endif
-      }
+      #if os(Linux)
+        let x = try img.match(image: eight)
+        XCTAssertEqual(x, 536)
+      #else
+        autoreleasepool(invoking: {
+          do {
+            let x = try img.match(image: eight)
+            XCTAssertEqual(x, 536)
+          }catch {
+            XCTFail("label loop: \(error)")
+          }
+        })
+      #endif
     }catch {
       XCTFail("label: \(error)")
     }
@@ -1187,11 +1185,7 @@ class PerfectTensorFlowTests: XCTestCase {
 
   override func setUp() {
     do {
-      #if os(Linux)
-      try TF.Open(library:"/tmp/testdata/linux/lib/libtensorflow.so")
-      #else
-      try TF.Open(library:"/tmp/testdata/darwin/lib/libtensorflow.so")
-      #endif
+      try TF.Open(library:"/tmp/testdata/lib/libtensorflow.so")
     }catch {
       XCTFail("\(error)")
     }

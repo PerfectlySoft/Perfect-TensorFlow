@@ -37,7 +37,8 @@ let package = Package(
             dependencies: []),
         .target(
             name: "PerfectTensorFlow",
-            dependencies: ["TensorFlowAPI", "SwiftProtobuf"]),
+            dependencies: ["TensorFlowAPI", "SwiftProtobuf"],
+            exclude:[]),
         .testTarget(
             name: "PerfectTensorFlowTests",
             dependencies: ["PerfectTensorFlow"]),
