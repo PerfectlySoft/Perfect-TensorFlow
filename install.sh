@@ -5,8 +5,5 @@ VERSION=`cat VERSION`
 URL=https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-$OSABR-x86_64-$VERSION.tar.gz
 echo $URL
 wget $URL -O $DWN
-sudo tar xvf $DWN -C /usr/local ./lib/libtensorflow.so
-sudo tar xvf $DWN -C /usr/local ./lib/libtensorflow_framework.so
+sudo tar xvf $DWN -C /usr/local ./lib/libtensorflow.so ./lib/libtensorflow_framework.so
 rm -f $DWN
-ls -l /usr/local/lib/libtensorflow.so
-ls -l /usr/local/lib/libtensorflow_framework.so
