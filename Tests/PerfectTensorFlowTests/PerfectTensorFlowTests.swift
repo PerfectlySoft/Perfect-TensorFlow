@@ -1185,7 +1185,7 @@ class PerfectTensorFlowTests: XCTestCase {
 
   override func setUp() {
     do {
-      try TF.Open()
+      try TF.Open(library: "/tmp/testdata/lib/libtensorflow.so")
     }catch {
       XCTFail("\(error)")
     }
