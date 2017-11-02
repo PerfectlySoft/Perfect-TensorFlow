@@ -1319,7 +1319,7 @@ class PerfectTensorFlowTests: XCTestCase {
       var summary = TF.Summary()
       summary.value = [value]
       let summaryData = try summary.serializedData()
-      guard let url = URL(string: "file:///tmp/written.summary.data") else { XCTFail(); return }
+      guard let url = URL(string: "file:///tmp/testdata/written.summary.data") else { XCTFail(); return }
       try summaryData.write(to: url)
     }catch {
       XCTFail("improved: \(error)")

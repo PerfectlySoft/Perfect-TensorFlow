@@ -785,12 +785,33 @@ public class TFLib {
   /// in this address space.
   public static var GetAllOpList: @convention(c) () -> UnsafeMutablePointer<TF_Buffer>? = { return nil }
 
-  /// Add `function` to graph `g`. Once `function` is added to `g`,
-  /// it can be called by creating an operation using the function's name.
-  ///
-  /// If successful, status is set to OK and function is added to g
-  /// Otherwise, status is set to the encountered error and g is unmodified
-  public static var GraphAddFunction: @convention(c) (OpaquePointer, OpaquePointer, OpaquePointer?) -> Void = { _, _, _ in }
+  // Adds a copy of function `func` and optionally its gradient function `grad`
+  // to `g`. Once `func`/`grad` is added to `g`, it can be called by creating
+  // an operation using the function's name.
+  // Any changes to `func`/`grad` (including deleting it) done after this method
+  // returns, won't affect the copy of `func`/`grad` in `g`.
+  // If `func` or `grad` are already in `g`, TF_GraphCopyFunction has no
+  // effect on them, but can establish the function->gradient relationship
+  // between them if `func` does not already have a gradient. If `func` already
+  // has a gradient different from `grad`, an error is returned.
+  //
+  // `func` must not be null.
+  // If `grad` is null and `func` is not in `g`, `func` is added without a
+  // gradient.
+  // If `grad` is null and `func` is in `g`, TF_GraphCopyFunction is a noop.
+  // `grad` must have appropriate signature as described in the doc of
+  // GradientDef in tensorflow/core/framework/function.proto.
+  //
+  // If successful, status is set to OK and `func` and `grad` are added to `g`.
+  // Otherwise, status is set to the encountered error and `g` is unmodified.
+  /*
+  TF_CAPI_EXPORT extern void TF_GraphCopyFunction(TF_Graph* g,
+  const TF_Function* func,
+  const TF_Function* grad,
+  TF_Status* status);
+   */
+
+  public static var GraphCopyFunction: @convention(c) (OpaquePointer?, OpaquePointer?, OpaquePointer?, OpaquePointer?) -> Void = { _, _, _, _ in }
 
   /// Create a TF_Function from a TF_Graph
   ///
@@ -873,7 +894,12 @@ public class TFLib {
   ///
   /// TODO(iga): Add input_names argument and get output_names working (they are
   /// currently ignored)
-  public static var GraphToFunction: @convention(c) (OpaquePointer, UnsafePointer<CChar>, Int32, UnsafePointer<OpaquePointer?>?, Int32, UnsafePointer<TF_Output>?, Int32, UnsafePointer<TF_Output>?, UnsafePointer<UnsafePointer<CChar>?>?, OpaquePointer?, OpaquePointer) -> OpaquePointer? = { _, _, _, _, _, _, _, _, _, _, _ in return nil}
+  public static var GraphToFunction: @convention(c) (OpaquePointer, UnsafePointer<CChar>,
+    UInt8, Int32,
+    UnsafePointer<OpaquePointer?>?, Int32, UnsafePointer<TF_Output>?,
+    Int32, UnsafePointer<TF_Output>?, UnsafePointer<UnsafePointer<CChar>?>?,
+    OpaquePointer?, UnsafePointer<CChar>?, OpaquePointer) -> OpaquePointer?
+    = { _, _, _, _, _, _, _, _, _, _, _, _, _ in return nil}
 
   /// Write out a serialized representation of `func` (as a FunctionDef protocol
   /// message) to `output_func_def` (allocated by TF_NewBuffer()).
@@ -883,6 +909,31 @@ public class TFLib {
   /// May fail on very large graphs in the future.
   public static var FunctionToFunctionDef: @convention(c) (OpaquePointer, UnsafeMutablePointer<TF_Buffer>?, OpaquePointer) -> Void = { _, _, _ in }
 
+  // Construct and return the function whose FunctionDef representation is
+  // serialized in `proto`. `proto_len` must equal the number of bytes
+  // pointed to by `proto`.
+  // Returns:
+  //  On success, a newly created TF_Function instance. It must be deleted by
+  //  calling TF_DeleteFunction.
+  //
+  //  On failure, null.
+  public static var FunctionImportFunctionDef: @convention(c) (UnsafeRawPointer?, Int32, OpaquePointer) -> OpaquePointer? = { _, _, _ in return nil}
+
+  // Sets function attribute named `attr_name` to value stored in `proto`.
+  // If this attribute is already set to another value, it is overridden.
+  // `proto` should point to a sequence of bytes of length `proto_len`
+  // representing a binary serialization of an AttrValue protocol
+  // buffer.
+  public static var FunctionSetAttrValueProto: @convention(c) (OpaquePointer?, UnsafePointer<CChar>?, UnsafeRawPointer?, Int32, OpaquePointer) -> Void = { _, _, _, _, _ in }
+
+  // Sets `output_attr_value` to the binary-serialized AttrValue proto
+  // representation of the value of the `attr_name` attr of `func`.
+  // If `attr_name` attribute is not present, status is set to an error.
+  public static var FunctionGetAttrValueProto: @convention(c) (OpaquePointer?, UnsafePointer<CChar>?, UnsafePointer<TF_Buffer>?, OpaquePointer) -> Void = { _, _, _, _ in }
+
+  // Frees the memory used by the `func` struct.
+  // TF_DeleteFunction is a noop if `func` is null.
+  // Deleting a function does not remove it from any graphs it was copied to.
   public static var DeleteFunction: @convention(c) (OpaquePointer?) -> Void = { _ in }
 
   /// Bootstrap of tensorflow library open, **MUST BE CALL BEFORE ANY OPERATIONS**
@@ -906,10 +957,13 @@ public class TFLib {
       throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
     }
 
-    if ver > "1.5.0" {
-      GraphAddFunction = try LoadFunction(lib, "TF_GraphAddFunction")
+    if ver >= "1.4.0" {
+      GraphCopyFunction = try LoadFunction(lib, "TF_GraphCopyFunction")
       GraphToFunction = try LoadFunction(lib, "TF_GraphToFunction")
       FunctionToFunctionDef = try LoadFunction(lib, "TF_FunctionToFunctionDef")
+      FunctionImportFunctionDef = try LoadFunction(lib, "TF_FunctionImportFunctionDef")
+      FunctionSetAttrValueProto = try LoadFunction(lib, "TF_FunctionSetAttrValueProto")
+      FunctionGetAttrValueProto = try LoadFunction(lib, "TF_FunctionGetAttrValueProto")
       DeleteFunction = try LoadFunction(lib, "TF_DeleteFunction")
     }
 

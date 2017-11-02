@@ -1875,7 +1875,7 @@ public class TensorFlow {
     ///   - inputs: [Output], array of TF_Outputs that specify the inputs to the function
     ///   - outputs: [Output], array of TF_Outputs that specify the outputs of the function.
     ///   - outputNames: [String], The names of the function's outputs. Must either have the same length as `outputs` or be null. In the former case, the names should match the regular expression for ArgDef names - "[a-z][a-z0-9_]*". In the latter case, names for outputs will be generated automatically.
-    public func toFunction(_ name: String, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil) throws -> Function? {
+    public func toFunction(_ name: String, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil, description: String = "") throws -> Function? {
       guard outputs.count == outputNames.count else {
         throw Panic.FAULT(reason: "Output array elements are mismatched with names")
       }
@@ -1887,34 +1887,22 @@ public class TensorFlow {
       let pOutputNames:UnsafePointer<UnsafePointer<CChar>?>? = outputNames
         .map { $0.withCString { p -> UnsafePointer<CChar> in return p } }
         .withUnsafeBufferPointer { $0.baseAddress }
-      guard let fun = TFLib.GraphToFunction(graph, name, Int32(operations.count > 0 ? operations.count: -1), operations.count > 0 ? opera : nil, Int32(inputs.count), pInputs, Int32(outputs.count), pOutpus, pOutputNames, options, status.status),
+      guard let fun = TFLib.GraphToFunction(graph, name, 0, Int32(operations.count > 0 ? operations.count: -1), operations.count > 0 ? opera : nil, Int32(inputs.count), pInputs, Int32(outputs.count), pOutpus, pOutputNames, options, description, status.status),
       let code = status.code, code == .OK else {
         throw Panic.FAULT(reason: status.message)
       }//end guard
-      return Function(self, reference: fun)
+      return Function(fun)
     }
 
     /// Function is a grouping of operations with defined inputs and outputs.
     /// Once created and added to graphs, functions can be invoked by creating an
     /// operation whose operation type matches the function name.
     public class Function {
-      let g: Graph
       let ref: OpaquePointer
 
       /// constructor. DO **NOT** CALL IT DIRECTLY. Call `Graph.toFunction()` to generate function instead.
-      public init(_ graph: Graph, reference: OpaquePointer) {
-        g = graph
+      public init(_ reference: OpaquePointer) {
         ref = reference
-      }
-
-      /// Add `function` to graph `g`. Once `function` is added to `g`,
-      /// it can be called by creating an operation using the function's name.
-      public func add () throws {
-        let status = try Status()
-        TFLib.GraphAddFunction(g.graph, ref, status.status)
-        guard let code = status.code, code == .OK else {
-          throw Panic.FAULT(reason: status.message)
-        }//end guard
       }
 
       /// delete function
