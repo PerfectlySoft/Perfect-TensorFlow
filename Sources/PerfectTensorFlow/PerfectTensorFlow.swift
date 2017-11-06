@@ -1869,13 +1869,34 @@ public class TensorFlow {
     }
 
     /// Create a function from a graph
+    /// Note that when the same TF_Output is listed as both an input and an output,
+    /// the corresponding function's output will equal to this input,
+    /// instead of the original node's output.
+    /// Callers must also satisfy the following constraints:
+    /// `inputs` cannot refer to TF_Outputs within a control flow context. For
+    /// example, one cannot use the output of "switch" node as input.
+    /// `inputs` and `outputs` cannot have reference types. Reference types are
+    /// not exposed through C API and are being replaced with Resources. We support
+    /// reference types inside function's body to support legacy code. Do not
+    /// use them in new code.
+    /// Every node in the function's body must have all of its inputs (including
+    /// control inputs). In other words, for every node in the body, each input
+    /// must be either listed in `inputs` or must come from another node in
+    /// the body. In particular, it is an error to have a control edge going from
+    /// a node outside of the body into a node in the body. This applies to control
+    /// edges going from nodes referenced in `inputs` to nodes in the body when
+    /// the former nodes are not in the body (automatically skipped or not
+    /// included in explicitly specified body).
     /// - parameters:
     ///   - name: String, the name of the new TF_Function. Should match the operation name (OpDef.name) regexp [A-Z][A-Za-z0-9_.\\-/]* and be distinct from other operation names (at least those registered in graphs  where this function will be used).
-    ///   - operations: [Operation], Array of operations to become the body of the function or null
+    ///   - appendHashToFunctionName: if true, the actual name of the function will be function name appended with `_<hash_of_this_function's_definition>`.
+    ///   - operations: [Operation], Array of operations to become the body of the function or empty
     ///   - inputs: [Output], array of TF_Outputs that specify the inputs to the function
     ///   - outputs: [Output], array of TF_Outputs that specify the outputs of the function.
     ///   - outputNames: [String], The names of the function's outputs. Must either have the same length as `outputs` or be null. In the former case, the names should match the regular expression for ArgDef names - "[a-z][a-z0-9_]*". In the latter case, names for outputs will be generated automatically.
-    public func toFunction(_ name: String, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil, description: String = "") throws -> Function? {
+    ///   - options: various options for the function, e.g. XLA's inlining control.
+    ///   - description: optional human-readable description of this function
+    public func toFunction(_ name: String, appendHashToFunctionName: Bool = false, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil, description: String = "") throws -> Function {
       guard outputs.count == outputNames.count else {
         throw Panic.FAULT(reason: "Output array elements are mismatched with names")
       }
@@ -1887,8 +1908,26 @@ public class TensorFlow {
       let pOutputNames:UnsafePointer<UnsafePointer<CChar>?>? = outputNames
         .map { $0.withCString { p -> UnsafePointer<CChar> in return p } }
         .withUnsafeBufferPointer { $0.baseAddress }
-      guard let fun = TFLib.GraphToFunction(graph, name, 0, Int32(operations.count > 0 ? operations.count: -1), operations.count > 0 ? opera : nil, Int32(inputs.count), pInputs, Int32(outputs.count), pOutpus, pOutputNames, options, description, status.status),
-      let code = status.code, code == .OK else {
+      guard
+        let fun = TFLib.GraphToFunction (
+          graph, name, appendHashToFunctionName ? 1 : 0,
+
+          Int32(operations.count > 0 ? operations.count: -1),
+          operations.count > 0 ? opera : nil,
+
+          Int32(inputs.count > 0 ? inputs.count : 0),
+          inputs.count > 0 ? pInputs : nil,
+
+          Int32(outputs.count > 0 ? outputs.count: 0),
+          outputs.count > 0 ? pOutpus : nil,
+
+          outputs.count > 0 && outputNames.count == outputs.count ? pOutputNames : nil,
+
+          options, description.isEmpty ? nil: description,
+
+          status.status),
+
+          let code = status.code, code == .OK else {
         throw Panic.FAULT(reason: status.message)
       }//end guard
       return Function(fun)
@@ -1905,8 +1944,62 @@ public class TensorFlow {
         ref = reference
       }
 
+      /// Construct and return the function whose FunctionDef representation is
+      /// serialized in `importDefinition`.
+      /// - parameters:
+      ///   - importDefinition: protobuf data of the previous exported function.
+      /// - throws: Panic.Fault(reason: status.message)
+      public init(importDefinition: FunctionDef) throws {
+        let proto = try importDefinition.serializedData()
+        ref = try proto.withUnsafeBytes {
+          (p: UnsafePointer<UInt8>) throws -> OpaquePointer in
+          let status = try Status()
+          guard let function = TFLib.FunctionImportFunctionDef(
+            p, Int32(proto.count), status.status),
+            status.code == .OK else {
+              throw Panic.FAULT(reason: status.message)
+          }
+          return function
+        }
+      }
+
+      /// Sets function attribute named `name` to value.
+      /// If this attribute is already set to another value, it is overridden.
+      /// - parameters:
+      ///   - name: name of the attribute
+      ///   - value: AttrValue of the attribute
+      /// - throws: Panic.Fault(reason: status.message)
+      public func setAttributeFor(_ name: String, value: AttrValue) throws {
+        let proto = try value.serializedData()
+        try proto.withUnsafeBytes {
+          (p: UnsafePointer<UInt8>) throws in
+          let status = try Status()
+          TFLib.FunctionSetAttrValueProto(
+            ref, name, p, Int32(proto.count), status.status)
+          guard status.code == .OK else {
+            throw Panic.FAULT(reason: status.message)
+          }
+        }
+      }
+
+      /// get an attribute value by its name
+      /// - parameters:
+      ///   - name: string name of the attribute
+      /// - throws: Panic.Fault(reason: status.message)
+      /// - returns: AttrValue
+      public func getAttributeFor(_ name: String) throws -> AttrValue {
+        let status = try Status()
+        let buffer = try Buffer()
+        TFLib.FunctionGetAttrValueProto(ref, name, buffer.buffer, status.status)
+        guard status.code == .OK,
+          let proto = buffer.data else {
+          throw Panic.FAULT(reason: status.message)
+        }
+        return try AttrValue(serializedData: proto)
+      }
+
       /// delete function
-      public func delete() {
+      deinit {
         TFLib.DeleteFunction(ref)
       }
 
@@ -1921,6 +2014,15 @@ public class TensorFlow {
         } else {
           return nil
         }
+      }
+    }
+
+    /// get definition
+    public var def: FunctionDef? {
+      if let buf = self.buffer, let proto = buf.data {
+        return try? FunctionDef(serializedData: proto)
+      } else {
+        return nil
       }
     }
 

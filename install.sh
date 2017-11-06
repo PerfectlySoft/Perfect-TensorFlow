@@ -13,4 +13,6 @@ echo $URL
 curl $URL -o $DWN
 echo "installing binaries ..."
 tar xf $DWN -C $LOC ./lib/libtensorflow.so ./lib/libtensorflow_framework.so
+touch $LOC/lib/libtensorflow.so
+touch $LOC/lib/libtensorflow_framework.so
 rm -f $DWN
