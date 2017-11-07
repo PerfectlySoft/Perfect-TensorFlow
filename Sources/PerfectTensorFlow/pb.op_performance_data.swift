@@ -195,6 +195,86 @@ public struct Tensorflow_OpInfo: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+public struct Tensorflow_NormalDistribution: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".NormalDistribution"
+
+  public var mu: Double = 0
+
+  public var sigma: Double = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularDoubleField(value: &self.mu)
+      case 2: try decoder.decodeSingularDoubleField(value: &self.sigma)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.mu != 0 {
+      try visitor.visitSingularDoubleField(value: self.mu, fieldNumber: 1)
+    }
+    if self.sigma != 0 {
+      try visitor.visitSingularDoubleField(value: self.sigma, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
+public struct Tensorflow_LogNormalDistribution: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".LogNormalDistribution"
+
+  public var mu: Double = 0
+
+  public var sigma: Double = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularDoubleField(value: &self.mu)
+      case 2: try decoder.decodeSingularDoubleField(value: &self.sigma)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.mu != 0 {
+      try visitor.visitSingularDoubleField(value: self.mu, fieldNumber: 1)
+    }
+    if self.sigma != 0 {
+      try visitor.visitSingularDoubleField(value: self.sigma, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 /// Performance data for tensorflow operations
 public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpPerformance"
@@ -252,6 +332,28 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
     set {_uniqueStorage()._memoryEfficiency = newValue}
   }
 
+  /// Expected execution time, modeled using one of 2 possible distributions.
+  public var executionTime: OneOf_ExecutionTime? {
+    get {return _storage._executionTime}
+    set {_uniqueStorage()._executionTime = newValue}
+  }
+
+  public var executionTimeNormal: Tensorflow_NormalDistribution {
+    get {
+      if case .executionTimeNormal(let v)? = _storage._executionTime {return v}
+      return Tensorflow_NormalDistribution()
+    }
+    set {_uniqueStorage()._executionTime = .executionTimeNormal(newValue)}
+  }
+
+  public var executionTimeLogNormal: Tensorflow_LogNormalDistribution {
+    get {
+      if case .executionTimeLogNormal(let v)? = _storage._executionTime {return v}
+      return Tensorflow_LogNormalDistribution()
+    }
+    set {_uniqueStorage()._executionTime = .executionTimeLogNormal(newValue)}
+  }
+
   public var opMemory: Tensorflow_OpPerformance.OpMemory {
     get {return _storage._opMemory ?? Tensorflow_OpPerformance.OpMemory()}
     set {_uniqueStorage()._opMemory = newValue}
@@ -262,6 +364,20 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
   public mutating func clearOpMemory() {_storage._opMemory = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// Expected execution time, modeled using one of 2 possible distributions.
+  public enum OneOf_ExecutionTime: Equatable {
+    case executionTimeNormal(Tensorflow_NormalDistribution)
+    case executionTimeLogNormal(Tensorflow_LogNormalDistribution)
+
+    public static func ==(lhs: Tensorflow_OpPerformance.OneOf_ExecutionTime, rhs: Tensorflow_OpPerformance.OneOf_ExecutionTime) -> Bool {
+      switch (lhs, rhs) {
+      case (.executionTimeNormal(let l), .executionTimeNormal(let r)): return l == r
+      case (.executionTimeLogNormal(let l), .executionTimeLogNormal(let r)): return l == r
+      default: return false
+      }
+    }
+  }
 
   /// Memory usage data for a tensorflow operation.
   public struct OpMemory: SwiftProtobuf.Message {
@@ -345,6 +461,22 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
         case 7: try decoder.decodeSingularInt64Field(value: &_storage._memoryTime)
         case 8: try decoder.decodeSingularDoubleField(value: &_storage._memoryEfficiency)
         case 9: try decoder.decodeSingularMessageField(value: &_storage._opMemory)
+        case 10:
+          var v: Tensorflow_NormalDistribution?
+          if let current = _storage._executionTime {
+            try decoder.handleConflictingOneOf()
+            if case .executionTimeNormal(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._executionTime = .executionTimeNormal(v)}
+        case 11:
+          var v: Tensorflow_LogNormalDistribution?
+          if let current = _storage._executionTime {
+            try decoder.handleConflictingOneOf()
+            if case .executionTimeLogNormal(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._executionTime = .executionTimeLogNormal(v)}
         default: break
         }
       }
@@ -383,6 +515,13 @@ public struct Tensorflow_OpPerformance: SwiftProtobuf.Message {
       }
       if let v = _storage._opMemory {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      }
+      switch _storage._executionTime {
+      case .executionTimeNormal(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      case .executionTimeLogNormal(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      case nil: break
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -532,6 +671,34 @@ extension Tensorflow_OpInfo.TensorProperties: SwiftProtobuf._MessageImplementati
   }
 }
 
+extension Tensorflow_NormalDistribution: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "mu"),
+    2: .same(proto: "sigma"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_NormalDistribution) -> Bool {
+    if self.mu != other.mu {return false}
+    if self.sigma != other.sigma {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tensorflow_LogNormalDistribution: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "mu"),
+    2: .same(proto: "sigma"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_LogNormalDistribution) -> Bool {
+    if self.mu != other.mu {return false}
+    if self.sigma != other.sigma {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
 extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "op"),
@@ -542,6 +709,8 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
     7: .standard(proto: "memory_time"),
     4: .standard(proto: "compute_efficiency"),
     8: .standard(proto: "memory_efficiency"),
+    10: .standard(proto: "execution_time_normal"),
+    11: .standard(proto: "execution_time_log_normal"),
     9: .standard(proto: "op_memory"),
   ]
 
@@ -554,6 +723,7 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
     var _memoryTime: Int64 = 0
     var _computeEfficiency: Double = 0
     var _memoryEfficiency: Double = 0
+    var _executionTime: Tensorflow_OpPerformance.OneOf_ExecutionTime?
     var _opMemory: Tensorflow_OpPerformance.OpMemory? = nil
 
     static let defaultInstance = _StorageClass()
@@ -569,6 +739,7 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
       _memoryTime = source._memoryTime
       _computeEfficiency = source._computeEfficiency
       _memoryEfficiency = source._memoryEfficiency
+      _executionTime = source._executionTime
       _opMemory = source._opMemory
     }
   }
@@ -593,6 +764,7 @@ extension Tensorflow_OpPerformance: SwiftProtobuf._MessageImplementationBase, Sw
         if _storage._memoryTime != other_storage._memoryTime {return false}
         if _storage._computeEfficiency != other_storage._computeEfficiency {return false}
         if _storage._memoryEfficiency != other_storage._memoryEfficiency {return false}
+        if _storage._executionTime != other_storage._executionTime {return false}
         if _storage._opMemory != other_storage._opMemory {return false}
         return true
       }

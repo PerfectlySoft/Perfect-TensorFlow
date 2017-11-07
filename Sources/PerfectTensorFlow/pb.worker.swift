@@ -458,6 +458,8 @@ public struct Tensorflow_ExecutorOpts: SwiftProtobuf.Message {
 
   public var recordTimeline: Bool = false
 
+  public var recordPartitionGraphs: Bool = false
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -471,6 +473,7 @@ public struct Tensorflow_ExecutorOpts: SwiftProtobuf.Message {
       switch fieldNumber {
       case 1: try decoder.decodeSingularBoolField(value: &self.recordCosts)
       case 3: try decoder.decodeSingularBoolField(value: &self.recordTimeline)
+      case 4: try decoder.decodeSingularBoolField(value: &self.recordPartitionGraphs)
       default: break
       }
     }
@@ -486,6 +489,9 @@ public struct Tensorflow_ExecutorOpts: SwiftProtobuf.Message {
     }
     if self.recordTimeline != false {
       try visitor.visitSingularBoolField(value: self.recordTimeline, fieldNumber: 3)
+    }
+    if self.recordPartitionGraphs != false {
+      try visitor.visitSingularBoolField(value: self.recordPartitionGraphs, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -631,8 +637,9 @@ public struct Tensorflow_RunGraphResponse: SwiftProtobuf.Message {
     set {_uniqueStorage()._recv = newValue}
   }
 
-  /// If the request asked for execution stats or cost graph, these are returned
-  /// here.
+  /// If the request asked for execution stats, the cost graph, or the partition
+  /// graphs, these are returned here.
+  /// TODO(suharshs): Package these in a RunMetadata instead.
   public var stepStats: Tensorflow_StepStats {
     get {return _storage._stepStats ?? Tensorflow_StepStats()}
     set {_uniqueStorage()._stepStats = newValue}
@@ -651,6 +658,11 @@ public struct Tensorflow_RunGraphResponse: SwiftProtobuf.Message {
   /// Clears the value of `costGraph`. Subsequent reads from it will return its default value.
   public mutating func clearCostGraph() {_storage._costGraph = nil}
 
+  public var partitionGraph: [Tensorflow_GraphDef] {
+    get {return _storage._partitionGraph}
+    set {_uniqueStorage()._partitionGraph = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -667,6 +679,7 @@ public struct Tensorflow_RunGraphResponse: SwiftProtobuf.Message {
         case 1: try decoder.decodeRepeatedMessageField(value: &_storage._recv)
         case 2: try decoder.decodeSingularMessageField(value: &_storage._stepStats)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._costGraph)
+        case 4: try decoder.decodeRepeatedMessageField(value: &_storage._partitionGraph)
         default: break
         }
       }
@@ -687,6 +700,9 @@ public struct Tensorflow_RunGraphResponse: SwiftProtobuf.Message {
       }
       if let v = _storage._costGraph {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if !_storage._partitionGraph.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._partitionGraph, fieldNumber: 4)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -1432,11 +1448,13 @@ extension Tensorflow_ExecutorOpts: SwiftProtobuf._MessageImplementationBase, Swi
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "record_costs"),
     3: .standard(proto: "record_timeline"),
+    4: .standard(proto: "record_partition_graphs"),
   ]
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_ExecutorOpts) -> Bool {
     if self.recordCosts != other.recordCosts {return false}
     if self.recordTimeline != other.recordTimeline {return false}
+    if self.recordPartitionGraphs != other.recordPartitionGraphs {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
@@ -1514,12 +1532,14 @@ extension Tensorflow_RunGraphResponse: SwiftProtobuf._MessageImplementationBase,
     1: .same(proto: "recv"),
     2: .standard(proto: "step_stats"),
     3: .standard(proto: "cost_graph"),
+    4: .standard(proto: "partition_graph"),
   ]
 
   fileprivate class _StorageClass {
     var _recv: [Tensorflow_NamedTensorProto] = []
     var _stepStats: Tensorflow_StepStats? = nil
     var _costGraph: Tensorflow_CostGraphDef? = nil
+    var _partitionGraph: [Tensorflow_GraphDef] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -1529,6 +1549,7 @@ extension Tensorflow_RunGraphResponse: SwiftProtobuf._MessageImplementationBase,
       _recv = source._recv
       _stepStats = source._stepStats
       _costGraph = source._costGraph
+      _partitionGraph = source._partitionGraph
     }
   }
 
@@ -1547,6 +1568,7 @@ extension Tensorflow_RunGraphResponse: SwiftProtobuf._MessageImplementationBase,
         if _storage._recv != other_storage._recv {return false}
         if _storage._stepStats != other_storage._stepStats {return false}
         if _storage._costGraph != other_storage._costGraph {return false}
+        if _storage._partitionGraph != other_storage._partitionGraph {return false}
         return true
       }
       if !storagesAreEqual {return false}

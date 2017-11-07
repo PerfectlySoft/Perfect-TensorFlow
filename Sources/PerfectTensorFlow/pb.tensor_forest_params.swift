@@ -63,7 +63,10 @@ public enum Tensorflow_Tensorforest_StatsModelType: SwiftProtobuf.Enum {
   case statsDenseGini // = 0
   case statsSparseGini // = 1
   case statsLeastSquaresRegression // = 2
+
+  /// STATS_SPARSE_THEN_DENSE_GINI is deprecated and no longer supported.
   case statsSparseThenDenseGini // = 3
+  case statsFixedSizeSparseGini // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -76,6 +79,7 @@ public enum Tensorflow_Tensorforest_StatsModelType: SwiftProtobuf.Enum {
     case 1: self = .statsSparseGini
     case 2: self = .statsLeastSquaresRegression
     case 3: self = .statsSparseThenDenseGini
+    case 4: self = .statsFixedSizeSparseGini
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -86,6 +90,7 @@ public enum Tensorflow_Tensorforest_StatsModelType: SwiftProtobuf.Enum {
     case .statsSparseGini: return 1
     case .statsLeastSquaresRegression: return 2
     case .statsSparseThenDenseGini: return 3
+    case .statsFixedSizeSparseGini: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -699,6 +704,11 @@ public struct Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf.Message 
     set {_uniqueStorage()._initializeAverageSplits = newValue}
   }
 
+  public var inferenceTreePaths: Bool {
+    get {return _storage._inferenceTreePaths}
+    set {_uniqueStorage()._inferenceTreePaths = newValue}
+  }
+
   /// Number of classes (classification) or targets (regression)
   public var numOutputs: Int32 {
     get {return _storage._numOutputs}
@@ -753,6 +763,13 @@ public struct Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf.Message 
     set {_uniqueStorage()._numSelectFeatures = newValue}
   }
 
+  /// When using a FixedSizeSparseClassificationGrowStats, keep track of
+  /// this many classes.
+  public var numClassesToTrack: Int32 {
+    get {return _storage._numClassesToTrack}
+    set {_uniqueStorage()._numClassesToTrack = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -788,6 +805,8 @@ public struct Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf.Message 
         case 20: try decoder.decodeSingularBoolField(value: &_storage._useRunningStatsMethod)
         case 21: try decoder.decodeSingularInt32Field(value: &_storage._numFeatures)
         case 22: try decoder.decodeSingularBoolField(value: &_storage._initializeAverageSplits)
+        case 23: try decoder.decodeSingularBoolField(value: &_storage._inferenceTreePaths)
+        case 24: try decoder.decodeSingularInt32Field(value: &_storage._numClassesToTrack)
         default: break
         }
       }
@@ -866,6 +885,12 @@ public struct Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf.Message 
       if _storage._initializeAverageSplits != false {
         try visitor.visitSingularBoolField(value: _storage._initializeAverageSplits, fieldNumber: 22)
       }
+      if _storage._inferenceTreePaths != false {
+        try visitor.visitSingularBoolField(value: _storage._inferenceTreePaths, fieldNumber: 23)
+      }
+      if _storage._numClassesToTrack != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._numClassesToTrack, fieldNumber: 24)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -892,6 +917,7 @@ extension Tensorflow_Tensorforest_StatsModelType: SwiftProtobuf._ProtoNameProvid
     1: .same(proto: "STATS_SPARSE_GINI"),
     2: .same(proto: "STATS_LEAST_SQUARES_REGRESSION"),
     3: .same(proto: "STATS_SPARSE_THEN_DENSE_GINI"),
+    4: .same(proto: "STATS_FIXED_SIZE_SPARSE_GINI"),
   ]
 }
 
@@ -1117,6 +1143,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
     11: .standard(proto: "checkpoint_stats"),
     20: .standard(proto: "use_running_stats_method"),
     22: .standard(proto: "initialize_average_splits"),
+    23: .standard(proto: "inference_tree_paths"),
     12: .standard(proto: "num_outputs"),
     13: .standard(proto: "num_splits_to_consider"),
     14: .standard(proto: "split_after_samples"),
@@ -1124,6 +1151,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
     18: .standard(proto: "min_split_samples"),
     16: .standard(proto: "graph_dir"),
     17: .standard(proto: "num_select_features"),
+    24: .standard(proto: "num_classes_to_track"),
   ]
 
   fileprivate class _StorageClass {
@@ -1142,6 +1170,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
     var _checkpointStats: Bool = false
     var _useRunningStatsMethod: Bool = false
     var _initializeAverageSplits: Bool = false
+    var _inferenceTreePaths: Bool = false
     var _numOutputs: Int32 = 0
     var _numSplitsToConsider: Tensorflow_Tensorforest_DepthDependentParam? = nil
     var _splitAfterSamples: Tensorflow_Tensorforest_DepthDependentParam? = nil
@@ -1149,6 +1178,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
     var _minSplitSamples: Tensorflow_Tensorforest_DepthDependentParam? = nil
     var _graphDir: String = String()
     var _numSelectFeatures: Int32 = 0
+    var _numClassesToTrack: Int32 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -1170,6 +1200,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
       _checkpointStats = source._checkpointStats
       _useRunningStatsMethod = source._useRunningStatsMethod
       _initializeAverageSplits = source._initializeAverageSplits
+      _inferenceTreePaths = source._inferenceTreePaths
       _numOutputs = source._numOutputs
       _numSplitsToConsider = source._numSplitsToConsider
       _splitAfterSamples = source._splitAfterSamples
@@ -1177,6 +1208,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
       _minSplitSamples = source._minSplitSamples
       _graphDir = source._graphDir
       _numSelectFeatures = source._numSelectFeatures
+      _numClassesToTrack = source._numClassesToTrack
     }
   }
 
@@ -1207,6 +1239,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
         if _storage._checkpointStats != other_storage._checkpointStats {return false}
         if _storage._useRunningStatsMethod != other_storage._useRunningStatsMethod {return false}
         if _storage._initializeAverageSplits != other_storage._initializeAverageSplits {return false}
+        if _storage._inferenceTreePaths != other_storage._inferenceTreePaths {return false}
         if _storage._numOutputs != other_storage._numOutputs {return false}
         if _storage._numSplitsToConsider != other_storage._numSplitsToConsider {return false}
         if _storage._splitAfterSamples != other_storage._splitAfterSamples {return false}
@@ -1214,6 +1247,7 @@ extension Tensorflow_Tensorforest_TensorForestParams: SwiftProtobuf._MessageImpl
         if _storage._minSplitSamples != other_storage._minSplitSamples {return false}
         if _storage._graphDir != other_storage._graphDir {return false}
         if _storage._numSelectFeatures != other_storage._numSelectFeatures {return false}
+        if _storage._numClassesToTrack != other_storage._numClassesToTrack {return false}
         return true
       }
       if !storagesAreEqual {return false}

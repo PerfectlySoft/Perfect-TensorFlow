@@ -73,7 +73,7 @@ public struct Tensorflow_BoostedTrees_Learner_TreeRegularizationConfig: SwiftPro
 public struct Tensorflow_BoostedTrees_Learner_TreeConstraintsConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".TreeConstraintsConfig"
 
-  /// Maximum depth of the trees.
+  /// Maximum depth of the trees. The default value is 6 if not specified.
   public var maxTreeDepth: UInt32 = 0
 
   /// Min hessian weight per node.
@@ -502,19 +502,19 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
   /// Clears the value of `constraints`. Subsequent reads from it will return its default value.
   public mutating func clearConstraints() {_storage._constraints = nil}
 
-  /// Pruning.
+  /// Pruning. POST_PRUNE is the default pruning mode.
   public var pruningMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.PruningMode {
     get {return _storage._pruningMode}
     set {_uniqueStorage()._pruningMode = newValue}
   }
 
-  /// Growing Mode.
+  /// Growing Mode. LAYER_BY_LAYER is the default growing mode.
   public var growingMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.GrowingMode {
     get {return _storage._growingMode}
     set {_uniqueStorage()._growingMode = newValue}
   }
 
-  /// Learning rate.
+  /// Learning rate. By default we use fixed learning rate of 0.1.
   public var learningRateTuner: Tensorflow_BoostedTrees_Learner_LearningRateConfig {
     get {return _storage._learningRateTuner ?? Tensorflow_BoostedTrees_Learner_LearningRateConfig()}
     set {_uniqueStorage()._learningRateTuner = newValue}
@@ -524,7 +524,9 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
   /// Clears the value of `learningRateTuner`. Subsequent reads from it will return its default value.
   public mutating func clearLearningRateTuner() {_storage._learningRateTuner = nil}
 
-  /// Multi-class strategy.
+  /// Multi-class strategy. By default we use TREE_PER_CLASS for binary
+  /// classification and linear regression. For other cases, we use
+  /// DIAGONAL_HESSIAN as the default.
   public var multiClassStrategy: Tensorflow_BoostedTrees_Learner_LearnerConfig.MultiClassStrategy {
     get {return _storage._multiClassStrategy}
     set {_uniqueStorage()._multiClassStrategy = newValue}
@@ -560,26 +562,29 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
 
   public enum PruningMode: SwiftProtobuf.Enum {
     public typealias RawValue = Int
-    case prePrune // = 0
-    case postPrune // = 1
+    case unspecified // = 0
+    case prePrune // = 1
+    case postPrune // = 2
     case UNRECOGNIZED(Int)
 
     public init() {
-      self = .prePrune
+      self = .unspecified
     }
 
     public init?(rawValue: Int) {
       switch rawValue {
-      case 0: self = .prePrune
-      case 1: self = .postPrune
+      case 0: self = .unspecified
+      case 1: self = .prePrune
+      case 2: self = .postPrune
       default: self = .UNRECOGNIZED(rawValue)
       }
     }
 
     public var rawValue: Int {
       switch self {
-      case .prePrune: return 0
-      case .postPrune: return 1
+      case .unspecified: return 0
+      case .prePrune: return 1
+      case .postPrune: return 2
       case .UNRECOGNIZED(let i): return i
       }
     }
@@ -588,28 +593,29 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
 
   public enum GrowingMode: SwiftProtobuf.Enum {
     public typealias RawValue = Int
-    case wholeTree // = 0
-
-    /// Layer by layer is only supported by the batch learner.
-    case layerByLayer // = 1
+    case unspecified // = 0
+    case wholeTree // = 1
+    case layerByLayer // = 2
     case UNRECOGNIZED(Int)
 
     public init() {
-      self = .wholeTree
+      self = .unspecified
     }
 
     public init?(rawValue: Int) {
       switch rawValue {
-      case 0: self = .wholeTree
-      case 1: self = .layerByLayer
+      case 0: self = .unspecified
+      case 1: self = .wholeTree
+      case 2: self = .layerByLayer
       default: self = .UNRECOGNIZED(rawValue)
       }
     }
 
     public var rawValue: Int {
       switch self {
-      case .wholeTree: return 0
-      case .layerByLayer: return 1
+      case .unspecified: return 0
+      case .wholeTree: return 1
+      case .layerByLayer: return 2
       case .UNRECOGNIZED(let i): return i
       }
     }
@@ -618,29 +624,32 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
 
   public enum MultiClassStrategy: SwiftProtobuf.Enum {
     public typealias RawValue = Int
-    case treePerClass // = 0
-    case fullHessian // = 1
-    case diagonalHessian // = 2
+    case unspecified // = 0
+    case treePerClass // = 1
+    case fullHessian // = 2
+    case diagonalHessian // = 3
     case UNRECOGNIZED(Int)
 
     public init() {
-      self = .treePerClass
+      self = .unspecified
     }
 
     public init?(rawValue: Int) {
       switch rawValue {
-      case 0: self = .treePerClass
-      case 1: self = .fullHessian
-      case 2: self = .diagonalHessian
+      case 0: self = .unspecified
+      case 1: self = .treePerClass
+      case 2: self = .fullHessian
+      case 3: self = .diagonalHessian
       default: self = .UNRECOGNIZED(rawValue)
       }
     }
 
     public var rawValue: Int {
       switch self {
-      case .treePerClass: return 0
-      case .fullHessian: return 1
-      case .diagonalHessian: return 2
+      case .unspecified: return 0
+      case .treePerClass: return 1
+      case .fullHessian: return 2
+      case .diagonalHessian: return 3
       case .UNRECOGNIZED(let i): return i
       }
     }
@@ -707,13 +716,13 @@ public struct Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf.Messa
       if let v = _storage._learningRateTuner {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
       }
-      if _storage._pruningMode != .prePrune {
+      if _storage._pruningMode != .unspecified {
         try visitor.visitSingularEnumField(value: _storage._pruningMode, fieldNumber: 8)
       }
-      if _storage._growingMode != .wholeTree {
+      if _storage._growingMode != .unspecified {
         try visitor.visitSingularEnumField(value: _storage._growingMode, fieldNumber: 9)
       }
-      if _storage._multiClassStrategy != .treePerClass {
+      if _storage._multiClassStrategy != .unspecified {
         try visitor.visitSingularEnumField(value: _storage._multiClassStrategy, fieldNumber: 10)
       }
       if let v = _storage._averagingConfig {
@@ -875,10 +884,10 @@ extension Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf._MessageI
     var _featureFraction: Tensorflow_BoostedTrees_Learner_LearnerConfig.OneOf_FeatureFraction?
     var _regularization: Tensorflow_BoostedTrees_Learner_TreeRegularizationConfig? = nil
     var _constraints: Tensorflow_BoostedTrees_Learner_TreeConstraintsConfig? = nil
-    var _pruningMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.PruningMode = .prePrune
-    var _growingMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.GrowingMode = .wholeTree
+    var _pruningMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.PruningMode = .unspecified
+    var _growingMode: Tensorflow_BoostedTrees_Learner_LearnerConfig.GrowingMode = .unspecified
     var _learningRateTuner: Tensorflow_BoostedTrees_Learner_LearningRateConfig? = nil
-    var _multiClassStrategy: Tensorflow_BoostedTrees_Learner_LearnerConfig.MultiClassStrategy = .treePerClass
+    var _multiClassStrategy: Tensorflow_BoostedTrees_Learner_LearnerConfig.MultiClassStrategy = .unspecified
     var _averagingConfig: Tensorflow_BoostedTrees_Learner_AveragingConfig? = nil
 
     static let defaultInstance = _StorageClass()
@@ -930,22 +939,25 @@ extension Tensorflow_BoostedTrees_Learner_LearnerConfig: SwiftProtobuf._MessageI
 
 extension Tensorflow_BoostedTrees_Learner_LearnerConfig.PruningMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "PRE_PRUNE"),
-    1: .same(proto: "POST_PRUNE"),
+    0: .same(proto: "PRUNING_MODE_UNSPECIFIED"),
+    1: .same(proto: "PRE_PRUNE"),
+    2: .same(proto: "POST_PRUNE"),
   ]
 }
 
 extension Tensorflow_BoostedTrees_Learner_LearnerConfig.GrowingMode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "WHOLE_TREE"),
-    1: .same(proto: "LAYER_BY_LAYER"),
+    0: .same(proto: "GROWING_MODE_UNSPECIFIED"),
+    1: .same(proto: "WHOLE_TREE"),
+    2: .same(proto: "LAYER_BY_LAYER"),
   ]
 }
 
 extension Tensorflow_BoostedTrees_Learner_LearnerConfig.MultiClassStrategy: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "TREE_PER_CLASS"),
-    1: .same(proto: "FULL_HESSIAN"),
-    2: .same(proto: "DIAGONAL_HESSIAN"),
+    0: .same(proto: "MULTI_CLASS_STRATEGY_UNSPECIFIED"),
+    1: .same(proto: "TREE_PER_CLASS"),
+    2: .same(proto: "FULL_HESSIAN"),
+    3: .same(proto: "DIAGONAL_HESSIAN"),
   ]
 }

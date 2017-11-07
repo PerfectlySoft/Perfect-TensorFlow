@@ -21,6 +21,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 
 /// Defines an operation. A NodeDef in a GraphDef specifies an Op by
 /// using the "op" field which should match the name of a OpDef.
+/// LINT.IfChange
 public struct Tensorflow_OpDef: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpDef"
 

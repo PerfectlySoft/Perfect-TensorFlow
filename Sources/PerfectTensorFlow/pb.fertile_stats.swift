@@ -559,6 +559,43 @@ public struct Tensorflow_Tensorforest_SplitCandidate: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+/// Proto used for tracking tree paths during inference time.
+public struct Tensorflow_Tensorforest_TreePath: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".TreePath"
+
+  /// Nodes are listed in order that they were traversed. i.e. nodes_visited[0]
+  /// is the tree's root node.
+  public var nodesVisited: [Tensorflow_DecisionTrees_TreeNode] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedMessageField(value: &self.nodesVisited)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.nodesVisited.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.nodesVisited, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "tensorflow.tensorforest"
@@ -819,6 +856,18 @@ extension Tensorflow_Tensorforest_SplitCandidate: SwiftProtobuf._MessageImplemen
       }
       if !storagesAreEqual {return false}
     }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tensorflow_Tensorforest_TreePath: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "nodes_visited"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_Tensorforest_TreePath) -> Bool {
+    if self.nodesVisited != other.nodesVisited {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
