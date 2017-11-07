@@ -34,9 +34,34 @@ public struct Tensorflow_Tfprof_OptionsProto: SwiftProtobuf.Message {
     set {_uniqueStorage()._minBytes = newValue}
   }
 
+  public var minPeakBytes: Int64 {
+    get {return _storage._minPeakBytes}
+    set {_uniqueStorage()._minPeakBytes = newValue}
+  }
+
+  public var minResidualBytes: Int64 {
+    get {return _storage._minResidualBytes}
+    set {_uniqueStorage()._minResidualBytes = newValue}
+  }
+
+  public var minOutputBytes: Int64 {
+    get {return _storage._minOutputBytes}
+    set {_uniqueStorage()._minOutputBytes = newValue}
+  }
+
   public var minMicros: Int64 {
     get {return _storage._minMicros}
     set {_uniqueStorage()._minMicros = newValue}
+  }
+
+  public var minAcceleratorMicros: Int64 {
+    get {return _storage._minAcceleratorMicros}
+    set {_uniqueStorage()._minAcceleratorMicros = newValue}
+  }
+
+  public var minCpuMicros: Int64 {
+    get {return _storage._minCpuMicros}
+    set {_uniqueStorage()._minCpuMicros = newValue}
   }
 
   public var minParams: Int64 {
@@ -139,6 +164,11 @@ public struct Tensorflow_Tfprof_OptionsProto: SwiftProtobuf.Message {
         case 16: try decoder.decodeSingularStringField(value: &_storage._dumpToFile)
         case 17: try decoder.decodeSingularInt64Field(value: &_storage._minOccurrence)
         case 18: try decoder.decodeSingularInt64Field(value: &_storage._step)
+        case 19: try decoder.decodeSingularInt64Field(value: &_storage._minPeakBytes)
+        case 20: try decoder.decodeSingularInt64Field(value: &_storage._minResidualBytes)
+        case 21: try decoder.decodeSingularInt64Field(value: &_storage._minOutputBytes)
+        case 22: try decoder.decodeSingularInt64Field(value: &_storage._minAcceleratorMicros)
+        case 23: try decoder.decodeSingularInt64Field(value: &_storage._minCpuMicros)
         default: break
         }
       }
@@ -201,6 +231,21 @@ public struct Tensorflow_Tfprof_OptionsProto: SwiftProtobuf.Message {
       }
       if _storage._step != 0 {
         try visitor.visitSingularInt64Field(value: _storage._step, fieldNumber: 18)
+      }
+      if _storage._minPeakBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._minPeakBytes, fieldNumber: 19)
+      }
+      if _storage._minResidualBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._minResidualBytes, fieldNumber: 20)
+      }
+      if _storage._minOutputBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._minOutputBytes, fieldNumber: 21)
+      }
+      if _storage._minAcceleratorMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._minAcceleratorMicros, fieldNumber: 22)
+      }
+      if _storage._minCpuMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._minCpuMicros, fieldNumber: 23)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -286,7 +331,12 @@ extension Tensorflow_Tfprof_OptionsProto: SwiftProtobuf._MessageImplementationBa
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "max_depth"),
     2: .standard(proto: "min_bytes"),
+    19: .standard(proto: "min_peak_bytes"),
+    20: .standard(proto: "min_residual_bytes"),
+    21: .standard(proto: "min_output_bytes"),
     3: .standard(proto: "min_micros"),
+    22: .standard(proto: "min_accelerator_micros"),
+    23: .standard(proto: "min_cpu_micros"),
     4: .standard(proto: "min_params"),
     5: .standard(proto: "min_float_ops"),
     17: .standard(proto: "min_occurrence"),
@@ -306,7 +356,12 @@ extension Tensorflow_Tfprof_OptionsProto: SwiftProtobuf._MessageImplementationBa
   fileprivate class _StorageClass {
     var _maxDepth: Int64 = 0
     var _minBytes: Int64 = 0
+    var _minPeakBytes: Int64 = 0
+    var _minResidualBytes: Int64 = 0
+    var _minOutputBytes: Int64 = 0
     var _minMicros: Int64 = 0
+    var _minAcceleratorMicros: Int64 = 0
+    var _minCpuMicros: Int64 = 0
     var _minParams: Int64 = 0
     var _minFloatOps: Int64 = 0
     var _minOccurrence: Int64 = 0
@@ -329,7 +384,12 @@ extension Tensorflow_Tfprof_OptionsProto: SwiftProtobuf._MessageImplementationBa
     init(copying source: _StorageClass) {
       _maxDepth = source._maxDepth
       _minBytes = source._minBytes
+      _minPeakBytes = source._minPeakBytes
+      _minResidualBytes = source._minResidualBytes
+      _minOutputBytes = source._minOutputBytes
       _minMicros = source._minMicros
+      _minAcceleratorMicros = source._minAcceleratorMicros
+      _minCpuMicros = source._minCpuMicros
       _minParams = source._minParams
       _minFloatOps = source._minFloatOps
       _minOccurrence = source._minOccurrence
@@ -361,7 +421,12 @@ extension Tensorflow_Tfprof_OptionsProto: SwiftProtobuf._MessageImplementationBa
         let other_storage = _args.1
         if _storage._maxDepth != other_storage._maxDepth {return false}
         if _storage._minBytes != other_storage._minBytes {return false}
+        if _storage._minPeakBytes != other_storage._minPeakBytes {return false}
+        if _storage._minResidualBytes != other_storage._minResidualBytes {return false}
+        if _storage._minOutputBytes != other_storage._minOutputBytes {return false}
         if _storage._minMicros != other_storage._minMicros {return false}
+        if _storage._minAcceleratorMicros != other_storage._minAcceleratorMicros {return false}
+        if _storage._minCpuMicros != other_storage._minCpuMicros {return false}
         if _storage._minParams != other_storage._minParams {return false}
         if _storage._minFloatOps != other_storage._minFloatOps {return false}
         if _storage._minOccurrence != other_storage._minOccurrence {return false}

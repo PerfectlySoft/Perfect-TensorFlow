@@ -66,6 +66,9 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
   case dtHalf // = 19
   case dtResource // = 20
 
+  /// Arbitrary C++ data types
+  case dtVariant // = 21
+
   /// Do not use!  These are only for parameters.  Every enum above
   /// should have a corresponding value below (verified by types_test).
   case dtFloatRef // = 101
@@ -88,6 +91,7 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
   case dtComplex128Ref // = 118
   case dtHalfRef // = 119
   case dtResourceRef // = 120
+  case dtVariantRef // = 121
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -117,6 +121,7 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
     case 18: self = .dtComplex128
     case 19: self = .dtHalf
     case 20: self = .dtResource
+    case 21: self = .dtVariant
     case 101: self = .dtFloatRef
     case 102: self = .dtDoubleRef
     case 103: self = .dtInt32Ref
@@ -137,6 +142,7 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
     case 118: self = .dtComplex128Ref
     case 119: self = .dtHalfRef
     case 120: self = .dtResourceRef
+    case 121: self = .dtVariantRef
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -164,6 +170,7 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
     case .dtComplex128: return 18
     case .dtHalf: return 19
     case .dtResource: return 20
+    case .dtVariant: return 21
     case .dtFloatRef: return 101
     case .dtDoubleRef: return 102
     case .dtInt32Ref: return 103
@@ -184,6 +191,7 @@ public enum Tensorflow_DataType: SwiftProtobuf.Enum {
     case .dtComplex128Ref: return 118
     case .dtHalfRef: return 119
     case .dtResourceRef: return 120
+    case .dtVariantRef: return 121
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -215,6 +223,7 @@ extension Tensorflow_DataType: SwiftProtobuf._ProtoNameProviding {
     18: .same(proto: "DT_COMPLEX128"),
     19: .same(proto: "DT_HALF"),
     20: .same(proto: "DT_RESOURCE"),
+    21: .same(proto: "DT_VARIANT"),
     101: .same(proto: "DT_FLOAT_REF"),
     102: .same(proto: "DT_DOUBLE_REF"),
     103: .same(proto: "DT_INT32_REF"),
@@ -235,5 +244,6 @@ extension Tensorflow_DataType: SwiftProtobuf._ProtoNameProviding {
     118: .same(proto: "DT_COMPLEX128_REF"),
     119: .same(proto: "DT_HALF_REF"),
     120: .same(proto: "DT_RESOURCE_REF"),
+    121: .same(proto: "DT_VARIANT_REF"),
   ]
 }

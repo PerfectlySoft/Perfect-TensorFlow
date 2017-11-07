@@ -168,12 +168,9 @@ public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
     /// The name of the plugin this data pertains to.
     public var pluginName: String = String()
 
-    /// The content to store for the plugin. The best practice is for this JSON
-    /// string to be the canonical JSON serialization of a protocol buffer
-    /// defined by the plugin. Converting that protobuf to and from JSON is the
-    /// responsibility of the plugin code, and is not enforced by
-    /// TensorFlow/TensorBoard.
-    public var content: String = String()
+    /// The content to store for the plugin. The best practice is for this to be
+    /// a binary serialized protocol buffer.
+    public var content: Data = SwiftProtobuf.Internal.emptyData
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -187,7 +184,7 @@ public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
         case 1: try decoder.decodeSingularStringField(value: &self.pluginName)
-        case 2: try decoder.decodeSingularStringField(value: &self.content)
+        case 2: try decoder.decodeSingularBytesField(value: &self.content)
         default: break
         }
       }
@@ -202,7 +199,7 @@ public struct Tensorflow_SummaryMetadata: SwiftProtobuf.Message {
         try visitor.visitSingularStringField(value: self.pluginName, fieldNumber: 1)
       }
       if !self.content.isEmpty {
-        try visitor.visitSingularStringField(value: self.content, fieldNumber: 2)
+        try visitor.visitSingularBytesField(value: self.content, fieldNumber: 2)
       }
       try unknownFields.traverse(visitor: &visitor)
     }

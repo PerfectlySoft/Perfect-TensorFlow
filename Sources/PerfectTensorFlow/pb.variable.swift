@@ -29,6 +29,12 @@ public struct Tensorflow_VariableDef: SwiftProtobuf.Message {
     set {_uniqueStorage()._variableName = newValue}
   }
 
+  /// Name of the tensor holding the variable's initial value.
+  public var initialValueName: String {
+    get {return _storage._initialValueName}
+    set {_uniqueStorage()._initialValueName = newValue}
+  }
+
   /// Name of the initializer op.
   public var initializerName: String {
     get {return _storage._initializerName}
@@ -75,6 +81,7 @@ public struct Tensorflow_VariableDef: SwiftProtobuf.Message {
         case 3: try decoder.decodeSingularStringField(value: &_storage._snapshotName)
         case 4: try decoder.decodeSingularMessageField(value: &_storage._saveSliceInfoDef)
         case 5: try decoder.decodeSingularBoolField(value: &_storage._isResource)
+        case 6: try decoder.decodeSingularStringField(value: &_storage._initialValueName)
         default: break
         }
       }
@@ -101,6 +108,9 @@ public struct Tensorflow_VariableDef: SwiftProtobuf.Message {
       }
       if _storage._isResource != false {
         try visitor.visitSingularBoolField(value: _storage._isResource, fieldNumber: 5)
+      }
+      if !_storage._initialValueName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._initialValueName, fieldNumber: 6)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -172,6 +182,7 @@ fileprivate let _protobuf_package = "tensorflow"
 extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "variable_name"),
+    6: .standard(proto: "initial_value_name"),
     2: .standard(proto: "initializer_name"),
     3: .standard(proto: "snapshot_name"),
     4: .standard(proto: "save_slice_info_def"),
@@ -180,6 +191,7 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
 
   fileprivate class _StorageClass {
     var _variableName: String = String()
+    var _initialValueName: String = String()
     var _initializerName: String = String()
     var _snapshotName: String = String()
     var _saveSliceInfoDef: Tensorflow_SaveSliceInfoDef? = nil
@@ -191,6 +203,7 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
 
     init(copying source: _StorageClass) {
       _variableName = source._variableName
+      _initialValueName = source._initialValueName
       _initializerName = source._initializerName
       _snapshotName = source._snapshotName
       _saveSliceInfoDef = source._saveSliceInfoDef
@@ -211,6 +224,7 @@ extension Tensorflow_VariableDef: SwiftProtobuf._MessageImplementationBase, Swif
         let _storage = _args.0
         let other_storage = _args.1
         if _storage._variableName != other_storage._variableName {return false}
+        if _storage._initialValueName != other_storage._initialValueName {return false}
         if _storage._initializerName != other_storage._initializerName {return false}
         if _storage._snapshotName != other_storage._snapshotName {return false}
         if _storage._saveSliceInfoDef != other_storage._saveSliceInfoDef {return false}

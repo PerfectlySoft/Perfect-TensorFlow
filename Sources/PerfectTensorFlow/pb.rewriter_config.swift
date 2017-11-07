@@ -64,19 +64,28 @@ public struct Tensorflow_AutoParallelOptions: SwiftProtobuf.Message {
 public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".RewriterConfig"
 
+  /// Optimize tensor layouts
   public var optimizeTensorLayout: Bool {
     get {return _storage._optimizeTensorLayout}
     set {_uniqueStorage()._optimizeTensorLayout = newValue}
   }
 
+  /// Fold constants (default is ON)
+  public var constantFolding: Tensorflow_RewriterConfig.Toggle {
+    get {return _storage._constantFolding}
+    set {_uniqueStorage()._constantFolding = newValue}
+  }
+
+  /// Arithmetic optimizations (default is ON)
+  public var arithmeticOptimization: Tensorflow_RewriterConfig.Toggle {
+    get {return _storage._arithmeticOptimization}
+    set {_uniqueStorage()._arithmeticOptimization = newValue}
+  }
+
+  /// If true, don't remove unnecessary ops from the graph
   public var disableModelPruning: Bool {
     get {return _storage._disableModelPruning}
     set {_uniqueStorage()._disableModelPruning = newValue}
-  }
-
-  public var constantFolding: Bool {
-    get {return _storage._constantFolding}
-    set {_uniqueStorage()._constantFolding = newValue}
   }
 
   /// Configures memory optimization passes through the meta-optimizer. Has no
@@ -85,6 +94,20 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
   public var memoryOptimization: Tensorflow_RewriterConfig.MemOptType {
     get {return _storage._memoryOptimization}
     set {_uniqueStorage()._memoryOptimization = newValue}
+  }
+
+  /// The prefix for nodes which are valid outputs of recomputations. Inputs to
+  /// nodes with this name prefix may be recomputed (subject either to manual
+  /// annotation of those input nodes or to manual annotation and heuristics
+  /// depending on memory_optimization), but the prefixed nodes themselves will
+  /// not be recomputed. Typically this will be "gradients/", indicating that
+  /// activations from the forward pass of a graph may be recomputed as inputs to
+  /// gradients, but may be adjusted if gradients are inside a name scope or if
+  /// inputs to non-gradients should be recomputed. Defaults to "gradients/" if
+  /// empty or not set.
+  public var memoryOptimizerTargetNodeNamePrefix: String {
+    get {return _storage._memoryOptimizerTargetNodeNamePrefix}
+    set {_uniqueStorage()._memoryOptimizerTargetNodeNamePrefix = newValue}
   }
 
   /// Configures AutoParallel optimization passes either through the
@@ -114,38 +137,76 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum MemOptType: SwiftProtobuf.Enum {
+  public enum Toggle: SwiftProtobuf.Enum {
     public typealias RawValue = Int
-
-    /// Disabled in the meta-optimizer.
-    case noMemOpt // = 0
-
-    /// Driven by manual op-level annotations.
-    case manual // = 1
-
-    /// Driven by heuristics. The behavior of these heuristics is subject to
-    /// change. Currently includes an experimental recomputation heuristic.
-    case heuristics // = 2
+    case `default` // = 0
+    case on // = 1
+    case off // = 2
     case UNRECOGNIZED(Int)
 
     public init() {
-      self = .noMemOpt
+      self = .default
     }
 
     public init?(rawValue: Int) {
       switch rawValue {
-      case 0: self = .noMemOpt
-      case 1: self = .manual
-      case 2: self = .heuristics
+      case 0: self = .default
+      case 1: self = .on
+      case 2: self = .off
       default: self = .UNRECOGNIZED(rawValue)
       }
     }
 
     public var rawValue: Int {
       switch self {
-      case .noMemOpt: return 0
-      case .manual: return 1
-      case .heuristics: return 2
+      case .default: return 0
+      case .on: return 1
+      case .off: return 2
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  public enum MemOptType: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+
+    /// The default setting (currently disabled)
+    case defaultMemOpt // = 0
+
+    /// Disabled in the meta-optimizer.
+    case noMemOpt // = 1
+
+    /// Driven by manual op-level annotations.
+    case manual // = 2
+
+    /// Driven by heuristics. The behavior of these heuristics is subject to
+    /// change. Currently includes an experimental recomputation
+    /// heuristic. Manual annotations are respected, but additional nodes are
+    /// selected automatically.
+    case heuristics // = 3
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .defaultMemOpt
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .defaultMemOpt
+      case 1: self = .noMemOpt
+      case 2: self = .manual
+      case 3: self = .heuristics
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .defaultMemOpt: return 0
+      case .noMemOpt: return 1
+      case .manual: return 2
+      case .heuristics: return 3
       case .UNRECOGNIZED(let i): return i
       }
     }
@@ -165,9 +226,11 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
         switch fieldNumber {
         case 1: try decoder.decodeSingularBoolField(value: &_storage._optimizeTensorLayout)
         case 2: try decoder.decodeSingularBoolField(value: &_storage._disableModelPruning)
-        case 3: try decoder.decodeSingularBoolField(value: &_storage._constantFolding)
+        case 3: try decoder.decodeSingularEnumField(value: &_storage._constantFolding)
         case 4: try decoder.decodeSingularEnumField(value: &_storage._memoryOptimization)
         case 5: try decoder.decodeSingularMessageField(value: &_storage._autoParallel)
+        case 6: try decoder.decodeSingularStringField(value: &_storage._memoryOptimizerTargetNodeNamePrefix)
+        case 7: try decoder.decodeSingularEnumField(value: &_storage._arithmeticOptimization)
         case 100: try decoder.decodeRepeatedStringField(value: &_storage._optimizers)
         default: break
         }
@@ -187,14 +250,20 @@ public struct Tensorflow_RewriterConfig: SwiftProtobuf.Message {
       if _storage._disableModelPruning != false {
         try visitor.visitSingularBoolField(value: _storage._disableModelPruning, fieldNumber: 2)
       }
-      if _storage._constantFolding != false {
-        try visitor.visitSingularBoolField(value: _storage._constantFolding, fieldNumber: 3)
+      if _storage._constantFolding != .default {
+        try visitor.visitSingularEnumField(value: _storage._constantFolding, fieldNumber: 3)
       }
-      if _storage._memoryOptimization != .noMemOpt {
+      if _storage._memoryOptimization != .defaultMemOpt {
         try visitor.visitSingularEnumField(value: _storage._memoryOptimization, fieldNumber: 4)
       }
       if let v = _storage._autoParallel {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }
+      if !_storage._memoryOptimizerTargetNodeNamePrefix.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._memoryOptimizerTargetNodeNamePrefix, fieldNumber: 6)
+      }
+      if _storage._arithmeticOptimization != .default {
+        try visitor.visitSingularEnumField(value: _storage._arithmeticOptimization, fieldNumber: 7)
       }
       if !_storage._optimizers.isEmpty {
         try visitor.visitRepeatedStringField(value: _storage._optimizers, fieldNumber: 100)
@@ -227,18 +296,22 @@ extension Tensorflow_AutoParallelOptions: SwiftProtobuf._MessageImplementationBa
 extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "optimize_tensor_layout"),
-    2: .standard(proto: "disable_model_pruning"),
     3: .standard(proto: "constant_folding"),
+    7: .standard(proto: "arithmetic_optimization"),
+    2: .standard(proto: "disable_model_pruning"),
     4: .standard(proto: "memory_optimization"),
+    6: .standard(proto: "memory_optimizer_target_node_name_prefix"),
     5: .standard(proto: "auto_parallel"),
     100: .same(proto: "optimizers"),
   ]
 
   fileprivate class _StorageClass {
     var _optimizeTensorLayout: Bool = false
+    var _constantFolding: Tensorflow_RewriterConfig.Toggle = .default
+    var _arithmeticOptimization: Tensorflow_RewriterConfig.Toggle = .default
     var _disableModelPruning: Bool = false
-    var _constantFolding: Bool = false
-    var _memoryOptimization: Tensorflow_RewriterConfig.MemOptType = .noMemOpt
+    var _memoryOptimization: Tensorflow_RewriterConfig.MemOptType = .defaultMemOpt
+    var _memoryOptimizerTargetNodeNamePrefix: String = String()
     var _autoParallel: Tensorflow_AutoParallelOptions? = nil
     var _optimizers: [String] = []
 
@@ -248,9 +321,11 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
 
     init(copying source: _StorageClass) {
       _optimizeTensorLayout = source._optimizeTensorLayout
-      _disableModelPruning = source._disableModelPruning
       _constantFolding = source._constantFolding
+      _arithmeticOptimization = source._arithmeticOptimization
+      _disableModelPruning = source._disableModelPruning
       _memoryOptimization = source._memoryOptimization
+      _memoryOptimizerTargetNodeNamePrefix = source._memoryOptimizerTargetNodeNamePrefix
       _autoParallel = source._autoParallel
       _optimizers = source._optimizers
     }
@@ -269,9 +344,11 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
         let _storage = _args.0
         let other_storage = _args.1
         if _storage._optimizeTensorLayout != other_storage._optimizeTensorLayout {return false}
-        if _storage._disableModelPruning != other_storage._disableModelPruning {return false}
         if _storage._constantFolding != other_storage._constantFolding {return false}
+        if _storage._arithmeticOptimization != other_storage._arithmeticOptimization {return false}
+        if _storage._disableModelPruning != other_storage._disableModelPruning {return false}
         if _storage._memoryOptimization != other_storage._memoryOptimization {return false}
+        if _storage._memoryOptimizerTargetNodeNamePrefix != other_storage._memoryOptimizerTargetNodeNamePrefix {return false}
         if _storage._autoParallel != other_storage._autoParallel {return false}
         if _storage._optimizers != other_storage._optimizers {return false}
         return true
@@ -283,10 +360,19 @@ extension Tensorflow_RewriterConfig: SwiftProtobuf._MessageImplementationBase, S
   }
 }
 
+extension Tensorflow_RewriterConfig.Toggle: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "DEFAULT"),
+    1: .same(proto: "ON"),
+    2: .same(proto: "OFF"),
+  ]
+}
+
 extension Tensorflow_RewriterConfig.MemOptType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "NO_MEM_OPT"),
-    1: .same(proto: "MANUAL"),
-    2: .same(proto: "HEURISTICS"),
+    0: .same(proto: "DEFAULT_MEM_OPT"),
+    1: .same(proto: "NO_MEM_OPT"),
+    2: .same(proto: "MANUAL"),
+    3: .same(proto: "HEURISTICS"),
   ]
 }

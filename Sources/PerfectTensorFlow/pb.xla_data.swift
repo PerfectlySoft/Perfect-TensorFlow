@@ -220,6 +220,13 @@ public enum Xla_UnaryOperation: SwiftProtobuf.Enum {
 
   /// Elementwise, computes the cosine of x.
   case unopCos // = 12
+
+  /// Elementwise, computes the sine of x.
+  case unopSin // = 13
+
+  /// Elementwise, rounds x to nearest integral value, rounding half-way cases
+  /// away from zero.
+  case unopRoundNearestAfz // = 14
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -241,6 +248,8 @@ public enum Xla_UnaryOperation: SwiftProtobuf.Enum {
     case 10: self = .unopSign
     case 11: self = .unopIsFinite
     case 12: self = .unopCos
+    case 13: self = .unopSin
+    case 14: self = .unopRoundNearestAfz
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -260,6 +269,8 @@ public enum Xla_UnaryOperation: SwiftProtobuf.Enum {
     case .unopSign: return 10
     case .unopIsFinite: return 11
     case .unopCos: return 12
+    case .unopSin: return 13
+    case .unopRoundNearestAfz: return 14
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1687,9 +1698,9 @@ public struct Xla_SliceRequest: SwiftProtobuf.Message {
     set {_uniqueStorage()._limitIndices = newValue}
   }
 
-  public var stride: [Int64] {
-    get {return _storage._stride}
-    set {_uniqueStorage()._stride = newValue}
+  public var strides: [Int64] {
+    get {return _storage._strides}
+    set {_uniqueStorage()._strides = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1708,7 +1719,7 @@ public struct Xla_SliceRequest: SwiftProtobuf.Message {
         case 2: try decoder.decodeSingularMessageField(value: &_storage._operand)
         case 3: try decoder.decodeRepeatedInt64Field(value: &_storage._startIndices)
         case 4: try decoder.decodeRepeatedInt64Field(value: &_storage._limitIndices)
-        case 5: try decoder.decodeRepeatedInt64Field(value: &_storage._stride)
+        case 5: try decoder.decodeRepeatedInt64Field(value: &_storage._strides)
         default: break
         }
       }
@@ -1730,8 +1741,8 @@ public struct Xla_SliceRequest: SwiftProtobuf.Message {
       if !_storage._limitIndices.isEmpty {
         try visitor.visitPackedInt64Field(value: _storage._limitIndices, fieldNumber: 4)
       }
-      if !_storage._stride.isEmpty {
-        try visitor.visitPackedInt64Field(value: _storage._stride, fieldNumber: 5)
+      if !_storage._strides.isEmpty {
+        try visitor.visitPackedInt64Field(value: _storage._strides, fieldNumber: 5)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -2334,6 +2345,15 @@ public struct Xla_MapRequest: SwiftProtobuf.Message {
     set {_uniqueStorage()._staticOperands = newValue}
   }
 
+  /// The dimensions over which to map.
+  /// Example mapping a Dot operation along the batch dimension 0:
+  ///   operand0.shape = [2, 2, 2], operand1.shape = [2,2,3]
+  ///   Map({operand0, operand1}, Dot, {0})
+  public var dimensions: [Int64] {
+    get {return _storage._dimensions}
+    set {_uniqueStorage()._dimensions = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -2350,6 +2370,7 @@ public struct Xla_MapRequest: SwiftProtobuf.Message {
         case 2: try decoder.decodeRepeatedMessageField(value: &_storage._operands)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._toApply)
         case 4: try decoder.decodeRepeatedMessageField(value: &_storage._staticOperands)
+        case 5: try decoder.decodeRepeatedInt64Field(value: &_storage._dimensions)
         default: break
         }
       }
@@ -2370,6 +2391,9 @@ public struct Xla_MapRequest: SwiftProtobuf.Message {
       }
       if !_storage._staticOperands.isEmpty {
         try visitor.visitRepeatedMessageField(value: _storage._staticOperands, fieldNumber: 4)
+      }
+      if !_storage._dimensions.isEmpty {
+        try visitor.visitPackedInt64Field(value: _storage._dimensions, fieldNumber: 5)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -2637,6 +2661,124 @@ public struct Xla_BatchNormTrainingRequest: SwiftProtobuf.Message {
       }
       if _storage._featureIndex != 0 {
         try visitor.visitSingularInt64Field(value: _storage._featureIndex, fieldNumber: 5)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+public struct Xla_BatchNormInferenceRequest: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".BatchNormInferenceRequest"
+
+  public var operand: Xla_ComputationDataHandle {
+    get {return _storage._operand ?? Xla_ComputationDataHandle()}
+    set {_uniqueStorage()._operand = newValue}
+  }
+  /// Returns true if `operand` has been explicitly set.
+  public var hasOperand: Bool {return _storage._operand != nil}
+  /// Clears the value of `operand`. Subsequent reads from it will return its default value.
+  public mutating func clearOperand() {_storage._operand = nil}
+
+  public var scale: Xla_ComputationDataHandle {
+    get {return _storage._scale ?? Xla_ComputationDataHandle()}
+    set {_uniqueStorage()._scale = newValue}
+  }
+  /// Returns true if `scale` has been explicitly set.
+  public var hasScale: Bool {return _storage._scale != nil}
+  /// Clears the value of `scale`. Subsequent reads from it will return its default value.
+  public mutating func clearScale() {_storage._scale = nil}
+
+  public var offset: Xla_ComputationDataHandle {
+    get {return _storage._offset ?? Xla_ComputationDataHandle()}
+    set {_uniqueStorage()._offset = newValue}
+  }
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
+  public mutating func clearOffset() {_storage._offset = nil}
+
+  public var mean: Xla_ComputationDataHandle {
+    get {return _storage._mean ?? Xla_ComputationDataHandle()}
+    set {_uniqueStorage()._mean = newValue}
+  }
+  /// Returns true if `mean` has been explicitly set.
+  public var hasMean: Bool {return _storage._mean != nil}
+  /// Clears the value of `mean`. Subsequent reads from it will return its default value.
+  public mutating func clearMean() {_storage._mean = nil}
+
+  public var variance: Xla_ComputationDataHandle {
+    get {return _storage._variance ?? Xla_ComputationDataHandle()}
+    set {_uniqueStorage()._variance = newValue}
+  }
+  /// Returns true if `variance` has been explicitly set.
+  public var hasVariance: Bool {return _storage._variance != nil}
+  /// Clears the value of `variance`. Subsequent reads from it will return its default value.
+  public mutating func clearVariance() {_storage._variance = nil}
+
+  public var epsilon: Float {
+    get {return _storage._epsilon}
+    set {_uniqueStorage()._epsilon = newValue}
+  }
+
+  public var featureIndex: Int64 {
+    get {return _storage._featureIndex}
+    set {_uniqueStorage()._featureIndex = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._operand)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._scale)
+        case 3: try decoder.decodeSingularMessageField(value: &_storage._offset)
+        case 4: try decoder.decodeSingularMessageField(value: &_storage._mean)
+        case 5: try decoder.decodeSingularMessageField(value: &_storage._variance)
+        case 6: try decoder.decodeSingularFloatField(value: &_storage._epsilon)
+        case 7: try decoder.decodeSingularInt64Field(value: &_storage._featureIndex)
+        default: break
+        }
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._operand {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._scale {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+      if let v = _storage._offset {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if let v = _storage._mean {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      }
+      if let v = _storage._variance {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }
+      if _storage._epsilon != 0 {
+        try visitor.visitSingularFloatField(value: _storage._epsilon, fieldNumber: 6)
+      }
+      if _storage._featureIndex != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._featureIndex, fieldNumber: 7)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -4165,6 +4307,48 @@ public struct Xla_RecvRequest: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+public struct Xla_OpDeviceAssignment: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".OpDeviceAssignment"
+
+  public var hasDevice_p: Bool = false
+
+  /// Number of the device to which this operator is assigned. Ignored if
+  /// 'has_device' is false.
+  public var device: Int32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBoolField(value: &self.hasDevice_p)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.device)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.hasDevice_p != false {
+      try visitor.visitSingularBoolField(value: self.hasDevice_p, fieldNumber: 1)
+    }
+    if self.device != 0 {
+      try visitor.visitSingularInt32Field(value: self.device, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 public struct Xla_OpRequest: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".OpRequest"
 
@@ -4185,6 +4369,15 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
   public var hasMetadata: Bool {return _storage._metadata != nil}
   /// Clears the value of `metadata`. Subsequent reads from it will return its default value.
   public mutating func clearMetadata() {_storage._metadata = nil}
+
+  public var deviceAssignment: Xla_OpDeviceAssignment {
+    get {return _storage._deviceAssignment ?? Xla_OpDeviceAssignment()}
+    set {_uniqueStorage()._deviceAssignment = newValue}
+  }
+  /// Returns true if `deviceAssignment` has been explicitly set.
+  public var hasDeviceAssignment: Bool {return _storage._deviceAssignment != nil}
+  /// Clears the value of `deviceAssignment`. Subsequent reads from it will return its default value.
+  public mutating func clearDeviceAssignment() {_storage._deviceAssignment = nil}
 
   public var op: OneOf_Op? {
     get {return _storage._op}
@@ -4463,13 +4656,21 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
     set {_uniqueStorage()._op = .batchNormTrainingRequest(newValue)}
   }
 
-  /// Next: 38
   public var batchNormGradRequest: Xla_BatchNormGradRequest {
     get {
       if case .batchNormGradRequest(let v)? = _storage._op {return v}
       return Xla_BatchNormGradRequest()
     }
     set {_uniqueStorage()._op = .batchNormGradRequest(newValue)}
+  }
+
+  /// Next: 40
+  public var batchNormInferenceRequest: Xla_BatchNormInferenceRequest {
+    get {
+      if case .batchNormInferenceRequest(let v)? = _storage._op {return v}
+      return Xla_BatchNormInferenceRequest()
+    }
+    set {_uniqueStorage()._op = .batchNormInferenceRequest(newValue)}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4509,8 +4710,9 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
     case recvRequest(Xla_RecvRequest)
     case outfeedRequest(Xla_OutfeedRequest)
     case batchNormTrainingRequest(Xla_BatchNormTrainingRequest)
-    /// Next: 38
     case batchNormGradRequest(Xla_BatchNormGradRequest)
+    /// Next: 40
+    case batchNormInferenceRequest(Xla_BatchNormInferenceRequest)
 
     public static func ==(lhs: Xla_OpRequest.OneOf_Op, rhs: Xla_OpRequest.OneOf_Op) -> Bool {
       switch (lhs, rhs) {
@@ -4549,6 +4751,7 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
       case (.outfeedRequest(let l), .outfeedRequest(let r)): return l == r
       case (.batchNormTrainingRequest(let l), .batchNormTrainingRequest(let r)): return l == r
       case (.batchNormGradRequest(let l), .batchNormGradRequest(let r)): return l == r
+      case (.batchNormInferenceRequest(let l), .batchNormInferenceRequest(let r)): return l == r
       default: return false
       }
     }
@@ -4847,6 +5050,15 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._op = .batchNormGradRequest(v)}
+        case 38:
+          var v: Xla_BatchNormInferenceRequest?
+          if let current = _storage._op {
+            try decoder.handleConflictingOneOf()
+            if case .batchNormInferenceRequest(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._op = .batchNormInferenceRequest(v)}
+        case 39: try decoder.decodeSingularMessageField(value: &_storage._deviceAssignment)
         default: break
         }
       }
@@ -4940,8 +5152,13 @@ public struct Xla_OpRequest: SwiftProtobuf.Message {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 36)
       case .batchNormGradRequest(let v)?:
         try visitor.visitSingularMessageField(value: v, fieldNumber: 37)
+      case .batchNormInferenceRequest(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 38)
       case nil: break
       default: break
+      }
+      if let v = _storage._deviceAssignment {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 39)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -5048,6 +5265,8 @@ extension Xla_UnaryOperation: SwiftProtobuf._ProtoNameProviding {
     10: .same(proto: "UNOP_SIGN"),
     11: .same(proto: "UNOP_IS_FINITE"),
     12: .same(proto: "UNOP_COS"),
+    13: .same(proto: "UNOP_SIN"),
+    14: .same(proto: "UNOP_ROUND_NEAREST_AFZ"),
   ]
 }
 
@@ -5596,14 +5815,14 @@ extension Xla_SliceRequest: SwiftProtobuf._MessageImplementationBase, SwiftProto
     2: .same(proto: "operand"),
     3: .standard(proto: "start_indices"),
     4: .standard(proto: "limit_indices"),
-    5: .same(proto: "stride"),
+    5: .same(proto: "strides"),
   ]
 
   fileprivate class _StorageClass {
     var _operand: Xla_ComputationDataHandle? = nil
     var _startIndices: [Int64] = []
     var _limitIndices: [Int64] = []
-    var _stride: [Int64] = []
+    var _strides: [Int64] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -5613,7 +5832,7 @@ extension Xla_SliceRequest: SwiftProtobuf._MessageImplementationBase, SwiftProto
       _operand = source._operand
       _startIndices = source._startIndices
       _limitIndices = source._limitIndices
-      _stride = source._stride
+      _strides = source._strides
     }
   }
 
@@ -5632,7 +5851,7 @@ extension Xla_SliceRequest: SwiftProtobuf._MessageImplementationBase, SwiftProto
         if _storage._operand != other_storage._operand {return false}
         if _storage._startIndices != other_storage._startIndices {return false}
         if _storage._limitIndices != other_storage._limitIndices {return false}
-        if _storage._stride != other_storage._stride {return false}
+        if _storage._strides != other_storage._strides {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -5994,12 +6213,14 @@ extension Xla_MapRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobu
     2: .same(proto: "operands"),
     3: .standard(proto: "to_apply"),
     4: .standard(proto: "static_operands"),
+    5: .same(proto: "dimensions"),
   ]
 
   fileprivate class _StorageClass {
     var _operands: [Xla_ComputationDataHandle] = []
     var _toApply: Xla_ComputationHandle? = nil
     var _staticOperands: [Xla_ComputationDataHandle] = []
+    var _dimensions: [Int64] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -6009,6 +6230,7 @@ extension Xla_MapRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobu
       _operands = source._operands
       _toApply = source._toApply
       _staticOperands = source._staticOperands
+      _dimensions = source._dimensions
     }
   }
 
@@ -6027,6 +6249,7 @@ extension Xla_MapRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobu
         if _storage._operands != other_storage._operands {return false}
         if _storage._toApply != other_storage._toApply {return false}
         if _storage._staticOperands != other_storage._staticOperands {return false}
+        if _storage._dimensions != other_storage._dimensions {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -6182,6 +6405,69 @@ extension Xla_BatchNormTrainingRequest: SwiftProtobuf._MessageImplementationBase
         if _storage._operand != other_storage._operand {return false}
         if _storage._scale != other_storage._scale {return false}
         if _storage._offset != other_storage._offset {return false}
+        if _storage._epsilon != other_storage._epsilon {return false}
+        if _storage._featureIndex != other_storage._featureIndex {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Xla_BatchNormInferenceRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "operand"),
+    2: .same(proto: "scale"),
+    3: .same(proto: "offset"),
+    4: .same(proto: "mean"),
+    5: .same(proto: "variance"),
+    6: .same(proto: "epsilon"),
+    7: .standard(proto: "feature_index"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _operand: Xla_ComputationDataHandle? = nil
+    var _scale: Xla_ComputationDataHandle? = nil
+    var _offset: Xla_ComputationDataHandle? = nil
+    var _mean: Xla_ComputationDataHandle? = nil
+    var _variance: Xla_ComputationDataHandle? = nil
+    var _epsilon: Float = 0
+    var _featureIndex: Int64 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _operand = source._operand
+      _scale = source._scale
+      _offset = source._offset
+      _mean = source._mean
+      _variance = source._variance
+      _epsilon = source._epsilon
+      _featureIndex = source._featureIndex
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public func _protobuf_generated_isEqualTo(other: Xla_BatchNormInferenceRequest) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._operand != other_storage._operand {return false}
+        if _storage._scale != other_storage._scale {return false}
+        if _storage._offset != other_storage._offset {return false}
+        if _storage._mean != other_storage._mean {return false}
+        if _storage._variance != other_storage._variance {return false}
         if _storage._epsilon != other_storage._epsilon {return false}
         if _storage._featureIndex != other_storage._featureIndex {return false}
         return true
@@ -7192,10 +7478,25 @@ extension Xla_RecvRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtob
   }
 }
 
+extension Xla_OpDeviceAssignment: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "has_device"),
+    2: .same(proto: "device"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Xla_OpDeviceAssignment) -> Bool {
+    if self.hasDevice_p != other.hasDevice_p {return false}
+    if self.device != other.device {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
 extension Xla_OpRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "computation"),
     33: .same(proto: "metadata"),
+    39: .standard(proto: "device_assignment"),
     2: .standard(proto: "binary_op_request"),
     3: .standard(proto: "broadcast_request"),
     4: .standard(proto: "call_request"),
@@ -7231,11 +7532,13 @@ extension Xla_OpRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf
     32: .standard(proto: "outfeed_request"),
     35: .standard(proto: "batch_norm_training_request"),
     37: .standard(proto: "batch_norm_grad_request"),
+    38: .standard(proto: "batch_norm_inference_request"),
   ]
 
   fileprivate class _StorageClass {
     var _computation: Xla_ComputationHandle? = nil
     var _metadata: Xla_OpMetadata? = nil
+    var _deviceAssignment: Xla_OpDeviceAssignment? = nil
     var _op: Xla_OpRequest.OneOf_Op?
 
     static let defaultInstance = _StorageClass()
@@ -7245,6 +7548,7 @@ extension Xla_OpRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf
     init(copying source: _StorageClass) {
       _computation = source._computation
       _metadata = source._metadata
+      _deviceAssignment = source._deviceAssignment
       _op = source._op
     }
   }
@@ -7263,6 +7567,7 @@ extension Xla_OpRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf
         let other_storage = _args.1
         if _storage._computation != other_storage._computation {return false}
         if _storage._metadata != other_storage._metadata {return false}
+        if _storage._deviceAssignment != other_storage._deviceAssignment {return false}
         if _storage._op != other_storage._op {return false}
         return true
       }

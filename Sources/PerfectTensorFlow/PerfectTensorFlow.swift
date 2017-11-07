@@ -89,6 +89,14 @@ public class TensorFlow {
   public typealias Output = TF_Output
   public typealias Panic = TFLib.Panic
   public typealias Code = TFLib.Code
+  public typealias ApiDef = Tensorflow_ApiDef
+  public typealias RemoteMemoryRegion = Tensorflow_RemoteMemoryRegion
+  public typealias ContribMpiMPIRequest = Tensorflow_Contrib_Mpi_MPIRequest
+  public typealias TpuOpProfileProfile = Tensorflow_Tpu_OpProfile_Profile
+  public typealias TfprofPprofProfile = Tensorflow_Tfprof_Pprof_Profile
+  public typealias Tf2xlaTensorId = Tensorflow_Tf2xla_TensorId
+  public typealias ProfileRequest = Tensorflow_ProfileRequest
+  public typealias TpuTrace = Tensorflow_Tpu_Trace
   public typealias Config = Tensorflow_ConfigProto
   public typealias DataType = Tensorflow_DataType
   public typealias AllocationDescription = Tensorflow_AllocationDescription

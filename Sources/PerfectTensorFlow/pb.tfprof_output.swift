@@ -116,10 +116,28 @@ public struct Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf.Message {
     set {_uniqueStorage()._cpuExecMicros = newValue}
   }
 
-  /// Total requested bytes by the op.
+  /// Total bytes requested by the op.
   public var requestedBytes: Int64 {
     get {return _storage._requestedBytes}
     set {_uniqueStorage()._requestedBytes = newValue}
+  }
+
+  /// Max bytes allocated and being used by the op at a point.
+  public var peakBytes: Int64 {
+    get {return _storage._peakBytes}
+    set {_uniqueStorage()._peakBytes = newValue}
+  }
+
+  /// Total bytes requested by the op and not released before end.
+  public var residualBytes: Int64 {
+    get {return _storage._residualBytes}
+    set {_uniqueStorage()._residualBytes = newValue}
+  }
+
+  /// Total bytes output by the op (not necessarily allocated by the op).
+  public var outputBytes: Int64 {
+    get {return _storage._outputBytes}
+    set {_uniqueStorage()._outputBytes = newValue}
   }
 
   /// Number of parameters if available.
@@ -173,6 +191,21 @@ public struct Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf.Message {
   public var totalRequestedBytes: Int64 {
     get {return _storage._totalRequestedBytes}
     set {_uniqueStorage()._totalRequestedBytes = newValue}
+  }
+
+  public var totalPeakBytes: Int64 {
+    get {return _storage._totalPeakBytes}
+    set {_uniqueStorage()._totalPeakBytes = newValue}
+  }
+
+  public var totalResidualBytes: Int64 {
+    get {return _storage._totalResidualBytes}
+    set {_uniqueStorage()._totalResidualBytes = newValue}
+  }
+
+  public var totalOutputBytes: Int64 {
+    get {return _storage._totalOutputBytes}
+    set {_uniqueStorage()._totalOutputBytes = newValue}
   }
 
   public var totalParameters: Int64 {
@@ -238,6 +271,12 @@ public struct Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf.Message {
         case 21: try decoder.decodeSingularInt64Field(value: &_storage._runCount)
         case 22: try decoder.decodeSingularInt64Field(value: &_storage._totalRunCount)
         case 23: try decoder.decodeSingularInt64Field(value: &_storage._totalDefinitionCount)
+        case 24: try decoder.decodeSingularInt64Field(value: &_storage._peakBytes)
+        case 25: try decoder.decodeSingularInt64Field(value: &_storage._residualBytes)
+        case 26: try decoder.decodeSingularInt64Field(value: &_storage._outputBytes)
+        case 27: try decoder.decodeSingularInt64Field(value: &_storage._totalPeakBytes)
+        case 28: try decoder.decodeSingularInt64Field(value: &_storage._totalResidualBytes)
+        case 29: try decoder.decodeSingularInt64Field(value: &_storage._totalOutputBytes)
         default: break
         }
       }
@@ -313,6 +352,24 @@ public struct Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf.Message {
       if _storage._totalDefinitionCount != 0 {
         try visitor.visitSingularInt64Field(value: _storage._totalDefinitionCount, fieldNumber: 23)
       }
+      if _storage._peakBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._peakBytes, fieldNumber: 24)
+      }
+      if _storage._residualBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._residualBytes, fieldNumber: 25)
+      }
+      if _storage._outputBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._outputBytes, fieldNumber: 26)
+      }
+      if _storage._totalPeakBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalPeakBytes, fieldNumber: 27)
+      }
+      if _storage._totalResidualBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalResidualBytes, fieldNumber: 28)
+      }
+      if _storage._totalOutputBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalOutputBytes, fieldNumber: 29)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -331,44 +388,122 @@ public struct Tensorflow_Tfprof_MultiGraphNodeProto: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".MultiGraphNodeProto"
 
   /// Name of the node.
-  public var name: String = String()
+  public var name: String {
+    get {return _storage._name}
+    set {_uniqueStorage()._name = newValue}
+  }
 
   /// code execution time.
-  public var execMicros: Int64 = 0
+  public var execMicros: Int64 {
+    get {return _storage._execMicros}
+    set {_uniqueStorage()._execMicros = newValue}
+  }
 
-  public var acceleratorExecMicros: Int64 = 0
+  public var acceleratorExecMicros: Int64 {
+    get {return _storage._acceleratorExecMicros}
+    set {_uniqueStorage()._acceleratorExecMicros = newValue}
+  }
 
-  public var cpuExecMicros: Int64 = 0
+  public var cpuExecMicros: Int64 {
+    get {return _storage._cpuExecMicros}
+    set {_uniqueStorage()._cpuExecMicros = newValue}
+  }
 
   /// Total requested bytes by the code.
-  public var requestedBytes: Int64 = 0
+  public var requestedBytes: Int64 {
+    get {return _storage._requestedBytes}
+    set {_uniqueStorage()._requestedBytes = newValue}
+  }
+
+  /// Max bytes allocated and being used by the op at a point.
+  public var peakBytes: Int64 {
+    get {return _storage._peakBytes}
+    set {_uniqueStorage()._peakBytes = newValue}
+  }
+
+  /// Total bytes requested by the op and not released before end.
+  public var residualBytes: Int64 {
+    get {return _storage._residualBytes}
+    set {_uniqueStorage()._residualBytes = newValue}
+  }
+
+  /// Total bytes output by the op (not necessarily allocated by the op).
+  public var outputBytes: Int64 {
+    get {return _storage._outputBytes}
+    set {_uniqueStorage()._outputBytes = newValue}
+  }
 
   /// Number of parameters if available.
-  public var parameters: Int64 = 0
+  public var parameters: Int64 {
+    get {return _storage._parameters}
+    set {_uniqueStorage()._parameters = newValue}
+  }
 
   /// Number of float operations.
-  public var floatOps: Int64 = 0
+  public var floatOps: Int64 {
+    get {return _storage._floatOps}
+    set {_uniqueStorage()._floatOps = newValue}
+  }
 
   /// The following are the aggregated stats from descendants.
   /// The actual descendants depend on the data structure used.
-  public var totalExecMicros: Int64 = 0
+  public var totalExecMicros: Int64 {
+    get {return _storage._totalExecMicros}
+    set {_uniqueStorage()._totalExecMicros = newValue}
+  }
 
-  public var totalAcceleratorExecMicros: Int64 = 0
+  public var totalAcceleratorExecMicros: Int64 {
+    get {return _storage._totalAcceleratorExecMicros}
+    set {_uniqueStorage()._totalAcceleratorExecMicros = newValue}
+  }
 
-  public var totalCpuExecMicros: Int64 = 0
+  public var totalCpuExecMicros: Int64 {
+    get {return _storage._totalCpuExecMicros}
+    set {_uniqueStorage()._totalCpuExecMicros = newValue}
+  }
 
-  public var totalRequestedBytes: Int64 = 0
+  public var totalRequestedBytes: Int64 {
+    get {return _storage._totalRequestedBytes}
+    set {_uniqueStorage()._totalRequestedBytes = newValue}
+  }
 
-  public var totalParameters: Int64 = 0
+  public var totalPeakBytes: Int64 {
+    get {return _storage._totalPeakBytes}
+    set {_uniqueStorage()._totalPeakBytes = newValue}
+  }
 
-  public var totalFloatOps: Int64 = 0
+  public var totalResidualBytes: Int64 {
+    get {return _storage._totalResidualBytes}
+    set {_uniqueStorage()._totalResidualBytes = newValue}
+  }
+
+  public var totalOutputBytes: Int64 {
+    get {return _storage._totalOutputBytes}
+    set {_uniqueStorage()._totalOutputBytes = newValue}
+  }
+
+  public var totalParameters: Int64 {
+    get {return _storage._totalParameters}
+    set {_uniqueStorage()._totalParameters = newValue}
+  }
+
+  public var totalFloatOps: Int64 {
+    get {return _storage._totalFloatOps}
+    set {_uniqueStorage()._totalFloatOps = newValue}
+  }
 
   /// TensorFlow graph nodes contained by the MultiGraphNodeProto.
-  public var graphNodes: [Tensorflow_Tfprof_GraphNodeProto] = []
+  public var graphNodes: [Tensorflow_Tfprof_GraphNodeProto] {
+    get {return _storage._graphNodes}
+    set {_uniqueStorage()._graphNodes = newValue}
+  }
 
   /// Descendants of the node. The actual descendants depend on the data
   /// structure used.
-  public var children: [Tensorflow_Tfprof_MultiGraphNodeProto] = []
+  public var children: [Tensorflow_Tfprof_MultiGraphNodeProto] {
+    get {return _storage._children}
+    set {_uniqueStorage()._children = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -379,24 +514,33 @@ public struct Tensorflow_Tfprof_MultiGraphNodeProto: SwiftProtobuf.Message {
   /// initializers are defined in the SwiftProtobuf library. See the Message and
   /// Message+*Additions` files.
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.name)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.execMicros)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.requestedBytes)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.parameters)
-      case 5: try decoder.decodeSingularInt64Field(value: &self.floatOps)
-      case 6: try decoder.decodeSingularInt64Field(value: &self.totalExecMicros)
-      case 7: try decoder.decodeSingularInt64Field(value: &self.totalRequestedBytes)
-      case 8: try decoder.decodeSingularInt64Field(value: &self.totalParameters)
-      case 9: try decoder.decodeSingularInt64Field(value: &self.totalFloatOps)
-      case 10: try decoder.decodeRepeatedMessageField(value: &self.graphNodes)
-      case 11: try decoder.decodeRepeatedMessageField(value: &self.children)
-      case 12: try decoder.decodeSingularInt64Field(value: &self.acceleratorExecMicros)
-      case 13: try decoder.decodeSingularInt64Field(value: &self.cpuExecMicros)
-      case 14: try decoder.decodeSingularInt64Field(value: &self.totalAcceleratorExecMicros)
-      case 15: try decoder.decodeSingularInt64Field(value: &self.totalCpuExecMicros)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularStringField(value: &_storage._name)
+        case 2: try decoder.decodeSingularInt64Field(value: &_storage._execMicros)
+        case 3: try decoder.decodeSingularInt64Field(value: &_storage._requestedBytes)
+        case 4: try decoder.decodeSingularInt64Field(value: &_storage._parameters)
+        case 5: try decoder.decodeSingularInt64Field(value: &_storage._floatOps)
+        case 6: try decoder.decodeSingularInt64Field(value: &_storage._totalExecMicros)
+        case 7: try decoder.decodeSingularInt64Field(value: &_storage._totalRequestedBytes)
+        case 8: try decoder.decodeSingularInt64Field(value: &_storage._totalParameters)
+        case 9: try decoder.decodeSingularInt64Field(value: &_storage._totalFloatOps)
+        case 10: try decoder.decodeRepeatedMessageField(value: &_storage._graphNodes)
+        case 11: try decoder.decodeRepeatedMessageField(value: &_storage._children)
+        case 12: try decoder.decodeSingularInt64Field(value: &_storage._acceleratorExecMicros)
+        case 13: try decoder.decodeSingularInt64Field(value: &_storage._cpuExecMicros)
+        case 14: try decoder.decodeSingularInt64Field(value: &_storage._totalAcceleratorExecMicros)
+        case 15: try decoder.decodeSingularInt64Field(value: &_storage._totalCpuExecMicros)
+        case 16: try decoder.decodeSingularInt64Field(value: &_storage._peakBytes)
+        case 17: try decoder.decodeSingularInt64Field(value: &_storage._residualBytes)
+        case 18: try decoder.decodeSingularInt64Field(value: &_storage._outputBytes)
+        case 19: try decoder.decodeSingularInt64Field(value: &_storage._totalPeakBytes)
+        case 20: try decoder.decodeSingularInt64Field(value: &_storage._totalResidualBytes)
+        case 21: try decoder.decodeSingularInt64Field(value: &_storage._totalOutputBytes)
+        default: break
+        }
       }
     }
   }
@@ -406,53 +550,75 @@ public struct Tensorflow_Tfprof_MultiGraphNodeProto: SwiftProtobuf.Message {
   /// other serializer methods are defined in the SwiftProtobuf library. See the
   /// `Message` and `Message+*Additions` files.
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.name.isEmpty {
-      try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
-    }
-    if self.execMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.execMicros, fieldNumber: 2)
-    }
-    if self.requestedBytes != 0 {
-      try visitor.visitSingularInt64Field(value: self.requestedBytes, fieldNumber: 3)
-    }
-    if self.parameters != 0 {
-      try visitor.visitSingularInt64Field(value: self.parameters, fieldNumber: 4)
-    }
-    if self.floatOps != 0 {
-      try visitor.visitSingularInt64Field(value: self.floatOps, fieldNumber: 5)
-    }
-    if self.totalExecMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalExecMicros, fieldNumber: 6)
-    }
-    if self.totalRequestedBytes != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalRequestedBytes, fieldNumber: 7)
-    }
-    if self.totalParameters != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalParameters, fieldNumber: 8)
-    }
-    if self.totalFloatOps != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalFloatOps, fieldNumber: 9)
-    }
-    if !self.graphNodes.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.graphNodes, fieldNumber: 10)
-    }
-    if !self.children.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.children, fieldNumber: 11)
-    }
-    if self.acceleratorExecMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.acceleratorExecMicros, fieldNumber: 12)
-    }
-    if self.cpuExecMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.cpuExecMicros, fieldNumber: 13)
-    }
-    if self.totalAcceleratorExecMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalAcceleratorExecMicros, fieldNumber: 14)
-    }
-    if self.totalCpuExecMicros != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalCpuExecMicros, fieldNumber: 15)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._name.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 1)
+      }
+      if _storage._execMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._execMicros, fieldNumber: 2)
+      }
+      if _storage._requestedBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._requestedBytes, fieldNumber: 3)
+      }
+      if _storage._parameters != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._parameters, fieldNumber: 4)
+      }
+      if _storage._floatOps != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._floatOps, fieldNumber: 5)
+      }
+      if _storage._totalExecMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalExecMicros, fieldNumber: 6)
+      }
+      if _storage._totalRequestedBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalRequestedBytes, fieldNumber: 7)
+      }
+      if _storage._totalParameters != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalParameters, fieldNumber: 8)
+      }
+      if _storage._totalFloatOps != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalFloatOps, fieldNumber: 9)
+      }
+      if !_storage._graphNodes.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._graphNodes, fieldNumber: 10)
+      }
+      if !_storage._children.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._children, fieldNumber: 11)
+      }
+      if _storage._acceleratorExecMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._acceleratorExecMicros, fieldNumber: 12)
+      }
+      if _storage._cpuExecMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._cpuExecMicros, fieldNumber: 13)
+      }
+      if _storage._totalAcceleratorExecMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalAcceleratorExecMicros, fieldNumber: 14)
+      }
+      if _storage._totalCpuExecMicros != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalCpuExecMicros, fieldNumber: 15)
+      }
+      if _storage._peakBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._peakBytes, fieldNumber: 16)
+      }
+      if _storage._residualBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._residualBytes, fieldNumber: 17)
+      }
+      if _storage._outputBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._outputBytes, fieldNumber: 18)
+      }
+      if _storage._totalPeakBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalPeakBytes, fieldNumber: 19)
+      }
+      if _storage._totalResidualBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalResidualBytes, fieldNumber: 20)
+      }
+      if _storage._totalOutputBytes != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._totalOutputBytes, fieldNumber: 21)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct Tensorflow_Tfprof_AdviceProto: SwiftProtobuf.Message {
@@ -555,6 +721,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
     17: .standard(proto: "accelerator_exec_micros"),
     18: .standard(proto: "cpu_exec_micros"),
     3: .standard(proto: "requested_bytes"),
+    24: .standard(proto: "peak_bytes"),
+    25: .standard(proto: "residual_bytes"),
+    26: .standard(proto: "output_bytes"),
     4: .same(proto: "parameters"),
     13: .standard(proto: "float_ops"),
     10: .same(proto: "devices"),
@@ -564,6 +733,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
     19: .standard(proto: "total_accelerator_exec_micros"),
     20: .standard(proto: "total_cpu_exec_micros"),
     7: .standard(proto: "total_requested_bytes"),
+    27: .standard(proto: "total_peak_bytes"),
+    28: .standard(proto: "total_residual_bytes"),
+    29: .standard(proto: "total_output_bytes"),
     8: .standard(proto: "total_parameters"),
     14: .standard(proto: "total_float_ops"),
     11: .same(proto: "shapes"),
@@ -579,6 +751,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
     var _acceleratorExecMicros: Int64 = 0
     var _cpuExecMicros: Int64 = 0
     var _requestedBytes: Int64 = 0
+    var _peakBytes: Int64 = 0
+    var _residualBytes: Int64 = 0
+    var _outputBytes: Int64 = 0
     var _parameters: Int64 = 0
     var _floatOps: Int64 = 0
     var _devices: [String] = []
@@ -588,6 +763,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
     var _totalAcceleratorExecMicros: Int64 = 0
     var _totalCpuExecMicros: Int64 = 0
     var _totalRequestedBytes: Int64 = 0
+    var _totalPeakBytes: Int64 = 0
+    var _totalResidualBytes: Int64 = 0
+    var _totalOutputBytes: Int64 = 0
     var _totalParameters: Int64 = 0
     var _totalFloatOps: Int64 = 0
     var _shapes: [Tensorflow_TensorShapeProto] = []
@@ -606,6 +784,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
       _acceleratorExecMicros = source._acceleratorExecMicros
       _cpuExecMicros = source._cpuExecMicros
       _requestedBytes = source._requestedBytes
+      _peakBytes = source._peakBytes
+      _residualBytes = source._residualBytes
+      _outputBytes = source._outputBytes
       _parameters = source._parameters
       _floatOps = source._floatOps
       _devices = source._devices
@@ -615,6 +796,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
       _totalAcceleratorExecMicros = source._totalAcceleratorExecMicros
       _totalCpuExecMicros = source._totalCpuExecMicros
       _totalRequestedBytes = source._totalRequestedBytes
+      _totalPeakBytes = source._totalPeakBytes
+      _totalResidualBytes = source._totalResidualBytes
+      _totalOutputBytes = source._totalOutputBytes
       _totalParameters = source._totalParameters
       _totalFloatOps = source._totalFloatOps
       _shapes = source._shapes
@@ -642,6 +826,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
         if _storage._acceleratorExecMicros != other_storage._acceleratorExecMicros {return false}
         if _storage._cpuExecMicros != other_storage._cpuExecMicros {return false}
         if _storage._requestedBytes != other_storage._requestedBytes {return false}
+        if _storage._peakBytes != other_storage._peakBytes {return false}
+        if _storage._residualBytes != other_storage._residualBytes {return false}
+        if _storage._outputBytes != other_storage._outputBytes {return false}
         if _storage._parameters != other_storage._parameters {return false}
         if _storage._floatOps != other_storage._floatOps {return false}
         if _storage._devices != other_storage._devices {return false}
@@ -651,6 +838,9 @@ extension Tensorflow_Tfprof_GraphNodeProto: SwiftProtobuf._MessageImplementation
         if _storage._totalAcceleratorExecMicros != other_storage._totalAcceleratorExecMicros {return false}
         if _storage._totalCpuExecMicros != other_storage._totalCpuExecMicros {return false}
         if _storage._totalRequestedBytes != other_storage._totalRequestedBytes {return false}
+        if _storage._totalPeakBytes != other_storage._totalPeakBytes {return false}
+        if _storage._totalResidualBytes != other_storage._totalResidualBytes {return false}
+        if _storage._totalOutputBytes != other_storage._totalOutputBytes {return false}
         if _storage._totalParameters != other_storage._totalParameters {return false}
         if _storage._totalFloatOps != other_storage._totalFloatOps {return false}
         if _storage._shapes != other_storage._shapes {return false}
@@ -672,34 +862,113 @@ extension Tensorflow_Tfprof_MultiGraphNodeProto: SwiftProtobuf._MessageImplement
     12: .standard(proto: "accelerator_exec_micros"),
     13: .standard(proto: "cpu_exec_micros"),
     3: .standard(proto: "requested_bytes"),
+    16: .standard(proto: "peak_bytes"),
+    17: .standard(proto: "residual_bytes"),
+    18: .standard(proto: "output_bytes"),
     4: .same(proto: "parameters"),
     5: .standard(proto: "float_ops"),
     6: .standard(proto: "total_exec_micros"),
     14: .standard(proto: "total_accelerator_exec_micros"),
     15: .standard(proto: "total_cpu_exec_micros"),
     7: .standard(proto: "total_requested_bytes"),
+    19: .standard(proto: "total_peak_bytes"),
+    20: .standard(proto: "total_residual_bytes"),
+    21: .standard(proto: "total_output_bytes"),
     8: .standard(proto: "total_parameters"),
     9: .standard(proto: "total_float_ops"),
     10: .standard(proto: "graph_nodes"),
     11: .same(proto: "children"),
   ]
 
+  fileprivate class _StorageClass {
+    var _name: String = String()
+    var _execMicros: Int64 = 0
+    var _acceleratorExecMicros: Int64 = 0
+    var _cpuExecMicros: Int64 = 0
+    var _requestedBytes: Int64 = 0
+    var _peakBytes: Int64 = 0
+    var _residualBytes: Int64 = 0
+    var _outputBytes: Int64 = 0
+    var _parameters: Int64 = 0
+    var _floatOps: Int64 = 0
+    var _totalExecMicros: Int64 = 0
+    var _totalAcceleratorExecMicros: Int64 = 0
+    var _totalCpuExecMicros: Int64 = 0
+    var _totalRequestedBytes: Int64 = 0
+    var _totalPeakBytes: Int64 = 0
+    var _totalResidualBytes: Int64 = 0
+    var _totalOutputBytes: Int64 = 0
+    var _totalParameters: Int64 = 0
+    var _totalFloatOps: Int64 = 0
+    var _graphNodes: [Tensorflow_Tfprof_GraphNodeProto] = []
+    var _children: [Tensorflow_Tfprof_MultiGraphNodeProto] = []
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _name = source._name
+      _execMicros = source._execMicros
+      _acceleratorExecMicros = source._acceleratorExecMicros
+      _cpuExecMicros = source._cpuExecMicros
+      _requestedBytes = source._requestedBytes
+      _peakBytes = source._peakBytes
+      _residualBytes = source._residualBytes
+      _outputBytes = source._outputBytes
+      _parameters = source._parameters
+      _floatOps = source._floatOps
+      _totalExecMicros = source._totalExecMicros
+      _totalAcceleratorExecMicros = source._totalAcceleratorExecMicros
+      _totalCpuExecMicros = source._totalCpuExecMicros
+      _totalRequestedBytes = source._totalRequestedBytes
+      _totalPeakBytes = source._totalPeakBytes
+      _totalResidualBytes = source._totalResidualBytes
+      _totalOutputBytes = source._totalOutputBytes
+      _totalParameters = source._totalParameters
+      _totalFloatOps = source._totalFloatOps
+      _graphNodes = source._graphNodes
+      _children = source._children
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public func _protobuf_generated_isEqualTo(other: Tensorflow_Tfprof_MultiGraphNodeProto) -> Bool {
-    if self.name != other.name {return false}
-    if self.execMicros != other.execMicros {return false}
-    if self.acceleratorExecMicros != other.acceleratorExecMicros {return false}
-    if self.cpuExecMicros != other.cpuExecMicros {return false}
-    if self.requestedBytes != other.requestedBytes {return false}
-    if self.parameters != other.parameters {return false}
-    if self.floatOps != other.floatOps {return false}
-    if self.totalExecMicros != other.totalExecMicros {return false}
-    if self.totalAcceleratorExecMicros != other.totalAcceleratorExecMicros {return false}
-    if self.totalCpuExecMicros != other.totalCpuExecMicros {return false}
-    if self.totalRequestedBytes != other.totalRequestedBytes {return false}
-    if self.totalParameters != other.totalParameters {return false}
-    if self.totalFloatOps != other.totalFloatOps {return false}
-    if self.graphNodes != other.graphNodes {return false}
-    if self.children != other.children {return false}
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._name != other_storage._name {return false}
+        if _storage._execMicros != other_storage._execMicros {return false}
+        if _storage._acceleratorExecMicros != other_storage._acceleratorExecMicros {return false}
+        if _storage._cpuExecMicros != other_storage._cpuExecMicros {return false}
+        if _storage._requestedBytes != other_storage._requestedBytes {return false}
+        if _storage._peakBytes != other_storage._peakBytes {return false}
+        if _storage._residualBytes != other_storage._residualBytes {return false}
+        if _storage._outputBytes != other_storage._outputBytes {return false}
+        if _storage._parameters != other_storage._parameters {return false}
+        if _storage._floatOps != other_storage._floatOps {return false}
+        if _storage._totalExecMicros != other_storage._totalExecMicros {return false}
+        if _storage._totalAcceleratorExecMicros != other_storage._totalAcceleratorExecMicros {return false}
+        if _storage._totalCpuExecMicros != other_storage._totalCpuExecMicros {return false}
+        if _storage._totalRequestedBytes != other_storage._totalRequestedBytes {return false}
+        if _storage._totalPeakBytes != other_storage._totalPeakBytes {return false}
+        if _storage._totalResidualBytes != other_storage._totalResidualBytes {return false}
+        if _storage._totalOutputBytes != other_storage._totalOutputBytes {return false}
+        if _storage._totalParameters != other_storage._totalParameters {return false}
+        if _storage._totalFloatOps != other_storage._totalFloatOps {return false}
+        if _storage._graphNodes != other_storage._graphNodes {return false}
+        if _storage._children != other_storage._children {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if unknownFields != other.unknownFields {return false}
     return true
   }

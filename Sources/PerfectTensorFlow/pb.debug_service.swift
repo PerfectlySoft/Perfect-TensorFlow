@@ -40,14 +40,27 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public struct Tensorflow_EventReply: SwiftProtobuf.Message {
   public static let protoMessageName: String = _protobuf_package + ".EventReply"
 
-  public var debugOpStateChanges: [Tensorflow_EventReply.DebugOpStateChange] = []
+  public var debugOpStateChanges: [Tensorflow_EventReply.DebugOpStateChange] {
+    get {return _storage._debugOpStateChanges}
+    set {_uniqueStorage()._debugOpStateChanges = newValue}
+  }
+
+  /// New tensor value to override the current tensor value with.
+  public var tensor: Tensorflow_TensorProto {
+    get {return _storage._tensor ?? Tensorflow_TensorProto()}
+    set {_uniqueStorage()._tensor = newValue}
+  }
+  /// Returns true if `tensor` has been explicitly set.
+  public var hasTensor: Bool {return _storage._tensor != nil}
+  /// Clears the value of `tensor`. Subsequent reads from it will return its default value.
+  public mutating func clearTensor() {_storage._tensor = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public struct DebugOpStateChange: SwiftProtobuf.Message {
     public static let protoMessageName: String = Tensorflow_EventReply.protoMessageName + ".DebugOpStateChange"
 
-    public var change: Tensorflow_EventReply.DebugOpStateChange.Change = .disable
+    public var state: Tensorflow_EventReply.DebugOpStateChange.State = .unspecified
 
     public var nodeName: String = String()
 
@@ -57,28 +70,34 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-    public enum Change: SwiftProtobuf.Enum {
+    public enum State: SwiftProtobuf.Enum {
       public typealias RawValue = Int
-      case disable // = 0
-      case enable // = 1
+      case unspecified // = 0
+      case disabled // = 1
+      case readOnly // = 2
+      case readWrite // = 3
       case UNRECOGNIZED(Int)
 
       public init() {
-        self = .disable
+        self = .unspecified
       }
 
       public init?(rawValue: Int) {
         switch rawValue {
-        case 0: self = .disable
-        case 1: self = .enable
+        case 0: self = .unspecified
+        case 1: self = .disabled
+        case 2: self = .readOnly
+        case 3: self = .readWrite
         default: self = .UNRECOGNIZED(rawValue)
         }
       }
 
       public var rawValue: Int {
         switch self {
-        case .disable: return 0
-        case .enable: return 1
+        case .unspecified: return 0
+        case .disabled: return 1
+        case .readOnly: return 2
+        case .readWrite: return 3
         case .UNRECOGNIZED(let i): return i
         }
       }
@@ -94,7 +113,7 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
     public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 1: try decoder.decodeSingularEnumField(value: &self.change)
+        case 1: try decoder.decodeSingularEnumField(value: &self.state)
         case 2: try decoder.decodeSingularStringField(value: &self.nodeName)
         case 3: try decoder.decodeSingularInt32Field(value: &self.outputSlot)
         case 4: try decoder.decodeSingularStringField(value: &self.debugOp)
@@ -108,8 +127,8 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
     /// other serializer methods are defined in the SwiftProtobuf library. See the
     /// `Message` and `Message+*Additions` files.
     public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-      if self.change != .disable {
-        try visitor.visitSingularEnumField(value: self.change, fieldNumber: 1)
+      if self.state != .unspecified {
+        try visitor.visitSingularEnumField(value: self.state, fieldNumber: 1)
       }
       if !self.nodeName.isEmpty {
         try visitor.visitSingularStringField(value: self.nodeName, fieldNumber: 2)
@@ -131,10 +150,14 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
   /// initializers are defined in the SwiftProtobuf library. See the Message and
   /// Message+*Additions` files.
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeRepeatedMessageField(value: &self.debugOpStateChanges)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeRepeatedMessageField(value: &_storage._debugOpStateChanges)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._tensor)
+        default: break
+        }
       }
     }
   }
@@ -144,11 +167,18 @@ public struct Tensorflow_EventReply: SwiftProtobuf.Message {
   /// other serializer methods are defined in the SwiftProtobuf library. See the
   /// `Message` and `Message+*Additions` files.
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.debugOpStateChanges.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.debugOpStateChanges, fieldNumber: 1)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._debugOpStateChanges.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._debugOpStateChanges, fieldNumber: 1)
+      }
+      if let v = _storage._tensor {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -158,10 +188,41 @@ fileprivate let _protobuf_package = "tensorflow"
 extension Tensorflow_EventReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "debug_op_state_changes"),
+    2: .same(proto: "tensor"),
   ]
 
+  fileprivate class _StorageClass {
+    var _debugOpStateChanges: [Tensorflow_EventReply.DebugOpStateChange] = []
+    var _tensor: Tensorflow_TensorProto? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _debugOpStateChanges = source._debugOpStateChanges
+      _tensor = source._tensor
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public func _protobuf_generated_isEqualTo(other: Tensorflow_EventReply) -> Bool {
-    if self.debugOpStateChanges != other.debugOpStateChanges {return false}
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._debugOpStateChanges != other_storage._debugOpStateChanges {return false}
+        if _storage._tensor != other_storage._tensor {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if unknownFields != other.unknownFields {return false}
     return true
   }
@@ -169,14 +230,14 @@ extension Tensorflow_EventReply: SwiftProtobuf._MessageImplementationBase, Swift
 
 extension Tensorflow_EventReply.DebugOpStateChange: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "change"),
+    1: .same(proto: "state"),
     2: .standard(proto: "node_name"),
     3: .standard(proto: "output_slot"),
     4: .standard(proto: "debug_op"),
   ]
 
   public func _protobuf_generated_isEqualTo(other: Tensorflow_EventReply.DebugOpStateChange) -> Bool {
-    if self.change != other.change {return false}
+    if self.state != other.state {return false}
     if self.nodeName != other.nodeName {return false}
     if self.outputSlot != other.outputSlot {return false}
     if self.debugOp != other.debugOp {return false}
@@ -185,9 +246,11 @@ extension Tensorflow_EventReply.DebugOpStateChange: SwiftProtobuf._MessageImplem
   }
 }
 
-extension Tensorflow_EventReply.DebugOpStateChange.Change: SwiftProtobuf._ProtoNameProviding {
+extension Tensorflow_EventReply.DebugOpStateChange.State: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "DISABLE"),
-    1: .same(proto: "ENABLE"),
+    0: .same(proto: "STATE_UNSPECIFIED"),
+    1: .same(proto: "DISABLED"),
+    2: .same(proto: "READ_ONLY"),
+    3: .same(proto: "READ_WRITE"),
   ]
 }

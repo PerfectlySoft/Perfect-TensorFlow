@@ -121,6 +121,12 @@ public struct Tensorflow_TensorProto: SwiftProtobuf.Message {
     set {_uniqueStorage()._resourceHandleVal = newValue}
   }
 
+  /// DT_VARIANT
+  public var variantVal: [Tensorflow_VariantTensorDataProto] {
+    get {return _storage._variantVal}
+    set {_uniqueStorage()._variantVal = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -148,6 +154,7 @@ public struct Tensorflow_TensorProto: SwiftProtobuf.Message {
         case 12: try decoder.decodeRepeatedDoubleField(value: &_storage._dcomplexVal)
         case 13: try decoder.decodeRepeatedInt32Field(value: &_storage._halfVal)
         case 14: try decoder.decodeRepeatedMessageField(value: &_storage._resourceHandleVal)
+        case 15: try decoder.decodeRepeatedMessageField(value: &_storage._variantVal)
         default: break
         }
       }
@@ -202,11 +209,64 @@ public struct Tensorflow_TensorProto: SwiftProtobuf.Message {
       if !_storage._resourceHandleVal.isEmpty {
         try visitor.visitRepeatedMessageField(value: _storage._resourceHandleVal, fieldNumber: 14)
       }
+      if !_storage._variantVal.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._variantVal, fieldNumber: 15)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+/// Protocol buffer representing the serialization format of DT_VARIANT tensors.
+public struct Tensorflow_VariantTensorDataProto: SwiftProtobuf.Message {
+  public static let protoMessageName: String = _protobuf_package + ".VariantTensorDataProto"
+
+  /// Name of the type of objects being serialized.
+  public var typeName: String = String()
+
+  /// Portions of the object that are not Tensors.
+  public var metadata: Data = SwiftProtobuf.Internal.emptyData
+
+  /// Tensors contained within objects being serialized.
+  public var tensors: [Tensorflow_TensorProto] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.typeName)
+      case 2: try decoder.decodeSingularBytesField(value: &self.metadata)
+      case 3: try decoder.decodeRepeatedMessageField(value: &self.tensors)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.typeName.isEmpty {
+      try visitor.visitSingularStringField(value: self.typeName, fieldNumber: 1)
+    }
+    if !self.metadata.isEmpty {
+      try visitor.visitSingularBytesField(value: self.metadata, fieldNumber: 2)
+    }
+    if !self.tensors.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.tensors, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -229,6 +289,7 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
     11: .standard(proto: "bool_val"),
     12: .standard(proto: "dcomplex_val"),
     14: .standard(proto: "resource_handle_val"),
+    15: .standard(proto: "variant_val"),
   ]
 
   fileprivate class _StorageClass {
@@ -246,6 +307,7 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
     var _boolVal: [Bool] = []
     var _dcomplexVal: [Double] = []
     var _resourceHandleVal: [Tensorflow_ResourceHandleProto] = []
+    var _variantVal: [Tensorflow_VariantTensorDataProto] = []
 
     static let defaultInstance = _StorageClass()
 
@@ -266,6 +328,7 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
       _boolVal = source._boolVal
       _dcomplexVal = source._dcomplexVal
       _resourceHandleVal = source._resourceHandleVal
+      _variantVal = source._variantVal
     }
   }
 
@@ -295,10 +358,27 @@ extension Tensorflow_TensorProto: SwiftProtobuf._MessageImplementationBase, Swif
         if _storage._boolVal != other_storage._boolVal {return false}
         if _storage._dcomplexVal != other_storage._dcomplexVal {return false}
         if _storage._resourceHandleVal != other_storage._resourceHandleVal {return false}
+        if _storage._variantVal != other_storage._variantVal {return false}
         return true
       }
       if !storagesAreEqual {return false}
     }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tensorflow_VariantTensorDataProto: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "type_name"),
+    2: .same(proto: "metadata"),
+    3: .same(proto: "tensors"),
+  ]
+
+  public func _protobuf_generated_isEqualTo(other: Tensorflow_VariantTensorDataProto) -> Bool {
+    if self.typeName != other.typeName {return false}
+    if self.metadata != other.metadata {return false}
+    if self.tensors != other.tensors {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
