@@ -114,6 +114,17 @@ public extension Data {
   }
 }
 
+extension Array where Element == TF.Output {
+  func useHelper(graph: TF.Graph, _ operationType: String, _ name: String)
+    throws -> TF.Operation {
+      var desc = try TF.OperationBuilder(graph: graph, name: name, type: operationType)
+      self.forEach { inp in
+        desc = desc.add(input: inp)
+      }
+      return try desc.set(device: "/cpu:0").build()
+  }
+}
+
 class PerfectTensorFlowTests: XCTestCase {
 
   static var allTests = [
@@ -148,8 +159,45 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testMatrix", testMatrix),
     ("testBasicImproved",testBasicImproved),
     ("testDevices", testDevices),
-    ("testEventAndSummary", testEventAndSummary)
+    ("testEventAndSummary", testEventAndSummary),
+    ("testFunctionBasic", testFunctionBasic)
   ]
+
+  func testFunctionBasic() {
+    do {
+      let funcName = "MyFunc"
+      let nodeName = "MyFunc_0"
+      let funcGraph = try TF.Graph()
+      let hostGraph = try TF.Graph()
+      let c = try funcGraph.scalar(10, name: "scalar10")
+      let function = try funcGraph.toFunction(funcName, outputs: [c.asOutput(0)])
+      try hostGraph.copy(function: function)
+      let nullInput: [TF.Output] = []
+      let funOp = try nullInput.useHelper(graph: hostGraph, funcName, nodeName)
+      let s = try hostGraph.runner().fetch(funOp).run()
+      XCTAssertEqual(s.count, 1)
+      let res:[Int32] = try s[0].asArray()
+      XCTAssertEqual(res[0], 10)
+      guard let def = function.definition else {
+        XCTFail("function definition failure")
+        return
+      }
+      let node = def.nodeDef[0]
+      XCTAssertEqual(node.name, "scalar10_0")
+      guard let value = node.attr["value"] else {
+        XCTFail("function invalid value")
+        return
+      }
+      XCTAssertEqual( value.tensor.intVal, [10])
+      guard let ret = def.ret["scalar10"] else {
+        XCTFail("function return fault")
+        return
+      }
+      XCTAssertEqual(ret, "scalar10_0:output:0")
+    }catch {
+      XCTFail("functions: \(error)")
+    }
+  }
 
   func testDevices() {
     do {

@@ -1904,10 +1904,14 @@ public class TensorFlow {
     ///   - outputNames: [String], The names of the function's outputs. Must either have the same length as `outputs` or be null. In the former case, the names should match the regular expression for ArgDef names - "[a-z][a-z0-9_]*". In the latter case, names for outputs will be generated automatically.
     ///   - options: various options for the function, e.g. XLA's inlining control.
     ///   - description: optional human-readable description of this function
-    public func toFunction(_ name: String, appendHashToFunctionName: Bool = false, operations: [Operation], inputs: [Output], outputs: [Output], outputNames: [String], options: OpaquePointer? = nil, description: String = "") throws -> Function {
-      guard outputs.count == outputNames.count else {
-        throw Panic.FAULT(reason: "Output array elements are mismatched with names")
-      }
+    public func toFunction(
+      _ name: String, appendHashToFunctionName: Bool = false,
+      operations: [Operation] = [],
+      inputs: [Output] = [],
+      outputs: [Output] = [],
+      outputNames: [String] = [],
+      options: OpaquePointer? = nil,
+      description: String = "") throws -> Function {
       let status = try Status()
       let opera:UnsafePointer<OpaquePointer?>? = operations.map { $0.operation }
         .withUnsafeBufferPointer { $0.baseAddress }
@@ -1929,7 +1933,8 @@ public class TensorFlow {
           Int32(outputs.count > 0 ? outputs.count: 0),
           outputs.count > 0 ? pOutpus : nil,
 
-          outputs.count > 0 && outputNames.count == outputs.count ? pOutputNames : nil,
+          outputNames.count > 0
+            && outputNames.count == outputs.count ? pOutputNames : nil,
 
           options, description.isEmpty ? nil: description,
 
@@ -1941,6 +1946,32 @@ public class TensorFlow {
       return Function(fun)
     }
 
+    /// Adds a copy of function `func` and optionally its gradient function `grad`
+    /// to `g`. Once `func`/`grad` is added to `g`, it can be called by creating
+    /// an operation using the function's name.
+    /// Any changes to `func`/`grad` (including deleting it) done after this method
+    /// returns, won't affect the copy of `func`/`grad` in `g`.
+    /// If `func` or `grad` are already in `g`, TF_GraphCopyFunction has no
+    /// effect on them, but can establish the function->gradient relationship
+    /// between them if `func` does not already have a gradient. If `func` already
+    /// has a gradient different from `grad`, an error is returned.
+    /// If `grad` is null and `func` is not in `g`, `func` is added without a
+    /// gradient.
+    /// If `grad` is null and `func` is in `g`, TF_GraphCopyFunction is a noop.
+    /// `grad` must have appropriate signature as described in the doc of
+    /// GradientDef in tensorflow/core/framework/function.proto.
+    /// - parameters:
+    ///   - function: function to add
+    ///   - grad: the gradient function to add with.
+    /// - throws: Panic.FAULT
+    public func copy(function: Function, grad: Function? = nil) throws {
+      let status = try Status()
+      TFLib.GraphCopyFunction(self.graph, function.ref, grad?.ref, status.status)
+      guard status.code == .OK else {
+        throw Panic.FAULT(reason: status.message)
+      }
+    }
+    
     /// Function is a grouping of operations with defined inputs and outputs.
     /// Once created and added to graphs, functions can be invoked by creating an
     /// operation whose operation type matches the function name.
@@ -2023,17 +2054,17 @@ public class TensorFlow {
           return nil
         }
       }
-    }
 
-    /// get definition
-    public var def: FunctionDef? {
-      if let buf = self.buffer, let proto = buf.data {
-        return try? FunctionDef(serializedData: proto)
-      } else {
-        return nil
+      /// get definition
+      public var definition: FunctionDef? {
+        if let buf = self.buffer, let proto = buf.data {
+          return try? FunctionDef(serializedData: proto)
+        } else {
+          return nil
+        }
       }
-    }
 
+    }
   }//end graph
 
   /// class wrapper of Graph Definition Options

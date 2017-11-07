@@ -785,33 +785,26 @@ public class TFLib {
   /// in this address space.
   public static var GetAllOpList: @convention(c) () -> UnsafeMutablePointer<TF_Buffer>? = { return nil }
 
-  // Adds a copy of function `func` and optionally its gradient function `grad`
-  // to `g`. Once `func`/`grad` is added to `g`, it can be called by creating
+  /// Adds a copy of function `func` and optionally its gradient function `grad`
+  /// to `g`. Once `func`/`grad` is added to `g`, it can be called by creating
   // an operation using the function's name.
-  // Any changes to `func`/`grad` (including deleting it) done after this method
-  // returns, won't affect the copy of `func`/`grad` in `g`.
-  // If `func` or `grad` are already in `g`, TF_GraphCopyFunction has no
-  // effect on them, but can establish the function->gradient relationship
-  // between them if `func` does not already have a gradient. If `func` already
-  // has a gradient different from `grad`, an error is returned.
-  //
-  // `func` must not be null.
-  // If `grad` is null and `func` is not in `g`, `func` is added without a
-  // gradient.
-  // If `grad` is null and `func` is in `g`, TF_GraphCopyFunction is a noop.
-  // `grad` must have appropriate signature as described in the doc of
-  // GradientDef in tensorflow/core/framework/function.proto.
-  //
-  // If successful, status is set to OK and `func` and `grad` are added to `g`.
-  // Otherwise, status is set to the encountered error and `g` is unmodified.
-  /*
-  TF_CAPI_EXPORT extern void TF_GraphCopyFunction(TF_Graph* g,
-  const TF_Function* func,
-  const TF_Function* grad,
-  TF_Status* status);
-   */
-
-  public static var GraphCopyFunction: @convention(c) (OpaquePointer?, OpaquePointer?, OpaquePointer?, OpaquePointer?) -> Void = { _, _, _, _ in }
+  /// Any changes to `func`/`grad` (including deleting it) done after this method
+  /// returns, won't affect the copy of `func`/`grad` in `g`.
+  /// If `func` or `grad` are already in `g`, TF_GraphCopyFunction has no
+  /// effect on them, but can establish the function->gradient relationship
+  /// between them if `func` does not already have a gradient. If `func` already
+  /// has a gradient different from `grad`, an error is returned.
+  ///
+  /// `func` must not be null.
+  /// If `grad` is null and `func` is not in `g`, `func` is added without a
+  /// gradient.
+  /// If `grad` is null and `func` is in `g`, TF_GraphCopyFunction is a noop.
+  /// `grad` must have appropriate signature as described in the doc of
+  /// GradientDef in tensorflow/core/framework/function.proto.
+  ///
+  /// If successful, status is set to OK and `func` and `grad` are added to `g`.
+  /// Otherwise, status is set to the encountered error and `g` is unmodified.
+  public static var GraphCopyFunction: @convention(c) (OpaquePointer, OpaquePointer, OpaquePointer?, OpaquePointer) -> Void = { _, _, _, _ in }
 
   /// Create a TF_Function from a TF_Graph
   ///
