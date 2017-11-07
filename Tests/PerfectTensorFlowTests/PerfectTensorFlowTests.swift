@@ -167,6 +167,7 @@ class PerfectTensorFlowTests: XCTestCase {
     do {
       let funcName = "MyFunc"
       let nodeName = "MyFunc_0"
+      let attrName = "foo_attr"
       let funcGraph = try TF.Graph()
       let hostGraph = try TF.Graph()
       let c = try funcGraph.scalar(10, name: "scalar10")
@@ -194,6 +195,17 @@ class PerfectTensorFlowTests: XCTestCase {
         return
       }
       XCTAssertEqual(ret, "scalar10_0:output:0")
+
+      let function2 = try TF.Graph.Function(importDefinition: def)
+      guard let def2 = function2.definition else {
+        XCTFail("function import / export failure")
+        return
+      }
+      let node2 = def2.nodeDef[0]
+      XCTAssertEqual(node, node2)
+      try function2.setAttributeFor(attrName, value: value)
+      let value2 = try function2.getAttributeFor(attrName)
+      XCTAssertEqual(value, value2)
     }catch {
       XCTFail("functions: \(error)")
     }

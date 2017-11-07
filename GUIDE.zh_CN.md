@@ -499,3 +499,41 @@ print(dev)
 // 样本输出：
 // ["/job:localhost/replica:0/task:0/cpu:0": (type: "CPU", memory: 268435456)]
 ```
+
+### 运算流程图中的函数
+
+自 TensorFlow 1.4.0 版本开始，本函数库新增了一个内置对象类 `Function` 用于表达流程图中的运算函数。
+
+一个函数对象可以通过运算流程图`graph.toFunction()`方法创建，或者从其定义缓冲字节中导入：
+
+``` swift 
+// 从当前流程图中创建一个函数
+let function = try graph.toFunction("函数名", 
+	operations:[], inputs:[] outputs: [operation.asOutput(0)], 
+	outputNames: [], description: "我的函数")
+
+// 获取函数的协议缓冲字节
+guard let def = function.definition else {
+	// something wrong
+}
+
+// 或者从已经保存的协议缓冲字节中导入一个函数
+let function2 = try TF.Graph.Function(importDefinition: def)
+// now function == function2
+```
+
+运算流程图中函数对象的设置是为了方便地把一组运算（的梯度函数）从一个流程图复制到另外一个流程图上去：
+
+``` swift
+let function = try graph1.toFunction(...)
+try graph.copy(function: function)
+```
+
+同时还可以随时读取或者设置函数对象的属性：
+
+``` swift
+// 假设value是一个 TF.AttrValue 协议缓冲字节
+try function.setAttributeFor("某属性", value: value)
+let value2 = try function.getAttributeFor("某属性")
+// 现在 value 和 value2 应该是完全一致的
+```

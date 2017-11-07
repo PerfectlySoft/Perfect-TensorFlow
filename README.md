@@ -56,8 +56,8 @@ These files are the key part of Perfect-TensorFlow:
 ```
 Sources
 ├── PerfectTensorFlow
-│   ├── APILoader.swift (928 lines, translated from tensorflow/c/c_api.h)
-│   ├── PerfectTensorFlow.swift (2436 lines)
+│   ├── APILoader.swift (1099 lines, translated from tensorflow/c/c_api.h)
+│   ├── PerfectTensorFlow.swift (2701 lines)
 └── TensorFlowAPI
     ├── TensorFlowAPI.c (72 lines)
     └── include

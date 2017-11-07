@@ -505,3 +505,41 @@ print(dev)
 // sample output:
 // ["/job:localhost/replica:0/task:0/cpu:0": (type: "CPU", memory: 268435456)]
 ```
+
+### Functions of a Graph
+
+Since TensorFlow 1.4.0+, a new feature named `Function` has been introduced as a nested class of Graph.
+
+A `Function` object can be either built by `graph.toFunction()` or imported by its definition protocol buffer:
+
+``` swift 
+// build a function from the current graph
+let function = try graph.toFunction("funcName", 
+	operations:[], inputs:[] outputs: [operation.asOutput(0)], 
+	outputNames: [], description: "myFunc")
+
+// get the function definition buffer:
+guard let def = function.definition else {
+	// something wrong
+}
+
+// import a function from its definition buffer
+let function2 = try TF.Graph.Function(importDefinition: def)
+// now function == function2
+```
+
+The purpose of `Function` is to copy its gradient function from one graph to another:
+
+``` swift
+let function = try graph1.toFunction(...)
+try graph.copy(function: function)
+```
+
+You can also get and set a function object's attribute:
+
+``` swift
+// assuming value is a TF.AttrValue protocol buffer
+try function.setAttributeFor("foo_attr", value: value)
+let value2 = try function.getAttributeFor("foo_attr")
+// now value2 should be the same as value
+```
