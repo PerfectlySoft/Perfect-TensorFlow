@@ -348,20 +348,16 @@ public class TensorFlow {
 
     /// get the code from the status
     public var code: Code? {
-      get {
-        return TFLib.Code(rawValue: Int(TFLib.GetCode(status)))
-      }
+      return TFLib.Code(rawValue: Int(TFLib.GetCode(status)))
     }
 
     /// get the message from the status
     public var message: String {
-      get {
-        if let m = TFLib.Message(status) {
-          return String(cString: m)
-        } else {
-          return ""
-        }//end if
-      }//end get
+      if let m = TFLib.Message(status) {
+        return String(cString: m)
+      } else {
+        return ""
+      }//end if
     }//end message
   }//end status
 
@@ -420,30 +416,24 @@ public class TensorFlow {
 
     /// get data
     public var data: Data? {
-      get {
-        let b = buffer.pointee
-        guard b.length > 0 else { return nil }
-        return Data(bytes: b.data, count: b.length)
-      }//end get
+      let b = buffer.pointee
+      guard b.length > 0 else { return nil }
+      return Data(bytes: b.data, count: b.length)
     }//end data
 
     /// get the data as a string
     public var valueString: String {
-      get {
-        let b = buffer.pointee
-        guard b.length > 0 else { return "" }
-        return String(cString: b.data.bindMemory(to: CChar.self, capacity: b.length))
-      }//end get
+      let b = buffer.pointee
+      guard b.length > 0 else { return "" }
+      return String(cString: b.data.bindMemory(to: CChar.self, capacity: b.length))
     }//end var
 
     public var description: String {
-      get {
-        if autoDestroy {
-          return "(auto): \(buffer.pointee)"
-        } else {
-          return "(manual): \(buffer.pointee)"
-        }//end if
-      }//end get
+      if autoDestroy {
+        return "(auto): \(buffer.pointee)"
+      } else {
+        return "(manual): \(buffer.pointee)"
+      }//end if
     }//end var
   }//end class
 
@@ -452,40 +442,34 @@ public class TensorFlow {
 
     /// get tensorflow type from the Swift one, will be nil if not available
     public var matched: DataType? {
-      get {
-        switch "\(T.self)" {
-        case "Float":  return  DataType.dtFloat
-        case "Double":  return  DataType.dtDouble
-        case "Int32":  return  DataType.dtInt32
-        case "UInt8":  return  DataType.dtUint8
-        case "Int16":  return  DataType.dtInt16
-        case "Int8":  return  DataType.dtInt8
-        case "Int64", "Int":  return  DataType.dtInt64
-        case "Bool":  return  DataType.dtBool
-        case "UInt16":  return  DataType.dtUint16
-        case "String", "Data": return DataType.dtString
-        default:
-          return nil
-        }//end switch
-      }//end case
+      switch "\(T.self)" {
+      case "Float":  return  DataType.dtFloat
+      case "Double":  return  DataType.dtDouble
+      case "Int32":  return  DataType.dtInt32
+      case "UInt8":  return  DataType.dtUint8
+      case "Int16":  return  DataType.dtInt16
+      case "Int8":  return  DataType.dtInt8
+      case "Int64", "Int":  return  DataType.dtInt64
+      case "Bool":  return  DataType.dtBool
+      case "UInt16":  return  DataType.dtUint16
+      case "String", "Data": return DataType.dtString
+      default:
+        return nil
+      }//end switch
     }//end var
 
     /// size of the type
     public var size: Int? {
-      get {
-        guard let tp = matched else { return nil }
-        do {
-          return try TensorFlow.SizeOf(Type: tp)
-        }catch {
-          return nil
-        }
-      }//end get
+      guard let tp = matched else { return nil }
+      do {
+        return try TensorFlow.SizeOf(Type: tp)
+      }catch {
+        return nil
+      }
     }//end var
 
     public var description: String {
-      get {
-        return "<\(T.self): \(size ?? 0)>"
-      }//end get
+      return "<\(T.self): \(size ?? 0)>"
     }//end var
   }//end class DType
 
@@ -696,16 +680,12 @@ public class TensorFlow {
 
     /// check data type of the value / element of value array
     public var `type`: DataType? {
-      get {
-        return DataType(rawValue: Int(TFLib.TensorType(tensor)))
-      }
+      return DataType(rawValue: Int(TFLib.TensorType(tensor)))
     }
 
     /// check dimension count
     public var dimensionCount: Int {
-      get {
-        return Int(TFLib.NumDims(tensor))
-      }
+      return Int(TFLib.NumDims(tensor))
     }
 
     /// get a dimension data giving a proper index
@@ -716,26 +696,22 @@ public class TensorFlow {
 
     /// get total size of memory in bytes
     public var bytesCount: Int {
-      get {
-        return Int(TFLib.TensorByteSize(tensor))
-      }
+      return Int(TFLib.TensorByteSize(tensor))
     }
 
     /// dimensions
     public var dim: [Int64] {
-      get {
-        do {
-          let sz = dimensionCount
-          var array = [Int64]()
-          if sz > 0 {
-            for i in 0 ... sz - 1 {
-              array.append(try dimension(i))
-            }//next i
-          }//end if
-          return array
-        }catch {
-          return [Int64]()
-        }
+      do {
+        let sz = dimensionCount
+        var array = [Int64]()
+        if sz > 0 {
+          for i in 0 ... sz - 1 {
+            array.append(try dimension(i))
+          }//next i
+        }//end if
+        return array
+      }catch {
+        return [Int64]()
       }
     }
 
@@ -779,12 +755,11 @@ public class TensorFlow {
     }//end asScalar
 
     public var description: String {
-      get {
-        return "Tensor of \(self.type ?? .dtInvalid): <\(self.dimensionCount), \(self.bytesCount)>"
-      }//end get
+      return "Tensor of \(self.type ?? .dtInvalid): <\(self.dimensionCount), \(self.bytesCount)>"
     }//end var
   }
 
+  /// encode strings into one buffer
   public static func Encode(strings: [Data]) throws -> [Int8] {
 
     var headers = [UInt64(0)]
@@ -824,6 +799,7 @@ public class TensorFlow {
     return result
   }//end encode
 
+  // decode strings from a buffer
   public static func Decode(strings: [Int8], count: Int) throws -> [Data] {
     let szHeader = count * MemoryLayout<UInt64>.size
     guard count > 0, strings.count > 0, strings.count > szHeader else {
@@ -1225,77 +1201,63 @@ public class TensorFlow {
 
     /// get node definition
     public var nodeDefinition: NodeDef? {
-      get {
-        do {
-          let status = try Status()
-          let buffer = try Buffer()
-          TFLib.OperationToNodeDef(operation, buffer.buffer, status.status)
-          guard status.code == .OK,
-            let data = buffer.data
-            else { return nil }
-          return try NodeDef(serializedData: data)
-        }catch {
-          return nil
-        }//end try
-      }//end get
+      do {
+        let status = try Status()
+        let buffer = try Buffer()
+        TFLib.OperationToNodeDef(operation, buffer.buffer, status.status)
+        guard status.code == .OK,
+          let data = buffer.data
+          else { return nil }
+        return try NodeDef(serializedData: data)
+      }catch {
+        return nil
+      }//end try
     }//end var
 
     /// get operation name
     public var name: String? {
-      get {
-        if let nm = TFLib.OperationName(operation) {
-          return String(cString: nm)
-        } else {
-          return nil
-        }//end if
-      }//end get
+      if let nm = TFLib.OperationName(operation) {
+        return String(cString: nm)
+      } else {
+        return nil
+      }//end if
     }//end var
 
     /// get operation type
     public var `type`: String? {
-      get {
-        if let tp = TFLib.OperationOpType(operation) {
-          return String(cString: tp)
-        } else {
-          return nil
-        }//end if
-      }//end get
+      if let tp = TFLib.OperationOpType(operation) {
+        return String(cString: tp)
+      } else {
+        return nil
+      }//end if
     }//end var
 
     /// get device type
     public var device: String {
-      get {
-        if let dev = TFLib.OperationDevice(operation) {
-          return String(cString: dev)
-        } else {
-          return ""
-        }//end if
-      }//end get
+      if let dev = TFLib.OperationDevice(operation) {
+        return String(cString: dev)
+      } else {
+        return ""
+      }//end if
     }//end var
 
     public var description: String {
-      get {
-        let tp = type ?? ""
-        let nm = name ?? ""
-        let dev = device
-        let ni =  numberOfInputs
-        let no = numberOfOutputs
-        return "Operation: {type = \(tp), name = \(nm), device = \(dev), input = \(ni), output = \(no)}"
-      }
+      let tp = type ?? ""
+      let nm = name ?? ""
+      let dev = device
+      let ni =  numberOfInputs
+      let no = numberOfOutputs
+      return "Operation: {type = \(tp), name = \(nm), device = \(dev), input = \(ni), output = \(no)}"
     }
 
     /// get number of inputs of the operation
     public var numberOfInputs: Int {
-      get {
-        return Int(TFLib.OperationNumInputs(operation))
-      }//end get
+      return Int(TFLib.OperationNumInputs(operation))
     }//end var
 
     /// get number of outputs of the operation
     public var numberOfOutputs: Int {
-      get {
-        return Int(TFLib.OperationNumOutputs(operation))
-      }//end get
+      return Int(TFLib.OperationNumOutputs(operation))
     }//end var
 
     /// get type of the input
@@ -1558,45 +1520,39 @@ public class TensorFlow {
 
     /// retrieve all operations into an array
     public var operations: [Operation] {
-      get {
-        var cursor = 0
-        var ops = [Operation]()
-        while let pointer = TF_NextGraphOperation(graph, &cursor) {
-          ops.append(Operation(pointer))
-        }//next
-        return ops
-      }//end get
+      var cursor = 0
+      var ops = [Operation]()
+      while let pointer = TF_NextGraphOperation(graph, &cursor) {
+        ops.append(Operation(pointer))
+      }//next
+      return ops
     }//end var
 
     /// get the definition proto buffer
     public var definition: GraphDef? {
-      get {
-        guard let data = self.buffer?.data else {
-          return nil
-        }//end guard
+      guard let data = self.buffer?.data else {
+        return nil
+      }//end guard
 
-        do {
-          let def = try GraphDef(serializedData: data)
-          return def
-        } catch {
-          return nil
-        }//end try
-      }//end get
+      do {
+        let def = try GraphDef(serializedData: data)
+        return def
+      } catch {
+        return nil
+      }//end try
     }//end var
 
     /// get the definition as a buffer
     public var buffer: Buffer? {
-      get {
-        do {
-          let buffer = try Buffer()
-          let status = try Status()
-          TFLib.GraphToGraphDef(graph, buffer.buffer, status.status)
-          guard status.code == .OK else { return nil }
-          return buffer
-        } catch {
-          return nil
-        }//end try
-      }//end get
+      do {
+        let buffer = try Buffer()
+        let status = try Status()
+        TFLib.GraphToGraphDef(graph, buffer.buffer, status.status)
+        guard status.code == .OK else { return nil }
+        return buffer
+      } catch {
+        return nil
+      }//end try
     }//end buffer
 
     /// import a proto buffer with options
@@ -2678,23 +2634,19 @@ public class TensorFlow {
 
     /// return all operations in this library as a protocol buffer
     public var operations: Buffer {
-      get {
-        var buf = TFLib.GetOpList(handle)
-        return Buffer(buf: &buf)
-      } //end get
+      var buf = TFLib.GetOpList(handle)
+      return Buffer(buf: &buf)
     }//end operations
   }//end class
 
   /// TF_Version returns a string describing version information of the
   /// TensorFlow library. TensorFlow using semantic versioning.
   public static var Version: String {
-    get {
-      if let _ = TFLib.libDLL, let ver = TFLib.Version() {
-        return String(cString: ver)
-      }else {
-        return ""
-      }//end if
-    }//end get
+    if let _ = TFLib.libDLL, let ver = TFLib.Version() {
+      return String(cString: ver)
+    }else {
+      return ""
+    }//end if
   }//end var
 
 
