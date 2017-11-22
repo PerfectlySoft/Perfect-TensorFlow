@@ -78,8 +78,8 @@ Also, there are many features that has already embedded in the testing script, s
 
 ### TensorFlow C API Library Installation
 
-Perfect-TensorFlow is based on TensorFlow C API, i.e., `libtensorflow.so` on runtime.
-This project contains an express CPU version installation script for this module on both macOS / Ubuntu Linux, and will install the dynamic library into path `/usr/local/lib/libtensorflow.so`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh). Before running this script, please make sure that `curl` has been installed onto your computer.
+Perfect-TensorFlow is based on TensorFlow C API, i.e., `libtensorflow.so` and `libtensorflow_framework.so` on runtime.
+This project contains an express CPU version installation script for this module on both macOS / Ubuntu Linux, and will install both dynamic libraries into path `/usr/local/lib`. You can download & run [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh). Before running this script, please make sure that `curl` has been installed onto your computer.
 
 For more installation options, such as GPU/CPU and multiple versions on the same machine, please check TensorFlow website: [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
 
@@ -88,7 +88,13 @@ For more installation options, such as GPU/CPU and multiple versions on the same
 To use this library, add dependencies to your project's Package.swift with the **LATEST TAG**:
 
 ``` swift
-.Package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", majorVersion: 1)
+.package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", from: "1.4.0")
+```
+
+and it also requires a dependency declaration in the same file, `target` section:
+
+``` swift
+dependencies: ["PerfectTensorFlow"]
 ```
 
 Then declare the library:

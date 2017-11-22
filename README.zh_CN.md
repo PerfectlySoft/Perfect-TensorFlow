@@ -78,9 +78,9 @@ Sources
 
 ### TensorFlow API C语言库函数安装
 
-Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是您的计算机上在运行时必须安装 `libtensorflow.so`动态链接库。
+Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是您的计算机上在运行时必须安装 `libtensorflow.so` 和 `libtensorflow_framework.so` 动态链接库。
 
-本项目包含了一个用于快速安装该链接库 CPU 版本的脚本，默认安装路径为`/usr/local/lib/libtensorflow.so`。您可以根据平台要求下载并运行 [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh)。运行该脚本之前请确定 `curl`已经安装到您的计算机上。
+本项目包含了一个用于快速安装该链接库 CPU 版本的脚本，默认安装路径为`/usr/local/lib`。您可以根据平台要求下载并运行 [`install.sh`](https://github.com/PerfectlySoft/Perfect-TensorFlow/blob/master/install.sh)。运行该脚本之前请确定 `curl`已经安装到您的计算机上。
 
 
 更多的安装选项，如需要在同一台计算机上同时安装CPU/GPU或者多个不同版本，请参考官网网站： [Installing TensorFlow for C](https://www.tensorflow.org/install/install_c)
@@ -90,7 +90,12 @@ Perfect-TensorFlow 是基于其C语言函数库基础上的，简单说来就是
 使用之前请在您的项目Package.swift文件中增加依存关系并选择**最新版本**：
 
 ``` swift
-.Package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", majorVersion: 1)
+.package(url: "https://github.com/PerfectlySoft/Perfect-TensorFlow.git", from: "1.4.0")
+```
+同一个文件中还要在`target` 目标段声明依存关系：
+
+``` swift
+dependencies: ["PerfectTensorFlow"]
 ```
 
 然后声明函数库：
