@@ -2040,6 +2040,14 @@ public class TensorFlow {
       TFLib.DeleteImportGraphDefOptions(options)
     }//end init
 
+    public func setNames(uniquified: Bool = false) {
+      TFLib.ImportGraphDefOptionsSetUniquifyNames(options, uniquified ? 1 : 0)
+    }
+
+    public func setPrefix(uniquified: Bool = false) {
+      TFLib.ImportGraphDefOptionsSetUniquifyPrefix(options, uniquified ? 1 : 0)
+    }
+
     /// Set the prefix to be prepended to the names of nodes in graph_def that will be imported into graph.
     /// - parameters:
     ///   - prefix: the prefix to add to all the names of nodes.

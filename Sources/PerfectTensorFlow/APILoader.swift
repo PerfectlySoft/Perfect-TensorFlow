@@ -929,6 +929,23 @@ public class TFLib {
   // Deleting a function does not remove it from any graphs it was copied to.
   public static var DeleteFunction: @convention(c) (OpaquePointer?) -> Void = { _ in }
 
+  // Set whether to uniquify imported operation names. If true, imported operation
+  // names will be modified if their name already exists in the graph. If false,
+  // conflicting names will be treated as an error. Note that this option has no
+  // effect if a prefix is set, since the prefix will guarantee all names are
+  // unique. Defaults to false.
+  //TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyNames(
+  //TF_ImportGraphDefOptions* opts, unsigned char uniquify_names);
+  public static var ImportGraphDefOptionsSetUniquifyNames: @convention(c) (OpaquePointer, UInt8) -> Void = { _, _ in }
+
+  // If true, the specified prefix will be modified if it already exists as an
+  // operation name or prefix in the graph. If false, a conflicting prefix will be
+  // treated as an error. This option has no effect if no prefix is specified.
+  // TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyPrefix(
+  // TF_ImportGraphDefOptions* opts, unsigned char uniquify_prefix);
+  public static var ImportGraphDefOptionsSetUniquifyPrefix: @convention(c) (OpaquePointer, UInt8) -> Void = { _, _ in }
+
+
   /// Bootstrap of tensorflow library open, **MUST BE CALL BEFORE ANY OPERATIONS**
   /// - parameters
   ///   - library: the installation path of library TensorFlow for C, /usr/local/lib/libtensorflow.so by default
@@ -948,6 +965,11 @@ public class TFLib {
 
     guard ver >= "1.1.0" else {
       throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
+    }
+
+    if ver >= "1.4.1" {
+      ImportGraphDefOptionsSetUniquifyNames = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyNames")
+      ImportGraphDefOptionsSetUniquifyPrefix = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyPrefix")
     }
 
     if ver >= "1.4.0" {

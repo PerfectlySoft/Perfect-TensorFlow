@@ -20,6 +20,16 @@
 //
 
 import PackageDescription
+#if os(OSX)
+import Darwin
+#else
+import Glibc
+#endif
+
+var url = "https://github.com/apple/swift-protobuf.git"
+if let cache = getenv("URL_PERFECT"), let local = String(validatingUTF8: cache) {
+  url = "\(local)/swift-protobuf/.git"
+}
 
 let package = Package(
     name: "PerfectTensorFlow",
@@ -29,7 +39,7 @@ let package = Package(
             targets: ["PerfectTensorFlow"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.0.0")
+      .package(url: url, from: "1.0.0")
     ],
     targets: [
         .target(
