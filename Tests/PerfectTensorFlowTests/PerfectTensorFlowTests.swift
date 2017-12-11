@@ -160,9 +160,20 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testBasicImproved",testBasicImproved),
     ("testDevices", testDevices),
     ("testEventAndSummary", testEventAndSummary),
-    ("testFunctionBasic", testFunctionBasic)
+    ("testFunctionBasic", testFunctionBasic),
+    ("testUniquify", testUniquify)
   ]
 
+  func testUniquify() {
+    do {
+      let o = try TF.GraphDefOptions()
+      o.setNames(uniquified: true)
+      o.setPrefix(uniquified: true)
+    } catch {
+      XCTFail("\(error)")
+    }
+  }
+  
   func testFunctionBasic() {
     do {
       let funcName = "MyFunc"

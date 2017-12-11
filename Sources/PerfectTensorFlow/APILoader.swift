@@ -967,7 +967,7 @@ public class TFLib {
       throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
     }
 
-    if ver >= "1.4.1" {
+    if ver >= "1.4.2" {
       ImportGraphDefOptionsSetUniquifyNames = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyNames")
       ImportGraphDefOptionsSetUniquifyPrefix = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyPrefix")
     }
