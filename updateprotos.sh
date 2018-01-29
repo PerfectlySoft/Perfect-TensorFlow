@@ -2,7 +2,7 @@ PROJ_BASE=$PWD
 TF=/tmp/tf
 PTF=/tmp/ptf
 OUTP=/tmp/pbout
-VERSION=`cat VERSION`
+VERSION=`cat PROTO_VERSION`
 rm -rf $TF
 rm -rf $PTF
 rm -rf $OUTP

@@ -312,6 +312,13 @@ public class TensorFlow {
   public typealias TracingRequest = Tensorflow_TracingRequest
   public typealias TracingResponse = Tensorflow_TracingResponse
 
+  public typealias ContribEagerCheckpointableObjectGraph = Tensorflow_Contrib_Eager_CheckpointableObjectGraph
+  public typealias IteratorStateMetadata = Tensorflow_IteratorStateMetadata
+  public typealias TocoInputArrayShape = Toco_InputArrayShape
+  public typealias TocoFlags = Toco_TocoFlags
+  public typealias TpuOpMetricsResult = Tensorflow_Tpu_OpMetricsResult
+  public typealias TpuTopologyProto = Tensorflow_Tpu_TopologyProto
+
   /// DLL Loader, must be called before all methods
   /// - parameters:
   ///   - library: path of libtensorflow to load
@@ -1572,14 +1579,55 @@ public class TensorFlow {
       guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
     }//end func
 
+    public class Results {
+      let ref: OpaquePointer
+      fileprivate init(reference: OpaquePointer) {
+        ref = reference
+      }
+      deinit {
+        TFLib.DeleteImportGraphDefResults(ref)
+      }
+      /// check missing unused input mappings
+      /// - returns: a tuple of unused input names with indices.
+      public func missingUnusedInputMappings() -> [(name: String, index: Int)] {
+        var numUnusedInputMappings:Int32 = 0
+        var srcNames:UnsafeMutablePointer<UnsafeMutablePointer<CChar>>? = nil
+        var srcIndices: UnsafeMutablePointer<Int32>? = nil
+        TFLib.ImportGraphDefResultsMissingUnusedInputMappings(ref, &numUnusedInputMappings, &srcNames, &srcIndices)
+        var res:  [(name: String, index: Int)] = []
+        for i in 0..<Int(numUnusedInputMappings) {
+          if let name = srcNames?.advanced(by: i).pointee,
+            let index = srcIndices?.advanced(by: i).pointee {
+            res.append((name: String(cString:name), index: Int(index)))
+          }
+        }
+        return res
+      }
+    }
     /// import a definition with options
     /// - parameters:
     ///   - definition: GraphDef data object
-    ///   - options: optoins to apply with
+    ///   - options: options to apply with
+    ///   - withResults: if true, then a `Results` object may return which is useful to check missing unused input mappings.
     /// - throws: Panic
-    public func `import`(definition: GraphDef, options: GraphDefOptions? = nil) throws {
+    /// - returns: a `Results` instance if `withResults` is true.
+    public func `import`(definition: GraphDef, options: GraphDefOptions? = nil, withResults: Bool = false) throws -> Results? {
       let buf = try Buffer(data: try definition.serializedData())
-      try self.import(buf: buf, options: options)
+      if withResults {
+        let status = try Status()
+        let op: GraphDefOptions
+        if let o = options {
+          op = o
+        } else {
+          op = try GraphDefOptions()
+        }//end if
+        guard let results = TFLib.GraphImportGraphDefWithResults(graph, buf.buffer, op.options, status.status),
+          status.code == .OK else { throw Panic.FAULT(reason: status.message) }
+        return Results(reference: results)
+      } else {
+        try self.import(buf: buf, options: options)
+        return nil
+      }
     }//end import
 
     /// import a definition buffer and return outputs
@@ -1927,6 +1975,22 @@ public class TensorFlow {
         throw Panic.FAULT(reason: status.message)
       }
     }
+
+    public func getFunctions() throws -> [Function?] {
+      let count = TFLib.GraphNumFunctions(self.graph)
+      guard count > 0 else {
+        throw Panic.FAULT(reason: "no function exisis in this graph")
+      }
+      var funcs: OpaquePointer? = nil
+      let status = try Status()
+      let num = TFLib.GraphGetFunctions(self.graph, &funcs, count, status.status)
+      guard num > 0 && num <= count else {
+        throw Panic.FAULT(reason: "no function exisis in this graph")
+      }
+      let pointers = UnsafeBufferPointer(start: &funcs, count: Int(num))
+      let array = Array(pointers)
+      return array.map { if let f = $0 { return Function(f) } else { return nil } }
+    }
     
     /// Function is a grouping of operations with defined inputs and outputs.
     /// Once created and added to graphs, functions can be invoked by creating an
@@ -1935,7 +1999,7 @@ public class TensorFlow {
       let ref: OpaquePointer
 
       /// constructor. DO **NOT** CALL IT DIRECTLY. Call `Graph.toFunction()` to generate function instead.
-      public init(_ reference: OpaquePointer) {
+      fileprivate init(_ reference: OpaquePointer) {
         ref = reference
       }
 

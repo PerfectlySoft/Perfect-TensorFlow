@@ -164,6 +164,38 @@ class PerfectTensorFlowTests: XCTestCase {
     ("testUniquify", testUniquify)
   ]
 
+  func testGraphDefWithResults() {
+    do {
+      let g0 = try TF.Graph()
+      _ = try g0.placeholder()
+      _ = try g0.scalar(3)
+      guard let def = g0.definition else {
+        XCTFail("graph definition failure")
+        return
+      }
+      let g = try TF.Graph()
+      let o = try TF.GraphDefOptions()
+      _ = try g.import(definition: def, options: o)
+      let scalar = try g.searchOperation(forName: "scalar")
+      let opt = try TF.GraphDefOptions()
+      opt.set(prefix: "imported")
+      opt.addInputMapping(sourceName: "scalar", sourceIndex: 0, destination: scalar.asOutput(0))
+      opt.addInputMapping(sourceName: "fake", sourceIndex: 0, destination: scalar.asOutput(0))
+      guard let results = try g.import(definition: def, options: opt, withResults: true) else {
+        XCTFail("import with results failure")
+        return
+      }
+      let r = results.missingUnusedInputMappings()
+      XCTAssertEqual(r.count, 1)
+      XCTAssertEqual(r.first?.name ?? "failure", "fake")
+      XCTAssertEqual(r.first?.index ?? -1, 0)
+    } catch TF.Panic.FAULT(let reason){
+      XCTFail(reason)
+    } catch {
+      XCTFail(error.localizedDescription)
+    }
+  }
+
   func testUniquify() {
     do {
       let o = try TF.GraphDefOptions()
@@ -411,7 +443,7 @@ class PerfectTensorFlowTests: XCTestCase {
 
     public func match(image: Data) throws -> Int {
       let g = try TF.Graph()
-      try g.import(definition: def)
+      _ = try g.import(definition: def)
       let normalized = try constructAndExecuteGraphToNormalizeImage(g, imageBytes: image)
       let possibilities = try executeInceptionGraph(g, image: normalized)
       guard let m = possibilities.max(), let i = possibilities.index(of: m) else {
@@ -985,7 +1017,7 @@ class PerfectTensorFlowTests: XCTestCase {
       opts.set(prefix: "imported")
 
       let graph1 = try TF.Graph()
-      try graph1.import(definition: graph_def, options: opts)
+      _ = try graph1.import(definition: graph_def, options: opts)
 
       let feed = try graph1.searchOperation(forName: "imported/feed")
       let scalar = try graph1.searchOperation(forName: "imported/scalar")
@@ -1012,7 +1044,7 @@ class PerfectTensorFlowTests: XCTestCase {
       opts3.set(prefix: "imported3")
       opts3.addControlDependency(operation: feed)
       opts3.addControlDependency(operation: feed2)
-      try graph1.import(definition: graph_def, options: opts3)
+      _ = try graph1.import(definition: graph_def, options: opts3)
 
       let feed3 = try graph1.searchOperation(forName: "imported3/feed")
       let scalar3 = try graph1.searchOperation(forName: "imported3/scalar")
@@ -1035,7 +1067,7 @@ class PerfectTensorFlowTests: XCTestCase {
 
       /** TESTING NOTE: THERE MAY BE A BUG OF REMAP CONTROL DEPENDENCY**/
       opts4.remapControlDependency(source: "imported/feed", destination: feed)
-      try graph1.import(definition: graph_def2, options: opts4)
+      _ = try graph1.import(definition: graph_def2, options: opts4)
 
       let scalar4 = try graph1.searchOperation(forName: "imported4/imported3/scalar")
       let feed4 = try graph1.searchOperation(forName: "imported4/imported2/feed")
@@ -1284,7 +1316,7 @@ class PerfectTensorFlowTests: XCTestCase {
     XCTAssertEqual(try TF.SizeOf(Type: .dtQint8), 1)
     XCTAssertEqual(try TF.SizeOf(Type: .dtQuint8), 1)
     XCTAssertEqual(try TF.SizeOf(Type: .dtQint32), 4)
-    XCTAssertEqual(try TF.SizeOf(Type: .dtBfloat16), 0)
+    XCTAssertEqual(try TF.SizeOf(Type: .dtBfloat16), 2)
     XCTAssertEqual(try TF.SizeOf(Type: .dtQint8), 1)
     XCTAssertEqual(try TF.SizeOf(Type: .dtQuint16), 2)
     XCTAssertEqual(try TF.SizeOf(Type: .dtComplex128), 16)

@@ -902,49 +902,112 @@ public class TFLib {
   /// May fail on very large graphs in the future.
   public static var FunctionToFunctionDef: @convention(c) (OpaquePointer, UnsafeMutablePointer<TF_Buffer>?, OpaquePointer) -> Void = { _, _, _ in }
 
-  // Construct and return the function whose FunctionDef representation is
-  // serialized in `proto`. `proto_len` must equal the number of bytes
-  // pointed to by `proto`.
-  // Returns:
-  //  On success, a newly created TF_Function instance. It must be deleted by
-  //  calling TF_DeleteFunction.
-  //
-  //  On failure, null.
+  /// Construct and return the function whose FunctionDef representation is
+  /// serialized in `proto`. `proto_len` must equal the number of bytes
+  /// pointed to by `proto`.
+  /// Returns:
+  ///  On success, a newly created TF_Function instance. It must be deleted by
+  ///  calling TF_DeleteFunction.
+  ///
+  ///  On failure, null.
   public static var FunctionImportFunctionDef: @convention(c) (UnsafeRawPointer?, Int32, OpaquePointer) -> OpaquePointer? = { _, _, _ in return nil}
 
-  // Sets function attribute named `attr_name` to value stored in `proto`.
-  // If this attribute is already set to another value, it is overridden.
-  // `proto` should point to a sequence of bytes of length `proto_len`
-  // representing a binary serialization of an AttrValue protocol
-  // buffer.
+  /// Sets function attribute named `attr_name` to value stored in `proto`.
+  /// If this attribute is already set to another value, it is overridden.
+  /// `proto` should point to a sequence of bytes of length `proto_len`
+  /// representing a binary serialization of an AttrValue protocol
+  /// buffer.
   public static var FunctionSetAttrValueProto: @convention(c) (OpaquePointer?, UnsafePointer<CChar>?, UnsafeRawPointer?, Int32, OpaquePointer) -> Void = { _, _, _, _, _ in }
 
-  // Sets `output_attr_value` to the binary-serialized AttrValue proto
-  // representation of the value of the `attr_name` attr of `func`.
-  // If `attr_name` attribute is not present, status is set to an error.
+  /// Sets `output_attr_value` to the binary-serialized AttrValue proto
+  /// representation of the value of the `attr_name` attr of `func`.
+  /// If `attr_name` attribute is not present, status is set to an error.
   public static var FunctionGetAttrValueProto: @convention(c) (OpaquePointer?, UnsafePointer<CChar>?, UnsafePointer<TF_Buffer>?, OpaquePointer) -> Void = { _, _, _, _ in }
 
-  // Frees the memory used by the `func` struct.
-  // TF_DeleteFunction is a noop if `func` is null.
-  // Deleting a function does not remove it from any graphs it was copied to.
+  /// Frees the memory used by the `func` struct.
+  /// TF_DeleteFunction is a noop if `func` is null.
+  /// Deleting a function does not remove it from any graphs it was copied to.
   public static var DeleteFunction: @convention(c) (OpaquePointer?) -> Void = { _ in }
 
-  // Set whether to uniquify imported operation names. If true, imported operation
-  // names will be modified if their name already exists in the graph. If false,
-  // conflicting names will be treated as an error. Note that this option has no
-  // effect if a prefix is set, since the prefix will guarantee all names are
-  // unique. Defaults to false.
-  //TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyNames(
-  //TF_ImportGraphDefOptions* opts, unsigned char uniquify_names);
+  /// Fetches any input mappings requested via
+  /// TF_ImportGraphDefOptionsAddInputMapping() that didn't appear in the GraphDef
+  /// and weren't used as input to any node in the imported graph def. The number
+  /// of fetched mappings is returned in `num_missing_unused_input_mappings`. The
+  /// array of each mapping's source node name is returned in `src_names`, and the
+  /// array of each mapping's source index is returned in `src_indexes`.
+  /// `*src_names`, `*src_indexes`, and the memory backing each string in
+  /// `src_names` are owned by and have the lifetime of `results`.
+  public static var ImportGraphDefResultsMissingUnusedInputMappings: @convention(c) (OpaquePointer?, UnsafeMutablePointer<Int32>?, UnsafeMutablePointer<UnsafeMutablePointer<UnsafeMutablePointer<CChar>>?>, UnsafeMutablePointer<UnsafeMutablePointer<Int32>?>?) -> Void = { _, _, _, _ in }
+
+  /// Import the graph serialized in `graph_def` into `graph`.  Returns nullptr and
+  /// a bad status on error. Otherwise, returns a populated
+  /// TF_ImportGraphDefResults instance. The returned instance must be deleted via
+  /// TF_DeleteImportGraphDefResults().
+  public static var GraphImportGraphDefWithResults: @convention(c) (OpaquePointer?, UnsafeMutablePointer<TF_Buffer>?, OpaquePointer?, OpaquePointer?) -> OpaquePointer? = { _, _, _, _ in return nil}
+
+  /// Deletes a results object returned by TF_GraphImportGraphDefWithResults().
+  public static var DeleteImportGraphDefResults: @convention(c) (OpaquePointer?) -> Void = { _ in }
+
+  /// Set whether to uniquify imported operation names. If true, imported operation
+  /// names will be modified if their name already exists in the graph. If false,
+  /// conflicting names will be treated as an error. Note that this option has no
+  /// effect if a prefix is set, since the prefix will guarantee all names are
+  /// unique. Defaults to false.
+  /// TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyNames(
+  /// TF_ImportGraphDefOptions* opts, unsigned char uniquify_names);
   public static var ImportGraphDefOptionsSetUniquifyNames: @convention(c) (OpaquePointer, UInt8) -> Void = { _, _ in }
 
-  // If true, the specified prefix will be modified if it already exists as an
-  // operation name or prefix in the graph. If false, a conflicting prefix will be
-  // treated as an error. This option has no effect if no prefix is specified.
-  // TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyPrefix(
-  // TF_ImportGraphDefOptions* opts, unsigned char uniquify_prefix);
+  /// If true, the specified prefix will be modified if it already exists as an
+  /// operation name or prefix in the graph. If false, a conflicting prefix will be
+  /// treated as an error. This option has no effect if no prefix is specified.
+  /// TF_CAPI_EXPORT extern void TF_ImportGraphDefOptionsSetUniquifyPrefix(
+  /// TF_ImportGraphDefOptions* opts, unsigned char uniquify_prefix);
   public static var ImportGraphDefOptionsSetUniquifyPrefix: @convention(c) (OpaquePointer, UInt8) -> Void = { _, _ in }
 
+
+  /// Creates a new TF_ApiDefMap instance
+  /// op_list_buffer - TF_Buffer instance containing serialized OpList
+  /// https://www.tensorflow.org/code/tensorflow/core/framework/op_def.proto
+  /// for the OpList proto definition.
+  public static var NewApiDefMap: @convention(c) (UnsafePointer<TF_Buffer>?, OpaquePointer?) -> OpaquePointer? = { _, _ in return nil }
+
+  /// Deallocates a TF_ApiDefMap.
+  public static var DeleteApiDefMap: @convention(c) (OpaquePointer?) -> Void = { _ in }
+
+  /// Add ApiDefs to the map.
+  ///
+  /// `text` corresponds to a text representation of an ApiDefs protocol message.
+  /// (https://www.tensorflow.org/code/tensorflow/core/framework/api_def.proto).
+  ///
+  /// The provided ApiDefs will be merged with existing ones in the map, with
+  /// precedence given to the newly added version in case of conflicts with
+  /// previous calls to TF_ApiDefMapPut.
+  public static var ApiDefMapPut: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, Int32, OpaquePointer?) -> Void = { _, _, _, _ in }
+
+  /// Returns a serialized ApiDef protocol buffer for the TensorFlow operation
+  public static var ApiDefMapGet: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, Int32, OpaquePointer?) -> UnsafePointer<TF_Buffer>? = { _, _, _, _ in return nil }
+
+  /// Set a 'func' attribute to the specified name.
+  /// `value` must point to a string of length `length` bytes.
+  public static var SetAttrFuncName: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, UnsafePointer<CChar>, Int32) -> Void = { _, _, _, _ in }
+
+  /// Returns the number of TF_Functions registered in `g`.
+  public static var GraphNumFunctions: @convention(c) (OpaquePointer?) -> Int32 = { _ in return 0 }
+
+  /// Fills in `funcs` with the TF_Function* registered in `g`.
+  /// `funcs` must point to an array of TF_Function* of length at least
+  /// `max_func`. In usual usage, max_func should be set to the result of
+  /// TF_GraphNumFunctions(g). In this case, all the functions registered in
+  /// `g` will be returned. Else, an unspecified subset.
+  ///
+  /// If successful, returns the number of TF_Function* successfully set in
+  /// `funcs` and sets status to OK. The caller takes ownership of
+  /// all the returned TF_Functions. They must be deleted with TF_DeleteFunction.
+  /// On error, returns 0, sets status to the encountered error, and the contents
+  /// of funcs will be undefined.
+  //TF_CAPI_EXPORT extern int TF_GraphGetFunctions(TF_Graph* g, TF_Function** funcs,
+  //                                              int max_func, TF_Status* status);
+  public static var GraphGetFunctions: @convention(c) (OpaquePointer?, UnsafeMutablePointer<OpaquePointer?>?, Int32, OpaquePointer?) -> Int32 = { _, _, _, _ in return 0}
 
   /// Bootstrap of tensorflow library open, **MUST BE CALL BEFORE ANY OPERATIONS**
   /// - parameters
@@ -967,7 +1030,20 @@ public class TFLib {
       throw Panic.DLL(reason: "Version \(ver) is obsolete and out of support.")
     }
 
-    if ver >= "1.4.2" {
+    if ver >= "1.6.0" {
+      NewApiDefMap = try LoadFunction(lib, "TF_NewApiDefMap")
+      DeleteApiDefMap = try LoadFunction(lib, "TF_DeleteApiDefMap")
+      ApiDefMapPut = try LoadFunction(lib, "TF_ApiDefMapPut")
+      ApiDefMapGet = try LoadFunction(lib, "TF_ApiDefMapGet")
+      SetAttrFuncName = try LoadFunction(lib, "TF_SetAttrFuncName")
+      GraphNumFunctions = try LoadFunction(lib, "TF_GraphNumFunctions")
+      GraphGetFunctions = try LoadFunction(lib, "TF_GraphGetFunctions")
+    }
+    
+    if ver >= "1.5.0" {
+      GraphImportGraphDefWithResults = try LoadFunction(lib, "TF_GraphImportGraphDefWithResults")
+      DeleteImportGraphDefResults = try LoadFunction(lib, "TF_DeleteImportGraphDefResults")
+      ImportGraphDefResultsMissingUnusedInputMappings = try LoadFunction(lib, "TF_ImportGraphDefResultsMissingUnusedInputMappings")
       ImportGraphDefOptionsSetUniquifyNames = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyNames")
       ImportGraphDefOptionsSetUniquifyPrefix = try LoadFunction(lib, "TF_ImportGraphDefOptionsSetUniquifyPrefix")
     }
