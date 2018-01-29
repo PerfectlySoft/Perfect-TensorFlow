@@ -43,11 +43,11 @@ This project is an experimental wrapper of TensorFlow C API which enables Machin
 
 This package builds with Swift Package Manager and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project but can also be used as an independent module.
 
-Ensure you have installed and activated the latest Swift 4.0 / Xcode 9.0
+Ensure you have installed and activated the latest Swift 4.0.3 / Xcode 9.2
 
 ## Project Status
 
-The framework conforms to TensorFlow v1.4.0 C API functionality.
+The framework conforms to TensorFlow v1.5.0 C API functionality.
 
 ## Development Notes
 
@@ -56,8 +56,8 @@ These files are the key part of Perfect-TensorFlow:
 ```
 Sources
 ├── PerfectTensorFlow
-│   ├── APILoader.swift (1099 lines, translated from tensorflow/c/c_api.h)
-│   ├── PerfectTensorFlow.swift (2701 lines)
+│   ├── APILoader.swift (1000+ lines, translated from tensorflow/c/c_api.h)
+│   ├── PerfectTensorFlow.swift (2700+ lines)
 └── TensorFlowAPI
     ├── TensorFlowAPI.c (72 lines)
     └── include

@@ -43,11 +43,11 @@
 
 本项目需要使用SPM软件包管理器编译并是[Perfect项目](https://github.com/PerfectlySoft/Perfect)的一个组成部分，但也可以独立使用。
 
-请确保您的系统已经安装了Swift 4.0 / Xcode 9.0
+请确保您的系统已经安装了Swift 4.0.3 / Xcode 9.2
 
 ## 项目状态
 
-目前本函数库遵从 TensorFlow v1.4.0 C语言 API 功能特征。
+目前本函数库遵从 TensorFlow v1.5.0 C语言 API 功能特征。
 
 ## 关于开发
 
@@ -56,8 +56,8 @@
 ```
 Sources
 ├── PerfectTensorFlow
-│   ├── APILoader.swift (1099 行代码，直接从tensorflow/c/c_api.h翻译而来)
-│   ├── PerfectTensorFlow.swift (2701 行代码)
+│   ├── APILoader.swift (1000+ 行代码，直接从tensorflow/c/c_api.h翻译而来)
+│   ├── PerfectTensorFlow.swift (2700+ 行代码)
 └── TensorFlowAPI
     ├── TensorFlowAPI.c (72 行代码)
     └── include
