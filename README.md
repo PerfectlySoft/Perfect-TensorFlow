@@ -208,14 +208,6 @@ A detailed example of Perfect TensorFlow for Computer Vision can be found in thi
 <img src='https://github.com/PerfectExamples/Perfect-TensorFlow-Demo-Vision/blob/master/scrshot2.png?raw=true'></img>
 
 
-## Issues
-
-We are transitioning to using JIRA for all bugs and support related issues, therefore the GitHub issues has been disabled.
-
-If you find a mistake, bug, or any other helpful suggestion you'd like to make on the docs please head over to [http://jira.perfect.org:8080/servicedesk/customer/portal/1](http://jira.perfect.org:8080/servicedesk/customer/portal/1) and raise it.
-
-A comprehensive list of open issues can be found at [http://jira.perfect.org:8080/projects/ISS/issues](http://jira.perfect.org:8080/projects/ISS/issues)
-
 ## Further Information
 For more information on the Perfect project, please visit [perfect.org](http://perfect.org).
 
