@@ -985,7 +985,7 @@ public class TFLib {
   public static var ApiDefMapPut: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, Int32, OpaquePointer?) -> Void = { _, _, _, _ in }
 
   /// Returns a serialized ApiDef protocol buffer for the TensorFlow operation
-  public static var ApiDefMapGet: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, Int32, OpaquePointer?) -> UnsafePointer<TF_Buffer>? = { _, _, _, _ in return nil }
+  public static var ApiDefMapGet: @convention(c) (OpaquePointer?, UnsafePointer<CChar>, Int32, OpaquePointer?) -> UnsafeMutablePointer<TF_Buffer>? = { _, _, _, _ in return nil }
 
   /// Set a 'func' attribute to the specified name.
   /// `value` must point to a string of length `length` bytes.

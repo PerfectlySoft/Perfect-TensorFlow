@@ -2721,5 +2721,61 @@ public class TensorFlow {
     }//end if
   }//end var
 
+  /// ApiDefMap encapsulates a collection of API definitions for an operation.
+  /// This object maps the name of a TensorFlow operation to a description of the
+  /// API to generate for it, as defined by the ApiDef protocol buffer (
+  /// https://www.tensorflow.org/code/tensorflow/core/framework/api_def.proto)
+  ///
+  /// The ApiDef messages are typically used to generate convenience wrapper
+  /// functions for TensorFlow operations in various language bindings.
+  public class ApiDefMap {
 
+    let ref: OpaquePointer
+
+    /// Constructor
+    /// - parameter buffer: TF_Buffer instance containing serialized OpList protocol buffer. (See
+    /// https://www.tensorflow.org/code/tensorflow/core/framework/op_def.proto
+    /// for the OpList proto definition).
+    /// - throws: Panic
+    public init(buffer: Buffer) throws {
+      let status = try Status()
+      guard let apiDefMap = TFLib.NewApiDefMap(buffer.buffer, status.status),
+      status.code == .OK else {
+        throw Panic.FAULT(reason: status.message)
+      }
+      ref = apiDefMap
+    }
+
+    deinit {
+      TFLib.DeleteApiDefMap(ref)
+    }
+
+    /// Add ApiDefs to the map.
+    /// - parameter text: corresponds to a text representation of an ApiDefs protocol message.
+    /// (https://www.tensorflow.org/code/tensorflow/core/framework/api_def.proto).
+    /// The provided ApiDefs will be merged with existing ones in the map, with
+    /// precedence given to the newly added version in case of conflicts with
+    /// previous calls to put().
+    /// - throws: Panic
+    public func put(text: String) throws {
+      let status = try Status()
+      TFLib.ApiDefMapPut(ref, text, Int32(text.count), status.status)
+      guard status.code == .OK else {
+        throw Panic.FAULT(reason: status.message)
+      }
+    }
+
+    /// Returns a serialized ApiDef protocol buffer for the TensorFlow operation
+    /// - parameter name: name of the operation
+    /// - returns: a serialized ApiDef protocol buffer for the TensorFlow operation
+    /// - throws: Panic
+    public func `get`(name: String) throws -> Buffer {
+      let status = try Status()
+      guard let buf = TFLib.ApiDefMapGet(ref, name, Int32(name.count), status.status),
+        status.code == .OK else {
+          throw Panic.FAULT(reason: status.message)
+      }
+      return Buffer.init(buf: buf)
+    }
+  }
 }//end class
