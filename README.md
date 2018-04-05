@@ -23,7 +23,7 @@
 
 <p align="center">
     <a href="https://developer.apple.com/swift/" target="_blank">
-        <img src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" alt="Swift 4.0">
+        <img src="https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat" alt="Swift 4.1">
     </a>
     <a href="https://developer.apple.com/swift/" target="_blank">
         <img src="https://img.shields.io/badge/Platforms-OS%20X%20%7C%20Linux%20-lightgray.svg?style=flat" alt="Platforms OS X | Linux">
@@ -43,11 +43,11 @@ This project is an experimental wrapper of TensorFlow C API which enables Machin
 
 This package builds with Swift Package Manager and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project but can also be used as an independent module.
 
-Ensure you have installed and activated the latest Swift 4.0.3 / Xcode 9.2
+Ensure you have installed and activated the latest Swift 4.1 / Xcode 9.3
 
 ## Project Status
 
-The framework conforms to TensorFlow v1.5.0 C API functionality.
+The framework conforms to TensorFlow v1.7.0 C API functionality.
 
 ## Development Notes
 
