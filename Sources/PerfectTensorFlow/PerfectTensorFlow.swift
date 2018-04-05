@@ -27,7 +27,11 @@ public extension Array {
     if let a = array as? Array<Array<Any>> {
       return Flat(a.flatMap({$0}))
     }
+    #if swift(>=4.1)
+    return array.compactMap{$0}
+    #else
     return array.flatMap{$0}
+    #endif
   }//end func
 
   /// instance method
@@ -515,7 +519,11 @@ public class TensorFlow {
           let p = TFLib.TensorData(tensor) else { return }
         newValue.withUnsafeBufferPointer { pBuf in
           if let q = pBuf.baseAddress {
+            #if swift(>=4.1)
+            p.copyMemory(from: q, byteCount: newValue.count)
+            #else
             p.copyBytes(from: q, count: newValue.count)
+            #endif
           }//end if
         }//end with
       }//end set
@@ -658,7 +666,11 @@ public class TensorFlow {
         }//end guard
         try value.withUnsafeBufferPointer { pValue in
           guard let q = pValue.baseAddress else { throw Panic.INVALID }
+          #if swift(>=4.1)
+          p.copyMemory(from: q, byteCount: size)
+          #else
           p.copyBytes(from: q, count: size)
+          #endif
         }//end try
         return t
       }//end size
@@ -859,7 +871,11 @@ public class TensorFlow {
       let dst = UnsafeMutablePointer<CChar>.allocate(capacity: sz)
 
       defer {
+        #if swift(>=4.1)
+        dst.deallocate()
+        #else
         dst.deallocate(capacity: sz)
+        #endif
       }//end defer
 
       let len = TFLib.StringEncode(ptr, string.count, dst, sz, status.status)
@@ -1110,8 +1126,16 @@ public class TensorFlow {
           }//next
           TFLib.SetAttrShapeList(descriptor, k, array, lens, Int32(s.count))
           total += 1
+          #if swift(>=4.1)
+          lens.deallocate()
+          #else
           lens.deallocate(capacity: s.count)
+          #endif
+          #if swift(>=4.1)
+          array.deallocate()
+          #else
           array.deallocate(capacity: s.count)
+          #endif
         } else if v is TensorProto, let p = v as? TensorProto {
           let data = try p.serializedData()
           let status = try Status()
@@ -1133,8 +1157,16 @@ public class TensorFlow {
           let status = try Status()
           TFLib.SetAttrTensorShapeProtoList(descriptor, k, array, lens, Int32(pv.count), status.status)
           total += 1
+          #if swift(>=4.1)
+          lens.deallocate()
+          #else
           lens.deallocate(capacity: pv.count)
+          #endif
+          #if swift(>=4.1)
+          array.deallocate()
+          #else
           array.deallocate(capacity: pv.count)
+          #endif
           guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
         } else if v is Tensor, let t = v as? Tensor {
           let status = try Status()
@@ -1318,7 +1350,11 @@ public class TensorFlow {
       guard size > 0 else { return [Input]() }
       let inputs = UnsafeMutablePointer<Input>.allocate(capacity: size)
       defer {
+        #if swift(>=4.1)
+        inputs.deallocate()
+        #else
         inputs.deallocate(capacity: size)
+        #endif
       }//end defer
       let count = TFLib.OperationOutputConsumers(output, inputs, Int32(size))
       guard count == Int32(size) else {
@@ -1335,7 +1371,11 @@ public class TensorFlow {
       guard size > 0 else { return [Operation]() }
       let inputs = UnsafeMutablePointer<OpaquePointer>.allocate(capacity: size)
       defer {
+        #if swift(>=4.1)
+        inputs.deallocate()
+        #else
         inputs.deallocate(capacity: size)
+        #endif
       }//end defer
       let count = TFLib.OperationGetControlInputs(operation, inputs, Int32(size))
       guard count == Int32(size) else {
@@ -1353,7 +1393,11 @@ public class TensorFlow {
 
       let outputs = UnsafeMutablePointer<OpaquePointer>.allocate(capacity: size)
       defer {
+        #if swift(>=4.1)
+        outputs.deallocate()
+        #else
         outputs.deallocate(capacity: size)
+        #endif
       }//end defer
 
       let count = TFLib.OperationGetControlOutputs(operation, outputs, Int32(size))
@@ -1459,7 +1503,11 @@ public class TensorFlow {
       }//end guard
       let dy = UnsafeMutablePointer<Output>.allocate(capacity: countX)
       defer {
+        #if swift(>=4.1)
+        dy.deallocate()
+        #else
         dy.deallocate(capacity: countX)
+        #endif
       }//end dy
       let pY = y.withUnsafeBufferPointer { $0.baseAddress }
       let pX = x.withUnsafeBufferPointer { $0.baseAddress }
@@ -1505,7 +1553,11 @@ public class TensorFlow {
 
       let array = UnsafeMutablePointer<Int64>.allocate(capacity: size)
       defer {
+        #if swift(>=4.1)
+        array.deallocate()
+        #else
         array.deallocate(capacity: size)
+        #endif
       }//end defer
 
       TFLib.GraphGetTensorShape(graph, output, array, Int32(size), pStatus)
@@ -1643,7 +1695,11 @@ public class TensorFlow {
       if count < 1 {
         let pOutputs = UnsafeMutablePointer<Output>.allocate(capacity: 1)
         TFLib.GraphImportGraphDefWithReturnOutputs(graph, buf.buffer, options.options, pOutputs, 0, status.status)
+        #if swift(>=4.1)
+        pOutputs.deallocate()
+        #else
         pOutputs.deallocate(capacity: 1)
+        #endif
         guard let code = status.code, code == .OK else {
           throw Panic.FAULT(reason: status.message)
         }//end guard
@@ -1651,7 +1707,13 @@ public class TensorFlow {
       }//end if
 
       let pOutputs = UnsafeMutablePointer<Output>.allocate(capacity: count)
-      defer { pOutputs.deallocate(capacity: count) }
+      defer {
+        #if swift(>=4.1)
+        pOutputs.deallocate()
+        #else
+        pOutputs.deallocate(capacity: count)
+        #endif
+      }
       TFLib.GraphImportGraphDefWithReturnOutputs(graph, buf.buffer, options.options, pOutputs, Int32(count),  status.status)
       guard status.code == .OK else {
         throw Panic.FAULT(reason: status.message)
@@ -1991,7 +2053,7 @@ public class TensorFlow {
       let array = Array(pointers)
       return array.map { if let f = $0 { return Function(f) } else { return nil } }
     }
-    
+
     /// Function is a grouping of operations with defined inputs and outputs.
     /// Once created and added to graphs, functions can be invoked by creating an
     /// operation whose operation type matches the function name.
@@ -2181,7 +2243,11 @@ public class TensorFlow {
 
       let outputs = UnsafeMutablePointer<Output>.allocate(capacity: size)
       defer {
+        #if swift(>=4.1)
+        outputs.deallocate()
+        #else
         outputs.deallocate(capacity: size)
+        #endif
       }//end defer
       TFLib.FinishWhile(&param, status.status, outputs)
 
@@ -2421,7 +2487,11 @@ public class TensorFlow {
 
         // WARNING: tensors created here are WILD - autodestroy = false
         outputTensors = Array(values).map { Tensor(handle: $0) }
+        #if swift(>=4.1)
+        p.deallocate()
+        #else
         p.deallocate(capacity: szOutput)
+        #endif
       } else {
         outputTensors = [Tensor]()
       }//end if
@@ -2662,7 +2732,11 @@ public class TensorFlow {
         let values = UnsafeMutableBufferPointer<OpaquePointer>(start: p, count: szOutputs)
         // WARNING: tensors created here are WILD - autodestroy = false
         outputTensors = Array(values).map { Tensor(handle: $0) }
+        #if swift(>=4.1)
+        p.deallocate()
+        #else
         p.deallocate(capacity: szOutputs)
+        #endif
       } else {
         outputTensors = [Tensor]()
       }//end if
