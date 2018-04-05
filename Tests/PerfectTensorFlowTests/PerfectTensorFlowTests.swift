@@ -107,7 +107,11 @@ public extension Data {
     let size = Int(st.st_size)
     let buf = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
     guard size == fread(buf, 1, size, f) else {
+      #if swift(>=4.1)
+      buf.deallocate()
+      #else
       buf.deallocate(capacity: size)
+      #endif
       return nil
     }//end guard
     return Data(bytesNoCopy: buf, count: size, deallocator: .free)
@@ -205,7 +209,7 @@ class PerfectTensorFlowTests: XCTestCase {
       XCTFail("\(error)")
     }
   }
-  
+
   func testFunctionBasic() {
     do {
       let funcName = "MyFunc"
