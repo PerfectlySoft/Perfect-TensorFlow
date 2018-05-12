@@ -43,11 +43,11 @@
 
 本项目需要使用SPM软件包管理器编译并是[Perfect项目](https://github.com/PerfectlySoft/Perfect)的一个组成部分，但也可以独立使用。
 
-请确保您的系统已经安装了Swift 4.1 / Xcode 9.3
+请确保您的系统已经安装了Swift 4.1.1 / Xcode 9.3
 
 ## 项目状态
 
-目前本函数库遵从 TensorFlow v1.7.0 C语言 API 功能特征。
+目前本函数库遵从 TensorFlow v1.8.0 C语言 API 功能特征。
 
 ## 关于开发
 
