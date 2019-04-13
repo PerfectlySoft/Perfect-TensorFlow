@@ -23,7 +23,7 @@ import TensorFlowAPI
 public extension Array {
 
   /// method that can 'completely' flatten a multi-dimensional array
-  public static func Flat (_ array: Array<Any>) -> Array<Any> {
+  static func Flat (_ array: Array<Any>) -> Array<Any> {
     if let a = array as? Array<Array<Any>> {
       return Flat(a.flatMap({$0}))
     }
@@ -35,11 +35,11 @@ public extension Array {
   }//end func
 
   /// instance method
-  public func flat() -> Array<Any> {
+  func flat() -> Array<Any> {
     return Array.Flat(self)
   }
 
-  public var shape: [Int] {
+  var shape: [Int] {
     var _shape = [Int]()
     var a = self as Array<Any>
     while a.count > 0 {
@@ -53,7 +53,7 @@ public extension Array {
     return _shape
   }//end var
 
-  public func column(index: Int) -> Array<Any> {
+  func column(index: Int) -> Array<Any> {
     var b = [Any]()
     let s = shape
     guard s.count > 1, index > -1, index < s[1],
@@ -72,12 +72,12 @@ public extension Array {
 
 typealias SwiftArray<T> = Array<T>
 public extension Data {
-  public static func From(_ string: String) -> Data {
+  static func From(_ string: String) -> Data {
     return string.withCString { p -> Data in
       return Data(bytes: p, count: string.utf8.count)
     }//end return
   }//end from
-  public var string: String {
+  var string: String {
     return self.withUnsafeBytes { (p: UnsafePointer<CChar>) -> String in
       var q = Array(UnsafeBufferPointer(start: p, count: self.count))
       q.append(0)
