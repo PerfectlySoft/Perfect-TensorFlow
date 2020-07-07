@@ -78,11 +78,20 @@ public extension Data {
     }//end return
   }//end from
   var string: String {
+		#if swift(>=5.0)
+		return self.withUnsafeBytes { (buffered: UnsafeRawBufferPointer) -> String in
+			let p = buffered.baseAddress?.assumingMemoryBound(to: CChar.self)
+			var q = Array(UnsafeBufferPointer(start: p, count: self.count))
+      q.append(0)
+      return String(cString: q)
+		}
+		#else
     return self.withUnsafeBytes { (p: UnsafePointer<CChar>) -> String in
       var q = Array(UnsafeBufferPointer(start: p, count: self.count))
       q.append(0)
       return String(cString: q)
     }//end return
+		#endif
   }//end var
 }//end extension
 
@@ -409,10 +418,18 @@ public class TensorFlow {
     /// - parameters:
     /// - data: data to copy with
     public init(data: Data) throws {
+			#if swift(>=5.0)
+			guard let pData = (data.withUnsafeBytes { (buffered: UnsafeRawBufferPointer) -> UnsafePointer<Int8>? in
+				return buffered.baseAddress?.assumingMemoryBound(to: Int8.self)
+			}) else {
+				throw Panic.INVALID
+			}
+			#else
       let pData = data.withUnsafeBytes {
         (ptr: UnsafePointer<Int8>) -> UnsafePointer<Int8> in
         return ptr
       }//end let
+			#endif
       guard let _ = TFLib.libDLL,
       let buf = TFLib.NewBufferFromString(pData, data.count)
       else { throw Panic.CALL }
@@ -792,10 +809,20 @@ public class TensorFlow {
       // *NOTE* DON'T USE MAP
       // UInt8(128) to Int8 will cause segment fault
 
-      let s = strings[i].withUnsafeBytes { (ptr: UnsafePointer<Int8>) -> [Int8] in
+			#if swift(>=5.0)
+      let s = strings[i].withUnsafeBytes {
+				(ptr: UnsafeRawBufferPointer) -> [Int8] in
+				let p = ptr.baseAddress?.bindMemory(to: Int8.self, capacity: strings[i].count)
+				let buffered = UnsafeBufferPointer(start: p, count: strings[i].count)
+        return Array(buffered)
+      }
+			#else
+      let s = strings[i].withUnsafeBytes {
+				(ptr: UnsafePointer<Int8>) -> [Int8] in
         let buffered = UnsafeBufferPointer(start: ptr, count: strings[i].count)
         return Array(buffered)
       }
+			#endif
 
       let encoded = try TensorFlow.Encode(string: s)
       size += UInt64(encoded.count)
@@ -943,7 +970,12 @@ public class TensorFlow {
     public func `set`(config: Config) throws -> SessionOptions {
       let s = try Status()
       let data = try config.serializedData()
+			#if swift(>=5.0)
+			guard let p = (data.withUnsafeBytes { $0.baseAddress?.assumingMemoryBound(to: CChar.self) })
+				else { throw Panic.INVALID }
+			#else
       let p = data.withUnsafeBytes { (ptr: UnsafePointer<CChar>) in return ptr }
+			#endif
       TFLib.SetConfig(options, p, data.count, s.status)
       guard s.code == .OK else { throw Panic.FAULT(reason: s.message) }
       return self
@@ -1139,19 +1171,36 @@ public class TensorFlow {
         } else if v is TensorProto, let p = v as? TensorProto {
           let data = try p.serializedData()
           let status = try Status()
+					#if swift(>=5.0)
+					data.withUnsafeBytes { (buffered: UnsafeRawBufferPointer) in
+						if let ptr = buffered.baseAddress?.assumingMemoryBound(to: CChar.self) {
+							TFLib.SetAttrTensorShapeProto(descriptor, k, ptr, data.count, status.status)
+							total += 1
+						}
+					}
+					#else
           data.withUnsafeBytes { (ptr: UnsafePointer<CChar>) in
             TFLib.SetAttrTensorShapeProto(descriptor, k, ptr, data.count, status.status)
             total += 1
           }//end bytes
+					#endif
           guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
         } else if v is [TensorProto], let pv = v as? [TensorProto], pv.count > 0 {
           let array = UnsafeMutablePointer<UnsafePointer<CChar>>.allocate(capacity: pv.count)
           let lens = UnsafeMutablePointer<Int>.allocate(capacity: pv.count)
           let data = try pv.map { try $0.serializedData() }
           for i in 0 ... pv.count - 1 {
+						#if swift(>=5.0)
+						data[i].withUnsafeBytes { (buffered: UnsafeRawBufferPointer) in
+							if let ptr = buffered.baseAddress?.assumingMemoryBound(to: CChar.self) {
+								array.advanced(by: i).pointee = ptr
+							}
+						}
+						#else
             data[i].withUnsafeBytes { (ptr: UnsafePointer<CChar>) in
               array.advanced(by: i).pointee = ptr
             }//end bytes
+						#endif
             lens.advanced(by: i).pointee = data[i].count
           }//next
           let status = try Status()
@@ -1185,7 +1234,12 @@ public class TensorFlow {
           guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
         }else if v is Data, let d = v as? Data, d.count > 0 {
           let status = try Status()
+					#if swift(>=5.0)
+					guard let p = (d.withUnsafeBytes { $0.baseAddress?.assumingMemoryBound(to: Int8.self) })
+						else { throw Panic.FAULT(reason: "invalid pointer")}
+					#else
           let p = d.withUnsafeBytes { pointer -> UnsafePointer<Int8> in return pointer }
+					#endif
           TFLib.SetAttrValueProto(descriptor, k, p, d.count, status.status)
           total += 1
           guard status.code == .OK else { throw Panic.FAULT(reason: status.message) }
@@ -2038,6 +2092,12 @@ public class TensorFlow {
       }
     }
 
+		#if swift(>=5.0)
+		private func assignOpaque(pointer: UnsafeMutablePointer<OpaquePointer?>, count: Int) -> Array<OpaquePointer?> {
+			return Array(UnsafeBufferPointer(start: pointer, count: count))
+		}
+		#endif
+
     public func getFunctions() throws -> [Function?] {
       let count = TFLib.GraphNumFunctions(self.graph)
       guard count > 0 else {
@@ -2046,11 +2106,15 @@ public class TensorFlow {
       var funcs: OpaquePointer? = nil
       let status = try Status()
       let num = TFLib.GraphGetFunctions(self.graph, &funcs, count, status.status)
-      guard num > 0 && num <= count else {
+      guard let _ = funcs, num > 0 && num <= count else {
         throw Panic.FAULT(reason: "no function exisis in this graph")
       }
+			#if swift(>=5.0)
+			let array = assignOpaque(pointer: &funcs, count: Int(num))
+			#else
       let pointers = UnsafeBufferPointer(start: &funcs, count: Int(num))
       let array = Array(pointers)
+			#endif
       return array.map { if let f = $0 { return Function(f) } else { return nil } }
     }
 
@@ -2072,6 +2136,21 @@ public class TensorFlow {
       /// - throws: Panic.Fault(reason: status.message)
       public init(importDefinition: FunctionDef) throws {
         let proto = try importDefinition.serializedData()
+				#if swift(>=5.0)
+				ref = try proto.withUnsafeBytes {
+					(buffered: UnsafeRawBufferPointer) throws -> OpaquePointer in
+					guard let p = buffered.baseAddress?.assumingMemoryBound(to: UInt8.self) else {
+						throw Panic.INVALID
+					}
+          let status = try Status()
+          guard let function = TFLib.FunctionImportFunctionDef(
+            p, Int32(proto.count), status.status),
+            status.code == .OK else {
+              throw Panic.FAULT(reason: status.message)
+          }
+          return function
+				}
+				#else
         ref = try proto.withUnsafeBytes {
           (p: UnsafePointer<UInt8>) throws -> OpaquePointer in
           let status = try Status()
@@ -2082,6 +2161,7 @@ public class TensorFlow {
           }
           return function
         }
+				#endif
       }
 
       /// Sets function attribute named `name` to value.
@@ -2092,6 +2172,19 @@ public class TensorFlow {
       /// - throws: Panic.Fault(reason: status.message)
       public func setAttributeFor(_ name: String, value: AttrValue) throws {
         let proto = try value.serializedData()
+				#if swift(>=5.0)
+        try proto.withUnsafeBytes {
+					(buffered: UnsafeRawBufferPointer) throws in
+					guard let p = buffered.baseAddress?.assumingMemoryBound(to: UInt8.self)
+						else { throw Panic.INVALID }
+          let status = try Status()
+          TFLib.FunctionSetAttrValueProto(
+            ref, name, p, Int32(proto.count), status.status)
+          guard status.code == .OK else {
+            throw Panic.FAULT(reason: status.message)
+          }
+        }
+				#else
         try proto.withUnsafeBytes {
           (p: UnsafePointer<UInt8>) throws in
           let status = try Status()
@@ -2101,6 +2194,7 @@ public class TensorFlow {
             throw Panic.FAULT(reason: status.message)
           }
         }
+				#endif
       }
 
       /// get an attribute value by its name
