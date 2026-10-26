@@ -1,5 +1,9 @@
 # Perfect TensorFlow
 
+> [!NOTE]
+> **历史项目，已归档。** Perfect-TensorFlow 基于 TensorFlow 1.8 C API，面向 Swift 4，自 2020 年起未再更新，
+> 无法用于当前的 TensorFlow 或 Swift 工具链。本仓库保留为只读参考，不属于现代 Perfect 技术栈，也没有恢复计划。
+
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
         <img src="http://perfect.org/assets/github/perfect_github_2_0_0.jpg" alt="Get Involved with Perfect!" width="854" />

@@ -1,5 +1,12 @@
 # Perfect TensorFlow [简体中文](README.zh_CN.md)
 
+> [!NOTE]
+> **Historical project, archived.** Perfect-TensorFlow wrapped the TensorFlow 1.8 C API for Swift 4 and hasn't been
+> updated since 2020. TensorFlow has moved on to 2.x, so this binding won't build against a current TensorFlow or
+> Swift toolchain. The repository is kept read-only as a reference. It isn't part of the modern Perfect stack
+> ([Perfect-NIO](https://github.com/PerfectlySoft/Perfect-NIO) and the packages around it), and there are no plans
+> to revive it.
+
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
         <img src="http://perfect.org/assets/github/perfect_github_2_0_0.jpg" alt="Get Involved with Perfect!" width="854" />
